@@ -15,20 +15,13 @@ Build and start the container:
 ```bash
 docker compose up --build
 ```
-
-or
-
-```bash
-cd API
-pip install -r requirements.txt
-python app.py
-```
 ---
 The API will be available at:
 
 ```
 http://localhost:3000/<folder_id>
 ```
+Change port as needed if port conflict
 
 ## 🔗 API Endpoint
 
@@ -48,15 +41,14 @@ Response JSON:
 ```json
 {
   "status": "correct|incorrect|error",
-  "message": "Summary message",
-  "individual_test_results": [
+  "msg": "Summary message",
+  "tests": [
     {
-      "test_number": "1",
+      "case": 1,
       "status": "passed|failed",
-      "message": "...",
+      "msg": "...",
       "stdout": "...",
-      "stderr": "...",
-      "return_code": 0
+      "stderr": "..."
     }
   ]
 }

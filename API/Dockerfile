@@ -7,9 +7,9 @@ RUN apt-get update && \
         python3 \
         python3-pip \
         nodejs \
-        npm \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+        npm && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
@@ -22,4 +22,4 @@ COPY API/ .
 
 EXPOSE 3000
 
-CMD ["python", "app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:3000", "app:app"]

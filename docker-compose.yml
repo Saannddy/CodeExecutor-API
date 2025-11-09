@@ -1,11 +1,14 @@
 services:
   code-api:
     image: code-api:latest
+
     build:
       context: .
       dockerfile: API/Dockerfile
+
     ports:
       - "3000:3000"
+      
     restart: always
     stdin_open: true
     tty: true

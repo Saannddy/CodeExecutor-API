@@ -15,6 +15,3 @@ def code_executor(question_id):
 
     res = execute_code(code, lang, question_id)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
-
-if __name__ == '__main__':
-    app.run('0.0.0.0', 3000, debug=True)

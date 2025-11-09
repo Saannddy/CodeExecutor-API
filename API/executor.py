@@ -8,8 +8,13 @@ def execute_code(code: str, lang: str, qid: str) -> dict:
     try:
         data = loadTest(qid)
         tests, timeout = data['test_pairs'], data['timeout']
+        templates = data.get('templates', {})
     except Exception as e:
         return {"status": "error", "message": f"Error loading test cases: {e}"}
+
+    template = templates.get(lang)
+    if template and "__CODE_GOES_HERE__" in template:
+        code = template.replace("__CODE_GOES_HERE__", code)
 
     if lang in ["c", "cpp"]:
         return _run_c_cpp(code, lang, tests, timeout)
@@ -19,7 +24,6 @@ def execute_code(code: str, lang: str, qid: str) -> dict:
         return _run_interpreted(code, lang, tests, timeout)
 
 
-# --- Helpers ---
 def _run_c_cpp(code, lang, tests, timeout):
     cfg = COMPILERS[lang]
     fd, src = tempfile.mkstemp(suffix=cfg['extension'])
@@ -48,7 +52,7 @@ def _run_java(code, tests, timeout):
         comp = subprocess.run([cfg['compiler'], src, "-d", d], capture_output=True, text=True, timeout=timeout)
         if comp.returncode:
             return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
-        return _run_tests([cfg['interpreter'], "-cp", d, "Main"], tests, timeout)
+        return _run_tests(["java", "-cp", d, "Main"], tests, timeout)
     finally:
         for f in [src, os.path.join(d, "Main.class")]:
             if os.path.exists(f): os.remove(f)
@@ -74,9 +78,21 @@ def _run_tests(cmd_base, tests, timeout):
             s, m = "passed", "Test passed."
             if r.returncode or out != t['expected_output'].strip():
                 s, m, status, msg = "failed", f"Expected '{t['expected_output'].strip()}', got '{out}'", "incorrect", "Some test cases failed."
-            results.append({"test_number": t['test_number'], "status": s, "message": m, "stdout": out, "stderr": err, "return_code": r.returncode})
+            results.append({
+                "case": int(t['test_number']),
+                "status": s,
+                "msg": m,
+                "stdout": out,
+                "stderr": err
+            })
         except subprocess.TimeoutExpired:
-            results.append({"test_number": t['test_number'], "status": "failed", "message": f"Timeout {timeout}s", "stdout": "", "stderr": "Timeout", "return_code": -1})
-            status, msg = "incorrect", "Some test cases timed out."
+            results.append({
+                "case": int(t['test_number']),
+                "status": "failed",
+                "msg": f"Timeout {timeout}s",
+                "stdout": "",
+                "stderr": "Timeout"
+            })
+            status, msg = "timeout", "Time Limit Exceeded"
             break
-    return {"status": status, "message": msg, "individual_test_results": results}
+    return {"status": status, "msg": msg, "tests": results}
