@@ -5,7 +5,6 @@ Each question is stored in a folder named with a number, for example: `1`, `2`, 
 ## 📂 Folder Structure
 
 ```
-
 tests/
 ├── 1/
 │   ├── 1.in                # 📝 Input for test case 1
