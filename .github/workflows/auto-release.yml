@@ -1,0 +1,59 @@
+name: Auto Versioned Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write 
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          echo "latest_tag=$tag" >> $GITHUB_OUTPUT
+
+      - name: Bump version (semantic roll over)
+        id: bump
+        run: |
+          tag="${{ steps.get_tag.outputs.latest_tag }}"
+          base=${tag#v}
+          IFS='.' read -r major minor patch <<< "$base"
+
+          if [ "$patch" -lt 9 ]; then
+            patch=$((patch + 1))
+          else
+            patch=0
+            if [ "$minor" -lt 9 ]; then
+              minor=$((minor + 1))
+            else
+              minor=0
+              major=$((major + 1))
+            fi
+          fi
+
+          new_tag="v${major}.${minor}.${patch}"
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+
+      - name: Create new tag
+        run: |
+          git tag ${{ steps.bump.outputs.new_tag }}
+          git push origin ${{ steps.bump.outputs.new_tag }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump.outputs.new_tag }}
+          name: "${{ steps.bump.outputs.new_tag }}"
+          body: "Auto release for commit ${{ github.sha }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
