@@ -41,7 +41,7 @@ Example `config.json`:
 
 ## ➕ Adding a New Test Case
 
-1. Create a new folder with the next number (n+1) 🔢.
-2. Add `.in` files for inputs 📝 and `.out` files for expected outputs ✅.
-3. Make sure the numbers match across `.in` and `.out` files 🔗.
-4. Add `config.json` if you want to override the default timeout (default is 5 seconds) ⏱️.
+1. Create a new folder with the next number.
+2. Add `.in` files for inputs and `.out` files for expected .
+3. Make sure the numbers match across `.in` and `.out` files.
+4. Add `config.json` if needed.
