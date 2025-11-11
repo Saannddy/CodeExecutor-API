@@ -1,32 +1,23 @@
 
 # 🖥️ CodeExecutor-API
 
----
+This project provides a API to run submitted code against predefined test cases. 🧪
 
-This project provides a Flask API to run user-submitted code against predefined test cases. 🧪
-
-## 🛠️ Requirements
-- 🐳 Docker & Docker Compose
+## 🛠️ Requirements: 
+  `🐳 Docker` `🐳 Docker compose`
 
 ## 🚀 Running the API
 Build and start the container:
 
 ```bash
-docker compose up --build
+docker compose up -d --build
 ```
 ---
-The API will be available at:
-
-```
-http://127.0.0.1:3000
-```
-Change port as needed if port conflict
-
 ## 🔗 API Endpoint
 
-**POST** `/<folder_id>`
+**POST** `http://127.0.0.1:3000/code/<folder_id>`
 
-Request JSON:
+Request JSON Format: 
 
 ```json
 {
@@ -34,8 +25,9 @@ Request JSON:
   "language": "python"  
 }
 ```
+  `📝 Notes: For \t (tab) please sent 4 spacebar instead`
 
-Response JSON:
+Response JSON Format:
 
 ```json
 {
@@ -55,6 +47,7 @@ Response JSON:
 
 ### 📝 Notes
 
-* ⏱️ Default port is `3000`.
+* ⏱️ Default port is `3000` change port as needed in  `docker-compose.yml`.
+* ⏱️ The API will be available at `http://127.0.0.1:<port>`
 * 📁 Folder IDs correspond to folders under `tests/`.
 
