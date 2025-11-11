@@ -2,6 +2,7 @@ import subprocess, os, tempfile
 from config import COMPILERS, loadTest, validate_code
 
 def execute_code(code: str, lang: str, qid: str) -> dict:
+    """Execute the given code in the specified language against test cases for the question ID."""
     if lang not in COMPILERS:
         return {"status": "error", "message": f"Unsupported language: {lang}"}
 
@@ -29,6 +30,7 @@ def execute_code(code: str, lang: str, qid: str) -> dict:
 
 
 def _run_c_cpp(code, lang, tests, timeout):
+    """Compile and run C/C++ code."""
     cfg = COMPILERS[lang]
     fd, src = tempfile.mkstemp(suffix=cfg['extension'])
     os.close(fd)
@@ -45,6 +47,7 @@ def _run_c_cpp(code, lang, tests, timeout):
 
 
 def _run_java(code, tests, timeout):
+    """Compile and run Java code."""
     cfg = COMPILERS["java"]
     fd, src = tempfile.mkstemp(suffix=".java")
     os.close(fd)
@@ -63,6 +66,7 @@ def _run_java(code, tests, timeout):
 
 
 def _run_interpreted(code, lang, tests, timeout):
+    """Run interpreted languages like Python and JavaScript."""
     cfg = COMPILERS[lang]
     fd, src = tempfile.mkstemp(suffix=cfg['extension'])
     os.close(fd)
@@ -74,6 +78,7 @@ def _run_interpreted(code, lang, tests, timeout):
 
 
 def _run_tests(cmd_base, tests, timeout):
+    """Run the compiled/interpreted code against test cases."""
     results, status, msg = [], "correct", "All test cases passed!"
     for t in tests:
         try:
