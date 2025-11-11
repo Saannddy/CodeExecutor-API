@@ -1,6 +1,6 @@
 # 🧪 Test Case Guidelines
 
-Each question is stored in a folder named with a number, for example: 1, 2, 3
+Each question is stored in a folder named with a number, for example: `1`, `2`, `3`.
 
 ## 📂 Folder Structure
 
@@ -15,14 +15,19 @@ tests/
 ├── 2/
 │   ├── 1.in
 │   ├── 1.out
-│   └── config.json         # ⏱️ specific timeout / rules / pre-define code
+│   └── config.json         # ⚙️ Optional: timeout, rules, templates
 ```
 
-- The **folder name** is the `folder_id` used in the API endpoint.
-- **Test files** are numbered sequentially as `.in` for input and `.out` for expected output.
-- Optionally, you can add a `config.json` file to specify a timeout ⏱️, default code and rules:
+---
+- **Folder name** = `folder_id` used in the API endpoint.  
+- `.in` → Input file.  
+- `.out` → Expected output file.  
+- Optional **`config.json`** can define:
+  - ⏱️ Timeout
+  - 🧩 Default code templates
+  - 🧮 Validation rules
 
-Example `config.json`:
+## 🧾 Example `config.json`
 
 ```json
 {
@@ -42,6 +47,7 @@ Example `config.json`:
 ## ➕ Adding a New Test Case
 
 1. Create a new folder with the next number.
-2. Add `.in` files for inputs and `.out` files for expected .
-3. Make sure the numbers match across `.in` and `.out` files.
-4. Add `config.json` if needed.
+2. Add `.in` files for inputs.
+3. Add `.out` files for expected outputs.
+4. Make sure input and output filenames match.
+4. Add `config.json` if special rules or timeout are needed.
