@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from executor import execute_code
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='html')
 
 @app.post('/code/<question_id>')
 def code_executor(question_id):
@@ -15,3 +15,11 @@ def code_executor(question_id):
 
     res = execute_code(code, lang, question_id)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
+
+@app.route('/')
+def home():
+    return app.send_static_file('index.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return app.send_static_file('404.html'), 404

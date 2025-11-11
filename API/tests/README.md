@@ -3,6 +3,7 @@
 Each question is stored in a folder named with a number, for example: 1, 2, 3
 
 ## 📂 Folder Structure
+
 ```
 
 tests/
@@ -17,21 +18,23 @@ tests/
 │   └── config.json         # ⏱️ specific timeout
 ```
 
-* The **folder name** is the `folder_id` used in the API endpoint.  
-* **Test files** are numbered sequentially as `.in` for input and `.out` for expected output.  
-* Optionally, you can add a `config.json` file to specify a timeout ⏱️ and default code:
+- The **folder name** is the `folder_id` used in the API endpoint.
+- **Test files** are numbered sequentially as `.in` for input and `.out` for expected output.
+- Optionally, you can add a `config.json` file to specify a timeout ⏱️, default code and rules:
 
 Example `config.json`:
 
 ```json
 {
-  "timeout": 10
-    "templates": {
-    "c": "#include <stdio.h>\nint main(){\n    __CODE_GOES_HERE__\n    return 0;\n}",
-    "cpp": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n    __CODE_GOES_HERE__\n    return 0;\n}",
-    "java": "import java.util.*;\npublic class Main {\n    public static void main(String[] args){\n        __CODE_GOES_HERE__\n    }\n}",
-    "python": "def main():\n    __CODE_GOES_HERE__\n\nif __name__ == '__main__':\n    main()",
-    "javascript": "const readline = require('readline');\nconst rl = readline.createInterface({ input: process.stdin, output: process.stdout });\nlet inputs = [];\nrl.on('line', (line) => { inputs.push(line); });\nrl.on('close', () => {\n    __CODE_GOES_HERE__\n});"
+  "timeout": 10,
+  "templates": {
+    "python": "def main():\n    __CODE_GOES_HERE__\n\nif __name__ == '__main__':\n    main()"
+  },
+  "rules": {
+    "python": [
+      "\\w+\\s*=\\s*\\[.*\\]",  
+      "len\\(\\w+\\)"            
+    ]
   }
 }
 ```

@@ -22,4 +22,4 @@ COPY API/ .
 
 EXPOSE 3000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:3000", "app:app"]
+CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:3000", "--timeout", "60", "app:app"]

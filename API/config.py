@@ -10,6 +10,10 @@ COMPILERS = {
 
 TEST_CASES_ROOT_DIR = "tests"
 
+def validate_code(lang: str, code: str, rules: dict) -> bool:
+    patterns = rules.get(lang, [])
+    return all(re.search(p, code) for p in patterns)
+
 def loadTest(qid: str) -> dict:
     qpath = os.path.join(TEST_CASES_ROOT_DIR, str(qid))
     if not os.path.isdir(qpath):
@@ -24,6 +28,7 @@ def loadTest(qid: str) -> dict:
                 cfg = json.load(f)
                 data["timeout"] = cfg.get("timeout", 5)
                 data["templates"] = cfg.get("templates", {})
+                data["rules"] = cfg.get("rules", {})
         except json.JSONDecodeError:
             print(f"Warning: invalid JSON in {cfg_path}. Using default timeout.")
     else:

@@ -1,5 +1,5 @@
 import subprocess, os, tempfile
-from config import COMPILERS, loadTest
+from config import COMPILERS, loadTest, validate_code
 
 def execute_code(code: str, lang: str, qid: str) -> dict:
     if lang not in COMPILERS:
@@ -9,8 +9,12 @@ def execute_code(code: str, lang: str, qid: str) -> dict:
         data = loadTest(qid)
         tests, timeout = data['test_pairs'], data['timeout']
         templates = data.get('templates', {})
+        rules = data.get('rules', {})
     except Exception as e:
         return {"status": "error", "message": f"Error loading test cases: {e}"}
+
+    if not validate_code(lang, code, rules):
+        return {"status": "error", "message": "Code does not meet the required rules."}
 
     template = templates.get(lang)
     if template and "__CODE_GOES_HERE__" in template:
