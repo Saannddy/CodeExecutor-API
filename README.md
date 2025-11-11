@@ -1,4 +1,3 @@
-Here’s your README with some tasteful emojis added to make it more visual and friendly:
 
 # 🖥️ CodeExecutor-API
 
@@ -19,7 +18,7 @@ docker compose up --build
 The API will be available at:
 
 ```
-http://localhost:3000/<folder_id>
+http://127.0.0.1:3000
 ```
 Change port as needed if port conflict
 
@@ -32,7 +31,7 @@ Request JSON:
 ```json
 {
   "code": "<your code here>",
-  "language": "python"  // or c, cpp, java, javascript
+  "language": "python"  
 }
 ```
 

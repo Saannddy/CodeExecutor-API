@@ -11,10 +11,12 @@ COMPILERS = {
 TEST_CASES_ROOT_DIR = "tests"
 
 def validate_code(lang: str, code: str, rules: dict) -> bool:
+    # Validate code against language-specific rules
     patterns = rules.get(lang, [])
     return all(re.search(p, code) for p in patterns)
 
 def loadTest(qid: str) -> dict:
+    # Load test cases and configuration for a given question ID
     qpath = os.path.join(TEST_CASES_ROOT_DIR, str(qid))
     if not os.path.isdir(qpath):
         raise FileNotFoundError(f"Question directory not found: {qpath}")

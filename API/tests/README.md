@@ -15,7 +15,7 @@ tests/
 ├── 2/
 │   ├── 1.in
 │   ├── 1.out
-│   └── config.json         # ⏱️ specific timeout
+│   └── config.json         # ⏱️ specific timeout / rules / pre-define code
 ```
 
 - The **folder name** is the `folder_id` used in the API endpoint.
