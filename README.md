@@ -45,6 +45,18 @@ Response JSON Format:
 }
 ```
 
+**POST** `http://127.0.0.1:3000/run`
+
+Request JSON Format: 
+
+```json
+{
+  "code": "<your code here>",
+  "language": "python"  
+}
+```
+  `📝 Notes: For \t (tab) please sent 4 spacebar instead`
+
 ### 📝 Notes
 
 * ⏱️ Default port is `3000` change port as needed in  `docker-compose.yml`.
