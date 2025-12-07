@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write 
+  contents: write
 
 jobs:
   release:
@@ -43,6 +43,23 @@ jobs:
           new_tag="v${major}.${minor}.${patch}"
           echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
 
+      - name: Generate changelog
+        id: changelog
+        run: |
+          prev=${{ steps.get_tag.outputs.latest_tag }}
+          new=${{ steps.bump.outputs.new_tag }}
+
+          # If there was no previous tag, show all commits
+          if [ "$prev" = "v1.0.0" ]; then
+            log=$(git log --pretty=format:"- %s")
+          else
+            log=$(git log $prev..HEAD --pretty=format:"- %s")
+          fi
+
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$log" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Create new tag
         run: |
           git tag ${{ steps.bump.outputs.new_tag }}
@@ -53,6 +70,8 @@ jobs:
         with:
           tag_name: ${{ steps.bump.outputs.new_tag }}
           name: "${{ steps.bump.outputs.new_tag }}"
-          body: "Auto release for commit ${{ github.sha }}"
+          body: |
+            ## Changes since last release
+            ${{ steps.changelog.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
