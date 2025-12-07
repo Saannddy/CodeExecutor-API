@@ -1,6 +1,17 @@
 import subprocess, os, tempfile
 from config import COMPILERS, loadTest, validate_code
 
+def execute_custom_code(code: str, lang: str) -> dict:
+    if lang not in COMPILERS:
+        return {"status": "error", "stdout": "", "stderr": f"Unsupported language: {lang}"}
+
+    if lang in ["c", "cpp"]:
+        return _run_c_cpp(code, lang)
+    elif lang == "java":
+        return _run_java(code)
+    else:
+        return _run_interpreted(code, lang)
+
 def execute_code(code: str, lang: str, qid: str) -> dict:
     """Execute the given code in the specified language against test cases for the question ID."""
     if lang not in COMPILERS:
