@@ -2,6 +2,7 @@ import subprocess, os, tempfile
 from config import COMPILERS, loadTest, validate_code
 
 def execute_custom_code(code: str, lang: str) -> dict:
+    """Execute the given code in the specific language"""
     if lang not in COMPILERS:
         return {"status": "error", "stdout": "", "stderr": f"Unsupported language: {lang}"}
 

@@ -5,6 +5,7 @@ app = Flask(__name__, static_folder='html')
 
 @app.post('/run')
 def custom_code_executor():
+    """Endpoint to run the specific code with given lang"""
     lang = request.args.get('lang')
     if not lang:
         return jsonify(status="error", message="Missing 'lang' query parameter"), 400
