@@ -11,15 +11,28 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Get latest tag
+          fetch-depth: 0 
+          
+      - name: Get latest tag from remote
         id: get_tag
         run: |
-          tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          # Fetch all tags to ensure we see tags even if they aren't in this branch's history
+          git fetch --tags --force
+          
+          # Find the highest version tag using natural version sorting
+          # Filters for tags starting with 'v'
+          tag=$(git tag -l "v*" --sort=-v:refname | head -n 1)
+          
+          # If no tag is found, start at v1.0.0
+          if [ -z "$tag" ]; then
+            tag="v1.0.0"
+          fi
+          
           echo "latest_tag=$tag" >> $GITHUB_OUTPUT
+          echo "Found latest tag: $tag"
 
       - name: Bump version (semantic roll over)
         id: bump
@@ -28,6 +41,7 @@ jobs:
           base=${tag#v}
           IFS='.' read -r major minor patch <<< "$base"
 
+          # Logic: Rolls over to next decimal place if value is 9
           if [ "$patch" -lt 9 ]; then
             patch=$((patch + 1))
           else
@@ -42,26 +56,31 @@ jobs:
 
           new_tag="v${major}.${minor}.${patch}"
           echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+          echo "New calculated tag: $new_tag"
 
       - name: Generate changelog
         id: changelog
         run: |
           prev=${{ steps.get_tag.outputs.latest_tag }}
-          new=${{ steps.bump.outputs.new_tag }}
-
-          # If there was no previous tag, show all commits
-          if [ "$prev" = "v1.0.0" ]; then
-            log=$(git log --pretty=format:"- %s")
-          else
+          
+          # If the latest_tag was the fallback v1.0.0 and doesn't actually exist in git
+          if git rev-parse "$prev" >/dev/null 2>&1; then
             log=$(git log $prev..HEAD --pretty=format:"- %s")
+          else
+            log=$(git log --pretty=format:"- %s")
           fi
+
+          # Handle empty logs
+          if [ -z "$log" ]; then log="- No changes documented."; fi
 
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$log" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Create new tag
+      - name: Create and Push Tag
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag ${{ steps.bump.outputs.new_tag }}
           git push origin ${{ steps.bump.outputs.new_tag }}
 
@@ -69,7 +88,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.bump.outputs.new_tag }}
-          name: "${{ steps.bump.outputs.new_tag }}"
+          name: "Release ${{ steps.bump.outputs.new_tag }}"
           body: |
             ## Changes since last release
             ${{ steps.changelog.outputs.changelog }}
