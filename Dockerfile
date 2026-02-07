@@ -2,12 +2,12 @@ FROM debian:bookworm-slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        build-essential \
-        default-jdk \
-        python3 \
-        python3-pip \
-        nodejs \
-        npm && \
+    build-essential \
+    default-jdk \
+    python3 \
+    python3-pip \
+    nodejs \
+    npm && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
