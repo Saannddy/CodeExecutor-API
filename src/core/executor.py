@@ -1,5 +1,5 @@
 import subprocess, os, tempfile
-from config import COMPILERS, loadTest, validate_code
+from .config import COMPILERS, validate_code
 
 def execute_custom_code(code: str, lang: str) -> dict:
     """Execute the given code in the specific language"""
@@ -13,18 +13,13 @@ def execute_custom_code(code: str, lang: str) -> dict:
     else:
         return _run_interpreted(code, lang)
 
-def execute_code(code: str, lang: str, qid: str) -> dict:
-    """Execute the given code in the specified language against test cases for the question ID."""
+def execute_code(code: str, lang: str, tests: list, timeout: int = 5, templates: dict = None, rules: dict = None) -> dict:
+    """Execute the given code against provided test cases."""
     if lang not in COMPILERS:
         return {"status": "error", "message": f"Unsupported language: {lang}"}
 
-    try:
-        data = loadTest(qid)
-        tests, timeout = data['test_pairs'], data['timeout']
-        templates = data.get('templates', {})
-        rules = data.get('rules', {})
-    except Exception as e:
-        return {"status": "error", "message": f"Error loading test cases: {e}"}
+    templates = templates or {}
+    rules = rules or {}
 
     if not validate_code(lang, code, rules):
         return {"status": "error", "message": "Code does not meet the required rules."}
