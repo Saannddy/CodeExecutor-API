@@ -1,8 +1,34 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from executor import execute_code, execute_custom_code
 from db import init_db
 
 app = Flask(__name__, static_folder='html')
+
+@app.route('/openapi.yaml')
+def serve_openapi():
+    """Serve the OpenAPI specification."""
+    return send_from_directory(app.root_path, 'openapi.yaml')
+
+@app.route('/docs')
+def scalar_docs():
+    """Serve interactive Scalar documentation."""
+    return f"""
+    <!doctype html>
+    <html>
+      <head>
+        <title>CodeExecutor-API Documentation</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+          body {{ margin: 0; }}
+        </style>
+      </head>
+      <body>
+        <script id="api-reference" data-url="/openapi.yaml"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+      </body>
+    </html>
+    """, 200
 
 init_db()
 
