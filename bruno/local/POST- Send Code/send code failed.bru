@@ -1,0 +1,23 @@
+meta {
+  name: send code failed
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/code/a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "code": "num1, num2 = map(int, input().split())\nprint(num1 * num2)",
+      "language": "python"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

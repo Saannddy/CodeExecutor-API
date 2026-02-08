@@ -1,4 +1,5 @@
-import os, json, re
+import os, json, re, uuid
+from db import query_db, get_problem_details, get_problem_test_cases
 
 COMPILERS = {
     "c": {"compiler": "gcc", "extension": ".c"},
@@ -16,10 +17,26 @@ def validate_code(lang: str, code: str, rules: dict) -> bool:
     return all(re.search(p, code) for p in patterns)
 
 def loadTest(qid: str) -> dict:
-    # Load test cases and configuration for a given question ID
+    # Try loading from database first
+    try:
+        problem = get_problem_details(qid)
+        if problem:
+            test_cases = get_problem_test_cases(qid)
+            cfg = problem['config']
+            data = {
+                "timeout": cfg.get("timeout", 5),
+                "test_pairs": test_cases,
+                "templates": cfg.get("templates", {}),
+                "rules": cfg.get("rules", {})
+            }
+            return data
+    except Exception:
+        pass
+
+    # Fallback to file-based loading
     qpath = os.path.join(TEST_CASES_ROOT_DIR, str(qid))
     if not os.path.isdir(qpath):
-        raise FileNotFoundError(f"Question directory not found: {qpath}")
+        raise FileNotFoundError(f"Question id not found: {qpath}")
 
     data = {"timeout": 5, "test_pairs": [], "templates": {}}
     cfg_path = os.path.join(qpath, "config.json")

@@ -1,0 +1,4 @@
+Flask==3.0.3
+gunicorn==23.0.0
+psycopg2-binary==2.9.9
+yoyo-migrations==8.2.0
