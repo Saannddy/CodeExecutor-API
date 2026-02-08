@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: http://localhost:3000/problem/b1f2e3d4-c5b6-4a7b-8c9d-0e1f2a3b4c5d
+  url: http://localhost:3000/problems?tag=string
   body: none
   auth: inherit
+}
+
+params:query {
+  tag: string
 }
 
 settings {
