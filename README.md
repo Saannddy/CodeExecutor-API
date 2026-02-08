@@ -18,7 +18,7 @@ Follow these steps to get your own instance of **CodeExecutor-API** up and runni
 ### 1️⃣ Clone the Repository
 Open your terminal and clone this project:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Saannddy/CodeExecutor-API
 cd CodeExecutor-API
 ```
 
