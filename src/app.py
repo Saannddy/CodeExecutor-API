@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
 from executor import execute_code, execute_custom_code
+from db import init_db
 
 app = Flask(__name__, static_folder='html')
+
+init_db()
 
 @app.post('/run')
 def custom_code_executor():
@@ -20,6 +23,35 @@ def custom_code_executor():
 
     res = execute_custom_code(code, lang)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
+
+@app.get('/problems')
+def get_problems():
+    """Endpoint to list all problems."""
+    from db import list_problems
+    problems = list_problems()
+    return jsonify(status="success", data=problems), 200
+
+@app.get('/problem/<problem_id>')
+def get_problem(problem_id):
+    """Endpoint to fetch problem details by ID."""
+    from db import get_problem_details, get_public_test_cases
+    problem = get_problem_details(problem_id)
+    if not problem:
+        return jsonify(status="error", message="Problem not found"), 404
+    
+    # Construct an ordered result for better readability
+    response_data = {
+        "id": problem.get("id"),
+        "title": problem.get("title"),
+        "difficulty": problem.get("difficulty"),
+        "description": problem.get("description"),
+        "categories": problem.get("categories"),
+        "tags": problem.get("tags"),
+        "config": problem.get("config"),
+        "test_cases": get_public_test_cases(problem_id)
+    }
+    
+    return jsonify(status="success", data=response_data), 200
 
 @app.post('/code/<question_id>')
 def code_executor(question_id):
