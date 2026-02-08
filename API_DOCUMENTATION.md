@@ -13,9 +13,12 @@ Interactive docs are available at: [http://localhost:3000/docs](http://localhost
 ## Endpoints
 
 ### 1. List Problems
-Retrieve a summary of all problems in the database.
+Retrieve a summary of all problems in the database. Supports filtering by category or tag.
 - **URL**: `/problems`
 - **Method**: `GET`
+- **Query Parameters**:
+  - `category`: Filter by category name (e.g., `/problems?category=Math`)
+  - `tag`: Filter by tag name (e.g., `/problems?tag=String`)
 - **Response**: `200 OK`
 ```json
 {

@@ -11,6 +11,17 @@ paths:
   /problems:
     get:
       summary: List all problems
+      parameters:
+        - name: category
+          in: query
+          description: Filter problems by category name
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: Filter problems by tag name
+          schema:
+            type: string
       responses:
         '200':
           description: A list of problems
@@ -27,7 +38,7 @@ paths:
                     items:
                       type: object
                       properties:
-                        id: { type: string, format: uuid }
+                        id: { type: string }
                         title: { type: string }
                         difficulty: { type: string }
 
