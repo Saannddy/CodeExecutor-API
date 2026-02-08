@@ -1,0 +1,92 @@
+openapi: 3.1.0
+info:
+  title: CodeExecutor-API
+  description: API for executing code in various languages against database-backed problems.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /problems:
+    get:
+      summary: List all problems
+      responses:
+        '200':
+          description: A list of problems
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string, format: uuid }
+                        title: { type: string }
+                        difficulty: { type: string }
+
+  /problem/{problem_id}:
+    get:
+      summary: Get problem details
+      parameters:
+        - name: problem_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Detailed problem information
+        '404':
+          description: Problem not found
+
+  /code/{problem_id}:
+    post:
+      summary: Execute code for a problem
+      parameters:
+        - name: problem_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language: { type: string }
+                code: { type: string }
+      responses:
+        '200':
+          description: Execution results
+
+  /run:
+    post:
+      summary: Run arbitrary code
+      parameters:
+        - name: lang
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code: { type: string }
+      responses:
+        '200':
+          description: Execution results
