@@ -1,17 +1,18 @@
 meta {
-  name: get problems by tag
+  name: get problems by tag and category
   type: http
   seq: 3
 }
 
 get {
-  url: http://localhost:3000/problems?tag=string
+  url: http://localhost:3000/problems?tag=string&&category=math
   body: none
   auth: inherit
 }
 
 params:query {
   tag: string
+  category: math
 }
 
 settings {

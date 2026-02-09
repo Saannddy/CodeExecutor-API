@@ -51,7 +51,15 @@ On the very first run, the system will automatically:
 
 ---
 
-## 📖 Complete API Documentation
+## �️ Recommended Tooling
+For the most professional development experience, we recommend the following tools:
+- ⚡ **[OrbStack](https://orbstack.dev/)**: A fast, light, and easy way to run Docker containers on macOS.
+- 🐝 **[Beekeeper Studio](https://www.beekeeperstudio.io/)**: A smooth and easy-to-use SQL editor and database manager for PostgreSQL.
+- 🐶 **[Bruno](https://www.usebruno.com/)**: A fast and git-friendly API client for testing the CodeExecutor endpoints.
+
+---
+
+## �📖 Complete API Documentation
 Since you're up and running, you'll want to know how to talk to the API!
 
 - **Detailed Endpoints**: See [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) for full request/response examples.
