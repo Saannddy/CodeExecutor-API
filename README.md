@@ -59,7 +59,7 @@ If you modify the models in `src/models/`, use these commands to sync the databa
 
 ### 🌱 Data Seeding
 If you need to re-seed or reset the initial data:
-- **Run Seeder**: `docker compose exec code-api python3 seed.py`
+- **Run Seeder**: `docker compose exec code-api python3 -m scripts.seed`
 *(The seeder is idempotent and will skip problems that already exist!)*
 
 ---

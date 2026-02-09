@@ -4,7 +4,8 @@ from sqlmodel import Session, select
 from infrastructure import engine
 from models import Problem, Category, Tag, TestCase
 
-# Deterministic UUID Namespace
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+
 NAMESPACE = uuid.NAMESPACE_DNS
 
 def get_uuid(name: str) -> uuid.UUID:

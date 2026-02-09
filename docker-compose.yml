@@ -32,7 +32,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-code_executor}
     command: >
-      sh -c "python3 -m alembic upgrade head && python3 seed.py && gunicorn --bind 0.0.0.0:3000 --access-logfile - app:app"
+      sh -c "python3 -m alembic upgrade head && python3 -m scripts.seed && gunicorn --bind 0.0.0.0:3000 --access-logfile - app:app"
 
 volumes:
   postgres_data:
