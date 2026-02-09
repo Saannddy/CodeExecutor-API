@@ -20,7 +20,6 @@ class Problem(SQLModel, table=True):
     difficulty: str
     config: Optional[dict] = Field(default_factory=dict, sa_column=Column(JSON))
     
-    # Relationships
     test_cases: List["TestCase"] = Relationship(back_populates="problem", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
     categories: List["Category"] = Relationship(link_model=ProblemCategoryLink)
     tags: List["Tag"] = Relationship(link_model=ProblemTagLink)
@@ -44,5 +43,4 @@ class TestCase(SQLModel, table=True):
     is_hidden: bool = Field(default=True)
     sort_order: int
     
-    # Relationships
-    problem: Problem = Relationship(back_populates="test_cases")
+    problem: "Problem" = Relationship(back_populates="test_cases")

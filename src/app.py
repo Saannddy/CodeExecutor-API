@@ -1,12 +1,8 @@
 from flask import Flask
-from infrastructure import init_db
 from api import api_bp
 
 def create_app():
     app = Flask(__name__, static_folder='html')
-    
-    # Initialize infrastructure
-    init_db()
     
     # Register routes
     app.register_blueprint(api_bp)

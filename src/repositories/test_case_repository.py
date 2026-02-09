@@ -1,5 +1,5 @@
 from sqlmodel import select
-from infrastructure.database import SessionLocal
+from infrastructure import SessionLocal
 from models import TestCase
 
 class TestCaseRepository:
@@ -10,15 +10,14 @@ class TestCaseRepository:
         return self._session if self._session else SessionLocal()
 
     def find_all_by_problem(self, problem_id):
-        """Fetch all test cases for a problem (internal/execution use)."""
+        """Fetch all test cases for execution, mapped to engine format."""
         with self._get_session() as session:
             statement = select(TestCase).where(TestCase.problem_id == problem_id).order_by(TestCase.sort_order)
             results = session.exec(statement).all()
-            # Map to expected format for execution engine
             return [{"input": tc.input, "expected_output": tc.output, "test_number": tc.sort_order} for tc in results]
 
     def find_public_by_problem(self, problem_id):
-        """Fetch only non-hidden test cases (public description use)."""
+        """Fetch non-hidden test cases for public documentation."""
         with self._get_session() as session:
             statement = select(TestCase).where(
                 TestCase.problem_id == problem_id, 
