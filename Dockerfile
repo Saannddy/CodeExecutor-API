@@ -28,7 +28,8 @@ RUN pip install --no-cache-dir -r requirements.txt --break-system-packages
 
 # Copy application source
 COPY --chown=coder:coder src/ .
-COPY --chown=coder:coder migrations/ ./migrations/
+COPY --chown=coder:coder alembic/ ./alembic/
+COPY --chown=coder:coder alembic.ini .
 
 USER coder
 

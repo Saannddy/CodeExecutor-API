@@ -37,17 +37,30 @@ docker compose up -d --build
 - `-d`: Runs containers in the background (**detached mode**).
 - `--build`: Ensures all recent code changes are freshly compiled.
 
-### 4️⃣ Verify System Health ✅
-Once started, you can check if everything is breathing:
-- **Container Status**: `docker compose ps` (Look for `Up (healthy)`)
-- **API Logs**: `docker compose logs -f code-api`
-- **Database Logs**: `docker compose logs -f db`
-
-### 5️⃣ Automatic initialization 🪄
+### 5️⃣ Automatic Initialization 🪄
 On the very first run, the system will automatically:
 - Create all database tables (using UUIDs for safety).
 - Seed **7+ coding problems** (Two Sum, Palindrome, etc.).
 - Link problems with their respective categories and tags.
+
+---
+
+## 🏗️ Database Management
+While the system handles initialization automatically, you may need these manual commands for development:
+
+### 🔄 Migrations (Alembic)
+If you modify the models in `src/models/`, use these commands to sync the database:
+- **Check Status**: `docker compose exec code-api alembic current`
+- **Apply Migrations**: `docker compose exec code-api alembic upgrade head`
+- **Generate New Migration**:
+  ```bash
+  docker compose exec code-api alembic revision --autogenerate -m "description_of_change"
+  ```
+
+### 🌱 Data Seeding
+If you need to re-seed or reset the initial data:
+- **Run Seeder**: `docker compose exec code-api python3 seed.py`
+*(The seeder is idempotent and will skip problems that already exist!)*
 
 ---
 
