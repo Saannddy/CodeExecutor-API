@@ -32,7 +32,10 @@ cp .env.example .env
 ### 3️⃣ Build and Launch 🏗️
 Run the entire stack (API + PostgreSQL DB) using Docker Compose:
 ```bash
-docker compose up -d --build
+## FOR LOCAL DB
+docker compose --profile local up -d --build
+## FOR PRODUCTION
+docker compose --profile remote up -d --build
 ```
 - `-d`: Runs containers in the background (**detached mode**).
 - `--build`: Ensures all recent code changes are freshly compiled.
@@ -50,21 +53,21 @@ While the system handles initialization automatically, you may need these manual
 
 ### 🔄 Migrations (Alembic)
 If you modify the models in `src/models/`, use these commands to sync the database:
-- **Check Status**: `docker compose exec code-api alembic current`
-- **Apply Migrations**: `docker compose exec code-api alembic upgrade head`
+- **Check Status**: `docker compose --profile local exec code-api alembic current`
+- **Apply Migrations**: `docker compose --profile local exec code-api alembic upgrade head`
 - **Generate New Migration**:
   ```bash
-  docker compose exec code-api alembic revision --autogenerate -m "description_of_change"
+  docker compose --profile local exec code-api alembic revision --autogenerate -m "description_of_change"
   ```
 
 ### 🌱 Data Seeding
 If you need to re-seed or reset the initial data:
-- **Run Seeder**: `docker compose exec code-api python3 -m scripts.seed`
+- **Run Seeder**: `docker compose --profile local exec code-api python3 -m scripts.seed`
 *(The seeder is idempotent and will skip problems that already exist!)*
 
 ---
 
-## �️ Recommended Tooling
+## ️ Recommended Tooling
 For the most professional development experience, we recommend the following tools:
 - ⚡ **[OrbStack](https://orbstack.dev/)**: A fast, light, and easy way to run Docker containers on macOS.
 - 🐝 **[Beekeeper Studio](https://www.beekeeperstudio.io/)**: A smooth and easy-to-use SQL editor and database manager for PostgreSQL.
