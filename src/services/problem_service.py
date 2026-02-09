@@ -6,30 +6,28 @@ class ProblemService:
         self.test_case_repo = TestCaseRepository()
 
     def list_all_problems(self):
-        """Get summary list of problems."""
+        """Retrieve a list of all problems with basic information."""
         return self.problem_repo.find_all()
 
     def get_problem_details(self, problem_id):
-        """Get full problem details for the API response."""
-        problem = self.problem_repo.find_by_id(problem_id)
-        if not problem:
+        """Fetch full problem details, including config and public test cases."""
+        problem_dict = self.problem_repo.find_details_by_id(problem_id)
+        if not problem_dict:
             return None
 
-        # Filter config (Security/Business logic)
+        # Filter configuration for API response
         allowed_keys = {'timeout', 'templates'}
-        original_config = problem.get('config', {})
-        problem['config'] = {k: v for k, v in original_config.items() if k in allowed_keys}
+        problem_dict['config'] = {k: v for k, v in problem_dict.get('config', {}).items() if k in allowed_keys}
+        
+        # Enrich with public test cases
+        problem_dict['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id)
 
-        # Enrich with categories, tags, and public test cases
-        problem['categories'] = self.problem_repo.get_categories(problem_id)
-        problem['tags'] = self.problem_repo.get_tags(problem_id)
-        problem['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id)
+        return problem_dict
 
-        return problem
     def list_problems_by_category(self, category_name):
-        """Get problems filtered by category."""
+        """Filter problems by category."""
         return self.problem_repo.find_by_category(category_name)
 
     def list_problems_by_tag(self, tag_name):
-        """Get problems filtered by tag."""
+        """Filter problems by tag."""
         return self.problem_repo.find_by_tag(tag_name)

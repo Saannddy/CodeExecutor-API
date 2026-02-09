@@ -8,10 +8,12 @@ execution_service = ExecutionService()
 
 @api_bp.route('/openapi.yaml')
 def serve_openapi():
+    """Serve the OpenAPI specification file."""
     return send_from_directory(current_app.root_path, 'openapi.yaml')
 
 @api_bp.route('/docs')
 def scalar_docs():
+    """Serve interactive API documentation via Scalar."""
     return f"""
     <!doctype html>
     <html>
@@ -30,6 +32,7 @@ def scalar_docs():
 
 @api_bp.get('/problems')
 def get_problems():
+    """List problems with optional category/tag filtering."""
     category = request.args.get('category')
     tag = request.args.get('tag')
 
@@ -44,6 +47,7 @@ def get_problems():
 
 @api_bp.get('/problem/<problem_id>')
 def get_problem(problem_id):
+    """Retrieve detailed information for a single problem."""
     problem = problem_service.get_problem_details(problem_id)
     if not problem:
         return jsonify(status="error", message="Problem not found"), 404
@@ -51,6 +55,7 @@ def get_problem(problem_id):
 
 @api_bp.post('/code/<problem_id>')
 def execute_problem_code(problem_id):
+    """Execute code against stored test cases for a problem."""
     if not request.is_json:
         return jsonify(status="error", message="Request must be JSON"), 400
     
@@ -64,6 +69,7 @@ def execute_problem_code(problem_id):
 
 @api_bp.post('/run')
 def custom_code_executor():
+    """Execute arbitrary code without test cases."""
     lang = request.args.get('lang')
     if not lang or not request.is_json:
         return jsonify(status="error", message="Missing lang or invalid body"), 400

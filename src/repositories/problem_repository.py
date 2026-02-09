@@ -1,53 +1,50 @@
-from infrastructure.database import query_one, query_all
+from sqlmodel import select
+from sqlalchemy.orm import joinedload
+from infrastructure import SessionLocal
+from models import Problem, Category, Tag
 
 class ProblemRepository:
-    @staticmethod
-    def find_all():
-        """Retrieve all problems with basic info."""
-        return query_all("SELECT id, title, difficulty FROM problems ORDER BY created_at DESC")
+    def __init__(self, session=None):
+        self._session = session
 
-    @staticmethod
-    def find_by_id(problem_id):
-        """Retrieve basic problem details by ID."""
-        return query_one("SELECT id, title, description, difficulty, config FROM problems WHERE id = %s", (problem_id,))
+    def _get_session(self):
+        return self._session if self._session else SessionLocal()
 
-    @staticmethod
-    def get_categories(problem_id):
-        """Retrieve category names for a problem."""
-        rows = query_all("""
-            SELECT c.name FROM categories c
-            JOIN problem_categories pc ON c.id = pc.category_id
-            WHERE pc.problem_id = %s
-        """, (problem_id,))
-        return [r['name'] for r in rows]
+    def find_all(self):
+        """Retrieve all problems with basic information."""
+        with self._get_session() as session:
+            statement = select(Problem).order_by(Problem.id)
+            return [p.model_dump(exclude={"config", "description"}) for p in session.exec(statement).all()]
 
-    @staticmethod
-    def get_tags(problem_id):
-        """Retrieve tag names for a problem."""
-        rows = query_all("""
-            SELECT t.name FROM tags t
-            JOIN problem_tags pt ON t.id = pt.tag_id
-            WHERE pt.problem_id = %s
-        """, (problem_id,))
-        return [r['name'] for r in rows]
-    @staticmethod
-    def find_by_category(category_name):
-        """Retrieve problems filtered by category name."""
-        return query_all("""
-            SELECT p.id, p.title, p.difficulty FROM problems p
-            JOIN problem_categories pc ON p.id = pc.problem_id
-            JOIN categories c ON pc.category_id = c.id
-            WHERE c.name ILIKE %s
-            ORDER BY p.created_at DESC
-        """, (category_name,))
+    def find_by_id(self, problem_id):
+        """Internal helper to fetch a Problem model by UUID."""
+        with self._get_session() as session:
+            return session.get(Problem, problem_id)
 
-    @staticmethod
-    def find_by_tag(tag_name):
-        """Retrieve problems filtered by tag name."""
-        return query_all("""
-            SELECT p.id, p.title, p.difficulty FROM problems p
-            JOIN problem_tags pt ON p.id = pt.problem_id
-            JOIN tags t ON pt.tag_id = t.id
-            WHERE t.name ILIKE %s
-            ORDER BY p.created_at DESC
-        """, (tag_name,))
+    def find_details_by_id(self, problem_id):
+        """Fetch full problem details with hydrated relationships for API response."""
+        with self._get_session() as session:
+            statement = select(Problem).where(Problem.id == problem_id).options(
+                joinedload(Problem.categories),
+                joinedload(Problem.tags)
+            )
+            problem = session.exec(statement).first()
+            if not problem:
+                return None
+            
+            p_dict = problem.model_dump()
+            p_dict['categories'] = [c.name for c in problem.categories]
+            p_dict['tags'] = [t.name for t in problem.tags]
+            return p_dict
+
+    def find_by_category(self, category_name):
+        """Filter problems by category name (case-insensitive)."""
+        with self._get_session() as session:
+            statement = select(Problem).join(Problem.categories).where(Category.name.ilike(category_name))
+            return [p.model_dump(exclude={"config", "description"}) for p in session.exec(statement).all()]
+
+    def find_by_tag(self, tag_name):
+        """Filter problems by tag name (case-insensitive)."""
+        with self._get_session() as session:
+            statement = select(Problem).join(Problem.tags).where(Tag.name.ilike(tag_name))
+            return [p.model_dump(exclude={"config", "description"}) for p in session.exec(statement).all()]
