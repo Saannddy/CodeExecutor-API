@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional
 from uuid import UUID, uuid4
 from sqlmodel import SQLModel, Field, Relationship, JSON, Column
@@ -44,3 +45,34 @@ class TestCase(SQLModel, table=True):
     sort_order: int
     
     problem: "Problem" = Relationship(back_populates="test_cases")
+
+class Riddle(SQLModel, table=True):
+    __tablename__ = "riddles"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    riddle_text: str
+    refer_char: str = Field(max_length=1)
+    refer_index: int
+    difficulty: Optional[str] = None
+    tag: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class Question(SQLModel, table=True):
+    __tablename__ = "questions"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    title: str
+    tag: Optional[str] = None
+    category: Optional[str] = None
+    question_text: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    choices: List["Choice"] = Relationship(back_populates="question", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
+
+class Choice(SQLModel, table=True):
+    __tablename__ = "choices"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    question_id: UUID = Field(foreign_key="questions.id")
+    choice_text: str
+    is_correct: bool = Field(default=False)
+    
+    question: "Question" = Relationship(back_populates="choices")
+
