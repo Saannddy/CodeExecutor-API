@@ -1,10 +1,11 @@
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
-from services import ProblemService, ExecutionService
+from services import ProblemService, ExecutionService, QuestionService
 from core import execute_custom_code
 
 api_bp = Blueprint('api', __name__)
 problem_service = ProblemService()
 execution_service = ExecutionService()
+question_service = QuestionService()
 
 @api_bp.route('/openapi.yaml')
 def serve_openapi():
@@ -81,3 +82,82 @@ def custom_code_executor():
 
     res = execute_custom_code(code, lang)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
+
+# --- Question & Choice Management ---
+
+@api_bp.get('/questions')
+def get_questions():
+    """List all questions with pagination."""
+    page = request.args.get('page', 1, type=int)
+    page_size = request.args.get('page_size', 10, type=int)
+    
+    pagination_data = question_service.list_all_questions(page=page, page_size=page_size)
+    return jsonify(status="success", data=pagination_data), 200
+
+@api_bp.get('/question/<question_id>')
+def get_question(question_id):
+    """Retrieve question details with choices."""
+    question = question_service.get_question_details(question_id)
+    if not question:
+        return jsonify(status="error", message="Question not found"), 404
+    return jsonify(status="success", data=question), 200
+
+@api_bp.post('/question')
+def add_question():
+    """Create a new question."""
+    if not request.is_json:
+        return jsonify(status="error", message="Request must be JSON"), 400
+    data = request.get_json()
+    if not data.get('title') or not data.get('question_text'):
+        return jsonify(status="error", message="Missing title or question_text"), 400
+    
+    question = question_service.add_question(data)
+    return jsonify(status="success", data=question), 201
+
+@api_bp.patch('/question/<question_id>')
+def update_question(question_id):
+    """Update an existing question."""
+    if not request.is_json:
+        return jsonify(status="error", message="Request must be JSON"), 400
+    data = request.get_json()
+    
+    question = question_service.update_question(question_id, data)
+    if not question:
+        return jsonify(status="error", message="Question not found"), 404
+    return jsonify(status="success", data=question), 200
+
+@api_bp.post('/question/<question_id>/choice')
+def add_choice(question_id):
+    """Add a choice to a question (Limit: 4)."""
+    if not request.is_json:
+        return jsonify(status="error", message="Request must be JSON"), 400
+    data = request.get_json()
+    if not data.get('choice_text'):
+        return jsonify(status="error", message="Missing choice_text"), 400
+        
+    res = question_service.add_choice(question_id, data)
+    return jsonify(res), (400 if res.get("status") == "error" else 201)
+
+@api_bp.patch('/choice/<choice_id>')
+def update_choice(choice_id):
+    """Update an existing choice."""
+    if not request.is_json:
+        return jsonify(status="error", message="Request must be JSON"), 400
+    data = request.get_json()
+    
+    choice = question_service.update_choice(choice_id, data)
+    if not choice:
+        return jsonify(status="error", message="Choice not found"), 404
+    return jsonify(status="success", data=choice), 200
+
+@api_bp.get('/questions/random')
+def get_random_questions():
+    """Get random questions by tag."""
+    tag = request.args.get('tag')
+    amount = request.args.get('amount', 1, type=int)
+    
+    if not tag:
+        return jsonify(status="error", message="Missing 'tag' parameter"), 400
+        
+    questions = question_service.get_random_questions(tag, amount)
+    return jsonify(status="success", data=questions), 200

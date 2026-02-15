@@ -101,3 +101,163 @@ paths:
       responses:
         '200':
           description: Execution results
+  /questions:
+    get:
+      summary: List all questions
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of questions with choice counts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id: { type: string }
+                            title: { type: string }
+                            question_text: { type: string }
+                            choice_count: { type: integer }
+                      total_count: { type: integer }
+                      total_pages: { type: integer }
+                      current_page: { type: integer }
+                      page_size: { type: integer }
+
+  /question/{question_id}:
+    get:
+      summary: Get question details
+      parameters:
+        - name: question_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Question details with choices
+        '404':
+          description: Question not found
+    patch:
+      summary: Update a question
+      parameters:
+        - name: question_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                question_text: { type: string }
+      responses:
+        '200':
+          description: Question updated
+        '404':
+          description: Question not found
+
+  /question:
+    post:
+      summary: Create a new question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                question_text: { type: string }
+      responses:
+        '201':
+          description: Question created
+
+  /question/{question_id}/choice:
+    post:
+      summary: Add a choice to a question
+      parameters:
+        - name: question_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                choice_text: { type: string }
+                is_correct: { type: bool }
+      responses:
+        '201':
+          description: Choice added
+        '400':
+          description: Limit exceeded or invalid input
+
+  /choice/{choice_id}:
+    patch:
+      summary: Update a choice
+      parameters:
+        - name: choice_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                choice_text: { type: string }
+                is_correct: { type: bool }
+      responses:
+        '200':
+          description: Choice updated
+        '404':
+          description: Choice not found
+
+  /questions/random:
+    get:
+      summary: Get random questions by tag
+      parameters:
+        - name: tag
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: List of random questions
