@@ -1,14 +1,38 @@
 services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-code_executor}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-code_executor}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   code-api:
     image: code-api:latest
-
     build:
       context: .
       dockerfile: ./Dockerfile
-
     ports:
       - "3000:3000"
-      
     restart: always
     stdin_open: true
     tty: true
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-code_executor}
+    command: >
+      sh -c "python3 -m alembic upgrade head && python3 -m scripts.seed && gunicorn --bind 0.0.0.0:3000 --access-logfile - app:app"
+
+volumes:
+  postgres_data:

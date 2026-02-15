@@ -1,0 +1,23 @@
+meta {
+  name: send code
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{code-exec-url}}/code/2a3380b4-fbc7-517d-9583-01d41d1cbb80
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "code": "num1, num2 = map(int, input().split())\nprint(num1 * num2)",
+      "language": "python"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

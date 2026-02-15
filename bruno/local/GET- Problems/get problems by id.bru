@@ -1,0 +1,16 @@
+meta {
+  name: get problems by id
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/problem/2a3380b4-fbc7-517d-9583-01d41d1cbb80
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
