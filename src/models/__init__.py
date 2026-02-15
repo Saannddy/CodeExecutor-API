@@ -1,2 +1,6 @@
-from .base import Problem, TestCase, Category, Tag, ProblemCategoryLink, ProblemTagLink, Riddle, Question, Choice
-
+from .base import (
+    Problem, Category, Tag, TestCase,
+    ProblemCategoryLink, ProblemTagLink,
+    Riddle, Question, Choice,
+    RiddleTagLink, QuestionTagLink, QuestionCategoryLink
+)

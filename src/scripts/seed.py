@@ -3,9 +3,10 @@ import uuid
 import random
 import string
 from datetime import datetime, timezone
+from sqlalchemy import text
 from sqlmodel import Session, select
 from infrastructure import engine
-from models import Problem, Category, Tag, TestCase, Riddle, Question, Choice
+from models import Problem, Category, Tag, TestCase, Riddle, Question, Choice, RiddleTagLink, QuestionTagLink, QuestionCategoryLink
 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -24,27 +25,28 @@ def seed_data():
     with Session(engine) as session:
         logging.info("Seeding initial data with deterministic UUIDs...")
 
+        def get_or_create_category(name):
+            cat_id = get_uuid(f"cat_{name}")
+            cat = session.exec(select(Category).where(Category.id == cat_id)).first()
+            if not cat:
+                cat = Category(id=cat_id, name=name)
+                session.add(cat)
+                session.commit()
+                session.refresh(cat)
+            return cat
+
+        def get_or_create_tag(name):
+            tag_id = get_uuid(f"tag_{name}")
+            tag = session.exec(select(Tag).where(Tag.id == tag_id)).first()
+            if not tag:
+                tag = Tag(id=tag_id, name=name)
+                session.add(tag)
+                session.commit()
+                session.refresh(tag)
+            return tag
+
         # Check if Problems already have data
         if not session.exec(select(Problem)).first():
-            def get_or_create_category(name):
-                cat_id = get_uuid(f"cat_{name}")
-                cat = session.exec(select(Category).where(Category.id == cat_id)).first()
-                if not cat:
-                    cat = Category(id=cat_id, name=name)
-                    session.add(cat)
-                    session.commit()
-                    session.refresh(cat)
-                return cat
-
-            def get_or_create_tag(name):
-                tag_id = get_uuid(f"tag_{name}")
-                tag = session.exec(select(Tag).where(Tag.id == tag_id)).first()
-                if not tag:
-                    tag = Tag(id=tag_id, name=name)
-                    session.add(tag)
-                    session.commit()
-                    session.refresh(tag)
-                return tag
 
             # 1. Categories
             math = get_or_create_category("Math")
@@ -202,7 +204,12 @@ def seed_data():
 
 
         # 5. Seed Riddles
-        if not session.exec(select(Riddle)).first():
+        if not session.exec(select(RiddleTagLink)).first():
+            # Clear existing riddles and their tags
+            session.exec(text("DELETE FROM riddle_tags"))
+            session.exec(text("DELETE FROM riddles"))
+            session.commit()
+            
             logging.info("Seeding 30 riddles...")
             for i in range(1, 31):
                 riddle = Riddle(
@@ -210,24 +217,34 @@ def seed_data():
                     refer_char=random.choice(string.ascii_uppercase),
                     refer_index=random.randint(1, 6),
                     difficulty=random.choice(["Easy", "Medium", "Hard"]),
-                    tag=random.choice(["Logic", "Word", "Math"]),
                     created_at=datetime.now(timezone.utc)
                 )
+                tag_name = random.choice(["Logic", "Word", "Math", "Riddle"])
+                riddle.tags = [get_or_create_tag(tag_name)]
                 session.add(riddle)
             session.commit()
             logging.info("Successfully seeded 30 riddles.")
 
         # 6. Seed Questions
-        if not session.exec(select(Question)).first():
+        if not session.exec(select(QuestionTagLink)).first():
+            # Clear existing questions, choices, and their links
+            session.exec(text("DELETE FROM question_tags"))
+            session.exec(text("DELETE FROM question_categories"))
+            session.exec(text("DELETE FROM choices"))
+            session.exec(text("DELETE FROM questions"))
+            session.commit()
+
             logging.info("Seeding 10 questions with 4 choices each...")
             for i in range(1, 11):
                 question = Question(
                     title=f"Sample Question {i}",
-                    tag=random.choice(["General", "Tech", "Science"]),
-                    category=random.choice(["Knowledge", "Trivia"]),
                     question_text=f"This is the content for question {i}. Which choice is correct?",
                     created_at=datetime.now(timezone.utc)
                 )
+                tag_name = random.choice(["General", "Tech", "Science", "Trivia"])
+                cat_name = random.choice(["Knowledge", "Trivia", "Education"])
+                question.tags = [get_or_create_tag(tag_name)]
+                question.categories = [get_or_create_category(cat_name)]
                 session.add(question)
                 session.flush()
 
