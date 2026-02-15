@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: http://localhost:3000/riddles
+  url: http://localhost:3000/riddles?page=3
   body: none
   auth: inherit
+}
+
+params:query {
+  page: 3
 }
 
 settings {
