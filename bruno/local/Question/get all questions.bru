@@ -1,0 +1,21 @@
+meta {
+  name: get all questions
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/questions?page=4&page_size=4
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 4
+  page_size: 4
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
