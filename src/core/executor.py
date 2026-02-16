@@ -61,31 +61,35 @@ def _run_c_cpp(code, lang, tests=None, timeout=5):
             if os.path.exists(f): os.remove(f)
 
 def _run_java(code, tests=None, timeout=5):
-    """Compile and execute Java code (requires 'public class Main')."""
+    """Compile and execute Java code (automatically detects public class name)."""
+    import re
     cfg = COMPILERS["java"]
-    fd, src = tempfile.mkstemp(suffix=".java")
-    os.close(fd)
-    d = os.path.dirname(src)
-    try:
-        with open(src, 'w', encoding='utf-8') as f:
-            f.write(code)
+    
+    # Extract public class name
+    match = re.search(r'public\s+class\s+(\w+)', code)
+    if not match:
+        return {"status": "error", "message": "Java code must contain a 'public class'."}
+    
+    class_name = match.group(1)
+
+    with tempfile.TemporaryDirectory() as d:
+        src = os.path.join(d, f"{class_name}.java")
+        try:
+            with open(src, 'w', encoding='utf-8') as f:
+                f.write(code)
+                
+            comp = subprocess.run([cfg['compiler'], src, "-d", d], capture_output=True, text=True, timeout=timeout)
+            if comp.returncode:
+                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
             
-        if not code.strip().startswith("public class Main"):
-            return {"status": "error", "message": "Java code must utilize 'public class Main'."}
-            
-        comp = subprocess.run([cfg['compiler'], src, "-d", d], capture_output=True, text=True, timeout=timeout)
-        if comp.returncode:
-            return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
-        
-        cmd = ["java", "-cp", d, "Main"]
-        if tests is None:
-            res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-            return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
-            
-        return _run_tests(cmd, tests, timeout)
-    finally:
-        for f in [src, os.path.join(d, "Main.class")]:
-            if os.path.exists(f): os.remove(f)
+            cmd = ["java", "-cp", d, class_name]
+            if tests is None:
+                res = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+                return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+                
+            return _run_tests(cmd, tests, timeout)
+        except Exception as e:
+            return {"status": "error", "message": f"Execution error: {str(e)}"}
 
 def _run_interpreted(code, lang, tests=None, timeout=5):
     """Execute interpreted languages (e.g., Python, JavaScript)."""

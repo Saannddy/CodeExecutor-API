@@ -1,0 +1,21 @@
+meta {
+  name: get all riddles
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/riddles?page=3&&page_size=2
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 3
+  page_size: 2
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
