@@ -1,0 +1,26 @@
+meta {
+  name: send code pass
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/code/2a3380b4-fbc7-517d-9583-01d41d1cbb80?lang=python
+  body: json
+  auth: inherit
+}
+
+params:query {
+  lang: python
+}
+
+body:json {
+  {
+      "code": "num1, num2 = map(int, input().split())\nprint(num1 * num2)"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

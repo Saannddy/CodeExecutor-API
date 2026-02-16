@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional
 from uuid import UUID, uuid4
 from sqlmodel import SQLModel, Field, Relationship, JSON, Column
@@ -11,6 +12,21 @@ class ProblemTagLink(SQLModel, table=True):
     __tablename__ = "problem_tags"
     problem_id: UUID = Field(foreign_key="problems.id", primary_key=True)
     tag_id: UUID = Field(foreign_key="tags.id", primary_key=True)
+
+class RiddleTagLink(SQLModel, table=True):
+    __tablename__ = "riddle_tags"
+    riddle_id: UUID = Field(foreign_key="riddles.id", primary_key=True)
+    tag_id: UUID = Field(foreign_key="tags.id", primary_key=True)
+
+class QuestionTagLink(SQLModel, table=True):
+    __tablename__ = "question_tags"
+    question_id: UUID = Field(foreign_key="questions.id", primary_key=True)
+    tag_id: UUID = Field(foreign_key="tags.id", primary_key=True)
+
+class QuestionCategoryLink(SQLModel, table=True):
+    __tablename__ = "question_categories"
+    question_id: UUID = Field(foreign_key="questions.id", primary_key=True)
+    category_id: UUID = Field(foreign_key="categories.id", primary_key=True)
 
 class Problem(SQLModel, table=True):
     __tablename__ = "problems"
@@ -44,3 +60,35 @@ class TestCase(SQLModel, table=True):
     sort_order: int
     
     problem: "Problem" = Relationship(back_populates="test_cases")
+
+class Riddle(SQLModel, table=True):
+    __tablename__ = "riddles"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    riddle_text: str
+    refer_char: str = Field(max_length=1)
+    refer_index: int
+    difficulty: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    tags: List["Tag"] = Relationship(link_model=RiddleTagLink)
+
+class Question(SQLModel, table=True):
+    __tablename__ = "questions"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    title: str
+    question_text: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    choices: List["Choice"] = Relationship(back_populates="question", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
+    tags: List["Tag"] = Relationship(link_model=QuestionTagLink)
+    categories: List["Category"] = Relationship(link_model=QuestionCategoryLink)
+
+class Choice(SQLModel, table=True):
+    __tablename__ = "choices"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    question_id: UUID = Field(foreign_key="questions.id")
+    choice_text: str
+    is_correct: bool = Field(default=False)
+    
+    question: "Question" = Relationship(back_populates="choices")
+
