@@ -57,7 +57,5 @@ class RiddleRepository:
                 if results:
                     riddles_group.append(random.choice(results))
                 else:
-                    # If we can't find a riddle for a specific index, we stop or skip?
-                    # Usually we want a complete group, but let's just skip for now or add None
-                    pass
+                    raise ValueError(f"No riddles found for specific index {i}")
         return riddles_group

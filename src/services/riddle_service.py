@@ -89,20 +89,25 @@ class RiddleService:
 
     def get_random_riddles_group(self, amount: int):
         """Pick N random riddles (1 per refer_index) and build solution string."""
-        riddles = self.riddle_repo.find_random_per_index(amount)
-        
-        # Build solution string by joining refer_char in order of refer_index
-        # Since find_random_per_index returns them in order 1..N
-        solution = "".join([r.refer_char for r in riddles if r is not None])
-        
-        return {
-            "riddles": [
-                {
-                    "id": str(r.id),
-                    "riddle_text": r.riddle_text,
-                    "refer_index": r.refer_index
-                } for r in riddles if r is not None
-            ],
-            "solution": solution,
-            "amount": len(riddles)
-        }
+        try:
+            riddles = self.riddle_repo.find_random_per_index(amount)
+            
+            # Build solution string by joining refer_char in order of refer_index
+            solution = "".join([r.refer_char for r in riddles])
+            
+            return {
+                "status": "success",
+                "data": {
+                    "riddles": [
+                        {
+                            "id": str(r.id),
+                            "riddle_text": r.riddle_text,
+                            "refer_index": r.refer_index
+                        } for r in riddles
+                    ],
+                    "solution": solution,
+                    "amount": len(riddles)
+                }
+            }
+        except ValueError as e:
+            return {"status": "error", "message": str(e)}

@@ -178,8 +178,10 @@ def get_riddles():
 def get_riddles_group():
     """Get a random group of riddles (1 per index) and their solution."""
     amount = request.args.get('amount', 5, type=int)
-    group_data = riddle_service.get_random_riddles_group(amount)
-    return jsonify(status="success", data=group_data), 200
+    res = riddle_service.get_random_riddles_group(amount)
+    if res['status'] == "error":
+        return jsonify(res), 400
+    return jsonify(res), 200
 
 @api_bp.get('/riddle/<riddle_id>')
 def get_riddle(riddle_id):
