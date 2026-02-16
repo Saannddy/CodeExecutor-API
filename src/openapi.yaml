@@ -68,6 +68,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: lang
+          in: query
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -75,7 +80,6 @@ paths:
             schema:
               type: object
               properties:
-                language: { type: string }
                 code: { type: string }
       responses:
         '200':
