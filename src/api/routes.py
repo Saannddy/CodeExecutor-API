@@ -81,3 +81,20 @@ def custom_code_executor():
 
     res = execute_custom_code(code, lang)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
+
+@api_bp.post('/getRandomProblem')
+def get_random_problem():
+    """Fetch a random problem, optionally filtered by category or tag."""
+    category = request.args.get('category')
+    tag = request.args.get('tag')
+
+    if category:
+        problem = problem_service.get_random_problem_by_category(category)
+    elif tag:
+        problem = problem_service.get_random_problem_by_tag(tag)
+    else:
+        problem = problem_service.get_random_problem()
+
+    if not problem:
+        return jsonify(status="error", message="No problems found"), 404
+    return jsonify(status="success", data=problem), 200

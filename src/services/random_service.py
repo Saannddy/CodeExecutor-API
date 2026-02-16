@@ -1,11 +1,12 @@
 from repositories import ProblemRepository, TestCaseRepository
-class RadomService:
+
+class RandomService:
     def __init__(self):
         self.problem_repo = ProblemRepository()
         self.test_case_repo = TestCaseRepository()
 
     def get_random_problem(self):
-        """Retrieve a random problem with its public test cases."""
+        """Fetch a random problem with its details and public test cases."""
         problem_dict = self.problem_repo.find_random()
         if not problem_dict:
             return None
