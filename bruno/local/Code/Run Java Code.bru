@@ -1,0 +1,26 @@
+meta {
+  name: Run Java Code
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/run?lang=java
+  body: json
+  auth: inherit
+}
+
+params:query {
+  lang: java
+}
+
+body:json {
+  {
+    "code": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello from a custom class name!\");\n    }\n}"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

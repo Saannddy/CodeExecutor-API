@@ -58,13 +58,14 @@ def get_problem(problem_id):
 @api_bp.post('/code/<problem_id>')
 def execute_problem_code(problem_id):
     """Execute code against stored test cases for a problem."""
-    if not request.is_json:
-        return jsonify(status="error", message="Request must be JSON"), 400
+    lang = request.args.get('lang')
+    if not lang or not request.is_json:
+        return jsonify(status="error", message="Missing 'lang' or invalid body"), 400
     
     data = request.get_json()
-    code, lang = data.get('code'), data.get('language')
-    if not code or not lang:
-        return jsonify(status="error", message="Missing 'code' or 'language'"), 400
+    code = data.get('code')
+    if not code:
+        return jsonify(status="error", message="Missing 'code'"), 400
 
     res = execution_service.run_problem_code(problem_id, code, lang)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
