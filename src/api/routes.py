@@ -217,3 +217,23 @@ def update_riddle(riddle_id):
         return jsonify(status="success", data=updated_riddle), 200
     except Exception as e:
         return jsonify(status="error", message=str(e)), 500
+
+# --- Test Case Management ---
+
+@api_bp.post('/problem/<problem_id>/testcases')
+def add_test_cases(problem_id):
+    """ Add multiple test case  """
+    if not request.is_json:
+        return jsonify(status='error', message='Request must be JSON'), 400
+    
+    data = request.get_json()
+    testcases = data.get('testcases')
+
+    if not testcases or not isinstance(testcases, list):
+        return jsonify(status='error', message='Testcases must be a list'), 400
+    
+    result = problem_service.add_test_cases(problem_id, testcases)
+
+    if result['status'] == 'error':
+        return jsonify(status='error', message=result.get('message')), 400
+    return jsonify(status='success', data=result.get('data')), 201
