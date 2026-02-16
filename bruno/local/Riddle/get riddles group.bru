@@ -1,0 +1,16 @@
+meta {
+  name: get riddles group
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/riddles/group
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
