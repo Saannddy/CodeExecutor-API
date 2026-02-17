@@ -50,7 +50,16 @@ def get_problems():
 @api_bp.get('/problem/<problem_id>')
 def get_problem(problem_id):
     """Retrieve detailed information for a single problem."""
-    problem = problem_service.get_problem_details(problem_id)
+    test_case_limit = request.args.get('test_case_limit', None, type=int)
+    tag_limit = request.args.get('tag_limit', None, type=int)
+    category_limit = request.args.get('category_limit', None, type=int)
+
+    problem = problem_service.get_problem_details(
+        problem_id,
+        test_case_limit=test_case_limit,
+        tag_limit=tag_limit,
+        category_limit=category_limit,
+    )
     if not problem:
         return jsonify(status="error", message="Problem not found"), 404
     return jsonify(status="success", data=problem), 200
@@ -85,18 +94,23 @@ def custom_code_executor():
     res = execute_custom_code(code, lang)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
 
-@api_bp.post('/getRandomProblem')
+@api_bp.get('/getRandomProblem')
 def get_random_problem():
     """Fetch a random problem, optionally filtered by category or tag."""
     category = request.args.get('category')
     tag = request.args.get('tag')
+    test_case_limit = request.args.get('test_case_limit', None, type=int)
+    tag_limit = request.args.get('tag_limit', None, type=int)
+    category_limit = request.args.get('category_limit', None, type=int)
+    limit = request.args.get('limit', 1, type=int)
 
+    # Prefer category filter, then tag, otherwise random across all
     if category:
-        problem = problem_service.get_random_problem_by_category(category)
+        problem = problem_service.get_random_problem(category_name=category, limit=limit, test_case_limit=test_case_limit, tag_limit=tag_limit, category_limit=category_limit)
     elif tag:
-        problem = problem_service.get_random_problem_by_tag(tag)
+        problem = problem_service.get_random_problem(tag_name=tag, limit=limit, test_case_limit=test_case_limit, tag_limit=tag_limit, category_limit=category_limit)
     else:
-        problem = problem_service.get_random_problem()
+        problem = problem_service.get_random_problem(category_name=None, limit=limit, test_case_limit=test_case_limit, tag_limit=tag_limit, category_limit=category_limit)
 
     if not problem:
         return jsonify(status="error", message="No problems found"), 404
