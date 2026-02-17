@@ -90,17 +90,15 @@ def get_random_problem():
     """Fetch a random problem, optionally filtered by category or tag."""
     category = request.args.get('category')
     tag = request.args.get('tag')
-    tag_limit = request.args.get('tag_limit', None, type=int)
-    category_limit = request.args.get('category_limit', None, type=int)
     limit = request.args.get('limit', 1, type=int)
 
     # Prefer category filter, then tag, otherwise random across all
     if category:
-        problem = problem_service.get_random_problem(category_name=category, limit=limit, tag_limit=tag_limit, category_limit=category_limit)
+        problem = problem_service.get_random_problem(category_name=category, limit=limit)
     elif tag:
-        problem = problem_service.get_random_problem(tag_name=tag, limit=limit, tag_limit=tag_limit, category_limit=category_limit)
+        problem = problem_service.get_random_problem(tag_name=tag, limit=limit)
     else:
-        problem = problem_service.get_random_problem(category_name=None, limit=limit, tag_limit=tag_limit, category_limit=category_limit)
+        problem = problem_service.get_random_problem(category_name=None, limit=limit)
 
     if not problem:
         return jsonify(status="error", message="No problems found"), 404

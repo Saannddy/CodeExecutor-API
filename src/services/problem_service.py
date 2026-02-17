@@ -9,7 +9,7 @@ class ProblemService:
         """Retrieve a list of all problems with basic information."""
         return self.problem_repo.find_all()
 
-    def get_problem_details(self, problem_id, test_case_limit=None, tag_limit=None, category_limit=None):
+    def get_problem_details(self, problem_id):
         """Fetch full problem details, including config and public test cases.
 
         Optional limits can be provided to restrict returned counts for
@@ -27,10 +27,7 @@ class ProblemService:
         problem_dict['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id)
 
         # Apply optional limits to tags and categories
-        if problem_dict.get('tags') and tag_limit:
-            problem_dict['tags'] = problem_dict['tags'][:tag_limit]
-        if problem_dict.get('categories') and category_limit:
-            problem_dict['categories'] = problem_dict['categories'][:category_limit]
+
 
         return problem_dict
 
@@ -42,7 +39,7 @@ class ProblemService:
         """Filter problems by tag."""
         return self.problem_repo.find_by_tag(tag_name)
     
-    def get_random_problem(self, category_name=None, tag_name=None, limit=1, test_case_limit=None, tag_limit=None, category_limit=None):   
+    def get_random_problem(self, category_name=None, tag_name=None, limit=1):   
         """Fetch `limit` random problems (optionally filtered) and include details.
 
         Returns a list of problem dicts (may be empty).
@@ -59,13 +56,9 @@ class ProblemService:
 
             # Add public test cases (with optional limit)
             problem_id = problem_dict.get('id')
-            problem_dict['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id, limit=test_case_limit)
+            problem_dict['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id)
 
             # Apply optional limits to tags and categories
-            if problem_dict.get('tags') and tag_limit:
-                problem_dict['tags'] = problem_dict['tags'][:tag_limit]
-            if problem_dict.get('categories') and category_limit:
-                problem_dict['categories'] = problem_dict['categories'][:category_limit]
 
             enriched.append(problem_dict)
 
