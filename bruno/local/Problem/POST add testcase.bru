@@ -1,0 +1,15 @@
+meta {
+  name: POST add testcase
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/problems/{problem_id}/test-cases
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
