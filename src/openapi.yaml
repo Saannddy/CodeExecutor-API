@@ -60,7 +60,7 @@ paths:
 
   /getRandomProblem:
     get:
-      summary: Get a random problem, optionally filtered by category or tag
+      summary: Get Random N Problem category or tag
       parameters:
         - name: category
           in: query
