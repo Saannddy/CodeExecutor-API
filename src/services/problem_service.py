@@ -24,7 +24,7 @@ class ProblemService:
         problem_dict['config'] = {k: v for k, v in problem_dict.get('config', {}).items() if k in allowed_keys}
         
         # Enrich with public test cases (apply optional limit)
-        problem_dict['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id, limit=test_case_limit)
+        problem_dict['test_cases'] = self.test_case_repo.find_public_by_problem(problem_id)
 
         # Apply optional limits to tags and categories
         if problem_dict.get('tags') and tag_limit:
