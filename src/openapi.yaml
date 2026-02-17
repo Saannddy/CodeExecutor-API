@@ -58,6 +58,46 @@ paths:
         '404':
           description: Problem not found
 
+  /getRandomProblem:
+    get:
+      summary: Get a random problem, optionally filtered by category or tag
+      parameters:
+        - name: category
+          in: query
+          description: Filter by category name
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: Filter by tag name
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of random problems to return (default 1)
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: A random problem (or list of problems if limit > 1)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        title: { type: string }
+                        difficulty: { type: string }
+
   /code/{problem_id}:
     post:
       summary: Execute code for a problem
