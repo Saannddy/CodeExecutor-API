@@ -85,6 +85,24 @@ def custom_code_executor():
     res = execute_custom_code(code, lang)
     return jsonify(res), (500 if res.get("status") == "error" else 200)
 
+@api_bp.get('/getRandomProblem')
+def get_random_problem():
+    """Fetch a random problem, optionally filtered by category or tag."""
+    category = request.args.get('category')
+    tag = request.args.get('tag')
+    limit = request.args.get('limit', 1, type=int)
+
+    # Prefer category filter, then tag, otherwise random across all
+    if category:
+        problem = problem_service.get_random_problem(category_name=category, limit=limit)
+    elif tag:
+        problem = problem_service.get_random_problem(tag_name=tag, limit=limit)
+    else:
+        problem = problem_service.get_random_problem(category_name=None, limit=limit)
+
+    if not problem:
+        return jsonify(status="error", message="No problems found"), 404
+    return jsonify(status="success", data=problem), 200
 # --- Question & Choice Management ---
 
 @api_bp.get('/questions')
