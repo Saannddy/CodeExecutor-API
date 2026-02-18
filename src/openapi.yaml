@@ -8,7 +8,7 @@ servers:
     description: Local development server
 
 paths:
-  /problems:
+  /problem/:
     get:
       summary: List all problems
       parameters:
@@ -102,7 +102,7 @@ paths:
         '404':
           description: Problem not found
 
-  /getRandomProblem:
+  /problem/random:
     get:
       summary: Get Random N Problem category or tag
       parameters:
@@ -189,7 +189,8 @@ paths:
       responses:
         '200':
           description: Execution results
-  /questions:
+
+  /question/:
     get:
       summary: List all questions
       parameters:
@@ -228,6 +229,20 @@ paths:
                       total_pages: { type: integer }
                       current_page: { type: integer }
                       page_size: { type: integer }
+    post:
+      summary: Create a new question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                question_text: { type: string }
+      responses:
+        '201':
+          description: Question created
 
   /question/{question_id}:
     get:
@@ -267,22 +282,6 @@ paths:
         '404':
           description: Question not found
 
-  /question:
-    post:
-      summary: Create a new question
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title: { type: string }
-                question_text: { type: string }
-      responses:
-        '201':
-          description: Question created
-
   /question/{question_id}/choice:
     post:
       summary: Add a choice to a question
@@ -301,14 +300,14 @@ paths:
               type: object
               properties:
                 choice_text: { type: string }
-                is_correct: { type: bool }
+                is_correct: { type: boolean }
       responses:
         '201':
           description: Choice added
         '400':
           description: Limit exceeded or invalid input
 
-  /choice/{choice_id}:
+  /question/choice/{choice_id}:
     patch:
       summary: Update a choice
       parameters:
@@ -325,14 +324,14 @@ paths:
               type: object
               properties:
                 choice_text: { type: string }
-                is_correct: { type: bool }
+                is_correct: { type: boolean }
       responses:
         '200':
           description: Choice updated
         '404':
           description: Choice not found
 
-  /questions/random:
+  /question/random:
     get:
       summary: Get random questions by tag
       parameters:
@@ -350,7 +349,7 @@ paths:
         '200':
           description: List of random questions
 
-  /riddles:
+  /riddle/:
     get:
       summary: List all riddles
       parameters:
@@ -390,8 +389,27 @@ paths:
                       total_pages: { type: integer }
                       current_page: { type: integer }
                       page_size: { type: integer }
+    post:
+      summary: Create a new riddle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [riddle_text, refer_char, refer_index]
+              properties:
+                riddle_text: { type: string }
+                refer_char: { type: string, maxLength: 1 }
+                refer_index: { type: integer }
+                difficulty: { type: string }
+      responses:
+        '201':
+          description: Riddle created
+        '400':
+          description: Invalid input
 
-  /riddles/group:
+  /riddle/group:
     get:
       summary: Get a random group of riddles and their solution
       parameters:
@@ -422,27 +440,6 @@ paths:
                             refer_index: { type: integer }
                       solution: { type: string }
                       amount: { type: integer }
-
-  /riddle:
-    post:
-      summary: Create a new riddle
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [riddle_text, refer_char, refer_index]
-              properties:
-                riddle_text: { type: string }
-                refer_char: { type: string, maxLength: 1 }
-                refer_index: { type: integer }
-                difficulty: { type: string }
-      responses:
-        '201':
-          description: Riddle created
-        '400':
-          description: Invalid input
 
   /riddle/{riddle_id}:
     get:
