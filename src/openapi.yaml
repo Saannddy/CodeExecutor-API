@@ -58,6 +58,50 @@ paths:
         '404':
           description: Problem not found
 
+  /problem/{problem_id}/testcases:
+    post:
+      summary: Add test cases to a problem
+      parameters:
+        - name: problem_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [testcases]
+              properties:
+                testcases:
+                  type: array
+                  items:
+                    type: object
+                    required: [input, output, sort_order]
+                    properties:
+                      input:
+                        type: string
+                        example: "[2,7,11,15], 9"
+                      output:
+                        type: string
+                        example: "[0,1]"
+                      is_hidden:
+                        type: boolean
+                        example: false
+                      sort_order:
+                        type: integer
+                        example: 3
+      responses:
+        '201':
+          description: Test cases added successfully
+        '400':
+          description: Invalid request
+        '404':
+          description: Problem not found
+
   /getRandomProblem:
     get:
       summary: Get Random N Problem category or tag

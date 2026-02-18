@@ -29,3 +29,26 @@ class TestCaseRepository:
             if limit:
                 statement = statement.limit(limit)
             return [tc.model_dump(exclude={"is_hidden"}) for tc in session.exec(statement).all()]
+    
+    def create_test_case(self, testcase_data):
+        """ Create new test case """
+        with self._get_session() as session:
+            statement = select(TestCase).where(
+                TestCase.problem_id == testcase_data['problem_id']
+            ).order_by(TestCase.sort_order.desc())
+
+            last = session.exec(statement).first()
+            next_sort_order = 1 if not last else last.sort_order + 1
+
+            testcase = TestCase(
+                problem_id = testcase_data['problem_id'],
+                input = testcase_data['input'],
+                output = testcase_data['output'],
+                is_hidden = testcase_data.get('is_hidden', False),
+                sort_order = next_sort_order
+            )
+
+            session.add(testcase)
+            session.commit()
+            session.refresh(testcase)
+            return testcase.model_dump()
