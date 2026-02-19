@@ -2,11 +2,21 @@ import subprocess
 import os
 import tempfile
 from .config import COMPILERS, validate_code
+from .sanitizer import sanitize_code
 
 def execute_custom_code(code: str, lang: str) -> dict:
     """Execute raw code without test cases (custom run)."""
     if lang not in COMPILERS:
         return {"status": "error", "stdout": "", "stderr": f"Unsupported language: {lang}"}
+
+    # ── Security check ──
+    scan = sanitize_code(lang, code)
+    if not scan["safe"]:
+        return {
+            "status": "error",
+            "stdout": "",
+            "stderr": f"Code rejected: {'; '.join(scan['violations'])}",
+        }
 
     if lang in ["c", "cpp"]:
         return _run_c_cpp(code, lang)
@@ -22,6 +32,14 @@ def execute_code(code: str, lang: str, tests: list, timeout: int = 5, templates:
 
     templates = templates or {}
     rules = rules or {}
+
+    # ── Security check ──
+    scan = sanitize_code(lang, code)
+    if not scan["safe"]:
+        return {
+            "status": "error",
+            "message": f"Code rejected: {'; '.join(scan['violations'])}",
+        }
 
     if not validate_code(lang, code, rules):
         return {"status": "error", "message": "Code does not meet the prescribed rules."}
