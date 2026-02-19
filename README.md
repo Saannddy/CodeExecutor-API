@@ -101,6 +101,43 @@ For the best developer experience, we've included a **Bruno Collection**:
 
 ---
 
+## 🧪 Testing
+
+Tests are organized by feature group in the `tests/` directory:
+
+```
+tests/
+├── conftest.py           # Shared fixtures (Flask client, DB mocks)
+├── problem/              # Problem endpoint tests
+│   └── test_problem_handler.py
+├── question/             # Question endpoint tests
+├── riddle/               # Riddle endpoint tests
+├── execution/            # Code execution tests
+└── docs/                 # Documentation endpoint tests
+```
+
+### Run All Tests
+```bash
+python3 -m pytest
+```
+
+### Coverage Report
+After running tests, open the interactive HTML coverage report:
+```bash
+open coverage_html/index.html
+```
+The report highlights **exactly which lines** were hit or missed during testing — click any file to see line-by-line coverage.
+
+### Run a Specific Test Group
+```bash
+python3 -m pytest tests/problem/       # Problem tests only
+python3 -m pytest tests/riddle/        # Riddle tests only
+```
+
+> **Note**: Tests mock the database layer so they run locally without Postgres. Install test dependencies first: `pip install pytest pytest-cov`
+
+---
+
 ## 📝 Usage Best Practices
 - 💡 **4 Spaces**: Always use spaces instead of tabs in your JSON `code` strings.
 - ⏱️ **Timeouts**: Most problems are capped at 5 seconds for safety.

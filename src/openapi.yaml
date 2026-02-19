@@ -8,7 +8,7 @@ servers:
     description: Local development server
 
 paths:
-  /problems:
+  /problem/:
     get:
       summary: List all problems
       parameters:
@@ -58,6 +58,90 @@ paths:
         '404':
           description: Problem not found
 
+  /problem/{problem_id}/testcases:
+    post:
+      summary: Add test cases to a problem
+      parameters:
+        - name: problem_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [testcases]
+              properties:
+                testcases:
+                  type: array
+                  items:
+                    type: object
+                    required: [input, output, sort_order]
+                    properties:
+                      input:
+                        type: string
+                        example: "[2,7,11,15], 9"
+                      output:
+                        type: string
+                        example: "[0,1]"
+                      is_hidden:
+                        type: boolean
+                        example: false
+                      sort_order:
+                        type: integer
+                        example: 3
+      responses:
+        '201':
+          description: Test cases added successfully
+        '400':
+          description: Invalid request
+        '404':
+          description: Problem not found
+
+  /problem/random:
+    get:
+      summary: Get Random N Problem category or tag
+      parameters:
+        - name: category
+          in: query
+          description: Filter by category name
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: Filter by tag name
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of random problems to return (default 1)
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: A random problem (or list of problems if limit > 1)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        title: { type: string }
+                        difficulty: { type: string }
+
   /code/{problem_id}:
     post:
       summary: Execute code for a problem
@@ -105,7 +189,8 @@ paths:
       responses:
         '200':
           description: Execution results
-  /questions:
+
+  /question/:
     get:
       summary: List all questions
       parameters:
@@ -144,6 +229,20 @@ paths:
                       total_pages: { type: integer }
                       current_page: { type: integer }
                       page_size: { type: integer }
+    post:
+      summary: Create a new question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                question_text: { type: string }
+      responses:
+        '201':
+          description: Question created
 
   /question/{question_id}:
     get:
@@ -183,22 +282,6 @@ paths:
         '404':
           description: Question not found
 
-  /question:
-    post:
-      summary: Create a new question
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title: { type: string }
-                question_text: { type: string }
-      responses:
-        '201':
-          description: Question created
-
   /question/{question_id}/choice:
     post:
       summary: Add a choice to a question
@@ -217,14 +300,14 @@ paths:
               type: object
               properties:
                 choice_text: { type: string }
-                is_correct: { type: bool }
+                is_correct: { type: boolean }
       responses:
         '201':
           description: Choice added
         '400':
           description: Limit exceeded or invalid input
 
-  /choice/{choice_id}:
+  /question/choice/{choice_id}:
     patch:
       summary: Update a choice
       parameters:
@@ -241,14 +324,14 @@ paths:
               type: object
               properties:
                 choice_text: { type: string }
-                is_correct: { type: bool }
+                is_correct: { type: boolean }
       responses:
         '200':
           description: Choice updated
         '404':
           description: Choice not found
 
-  /questions/random:
+  /question/random:
     get:
       summary: Get random questions by tag
       parameters:
@@ -266,7 +349,7 @@ paths:
         '200':
           description: List of random questions
 
-  /riddles:
+  /riddle/:
     get:
       summary: List all riddles
       parameters:
@@ -306,8 +389,27 @@ paths:
                       total_pages: { type: integer }
                       current_page: { type: integer }
                       page_size: { type: integer }
+    post:
+      summary: Create a new riddle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [riddle_text, refer_char, refer_index]
+              properties:
+                riddle_text: { type: string }
+                refer_char: { type: string, maxLength: 1 }
+                refer_index: { type: integer }
+                difficulty: { type: string }
+      responses:
+        '201':
+          description: Riddle created
+        '400':
+          description: Invalid input
 
-  /riddles/group:
+  /riddle/group:
     get:
       summary: Get a random group of riddles and their solution
       parameters:
@@ -338,27 +440,6 @@ paths:
                             refer_index: { type: integer }
                       solution: { type: string }
                       amount: { type: integer }
-
-  /riddle:
-    post:
-      summary: Create a new riddle
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [riddle_text, refer_char, refer_index]
-              properties:
-                riddle_text: { type: string }
-                refer_char: { type: string, maxLength: 1 }
-                refer_index: { type: integer }
-                difficulty: { type: string }
-      responses:
-        '201':
-          description: Riddle created
-        '400':
-          description: Invalid input
 
   /riddle/{riddle_id}:
     get:

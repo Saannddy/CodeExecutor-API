@@ -1,5 +1,6 @@
 from sqlmodel import select
 from sqlalchemy.orm import joinedload
+from sqlalchemy import func
 from infrastructure import SessionLocal
 from models import Problem, Category, Tag
 
@@ -48,3 +49,30 @@ class ProblemRepository:
         with self._get_session() as session:
             statement = select(Problem).join(Problem.tags).where(Tag.name.ilike(tag_name))
             return [p.model_dump(exclude={"config", "description"}) for p in session.exec(statement).all()]
+        
+    def find_random(self, category_name=None, tag_name=None, limit=1):
+        """Fetch random problems with their details.
+
+        If `category_name` or `tag_name` is provided, restrict selection accordingly.
+        Returns a list of problem dicts (empty list if none found).
+        """
+        with self._get_session() as session:
+            statement = select(Problem)
+            if category_name:
+                statement = statement.join(Problem.categories).where(Category.name.ilike(category_name))
+            elif tag_name:
+                statement = statement.join(Problem.tags).where(Tag.name.ilike(tag_name))
+
+            statement = statement.order_by(func.random()).limit(limit)
+            results = session.exec(statement).all()
+            if not results:
+                return []
+
+            problems = []
+            for problem in results:
+                p_dict = problem.model_dump()
+                p_dict['categories'] = [c.name for c in problem.categories]
+                p_dict['tags'] = [t.name for t in problem.tags]
+                problems.append(p_dict)
+
+            return problems

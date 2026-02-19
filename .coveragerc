@@ -1,0 +1,15 @@
+[run]
+source = src/handlers, src/services, src/repositories, src/api
+
+[report]
+show_missing = true
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if __name__ == .__main__.
+    raise NotImplementedError
+
+[html]
+directory = coverage_html
+title = CodeExecutor-API Coverage Report
+show_contexts = true
