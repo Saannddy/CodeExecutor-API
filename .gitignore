@@ -44,3 +44,9 @@ Thumbs.db
 alembic/versions/__pycache__/
 *.class
 *.exe
+
+# Testing / Coverage
+coverage_html/
+.coverage
+.pytest_cache/
+htmlcov/
