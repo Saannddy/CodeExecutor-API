@@ -1,0 +1,26 @@
+meta {
+  name: reject
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/code/2a3380b4-fbc7-517d-9583-01d41d1cbb80?lang=java
+  body: json
+  auth: inherit
+}
+
+params:query {
+  lang: java
+}
+
+body:json {
+  {
+    "code": "import java.util.*;import java.io.*;\n\npublic class Multiplier {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            if (sc.hasNextInt()) {\n                int b = sc.nextInt();\n                System.out.println(a * b);\n            }\n        }\n    }\n}"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
