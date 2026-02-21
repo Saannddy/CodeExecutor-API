@@ -102,6 +102,31 @@ paths:
         '404':
           description: Problem not found
 
+  /problem/{problem_id}/testcases/import:
+    post:
+      summary: Import test cases from a ZIP file
+      parameters:
+        - name: problem_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/zip:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Test cases imported successfully
+        '400':
+          description: Invalid request or file format
+        '404':
+          description: Problem not found
+
   /problem/random:
     get:
       summary: Get Random N Problem category or tag
