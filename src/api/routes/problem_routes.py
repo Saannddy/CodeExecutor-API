@@ -23,3 +23,8 @@ def get_random_problem():
 def add_test_cases(problem_id):
     """Add test cases (Base: /problem/<id>/testcases)"""
     return problem_handler.add_test_cases(problem_id)
+
+@problem_bp.post('/<problem_id>/testcases/import')
+def import_test_cases(problem_id):
+    """ Import test cases from a ZIP file (Base: /problem/<id>/testcases/import)"""
+    return problem_handler.import_test_cases(problem_id)

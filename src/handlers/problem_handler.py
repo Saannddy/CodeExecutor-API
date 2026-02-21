@@ -1,3 +1,5 @@
+import io
+import zipfile
 from flask import request, jsonify
 from services import ProblemService
 
@@ -60,3 +62,64 @@ class ProblemHandler:
         if result['status'] == 'error':
             return jsonify(status='error', message=result.get('message')), 400
         return jsonify(status='success', data=result.get('data')), 201
+    
+    def import_test_cases(self, problem_id):
+        """ Import test cases from a ZIP file """
+        if not request.data:
+            return jsonify(status='error', message='No file uploaded'), 400
+        
+        content_type = request.content_type or ''
+        if 'application/zip' not in content_type and 'application/octet-stream' not in content_type:
+            return jsonify(status='error', message='Content-Type must be application/zip'), 400
+
+        try:
+            zip_data = zipfile.ZipFile(io.BytesIO(request.data))
+
+            if not any(name.startswith('in/') and name.endswith('.in') for name in zip_data.namelist()):
+                return jsonify(status='error', message='ZIP must contain input files in "in/" directory'), 400
+            if not any(name.startswith('out/') and name.endswith('.out') for name in zip_data.namelist()):
+                return jsonify(status='error', message='ZIP must contain output files in "out/" directory'), 400
+
+            is_shown = set()
+
+            if "isShown.txt" in zip_data.namelist():
+                content = zip_data.read("isShown.txt").decode('utf-8')
+                is_shown = set(map(int, content.split(',')))
+
+            testcases = []
+
+            input_files = [name for name in zip_data.namelist() 
+                           if name.startswith('in/') and name.endswith('.in')]
+            if not input_files:
+                return jsonify(status='error', message='No input files found in ZIP'), 400
+
+            for input_file in input_files:
+                try:
+                    test_number = int(input_file.split('/')[-1].replace('.in', ''))
+                except ValueError:
+                    return jsonify(status='error', message=f'Invalid input file name: {input_file}'), 400
+
+                if f'out/{test_number}.out' not in zip_data.namelist():
+                    return jsonify(status='error', message=f'Missing output file for test case {test_number}'), 400
+
+                input_data = zip_data.read(input_file).decode('utf-8')
+                output_data = zip_data.read(f'out/{test_number}.out').decode('utf-8')
+
+                testcases.append({
+                    'input': input_data.strip(),
+                    'output': output_data.strip(),
+                    'is_hidden': test_number not in is_shown,
+                    'sort_order': test_number
+                })
+            
+            if not testcases:
+                return jsonify(status='error', message='No valid test cases found in ZIP'), 400
+                
+            result = self.problem_service.add_test_cases(problem_id, testcases)
+
+            if result.get('status') == 'error':
+                return jsonify(status='error', message=result.get('message')), 400
+            
+            return jsonify(status='success', data=result.get('data')), 201
+        except Exception as e:
+            return jsonify(status='error', message=str(e)), 500
