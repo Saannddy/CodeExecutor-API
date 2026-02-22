@@ -27,7 +27,12 @@ def seed_data():
 
         def get_or_create_category(name):
             cat_id = get_uuid(f"cat_{name}")
+            # Try finding by ID first
             cat = session.exec(select(Category).where(Category.id == cat_id)).first()
+            if not cat:
+                # Fallback to finding by name to avoid unique constraint violations
+                cat = session.exec(select(Category).where(Category.name == name)).first()
+            
             if not cat:
                 cat = Category(id=cat_id, name=name)
                 session.add(cat)
@@ -37,7 +42,12 @@ def seed_data():
 
         def get_or_create_tag(name):
             tag_id = get_uuid(f"tag_{name}")
+            # Try finding by ID first
             tag = session.exec(select(Tag).where(Tag.id == tag_id)).first()
+            if not tag:
+                # Fallback to finding by name to avoid unique constraint violations
+                tag = session.exec(select(Tag).where(Tag.name == name)).first()
+            
             if not tag:
                 tag = Tag(id=tag_id, name=name)
                 session.add(tag)
