@@ -60,3 +60,20 @@ class ProblemHandler:
         if result['status'] == 'error':
             return jsonify(status='error', message=result.get('message')), 400
         return jsonify(status='success', data=result.get('data')), 201
+    
+    def import_test_cases(self, problem_id):
+        """ Import test cases from a ZIP file """
+        if not request.data:
+            return jsonify(status='error', message='No file uploaded'), 400
+        
+        content_type = request.content_type or ''
+        if 'application/zip' not in content_type and 'application/octet-stream' not in content_type:
+            return jsonify(status='error', message='Content-Type must be application/zip'), 400
+                
+        result = self.problem_service.import_test_cases(problem_id, request.data)
+
+        if result.get('status') == 'error':
+            return jsonify(status='error', message=result.get('message')), 400
+            
+        return jsonify(status='success', data=result.get('data')), 201
+        
