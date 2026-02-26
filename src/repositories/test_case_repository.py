@@ -52,3 +52,13 @@ class TestCaseRepository:
             session.commit()
             session.refresh(testcase)
             return testcase.model_dump()
+
+    def exists_test_case(self, problem_id, input_data, output_data):
+        """ Check if a test case already exists """
+        with self._get_session() as session:
+            statement = select(TestCase).where(
+                TestCase.problem_id == problem_id,
+                TestCase.input == input_data,
+                TestCase.output == output_data
+            )
+            return session.exec(statement).first() is not None
