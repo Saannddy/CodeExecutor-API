@@ -1,0 +1,23 @@
+meta {
+  name: Execute Python Chunk
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/chunk/execute/22e04d50-3aea-43ac-9a89-32daea0cc9f8?lang=python
+  body: json
+  auth: none
+}
+
+params:query {
+  lang: python
+}
+
+body:json {
+  {
+    "snippets": {
+      "logic": "return x * y"
+    }
+  }
+}

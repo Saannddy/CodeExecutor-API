@@ -1,0 +1,23 @@
+meta {
+  name: Execute JS Chunk
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/chunk/execute/9cb40096-ac06-4294-8d29-835eb30bfdce?lang=javascript
+  body: json
+  auth: none
+}
+
+query {
+  lang: javascript
+}
+
+body:json {
+  {
+    "snippets": {
+      "logic": "return x * y;"
+    }
+  }
+}

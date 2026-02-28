@@ -14,8 +14,10 @@ class TestCaseRepository:
         with self._get_session() as session:
             statement = select(TestCase).where(TestCase.problem_id == problem_id).order_by(TestCase.sort_order)
             results = session.exec(statement).all()
-            return [{"input": tc.input, "expected_output": tc.output, "test_number": tc.sort_order} for tc in results]
-
+            return [
+                {"input": tc.input, "expected_output": tc.output, "test_number": i}
+                for i, tc in enumerate(results, 1)
+            ]
     def find_public_by_problem(self, problem_id, limit=None):
         """Fetch non-hidden test cases for public documentation.
 
