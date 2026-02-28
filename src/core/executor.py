@@ -6,7 +6,7 @@ import resource
 from .config import COMPILERS, validate_code
 from .security.sanitizer import sanitize_code
 
-MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 512))
+MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 128))
 MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", 1))
 MAX_OPEN_FILES = int(os.getenv("MAX_OPEN_FILES", 64))
 MAX_RUN_TIME = int(os.getenv("MAX_RUN_TIME", 5))
