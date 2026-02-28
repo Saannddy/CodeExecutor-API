@@ -1,5 +1,8 @@
+import logging
 from flask import Flask
 from api import api_bp
+
+logging.basicConfig(level=logging.INFO)
 
 def create_app():
     app = Flask(__name__, static_folder='html')

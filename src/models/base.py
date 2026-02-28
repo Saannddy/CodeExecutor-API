@@ -61,6 +61,15 @@ class TestCase(SQLModel, table=True):
     
     problem: "Problem" = Relationship(back_populates="test_cases")
 
+class Expectation(SQLModel, table=True):
+    __tablename__ = "expectations"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    chunk_id: UUID = Field(foreign_key="chunks.id")
+    input: str
+    output: str
+    
+    chunk: "Chunk" = Relationship(back_populates="expectations")
+
 class Riddle(SQLModel, table=True):
     __tablename__ = "riddles"
     id: UUID = Field(default_factory=uuid4, primary_key=True)
@@ -92,3 +101,47 @@ class Choice(SQLModel, table=True):
     
     question: "Question" = Relationship(back_populates="choices")
 
+
+class ChunkCategoryLink(SQLModel, table=True):
+    __tablename__ = "chunks_categories"
+    chunk_id: UUID = Field(foreign_key="chunks.id", primary_key=True)
+    category_id: UUID = Field(foreign_key="categories.id", primary_key=True)
+
+class ChunkTagLink(SQLModel, table=True):
+    __tablename__ = "chunks_tags"
+    chunk_id: UUID = Field(foreign_key="chunks.id", primary_key=True)
+    tag_id: UUID = Field(foreign_key="tags.id", primary_key=True)
+
+class ChunkTemplate(SQLModel, table=True):
+    __tablename__ = "chunk_templates"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    chunk_id: UUID = Field(foreign_key="chunks.id")
+    language: str
+    name: str # e.g. "Python Implementation"
+    template_code: str
+    description: str
+    
+    chunk: "Chunk" = Relationship(back_populates="templates")
+    snippets: List["Snippet"] = Relationship(back_populates="template", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
+
+class Chunk(SQLModel, table=True):
+    __tablename__ = "chunks"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    # template_id moved to ChunkTemplate as chunk_id
+    title: str
+    difficulty: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    templates: List["ChunkTemplate"] = Relationship(back_populates="chunk", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
+    categories: List["Category"] = Relationship(link_model=ChunkCategoryLink)
+    tags: List["Tag"] = Relationship(link_model=ChunkTagLink)
+    expectations: List["Expectation"] = Relationship(back_populates="chunk", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
+
+class Snippet(SQLModel, table=True):
+    __tablename__ = "snippets"
+    id: UUID = Field(default_factory=uuid4, primary_key=True)
+    template_id: UUID = Field(foreign_key="chunk_templates.id")
+    placeholder_key: str
+    code_content: str
+    
+    template: "ChunkTemplate" = Relationship(back_populates="snippets")

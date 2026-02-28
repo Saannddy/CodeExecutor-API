@@ -45,6 +45,9 @@ Run the entire stack (API + PostgreSQL DB) using Docker Compose:
 docker compose --profile local up -d --build
 ## FOR PRODUCTION
 docker compose --profile remote up -d --build
+
+## FOR REBUILD WHILE DOCKER STILL RUNNING
+docker compose --profile local up -d --build --force-recreate
 ```
 
 - `-d`: Runs containers in the background (**detached mode**).
