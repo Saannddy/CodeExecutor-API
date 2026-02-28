@@ -1,0 +1,16 @@
+meta {
+  name: Get Random Chunks
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/chunk/random
+  body: none
+  auth: none
+}
+
+params:query {
+  limit: 2
+  lang: javascript
+}
