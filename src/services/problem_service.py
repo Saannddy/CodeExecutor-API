@@ -75,15 +75,22 @@ class ProblemService:
             return {'status': 'error', 'message': 'Problem not found'}
         
         created_testcases = []
+        skip_testcases = []
+
         for test in testcases:
             if 'input' not in test or 'output' not in test:
                 return {'status': 'error', 'message': 'Testcase must have input and output'}
+            
             testcase_data = {
                 'problem_id': problem_id,
-                'input': test['input'],
-                'output': test['output'],
+                'input': test['input'].strip(),
+                'output': test['output'].strip(),
                 'is_hidden': test.get('isHidden', False)
             }
+
+            if self.test_case_repo.exists_test_case(problem_id, testcase_data['input'], testcase_data['output']):
+                skip_testcases.append(testcase_data)
+                continue
 
             created = self.test_case_repo.create_test_case(testcase_data)
 
@@ -92,7 +99,8 @@ class ProblemService:
             
         return {'status': 'success', 'data': {
             'created_count': len(created_testcases),
-            'testcases': created_testcases
+            'testcases': created_testcases,
+            'skip_testcases': skip_testcases
         }}
     
     def import_test_cases(self, problem_id, zip_file):
@@ -117,6 +125,7 @@ class ProblemService:
                 is_shown = set(map(int, content.split(',')))
 
             testcases = []
+            skip_testcases = []
 
             input_files = [name for name in zip_data.namelist()
                            if name.startswith('in/') and name.endswith('.in')]
@@ -150,6 +159,10 @@ class ProblemService:
                     'is_hidden': test.get('is_hidden', False),
                     'sort_order': test.get('sort_order')
                 }
+                
+                if self.test_case_repo.exists_test_case(problem_id, testcase_data['input'], testcase_data['output']):
+                    skip_testcases.append(testcase_data)
+                    continue
 
                 created = self.test_case_repo.create_test_case(testcase_data)
 
@@ -158,7 +171,8 @@ class ProblemService:
 
             return {'status': 'success', 'data': {
                 'created_count': len(created_testcases),
-                'testcases': created_testcases
+                'testcases': created_testcases,
+                'skip_testcases': skip_testcases
             }}
 
         except Exception as e:

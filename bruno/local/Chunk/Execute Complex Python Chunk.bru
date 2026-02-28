@@ -1,0 +1,28 @@
+meta {
+  name: Execute Complex Python Chunk
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/chunk/execute/4c80ce4e-38e0-42ba-a72c-e3103dcaa766?lang=python
+  body: json
+  auth: none
+}
+
+params:query {
+  lang: python
+}
+
+body:json {
+  {
+    "snippets": {
+      "imports": "import math",
+      "setup": "OFFSET = 100\ndef get_offset(): return OFFSET",
+      "args": "data_list, multiplier",
+      "validation": "if not isinstance(data_list, list): return None",
+      "logic": "result = [utility(x) * multiplier + get_offset() for x in data_list]\nreturn result",
+      "test": "print(solution([1, 2, 3], 5))"
+    }
+  }
+}

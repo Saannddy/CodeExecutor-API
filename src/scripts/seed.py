@@ -6,7 +6,11 @@ from datetime import datetime, timezone
 from sqlalchemy import text
 from sqlmodel import Session, select
 from infrastructure import engine
-from models import Problem, Category, Tag, TestCase, Riddle, Question, Choice, RiddleTagLink, QuestionTagLink, QuestionCategoryLink
+from models import (
+    Problem, Category, Tag, TestCase, Riddle, Question, Choice,
+    RiddleTagLink, QuestionTagLink, QuestionCategoryLink,
+    ChunkTemplate, Chunk, Snippet, ChunkCategoryLink, ChunkTagLink, Expectation
+)
 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -269,6 +273,143 @@ def seed_data():
             session.commit()
             logging.info("Successfully seeded 10 questions with choices.")
 
+        # 7. Seed Chunks
+        logging.info("Checking for chunks to seed...")
+        
+        chunks_to_seed = [
+            {
+                "title": "Sample Chunk 1",
+                "difficulty": "Medium",
+                "templates": [
+                    {
+                        "lang": "python",
+                        "name": "Python Implementation",
+                        "code": "def solution({{args}}):\n    {{logic}}\n\n# Test here\n{{test}}",
+                        "snippets": [("args", "x, y"), ("logic", "return x * y"), ("test", "print(solution(1, 2))")]
+                    },
+                    {
+                        "lang": "javascript",
+                        "name": "JavaScript Implementation",
+                        "code": "function solution({{{args}}}) {\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "snippets": [("args", "x, y"), ("logic", "return x * y;"), ("test", "console.log(solution(1, 2))")]
+                    }
+                ],
+                "expectation": {"input": "1 2", "output": "2"}
+            },
+            {
+                "title": "Sample Chunk 2",
+                "difficulty": "Easy",
+                "templates": [
+                    {
+                        "lang": "python",
+                        "name": "Python Implementation",
+                        "code": "def solution({{{args}}}):\n{{{indent logic}}}\n\n# Test here\n{{{test}}}",
+                        "snippets": [("args", "x, y"), ("logic", "return x + y"), ("test", "print(solution(2, 4))")]
+                    },
+                    {
+                        "lang": "javascript",
+                        "name": "JavaScript Implementation",
+                        "code": "function solution({{{args}}}) {\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "snippets": [("args", "x, y"), ("logic", "return x + y;"), ("test", "console.log(solution(2, 4))")]
+                    }
+                ],
+                "expectation": {"input": "2 4", "output": "6"}
+            },
+            {
+                "title": "Sample Chunk 3",
+                "difficulty": "Hard",
+                "templates": [
+                    {
+                        "lang": "python",
+                        "name": "Python Implementation",
+                        "code": "def solution({{{args}}}):\n{{{indent logic}}}\n\n# Test here\n{{{test}}}",
+                        "snippets": [("args", "x, y"), ("logic", "return x * y"), ("test", "print(solution(3, 6))")]
+                    },
+                    {
+                        "lang": "javascript",
+                        "name": "JavaScript Implementation",
+                        "code": "function solution({{{args}}}) {\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "snippets": [("args", "x, y"), ("logic", "return x * y;"), ("test", "console.log(solution(3, 6))")]
+                    }
+                ],
+                "expectation": {"input": "3 6", "output": "18"}
+            },
+            {
+                "title": "Complex Logic Builder",
+                "difficulty": "Hard",
+                "category": "Advanced",
+                "templates": [
+                    {
+                        "lang": "python",
+                        "name": "Complex Python Implementation",
+                        "code": "{{{imports}}}\n\n{{{setup}}}\n\ndef utility(v):\n    return v * 2\n\ndef solution({{{args}}}):\n{{{indent validation}}}\n{{{indent logic}}}\n\n# Test here\n{{{test}}}",
+                        "snippets": [
+                            ("imports", "import math\nimport random"),
+                            ("setup", "OFFSET = 100\ndef get_offset(): return OFFSET"),
+                            ("args", "data_list, multiplier"),
+                            ("validation", "if not isinstance(data_list, list): return None"),
+                            ("logic", "result = [utility(x) * multiplier + get_offset() for x in data_list]\nreturn result"),
+                            ("test", "print(solution([1, 2, 3], 5))")
+                        ]
+                    },
+                    {
+                        "lang": "javascript",
+                        "name": "Complex JavaScript Implementation",
+                        "code": "{{{imports}}}\n\n{{{setup}}}\n\nfunction utility(v) {\n    return v * 2;\n}\n\nfunction solution({{{args}}}) {\n{{{indent validation}}}\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "snippets": [
+                            ("imports", "// No imports needed"),
+                            ("setup", "const OFFSET = 100;\nfunction getOffset() { return OFFSET; }"),
+                            ("args", "dataList, multiplier"),
+                            ("validation", "if (!Array.isArray(dataList)) return null;"),
+                            ("logic", "const result = dataList.map(x => utility(x) * multiplier + getOffset());\nreturn result;"),
+                            ("test", "const res = solution([1, 2, 3], 5); console.log('[' + res.join(', ') + ']');")
+                        ]
+                    }
+                ],
+                "expectation": {"input": "[1, 2, 3] 5", "output": "[110, 120, 130]"}
+            }
+        ]
+
+        for c_data in chunks_to_seed:
+            existing = session.exec(select(Chunk).where(Chunk.title == c_data["title"])).first()
+            if existing:
+                continue
+
+            logging.info(f"Seeding chunk: {c_data['title']}")
+            chunk = Chunk(
+                title=c_data["title"],
+                difficulty=c_data["difficulty"],
+                created_at=datetime.now(timezone.utc)
+            )
+            chunk.categories = [get_or_create_category(c_data.get("category", "Basics"))]
+            session.add(chunk)
+            session.flush()
+
+            for t_data in c_data["templates"]:
+                template = ChunkTemplate(
+                    chunk_id=chunk.id,
+                    language=t_data["lang"],
+                    name=t_data["name"],
+                    template_code=t_data["code"],
+                    description=f"Standard {t_data['lang']} boilerplate"
+                )
+                session.add(template)
+                session.flush()
+
+                for key, content in t_data["snippets"]:
+                    s = Snippet(template_id=template.id, placeholder_key=key, code_content=content)
+                    session.add(s)
+
+            if "expectation" in c_data:
+                ex = Expectation(
+                    chunk_id=chunk.id,
+                    input=c_data["expectation"]["input"],
+                    output=c_data["expectation"]["output"]
+                )
+                session.add(ex)
+        
+        session.commit()
+        logging.info("Chunk seeding process completed.")
 
 if __name__ == "__main__":
     seed_data()

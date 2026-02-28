@@ -33,3 +33,15 @@ class ExecutionHandler:
 
         res = execute_custom_code(code, lang)
         return jsonify(res), (500 if res.get("status") == "error" else 200)
+
+    def execute_chunk_code(self, chunk_id):
+        """Execute chunk code from template and provided snippets against chunk's testcases."""
+        lang = request.args.get('lang')
+        if not lang or not request.is_json:
+            return jsonify(status="error", message="Missing 'lang' or invalid body"), 400
+        
+        data = request.get_json()
+        snippets = data.get('snippets', {})
+        
+        res = self.execution_service.run_chunk_code(chunk_id, snippets, lang)
+        return jsonify(res), (500 if res.get("status") == "error" else 200)

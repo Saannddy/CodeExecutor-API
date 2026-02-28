@@ -505,3 +505,98 @@ paths:
           description: Riddle updated
         '404':
           description: Riddle not found
+
+  /chunk/:
+    get:
+      summary: List all chunks
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: lang
+          in: query
+          description: Filter templates by language
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of code chunks
+
+  /chunk/random:
+    get:
+      summary: Get random chunks
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: lang
+          in: query
+          description: Filter random chunks by language availability
+          schema:
+            type: string
+      responses:
+        '200':
+          description: One or more random chunks
+
+  /chunk/{chunk_id}:
+    get:
+      summary: Get chunk details
+      parameters:
+        - name: chunk_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: lang
+          in: query
+          description: Filter templates to this specific language
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed chunk information with templates and snippets
+        '404':
+          description: Chunk not found
+
+  /chunk/execute/{chunk_id}:
+    post:
+      summary: Execute code for a chunk using templates and snippets
+      parameters:
+        - name: chunk_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: lang
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                snippets:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  example: { "logic": "return x * y" }
+      responses:
+        '200':
+          description: Execution results with test case statuses
+        '404':
+          description: Chunk or template not found

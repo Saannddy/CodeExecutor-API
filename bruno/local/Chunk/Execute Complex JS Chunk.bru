@@ -1,0 +1,28 @@
+meta {
+  name: Execute Complex JS Chunk
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3000/chunk/execute/4c80ce4e-38e0-42ba-a72c-e3103dcaa766?lang=javascript
+  body: json
+  auth: none
+}
+
+params:query {
+  lang: javascript
+}
+
+body:json {
+  {
+    "snippets": {
+      "imports": "// No imports needed",
+      "setup": "const OFFSET = 100;\nfunction getOffset() { return OFFSET; }",
+      "args": "dataList, multiplier",
+      "validation": "if (!Array.isArray(dataList)) return null;",
+      "logic": "const result = dataList.map(x => utility(x) * multiplier + getOffset());\nreturn result;",
+      "test": "const res = solution([1, 2, 3], 5); console.log('[' + res.join(', ') + ']');"
+    }
+  }
+}
