@@ -1,0 +1,16 @@
+meta {
+  name: get all problems
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{code-exec-url}}/problem/
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

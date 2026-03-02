@@ -96,12 +96,39 @@ If you want to connect to **NeonDB** online and migrate it to the latest version
 
 _(Alternatively, you can simply update the `DATABASE_URL` in your `.env` file and run the standard migration commands.)_
 
-### 🌱 Data Seeding
+### 🌱 Data Seeding & Cleanup
 
-If you need to re-seed or reset the initial data:
+For manual data management, use these commands from the **project root**:
 
-- **Run Seeder**: `docker compose --profile local exec local-code-api python3 -m scripts.seed`
-  _(The seeder is idempotent and will skip problems that already exist!)_
+#### 1️⃣ Java Restroom Seeding (40+ Questions & Riddles)
+Seed the database with Java MCQs and riddles tagged as `JAV_RESTROOM`:
+```bash
+# Running via Docker (Recommended)
+docker compose --profile local exec code-api python3 -m scripts.jav-rst-seed
+
+# Running Locally
+PYTHONPATH=src python3 src/scripts/jav-rst-seed.py
+```
+
+#### 2️⃣ Clear All Database Data
+Delete all entries from all tables (Riddles, Questions, Problems, etc.):
+```bash
+# Running via Docker (Recommended)
+docker compose --profile local exec code-api python3 -m scripts.delete
+
+# Running Locally
+PYTHONPATH=src python3 src/scripts/delete.py
+```
+
+#### 3️⃣ Standard Sample Seeding
+Seed the original set of coding problems (Two Sum, etc.):
+```bash
+# Running via Docker (Recommended)
+docker compose --profile local exec code-api python3 -m scripts.seed
+
+# Running Locally
+PYTHONPATH=src python3 src/scripts/seed.py
+```
 
 ---
 
