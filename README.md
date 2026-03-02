@@ -101,20 +101,21 @@ _(Alternatively, you can simply update the `DATABASE_URL` in your `.env` file an
 For manual data management, use these commands from the **project root**:
 
 #### 1️⃣ Java Restroom Seeding (40+ Questions & Riddles)
-Seed the database with Java MCQs and riddles tagged as `JAV_RESTROOM`:
+Seed the database with Java MCQs, riddles, and problems tagged as `JAV_RESTROOM`:
 ```bash
-# Running via Docker (Recommended)
-docker compose --profile local exec code-api python3 -m scripts.jav-rst-seed
+# Running via Docker (Requires image rebuild if file is new)
+docker compose --profile local up -d --build
+docker compose --profile local exec local-code-api python3 -m scripts.seed_restroom_java
 
 # Running Locally
-PYTHONPATH=src python3 src/scripts/jav-rst-seed.py
+PYTHONPATH=src python3 src/scripts/seed_restroom_java.py
 ```
 
 #### 2️⃣ Clear All Database Data
 Delete all entries from all tables (Riddles, Questions, Problems, etc.):
 ```bash
 # Running via Docker (Recommended)
-docker compose --profile local exec code-api python3 -m scripts.delete
+docker compose --profile local exec local-code-api python3 -m scripts.delete
 
 # Running Locally
 PYTHONPATH=src python3 src/scripts/delete.py
@@ -124,7 +125,7 @@ PYTHONPATH=src python3 src/scripts/delete.py
 Seed the original set of coding problems (Two Sum, etc.):
 ```bash
 # Running via Docker (Recommended)
-docker compose --profile local exec code-api python3 -m scripts.seed
+docker compose --profile local exec local-code-api python3 -m scripts.seed
 
 # Running Locally
 PYTHONPATH=src python3 src/scripts/seed.py
