@@ -106,19 +106,25 @@ class QuestionService:
 
     def get_random_questions(self, tag_name: str, amount: int = 1):
         """Fetch N random questions by tag."""
+
         questions = self.question_repo.find_random_by_tag(tag_name, amount)
-        # get all choice that is not hidden
-        choices = self.choice_repo.find_all_by_question_id(questions)
-        choices = [c for c in choices if not c.hidden]
         return [
             {
                 "id": str(q.id),
                 "title": q.title,
                 "question_text": q.question_text,
-                "choices": choices,
-                "tags": [t.name for t in q.tags]
+                "choices": [
+                    {
+                        "id": str(c.id),
+                        "choice_text": c.choice_text,
+                        "is_correct": c.is_correct
+                    } for c in q.choices
+                ],
+                "tags": [t.name for t in q.tags],
+                "categories": [c.name for c in q.categories]
             } for q in questions
         ]
+
     def list_all_questions(self, page: int = 1, page_size: int = 10):
         """List questions with pagination and metadata."""
         import math

@@ -43,7 +43,9 @@ class QuestionRepository:
         with self._get_session() as session:
             # Join with tags to filter, and eagerly load them for the response
             statement = select(Question).join(Question.tags).where(Tag.name.ilike(tag_name)).options(
-                joinedload(Question.tags)
+                joinedload(Question.tags),
+                joinedload(Question.categories),
+                joinedload(Question.choices)
             )
             questions = session.exec(statement).unique().all()
             
@@ -52,6 +54,7 @@ class QuestionRepository:
             
             # Random selection from results
             return random.sample(questions, min(len(questions), amount))
+
     def find_all(self, offset: int = 0, limit: int = 10):
         """Retrieve questions and total count using pagination."""
         with self._get_session() as session:
@@ -59,7 +62,11 @@ class QuestionRepository:
             count_stmt = select(func.count()).select_from(Question)
             total_count = session.exec(count_stmt).one()
 
-            statement = select(Question).options(joinedload(Question.choices)).offset(offset).limit(limit)
+            statement = select(Question).options(
+                joinedload(Question.choices),
+                joinedload(Question.tags),
+                joinedload(Question.categories)
+            ).offset(offset).limit(limit)
             questions = session.exec(statement).unique().all()
             
             return questions, total_count
