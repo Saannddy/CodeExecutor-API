@@ -105,11 +105,11 @@ Seed the database with Java MCQs, riddles, and problems tagged as `JAV_RESTROOM`
 ```bash
 # Running via Docker (Must rebuild if scripts are modified)
 docker compose --profile local up -d --build
-docker compose --profile local exec local-code-api python3 -m scripts.seed_restroom_java
+docker compose --profile local exec local-code-api python3 -m scripts.seeders.seed_restroom_java
 
 # Running Locally (Ensure .env is configured or set DATABASE_URL)
 export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/code_executor
-PYTHONPATH=src python3 src/scripts/seed_restroom_java.py
+PYTHONPATH=src python3 src/scripts/seeders/seed_restroom_java.py
 ```
 
 #### 2️⃣ Clear All Database Data
@@ -130,6 +130,7 @@ Seed the original set of coding problems (Two Sum, etc.):
 docker compose --profile local exec local-code-api python3 -m scripts.seed
 
 # Running Locally
+export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/code_executor
 PYTHONPATH=src python3 src/scripts/seed.py
 ```
 

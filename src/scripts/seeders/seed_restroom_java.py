@@ -20,8 +20,8 @@ def get_uuid(name: str) -> uuid.UUID:
     return uuid.uuid5(NAMESPACE, name)
 
 def load_json(filename):
-    # Base directory for seeding data
-    base_path = os.path.join(os.path.dirname(__file__), "data", "java", "restroom")
+    # Base directory for seeding data (one level up from seeders/)
+    base_path = os.path.join(os.path.dirname(__file__), "..", "data", "java", "restroom")
     filepath = os.path.join(base_path, filename)
     if not os.path.exists(filepath):
         logging.warning(f"File not found: {filepath}")
@@ -29,7 +29,7 @@ def load_json(filename):
     with open(filepath, "r") as f:
         return json.load(f)
 
-def seed_jav_restroom():
+def seed_restroom_java():
     if not engine:
         logging.error("No database engine found. Skipping seeding.")
         return
@@ -193,4 +193,4 @@ def seed_jav_restroom():
         logging.info("JAV_RESTROOM JSON-based seeding completed successfully.")
 
 if __name__ == "__main__":
-    seed_jav_restroom()
+    seed_restroom_java()
