@@ -36,3 +36,9 @@ class ChoiceRepository:
         with self._get_session() as session:
             statement = select(Choice).where(Choice.question_id == question_id)
             return len(session.exec(statement).all())
+
+    def find_all_by_question_id(self, question_id: UUID):
+        """Fetch all choices that is not hidden for a question."""
+        with self._get_session() as session:
+            statement = select(Choice).where(Choice.question_id == question_id, Choice.hidden == False)
+            return session.exec(statement).all()
