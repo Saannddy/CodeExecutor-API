@@ -107,11 +107,15 @@ class QuestionService:
     def get_random_questions(self, tag_name: str, amount: int = 1):
         """Fetch N random questions by tag."""
         questions = self.question_repo.find_random_by_tag(tag_name, amount)
+        # get all choice that is not hidden
+        choices = self.choice_repo.find_all_by_question_id(questions)
+        choices = [c for c in choices if not c.hidden]
         return [
             {
                 "id": str(q.id),
                 "title": q.title,
                 "question_text": q.question_text,
+                "choices": choices,
                 "tags": [t.name for t in q.tags]
             } for q in questions
         ]
