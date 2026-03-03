@@ -96,12 +96,43 @@ If you want to connect to **NeonDB** online and migrate it to the latest version
 
 _(Alternatively, you can simply update the `DATABASE_URL` in your `.env` file and run the standard migration commands.)_
 
-### 🌱 Data Seeding
+### 🌱 Data Seeding & Cleanup
 
-If you need to re-seed or reset the initial data:
+For manual data management, use these commands from the **project root**:
 
-- **Run Seeder**: `docker compose --profile local exec local-code-api python3 -m scripts.seed`
-  _(The seeder is idempotent and will skip problems that already exist!)_
+#### 1️⃣ Java Restroom Seeding (40+ Questions & Riddles)
+Seed the database with Java MCQs, riddles, and problems tagged as `JAV_RESTROOM`:
+```bash
+# Running via Docker (Must rebuild if scripts are modified)
+docker compose --profile local up -d --build
+docker compose --profile local exec local-code-api python3 -m scripts.seeders.seed_restroom_java
+
+# Running Locally (Ensure .env is configured or set DATABASE_URL)
+export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/code_executor
+PYTHONPATH=src python3 src/scripts/seeders/seed_restroom_java.py
+```
+
+#### 2️⃣ Clear All Database Data
+Delete all entries from all tables (Riddles, Questions, Problems, etc.):
+```bash
+# Running via Docker
+docker compose --profile local exec local-code-api python3 -m scripts.delete
+
+# Running Locally
+export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/code_executor
+PYTHONPATH=src python3 src/scripts/delete.py
+```
+
+#### 3️⃣ Standard Sample Seeding
+Seed the original set of coding problems (Two Sum, etc.):
+```bash
+# Running via Docker (Recommended)
+docker compose --profile local exec local-code-api python3 -m scripts.seed
+
+# Running Locally
+export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/code_executor
+PYTHONPATH=src python3 src/scripts/seed.py
+```
 
 ---
 
