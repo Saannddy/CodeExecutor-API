@@ -1,0 +1,202 @@
+[
+    {
+        "text": "I was the sea and the thing you see, I will be your third char",
+        "char": "C",
+        "index": 3
+    },
+    {
+        "text": "I am the heart of the bread and the end of the line, I will be your first char",
+        "char": "B",
+        "index": 1
+    },
+    {
+        "text": "I am the start of the apple and the end of the sea, I will be your fifth char",
+        "char": "A",
+        "index": 5
+    },
+    {
+        "text": "I am the middle of the sun and the start of the sky, I will be your second char",
+        "char": "U",
+        "index": 2
+    },
+    {
+        "text": "I am the end of the day and the start of the dawn, I will be your fourth char",
+        "char": "D",
+        "index": 4
+    },
+    {
+        "text": "I am the first of the eagle and the last of the tree, I will be your third char",
+        "char": "E",
+        "index": 3
+    },
+    {
+        "text": "I am the middle of the fire and the start of the flame, I will be your fifth char",
+        "char": "F",
+        "index": 5
+    },
+    {
+        "text": "I am the heart of the gold and the end of the bag, I will be your second char",
+        "char": "O",
+        "index": 2
+    },
+    {
+        "text": "I am the start of the mountain and the end of the storm, I will be your fourth char",
+        "char": "M",
+        "index": 4
+    },
+    {
+        "text": "I am the first of the light and the last of the ball, I will be your first char",
+        "char": "L",
+        "index": 1
+    },
+    {
+        "text": "I am in the middle of 'Java' but not in 'Script', I will be your third char",
+        "char": "V",
+        "index": 3
+    },
+    {
+        "text": "I am the start of 'Programming' and the end of 'Keep', I will be your sixth char",
+        "char": "P",
+        "index": 6
+    },
+    {
+        "text": "I am the end of 'Spring' and the start of 'Green', I will be your second char",
+        "char": "G",
+        "index": 2
+    },
+    {
+        "text": "I am the first of 'Maven' and the last of 'Form', I will be your fourth char",
+        "char": "M",
+        "index": 4
+    },
+    {
+        "text": "I am the heart of 'Code' and the end of 'Topic', I will be your fifth char",
+        "char": "O",
+        "index": 5
+    },
+    {
+        "text": "I am the start of 'System' and the end of 'Hiss', I will be your first char",
+        "char": "S",
+        "index": 1
+    },
+    {
+        "text": "I am the middle of 'Thread' and the start of 'Rain', I will be your third char",
+        "char": "R",
+        "index": 3
+    },
+    {
+        "text": "I am the first of 'Object' and the last of 'Echo', I will be your second char",
+        "char": "O",
+        "index": 2
+    },
+    {
+        "text": "I am the end of 'Class' and the start of 'Success', I will be your fourth char",
+        "char": "S",
+        "index": 4
+    },
+    {
+        "text": "I am the heart of 'Logic' and the end of 'Digital', I will be your fifth char",
+        "char": "G",
+        "index": 5
+    },
+    {
+        "text": "I am the start of 'Heap' and the end of 'Bush', I will be your third char",
+        "char": "H",
+        "index": 3
+    },
+    {
+        "text": "I am the middle of 'Stack' and the start of 'Table', I will be your second char",
+        "char": "T",
+        "index": 2
+    },
+    {
+        "text": "I am the first of 'Queue' and the last of 'Unique', I will be your sixth char",
+        "char": "Q",
+        "index": 6
+    },
+    {
+        "text": "I am the end of 'Node' and the start of 'Enter', I will be your fourth char",
+        "char": "E",
+        "index": 4
+    },
+    {
+        "text": "I am the heart of 'Link' and the end of 'Hill', I will be your first char",
+        "char": "L",
+        "index": 1
+    },
+    {
+        "text": "I am the start of 'Byte' and the end of 'Bob', I will be your fifth char",
+        "char": "B",
+        "index": 5
+    },
+    {
+        "text": "I am the middle of 'Short' and the start of 'Ocean', I will be your third char",
+        "char": "O",
+        "index": 3
+    },
+    {
+        "text": "I am the first of 'Double' and the last of 'Bed', I will be your second char",
+        "char": "D",
+        "index": 2
+    },
+    {
+        "text": "I am the end of 'Float' and the start of 'Thought', I will be your fourth char",
+        "char": "T",
+        "index": 4
+    },
+    {
+        "text": "I am the heart of 'Char' and the end of 'March', I will be your fifth char",
+        "char": "A",
+        "index": 5
+    },
+    {
+        "text": "I am the start of 'Bool' and the end of 'Club', I will be your sixth char",
+        "char": "B",
+        "index": 6
+    },
+    {
+        "text": "I am the middle of 'Enum' and the start of 'Night', I will be your third char",
+        "char": "N",
+        "index": 3
+    },
+    {
+        "text": "I am the first of 'Void' and the last of 'Law', I will be your first char",
+        "char": "V",
+        "index": 1
+    },
+    {
+        "text": "I am the end of 'Null' and the start of 'Lamp', I will be your second char",
+        "char": "L",
+        "index": 2
+    },
+    {
+        "text": "I am the heart of 'Case' and the end of 'Sonic', I will be your fourth char",
+        "char": "C",
+        "index": 4
+    },
+    {
+        "text": "I am the start of 'Switch' and the end of 'Gas', I will be your fifth char",
+        "char": "S",
+        "index": 5
+    },
+    {
+        "text": "I am the middle of 'While' and the start of 'Idea', I will be your third char",
+        "char": "I",
+        "index": 3
+    },
+    {
+        "text": "I am the first of 'For' and the last of 'Shelf', I will be your second char",
+        "char": "F",
+        "index": 2
+    },
+    {
+        "text": "I am the end of 'Try' and the start of 'Yellow', I will be your fourth char",
+        "char": "Y",
+        "index": 4
+    },
+    {
+        "text": "I am the heart of 'Catch' and the end of 'Music', I will be your sixth char",
+        "char": "C",
+        "index": 6
+    }
+]
