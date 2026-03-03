@@ -46,7 +46,7 @@ alembic/versions/__pycache__/
 *.exe
 
 # Testing / Coverage
-coverage_html/
+coverage/
 .coverage
 .pytest_cache/
 htmlcov/
