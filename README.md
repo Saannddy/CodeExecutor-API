@@ -160,30 +160,47 @@ tests/
 └── docs/                 # Documentation endpoint tests
 ```
 
-### Run All Tests
+### Run with Coverage Report
+The tests automatically generate an HTML report inside the container. To view it locally:
 
 ```bash
-python3 -m pytest
-```
+# 1. Run the tests
+docker compose --profile local exec local-code-api python3 -m pytest
 
-### Coverage Report
+# 2. Copy the report from the container to your machine
+docker cp codeexecutor-api-local-code-api-1:/usr/src/app/coverage/ ./coverage/
 
-After running tests, open the interactive HTML coverage report:
-
-```bash
-open coverage_html/index.html
+# 3. Open it
+open coverage/index.html
 ```
 
 The report highlights **exactly which lines** were hit or missed during testing — click any file to see line-by-line coverage.
 
-### Run a Specific Test Group
+### Run Locally (Outside Docker)
+If you want to run tests without Docker for faster iteration:
 
+1. **Install Dependencies**:
+   ```bash
+   pip install Flask gunicorn pytest sqlmodel alembic python-dotenv pydantic-settings esprima javalang pytest-cov pybars3
+   ```
+   *(Note: `psycopg2-binary` might fail on some Python versions, but unit tests are mocked so you can skip it.)*
+
+2. **Run Tests**:
+   ```bash
+   PYTHONPATH=src python3 -m pytest
+   ```
+
+3. **View Coverage**:
+   ```bash
+   open coverage/index.html
+   ```
+
+### Run a Specific Test Group
 ```bash
-python3 -m pytest tests/problem/       # Problem tests only
-python3 -m pytest tests/riddle/        # Riddle tests only
+PYTHONPATH=src python3 -m pytest tests/problem/
 ```
 
-> **Note**: Tests mock the database layer so they run locally without Postgres. Install test dependencies first: `pip install pytest pytest-cov`
+> **Note**: Tests mock the database layer automatically, so no local Postgres is required.
 
 ---
 
