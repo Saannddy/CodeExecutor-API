@@ -74,6 +74,7 @@ If you modify the models in `src/models/`, use these commands to sync the databa
 - **Check Status**: `docker compose --profile local exec code-api alembic current`
 - **Apply Migrations**: `docker compose --profile local exec code-api alembic upgrade head`
 - **Generate New Migration**:
+
   ```bash
   docker compose --profile local exec code-api alembic revision --autogenerate -m "description_of_change"
   ```
@@ -85,11 +86,14 @@ If you want to connect to **NeonDB** online and migrate it to the latest version
 1. **Get Connection String**: Copy your connection string from the [Neon Console](https://console.neon.tech/) (ensure `?sslmode=require` is included).
 2. **Apply Migrations**:
    Run the following command, replacing `YOUR_NEON_URL` with your actual connection string:
+
    ```bash
    docker compose --profile local exec -e DATABASE_URL="YOUR_NEON_URL" local-code-api alembic upgrade head
    ```
+
 3. **(Optional) Seed Data**:
    If your Neon database is empty, you can seed it with the default problems:
+
    ```bash
    docker compose --profile local exec -e DATABASE_URL="YOUR_NEON_URL" local-code-api python3 -m scripts.seed
    ```
@@ -101,7 +105,9 @@ _(Alternatively, you can simply update the `DATABASE_URL` in your `.env` file an
 For manual data management, use these commands from the **project root**:
 
 #### 1️⃣ Java Restroom Seeding (40+ Questions & Riddles)
+
 Seed the database with Java MCQs, riddles, and problems tagged as `JAV_RESTROOM`:
+
 ```bash
 # Running via Docker (Must rebuild if scripts are modified)
 docker compose --profile local up -d --build
@@ -113,7 +119,9 @@ PYTHONPATH=src python3 src/scripts/seeders/seed_restroom_java.py
 ```
 
 #### 2️⃣ Clear All Database Data
+
 Delete all entries from all tables (Riddles, Questions, Problems, etc.):
+
 ```bash
 # Running via Docker
 docker compose --profile local exec local-code-api python3 -m scripts.delete
@@ -124,7 +132,9 @@ PYTHONPATH=src python3 src/scripts/delete.py
 ```
 
 #### 3️⃣ Standard Sample Seeding
+
 Seed the original set of coding problems (Two Sum, etc.):
+
 ```bash
 # Running via Docker (Recommended)
 docker compose --profile local exec local-code-api python3 -m scripts.seed
@@ -180,7 +190,7 @@ For the best developer experience, we've included a **Bruno Collection**:
 
 Tests are organized by feature group in the `tests/` directory:
 
-```
+```cmd
 tests/
 ├── conftest.py           # Shared fixtures (Flask client, DB mocks)
 ├── problem/              # Problem endpoint tests
@@ -192,6 +202,7 @@ tests/
 ```
 
 ### Run with Coverage Report
+
 The tests automatically generate an HTML report inside the container. To view it locally:
 
 ```bash
@@ -208,25 +219,31 @@ open coverage/index.html
 The report highlights **exactly which lines** were hit or missed during testing — click any file to see line-by-line coverage.
 
 ### Run Locally (Outside Docker)
+
 If you want to run tests without Docker for faster iteration:
 
 1. **Install Dependencies**:
+
    ```bash
    pip install Flask gunicorn pytest sqlmodel alembic python-dotenv pydantic-settings esprima javalang pytest-cov pybars3
    ```
-   *(Note: `psycopg2-binary` might fail on some Python versions, but unit tests are mocked so you can skip it.)*
+
+   _(Note: `psycopg2-binary` might fail on some Python versions, but unit tests are mocked so you can skip it.)_
 
 2. **Run Tests**:
+
    ```bash
    PYTHONPATH=src python3 -m pytest
    ```
 
 3. **View Coverage**:
+
    ```bash
    open coverage/index.html
    ```
 
 ### Run a Specific Test Group
+
 ```bash
 PYTHONPATH=src python3 -m pytest tests/problem/
 ```
