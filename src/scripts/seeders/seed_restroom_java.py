@@ -111,7 +111,7 @@ def seed_restroom_java():
                 riddle_text=r_data["text"],
                 refer_char=r_data["char"],
                 refer_index=r_data["index"],
-                difficulty=random.choice(["Easy", "Medium"]),
+                difficulty=r_data["difficulty"] or "Medium",
                 created_at=datetime.now(timezone.utc)
             )
             riddle.tags = [jav_restroom_tag]
