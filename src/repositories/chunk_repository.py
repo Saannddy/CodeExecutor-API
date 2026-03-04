@@ -25,17 +25,20 @@ class ChunkRepository:
 
             statement = statement.order_by(Chunk.id).offset((page - 1) * limit).limit(limit)
             
+            # Use unique() for joinedload with collections
             results = session.exec(statement).unique().all()
             chunks = []
             for chunk in results:
-                c_dict = self._serialize_chunk(chunk, lang)
-                chunks.append(c_dict)
+                chunks.append(self._serialize_chunk(chunk, lang))
             return chunks
 
     def _serialize_chunk(self, chunk, lang=None):
         """Helper to serialize a chunk and optionally filter its templates by language."""
         c_dict = chunk.model_dump()
-        c_dict["templates"] = []
+        
+        # Move templates to config key in response
+        c_dict["config"] = {"templates": {}}
+        
         for t in chunk.templates:
             # Skip if language filter is active and doesn't match
             if lang and t.language != lang:
@@ -43,13 +46,19 @@ class ChunkRepository:
                 
             t_dict = {
                 "id": str(t.id),
-                "language": t.language,
                 "name": t.name,
                 "template_code": t.template_code,
                 "description": t.description,
-                "snippets": [{"placeholder_key": s.placeholder_key, "code_content": s.code_content} for s in t.snippets]
+                "snippets": {s.placeholder_key: s.code_content for s in t.snippets}
             }
-            c_dict["templates"].append(t_dict)
+            c_dict["config"]["templates"][t.language] = t_dict
+            
+        # Add expectations to config for consistency
+        if hasattr(chunk, "expectations") and chunk.expectations:
+            c_dict["expectations"] = [
+                {"input": e.input, "output": e.output} for e in chunk.expectations
+            ]
+            
         return c_dict
 
     def find_by_id(self, chunk_id):
@@ -72,22 +81,19 @@ class ChunkRepository:
     def find_random(self, limit=1, lang=None):
         """Fetch random N chunks with their implementation details. Filters by language if provided."""
         with self._get_session() as session:
-            statement = select(Chunk).options(
-                joinedload(Chunk.templates).joinedload(ChunkTemplate.snippets)
-            )
-
-            if lang:
-                # Require that the chunk HAS a template in that language
-                statement = statement.join(Chunk.templates).where(ChunkTemplate.language == lang)
-
-            statement = statement.order_by(func.random()).limit(limit)
-            
-            results = session.exec(statement).unique().all()
+            statement = select(Chunk).order_by(func.random())
+            # For simplicity, if lang is provided, we fetch more and filter in Python
+            # or just fetch all and filter.
+            results = session.exec(statement).all()
             if not results:
                 return []
 
             chunks = []
             for chunk in results:
+                if lang and lang not in chunk.config.get("templates", {}):
+                    continue
                 chunks.append(self._serialize_chunk(chunk, lang))
+                if len(chunks) >= limit:
+                    break
 
             return chunks

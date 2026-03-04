@@ -5,6 +5,7 @@ import json
 import os
 from datetime import datetime, timezone
 from sqlalchemy import text
+from sqlalchemy.orm.attributes import flag_modified
 from sqlmodel import Session, select
 from infrastructure import engine
 from models import (
@@ -120,36 +121,47 @@ def seed_restroom_java():
         logging.info(f"Seeding {len(CHUNKS)} Java chunks...")
         for c_data in CHUNKS:
             c_id = get_uuid(f"jav_rst_chunk_{c_data['title']}")
-            if session.exec(select(Chunk).where(Chunk.id == c_id)).first():
-                continue
+            chunk = session.exec(select(Chunk).where(Chunk.id == c_id)).first()
+            if not chunk:
+                chunk = Chunk(
+                    id=c_id,
+                    title=c_data["title"],
+                    difficulty=c_data["difficulty"],
+                    created_at=datetime.now(timezone.utc)
+                )
+                chunk.categories = [get_or_create_category(c_data.get("category", "Java Basics"))]
+                chunk.tags = [jav_restroom_tag]
+                session.add(chunk)
+                session.flush()
+            else:
+                # Update basic info
+                chunk.difficulty = c_data["difficulty"]
+                # Clear existing templates to re-seed (cascades to snippets)
+                for t in chunk.templates:
+                    session.delete(t)
+                session.flush()
 
-            chunk = Chunk(
-                id=c_id,
-                title=c_data["title"],
-                difficulty=c_data["difficulty"],
-                created_at=datetime.now(timezone.utc)
-            )
-            chunk.categories = [get_or_create_category(c_data.get("category", "Java Basics"))]
-            chunk.tags = [jav_restroom_tag]
-            session.add(chunk)
-            session.flush()
-
-            for t_data in c_data["templates"]:
+            for lang, t_data in c_data["templates"].items():
                 template = ChunkTemplate(
                     chunk_id=chunk.id,
-                    language=t_data["lang"],
+                    language=lang,
                     name=t_data["name"],
-                    template_code=t_data["code"],
-                    description=f"Standard {t_data['lang']} boilerplate"
+                    template_code=t_data["template_code"],
+                    description=t_data.get("description", f"Standard {lang} boilerplate")
                 )
                 session.add(template)
                 session.flush()
 
-                for key, content in t_data["snippets"]:
+                for key, content in t_data.get("snippets", {}).items():
                     s = Snippet(template_id=template.id, placeholder_key=key, code_content=content)
                     session.add(s)
 
             if "expectation" in c_data:
+                # Clear existing expectations
+                for ex in chunk.expectations:
+                    session.delete(ex)
+                session.flush()
+                
                 ex = Expectation(
                     chunk_id=chunk.id,
                     input=c_data["expectation"]["input"],
@@ -161,22 +173,38 @@ def seed_restroom_java():
         logging.info(f"Seeding {len(PROBLEMS)} Java problems...")
         for p_data in PROBLEMS:
             p_id = get_uuid(f"jav_rst_prob_{p_data['title']}")
-            if session.exec(select(Problem).where(Problem.id == p_id)).first():
-                continue
-
-            problem = Problem(
-                id=p_id,
-                title=p_data["title"],
-                description=p_data["description"],
-                difficulty=p_data["difficulty"],
-                config={"templates": p_data.get("templates", {})}
-            )
-            problem.categories = [get_or_create_category(p_data.get("category", "Java Algorithms"))]
-            problem.tags = [jav_restroom_tag]
-            session.add(problem)
+            problem = session.exec(select(Problem).where(Problem.id == p_id)).first()
+            
+            if not problem:
+                problem = Problem(
+                    id=p_id,
+                    title=p_data["title"],
+                    description=p_data["description"],
+                    difficulty=p_data["difficulty"],
+                    config={"templates": p_data.get("templates", {})}
+                )
+                problem.categories = [get_or_create_category(p_data.get("category", "Java Algorithms"))]
+                problem.tags = [jav_restroom_tag]
+                session.add(problem)
+            else:
+                # Update existing problem
+                problem.description = p_data["description"]
+                problem.difficulty = p_data["difficulty"]
+                # Update templates in config
+                config = problem.config or {}
+                config["templates"] = p_data.get("templates", {})
+                problem.config = config
+                flag_modified(problem, "config")
+                session.add(problem)
+            
             session.flush()
 
             if "test_cases" in p_data:
+                # Clear existing test cases to avoid UniqueViolation
+                for tc in problem.test_cases:
+                    session.delete(tc)
+                session.flush()
+
                 for i, tc_data in enumerate(p_data["test_cases"]):
                     tc_id = get_uuid(f"jav_rst_tc_{p_data['title']}_{i}")
                     tc = TestCase(

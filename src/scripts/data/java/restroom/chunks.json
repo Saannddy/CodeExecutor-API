@@ -3,19 +3,24 @@
         "title": "Java Stream Filter",
         "difficulty": "Medium",
         "category": "Streams",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);\n        {{{logic}}}\n        System.out.println(result);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "List<Integer> result = numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());"
-                    ]
-                ]
+                "template_code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);\n        {{{logic}}}\n        System.out.println(result);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "List<Integer> result = numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[2, 4, 6]"
@@ -25,19 +30,24 @@
         "title": "Java Lambda Comparator",
         "difficulty": "Medium",
         "category": "Functional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> words = Arrays.asList(\"apple\", \"pear\", \"banana\", \"cherry\");\n        {{{logic}}}\n        System.out.println(words);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "words.sort((a, b) -> a.length() - b.length());"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> words = Arrays.asList(\"apple\", \"pear\", \"banana\", \"cherry\");\n        {{{logic}}}\n        System.out.println(words);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "words.sort((a, b) -> a.length() - b.length());"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[pear, apple, banana, cherry]"
@@ -47,19 +57,24 @@
         "title": "Java Optional Usage",
         "difficulty": "Easy",
         "category": "Optional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.ofNullable(null);\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(opt.orElse(\"Default Value\"));"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.ofNullable(null);\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(opt.orElse(\"Default Value\"));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Default Value"
@@ -69,19 +84,24 @@
         "title": "Java List Concatenation",
         "difficulty": "Easy",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> list1 = new ArrayList<>(Arrays.asList(\"A\", \"B\"));\n        List<String> list2 = Arrays.asList(\"C\", \"D\");\n        {{{logic}}}\n        System.out.println(list1);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "list1.addAll(list2);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> list1 = new ArrayList<>(Arrays.asList(\"A\", \"B\"));\n        List<String> list2 = Arrays.asList(\"C\", \"D\");\n        {{{logic}}}\n        System.out.println(list1);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "list1.addAll(list2);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[A, B, C, D]"
@@ -91,19 +111,24 @@
         "title": "Java Map Iteration",
         "difficulty": "Easy",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        map.put(\"A\", 1);\n        map.put(\"B\", 2);\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "map.forEach((k, v) -> System.out.println(k + \":\" + v));"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        map.put(\"A\", 1);\n        map.put(\"B\", 2);\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "map.forEach((k, v) -> System.out.println(k + \":\" + v));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "A:1\nB:2"
@@ -113,19 +138,24 @@
         "title": "Java String Format",
         "difficulty": "Easy",
         "category": "Strings",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "public class Solution {\n    public static void main(String[] args) {\n        String name = \"Java\";\n        int version = 17;\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(String.format(\"Name: %s, Version: %d\", name, version));"
-                    ]
-                ]
+                "template_code": "public class Solution {\n    public static void main(String[] args) {\n        String name = \"Java\";\n        int version = 17;\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(String.format(\"Name: %s, Version: %d\", name, version));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Name: Java, Version: 17"
@@ -135,19 +165,24 @@
         "title": "Java Array Sorting",
         "difficulty": "Easy",
         "category": "Arrays",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        int[] arr = {5, 2, 8, 1};\n        {{{logic}}}\n        System.out.println(Arrays.toString(arr));\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "Arrays.sort(arr);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        int[] arr = {5, 2, 8, 1};\n        {{{logic}}}\n        System.out.println(Arrays.toString(arr));\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "Arrays.sort(arr);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[1, 2, 5, 8]"
@@ -157,19 +192,24 @@
         "title": "Java List Filter",
         "difficulty": "Medium",
         "category": "Streams",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> items = Arrays.asList(\"apple\", \"banana\", \"apricot\", \"cherry\");\n        {{{logic}}}\n        System.out.println(aItems);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "List<String> aItems = items.stream().filter(s -> s.startsWith(\"a\")).collect(Collectors.toList());"
-                    ]
-                ]
+                "template_code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> items = Arrays.asList(\"apple\", \"banana\", \"apricot\", \"cherry\");\n        {{{logic}}}\n        System.out.println(aItems);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "List<String> aItems = items.stream().filter(s -> s.startsWith(\"a\")).collect(Collectors.toList());"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[apple, apricot]"
@@ -179,19 +219,24 @@
         "title": "Java Math Pow",
         "difficulty": "Easy",
         "category": "Math",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "public class Solution {\n    public static void main(String[] args) {\n        double base = 2;\n        double exp = 3;\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(Math.pow(base, exp));"
-                    ]
-                ]
+                "template_code": "public class Solution {\n    public static void main(String[] args) {\n        double base = 2;\n        double exp = 3;\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(Math.pow(base, exp));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "8.0"
@@ -201,19 +246,24 @@
         "title": "Java Thread Sleep",
         "difficulty": "Easy",
         "category": "Concurrency",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "public class Solution {\n    public static void main(String[] args) throws InterruptedException {\n        System.out.println(\"Start\");\n        {{{logic}}}\n        System.out.println(\"End\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "Thread.sleep(100);"
-                    ]
-                ]
+                "template_code": "public class Solution {\n    public static void main(String[] args) throws InterruptedException {\n        System.out.println(\"Start\");\n        {{{logic}}}\n        System.out.println(\"End\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "Thread.sleep(100);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Start\nEnd"
@@ -223,19 +273,24 @@
         "title": "Java AtomicInteger",
         "difficulty": "Medium",
         "category": "Concurrency",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.concurrent.atomic.*;\npublic class Solution {\n    public static void main(String[] args) {\n        AtomicInteger count = new AtomicInteger(0);\n        {{{logic}}}\n        System.out.println(count.get());\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "count.incrementAndGet();"
-                    ]
-                ]
+                "template_code": "import java.util.concurrent.atomic.*;\npublic class Solution {\n    public static void main(String[] args) {\n        AtomicInteger count = new AtomicInteger(0);\n        {{{logic}}}\n        System.out.println(count.get());\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "count.incrementAndGet();"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "1"
@@ -245,19 +300,24 @@
         "title": "Java LocalTime Now",
         "difficulty": "Easy",
         "category": "Time",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.time.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "LocalTime time = LocalTime.of(10, 0); System.out.println(time);"
-                    ]
-                ]
+                "template_code": "import java.time.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "LocalTime time = LocalTime.of(10, 0); System.out.println(time);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "10:00"
@@ -267,19 +327,24 @@
         "title": "Java LocalDate Parse",
         "difficulty": "Easy",
         "category": "Time",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.time.*;\npublic class Solution {\n    public static void main(String[] args) {\n        String dateStr = \"2023-10-01\";\n        {{{logic}}}\n        System.out.println(date);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "LocalDate date = LocalDate.parse(dateStr);"
-                    ]
-                ]
+                "template_code": "import java.time.*;\npublic class Solution {\n    public static void main(String[] args) {\n        String dateStr = \"2023-10-01\";\n        {{{logic}}}\n        System.out.println(date);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "LocalDate date = LocalDate.parse(dateStr);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "2023-10-01"
@@ -289,19 +354,24 @@
         "title": "Java HashMap GetDefault",
         "difficulty": "Easy",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Map<String, String> map = new HashMap<>();\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(map.getOrDefault(\"key\", \"Default\"));"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Map<String, String> map = new HashMap<>();\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(map.getOrDefault(\"key\", \"Default\"));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Default"
@@ -311,19 +381,24 @@
         "title": "Java String Split",
         "difficulty": "Easy",
         "category": "Strings",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        String s = \"a,b,c\";\n        {{{logic}}}\n        System.out.println(Arrays.toString(parts));\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "String[] parts = s.split(\",\");"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        String s = \"a,b,c\";\n        {{{logic}}}\n        System.out.println(Arrays.toString(parts));\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "String[] parts = s.split(\",\");"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[a, b, c]"
@@ -333,19 +408,24 @@
         "title": "Java Array Fill",
         "difficulty": "Easy",
         "category": "Arrays",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        int[] arr = new int[3];\n        {{{logic}}}\n        System.out.println(Arrays.toString(arr));\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "Arrays.fill(arr, 7);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        int[] arr = new int[3];\n        {{{logic}}}\n        System.out.println(Arrays.toString(arr));\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "Arrays.fill(arr, 7);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[7, 7, 7]"
@@ -355,19 +435,24 @@
         "title": "Java List Shuffle",
         "difficulty": "Easy",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3));\n        {{{logic}}}\n        System.out.println(list.size());\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "Collections.shuffle(list);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3));\n        {{{logic}}}\n        System.out.println(list.size());\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "Collections.shuffle(list);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "3"
@@ -377,19 +462,24 @@
         "title": "Java BigInteger Add",
         "difficulty": "Easy",
         "category": "Math",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.math.*;\npublic class Solution {\n    public static void main(String[] args) {\n        BigInteger a = new BigInteger(\"100\");\n        BigInteger b = new BigInteger(\"200\");\n        {{{logic}}}\n        System.out.println(c);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "BigInteger c = a.add(b);"
-                    ]
-                ]
+                "template_code": "import java.math.*;\npublic class Solution {\n    public static void main(String[] args) {\n        BigInteger a = new BigInteger(\"100\");\n        BigInteger b = new BigInteger(\"200\");\n        {{{logic}}}\n        System.out.println(c);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "BigInteger c = a.add(b);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "300"
@@ -399,19 +489,24 @@
         "title": "Java String Join",
         "difficulty": "Easy",
         "category": "Strings",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> list = Arrays.asList(\"A\", \"B\", \"C\");\n        {{{logic}}}\n        System.out.println(joined);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "String joined = String.join(\"-\", list);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> list = Arrays.asList(\"A\", \"B\", \"C\");\n        {{{logic}}}\n        System.out.println(joined);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "String joined = String.join(\"-\", list);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "A-B-C"
@@ -421,19 +516,24 @@
         "title": "Java Set Intersection",
         "difficulty": "Medium",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Set<Integer> s1 = new HashSet<>(Arrays.asList(1, 2, 3));\n        Set<Integer> s2 = new HashSet<>(Arrays.asList(2, 3, 4));\n        {{{logic}}}\n        System.out.println(s1);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "s1.retainAll(s2);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Set<Integer> s1 = new HashSet<>(Arrays.asList(1, 2, 3));\n        Set<Integer> s2 = new HashSet<>(Arrays.asList(2, 3, 4));\n        {{{logic}}}\n        System.out.println(s1);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "s1.retainAll(s2);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[2, 3]"
@@ -443,19 +543,24 @@
         "title": "Java Streams Map",
         "difficulty": "Medium",
         "category": "Streams",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> nums = Arrays.asList(1, 2, 3);\n        {{{logic}}}\n        System.out.println(squares);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "List<Integer> squares = nums.stream().map(n -> n * n).collect(Collectors.toList());"
-                    ]
-                ]
+                "template_code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> nums = Arrays.asList(1, 2, 3);\n        {{{logic}}}\n        System.out.println(squares);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "List<Integer> squares = nums.stream().map(n -> n * n).collect(Collectors.toList());"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[1, 4, 9]"
@@ -465,19 +570,24 @@
         "title": "Java Streams Reduce",
         "difficulty": "Medium",
         "category": "Streams",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> nums = Arrays.asList(1, 2, 3, 4);\n        {{{logic}}}\n        System.out.println(sum);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "int sum = nums.stream().reduce(0, Integer::sum);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> nums = Arrays.asList(1, 2, 3, 4);\n        {{{logic}}}\n        System.out.println(sum);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "int sum = nums.stream().reduce(0, Integer::sum);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "10"
@@ -487,19 +597,24 @@
         "title": "Java Files Write",
         "difficulty": "Medium",
         "category": "IO",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.nio.file.*;\nimport java.util.*;\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n       System.out.println(\"Done\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "// No logic needed for dummy shell"
-                    ]
-                ]
+                "template_code": "import java.nio.file.*;\nimport java.util.*;\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n       System.out.println(\"Done\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "// No logic needed for dummy shell"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Done"
@@ -509,19 +624,24 @@
         "title": "Java Base64 Encode",
         "difficulty": "Easy",
         "category": "Security",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        String original = \"hello\";\n        {{{logic}}}\n        System.out.println(encoded);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "String encoded = Base64.getEncoder().encodeToString(original.getBytes());"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        String original = \"hello\";\n        {{{logic}}}\n        System.out.println(encoded);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "String encoded = Base64.getEncoder().encodeToString(original.getBytes());"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "aGVsbG8="
@@ -531,19 +651,24 @@
         "title": "Java UUID Random",
         "difficulty": "Easy",
         "category": "Util",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n        System.out.println(\"Generated\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "UUID uuid = UUID.randomUUID();"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n        System.out.println(\"Generated\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "UUID uuid = UUID.randomUUID();"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Generated"
@@ -553,19 +678,24 @@
         "title": "Java ReentrantLock",
         "difficulty": "Hard",
         "category": "Concurrency",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.concurrent.locks.*;\npublic class Solution {\n    public static void main(String[] args) {\n        ReentrantLock lock = new ReentrantLock();\n        {{{logic}}}\n        System.out.println(\"Unlocked\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "lock.lock(); try { } finally { lock.unlock(); }"
-                    ]
-                ]
+                "template_code": "import java.util.concurrent.locks.*;\npublic class Solution {\n    public static void main(String[] args) {\n        ReentrantLock lock = new ReentrantLock();\n        {{{logic}}}\n        System.out.println(\"Unlocked\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "lock.lock(); try { } finally { lock.unlock(); }"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Unlocked"
@@ -575,19 +705,24 @@
         "title": "Java CountDownLatch",
         "difficulty": "Hard",
         "category": "Concurrency",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.concurrent.*;\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        CountDownLatch latch = new CountDownLatch(1);\n        {{{logic}}}\n        System.out.println(latch.getCount());\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "latch.countDown();"
-                    ]
-                ]
+                "template_code": "import java.util.concurrent.*;\npublic class Solution {\n    public static void main(String[] args) throws Exception {\n        CountDownLatch latch = new CountDownLatch(1);\n        {{{logic}}}\n        System.out.println(latch.getCount());\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "latch.countDown();"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "0"
@@ -597,19 +732,24 @@
         "title": "Java Scanner Stdin",
         "difficulty": "Easy",
         "category": "IO",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        // Simulated scan\n        System.out.println(\"Scanned\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        ""
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        // Simulated scan\n        System.out.println(\"Scanned\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": ""
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Scanned"
@@ -619,19 +759,24 @@
         "title": "Java Function Interface",
         "difficulty": "Medium",
         "category": "Functional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Function<Integer, Integer> addOne = x -> x + 1;\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(addOne.apply(5));"
-                    ]
-                ]
+                "template_code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Function<Integer, Integer> addOne = x -> x + 1;\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(addOne.apply(5));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "6"
@@ -641,19 +786,24 @@
         "title": "Java Predicate Usage",
         "difficulty": "Medium",
         "category": "Functional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Predicate<String> isEmpty = String::isEmpty;\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(isEmpty.test(\"\"));"
-                    ]
-                ]
+                "template_code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Predicate<String> isEmpty = String::isEmpty;\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(isEmpty.test(\"\"));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "true"
@@ -663,19 +813,24 @@
         "title": "Java Supplier Usage",
         "difficulty": "Medium",
         "category": "Functional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Supplier<Double> random = Math::random;\n        {{{logic}}}\n        System.out.println(\"Got Value\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "Double d = random.get();"
-                    ]
-                ]
+                "template_code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Supplier<Double> random = Math::random;\n        {{{logic}}}\n        System.out.println(\"Got Value\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "Double d = random.get();"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Got Value"
@@ -685,19 +840,24 @@
         "title": "Java Consumer Usage",
         "difficulty": "Medium",
         "category": "Functional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Consumer<String> printer = System.out::println;\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "printer.accept(\"Hello Consumer\");"
-                    ]
-                ]
+                "template_code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Consumer<String> printer = System.out::println;\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "printer.accept(\"Hello Consumer\");"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Hello Consumer"
@@ -707,19 +867,24 @@
         "title": "Java BinaryOperator",
         "difficulty": "Medium",
         "category": "Functional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        BinaryOperator<Integer> add = (a, b) -> a + b;\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "System.out.println(add.apply(10, 20));"
-                    ]
-                ]
+                "template_code": "import java.util.function.*;\npublic class Solution {\n    public static void main(String[] args) {\n        BinaryOperator<Integer> add = (a, b) -> a + b;\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "System.out.println(add.apply(10, 20));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "30"
@@ -729,19 +894,24 @@
         "title": "Java Collectors Join",
         "difficulty": "Medium",
         "category": "Streams",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> items = Arrays.asList(\"A\", \"B\", \"C\");\n        {{{logic}}}\n        System.out.println(res);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "String res = items.stream().collect(Collectors.joining(\", \"));"
-                    ]
-                ]
+                "template_code": "import java.util.*;\nimport java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<String> items = Arrays.asList(\"A\", \"B\", \"C\");\n        {{{logic}}}\n        System.out.println(res);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "String res = items.stream().collect(Collectors.joining(\", \"));"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "A, B, C"
@@ -751,19 +921,24 @@
         "title": "Java List Sort Natural",
         "difficulty": "Easy",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> list = Arrays.asList(3, 1, 2);\n        {{{logic}}}\n        System.out.println(list);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "list.sort(Comparator.naturalOrder());"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        List<Integer> list = Arrays.asList(3, 1, 2);\n        {{{logic}}}\n        System.out.println(list);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "list.sort(Comparator.naturalOrder());"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "[1, 2, 3]"
@@ -773,19 +948,24 @@
         "title": "Java Map Merge",
         "difficulty": "Medium",
         "category": "Collections",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        map.put(\"A\", 1);\n        {{{logic}}}\n        System.out.println(map.get(\"A\"));\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "map.merge(\"A\", 1, Integer::sum);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        map.put(\"A\", 1);\n        {{{logic}}}\n        System.out.println(map.get(\"A\"));\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "map.merge(\"A\", 1, Integer::sum);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "2"
@@ -795,19 +975,24 @@
         "title": "Java String Repeat",
         "difficulty": "Easy",
         "category": "Strings",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "public class Solution {\n    public static void main(String[] args) {\n        String s = \"A\";\n        {{{logic}}}\n        System.out.println(res);\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "String res = s.repeat(3);"
-                    ]
-                ]
+                "template_code": "public class Solution {\n    public static void main(String[] args) {\n        String s = \"A\";\n        {{{logic}}}\n        System.out.println(res);\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "String res = s.repeat(3);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "AAA"
@@ -817,19 +1002,24 @@
         "title": "Java Object Hash",
         "difficulty": "Easy",
         "category": "Util",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n        System.out.println(\"Hashed\");\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "int h = Objects.hash(\"a\", \"b\");"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n        System.out.println(\"Hashed\");\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "int h = Objects.hash(\"a\", \"b\");"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "Hashed"
@@ -839,19 +1029,24 @@
         "title": "Java Stream Of",
         "difficulty": "Easy",
         "category": "Streams",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "Stream.of(\"a\", \"b\").forEach(System.out::print);"
-                    ]
-                ]
+                "template_code": "import java.util.stream.*;\npublic class Solution {\n    public static void main(String[] args) {\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "Stream.of(\"a\", \"b\").forEach(System.out::print);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "ab"
@@ -861,19 +1056,24 @@
         "title": "Java Optional Map",
         "difficulty": "Medium",
         "category": "Optional",
-        "templates": [
-            {
-                "lang": "java",
+        "templates": {
+            "java": {
                 "name": "Java Implementation",
-                "code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.of(\"hello\");\n        {{{logic}}}\n    }\n}",
-                "snippets": [
-                    [
-                        "logic",
-                        "opt.map(String::toUpperCase).ifPresent(System.out::println);"
-                    ]
-                ]
+                "template_code": "import java.util.*;\npublic class Solution {\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.of(\"hello\");\n        {{{logic}}}\n    }\n}",
+                "description": "Standard java boilerplate",
+                "snippets": {
+                    "logic": "opt.map(String::toUpperCase).ifPresent(System.out::println);"
+                }
+            },
+            "python": {
+                "name": "Python Implementation",
+                "template_code": "def main():\n    {{{logic}}}\n\nif __name__ == '__main__':\n    main()",
+                "description": "Standard Python boilerplate",
+                "snippets": {
+                    "logic": "# Python logic here"
+                }
             }
-        ],
+        },
         "expectation": {
             "input": "",
             "output": "HELLO"

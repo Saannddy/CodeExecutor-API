@@ -5,7 +5,8 @@
         "difficulty": "Easy",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public String reverseString(String s) {\n        // Your code here\n        return \"\";\n    }\n}",
+            "python": "def solve():\n    # Implement Reverse a String\n    pass"
         },
         "test_cases": [
             {
@@ -21,7 +22,8 @@
         "difficulty": "Easy",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isPalindrome(String s) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Is Palindrome\n    pass"
         },
         "test_cases": [
             {
@@ -37,7 +39,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public long factorial(int n) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Factorial\n    pass"
         },
         "test_cases": [
             {
@@ -53,7 +56,8 @@
         "difficulty": "Medium",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int fibonacci(int n) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Fibonacci\n    pass"
         },
         "test_cases": [
             {
@@ -69,7 +73,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isPrime(int n) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Prime Number\n    pass"
         },
         "test_cases": [
             {
@@ -85,7 +90,8 @@
         "difficulty": "Easy",
         "category": "Arrays",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int findLargest(int[] arr) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Largest in Array\n    pass"
         },
         "test_cases": [
             {
@@ -101,7 +107,8 @@
         "difficulty": "Easy",
         "category": "Arrays",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int sumArray(int[] arr) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Sum of Array\n    pass"
         },
         "test_cases": [
             {
@@ -117,7 +124,8 @@
         "difficulty": "Easy",
         "category": "Sorting",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int[] bubbleSort(int[] arr) {\n        // Your code here\n        return arr;\n    }\n}",
+            "python": "def solve():\n    # Implement Bubble Sort\n    pass"
         },
         "test_cases": [
             {
@@ -133,7 +141,8 @@
         "difficulty": "Easy",
         "category": "Search",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int linearSearch(int[] arr, int target) {\n        // Your code here\n        return -1;\n    }\n}",
+            "python": "def solve():\n    # Implement Linear Search\n    pass"
         },
         "test_cases": [
             {
@@ -149,7 +158,8 @@
         "difficulty": "Medium",
         "category": "Search",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int binarySearch(int[] arr, int target) {\n        // Your code here\n        return -1;\n    }\n}",
+            "python": "def solve():\n    # Implement Binary Search\n    pass"
         },
         "test_cases": [
             {
@@ -165,7 +175,8 @@
         "difficulty": "Medium",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isAnagram(String s1, String s2) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Anagram Check\n    pass"
         },
         "test_cases": [
             {
@@ -181,7 +192,8 @@
         "difficulty": "Easy",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int countVowels(String s) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Count Vowels\n    pass"
         },
         "test_cases": [
             {
@@ -197,7 +209,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isArmstrong(int n) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Armstrong Number\n    pass"
         },
         "test_cases": [
             {
@@ -213,7 +226,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isPerfect(int n) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Perfect Number\n    pass"
         },
         "test_cases": [
             {
@@ -229,7 +243,8 @@
         "difficulty": "Medium",
         "category": "Matrix",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int[][] addMatrices(int[][] a, int[][] b) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Matrix Addition\n    pass"
         },
         "test_cases": [
             {
@@ -245,7 +260,8 @@
         "difficulty": "Medium",
         "category": "Matrix",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int[][] transpose(int[][] matrix) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Transpose Matrix\n    pass"
         },
         "test_cases": [
             {
@@ -261,7 +277,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int gcd(int a, int b) {\n        // Your code here\n        return 1;\n    }\n}",
+            "python": "def solve():\n    # Implement GCD of Two Numbers\n    pass"
         },
         "test_cases": [
             {
@@ -277,7 +294,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int lcm(int a, int b) {\n        // Your code here\n        return 1;\n    }\n}",
+            "python": "def solve():\n    # Implement LCM of Two Numbers\n    pass"
         },
         "test_cases": [
             {
@@ -293,7 +311,8 @@
         "difficulty": "Easy",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public String removeWhitespace(String s) {\n        // Your code here\n        return \"\";\n    }\n}",
+            "python": "def solve():\n    # Implement Remove Whitespace\n    pass"
         },
         "test_cases": [
             {
@@ -309,7 +328,8 @@
         "difficulty": "Medium",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public char maxOccurringChar(String s) {\n        // Your code here\n        return ' ';\n    }\n}",
+            "python": "def solve():\n    # Implement Max Occurrence Char\n    pass"
         },
         "test_cases": [
             {
@@ -325,7 +345,8 @@
         "difficulty": "Easy",
         "category": "Collections",
         "templates": {
-            "java": ""
+            "java": "import java.util.*;\npublic class Solution {\n    public Set<Integer> arrayToSet(int[] arr) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Array to Set\n    pass"
         },
         "test_cases": [
             {
@@ -341,7 +362,8 @@
         "difficulty": "Hard",
         "category": "Data Structures",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public ListNode reverseList(ListNode head) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement LinkedList Reverse\n    pass"
         },
         "test_cases": [
             {
@@ -357,7 +379,8 @@
         "difficulty": "Medium",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isValid(String s) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Valid Parentheses\n    pass"
         },
         "test_cases": [
             {
@@ -373,7 +396,8 @@
         "difficulty": "Medium",
         "category": "Arrays",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int[] merge(int[] nums1, int[] nums2) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Merge Sorted Arrays\n    pass"
         },
         "test_cases": [
             {
@@ -389,7 +413,8 @@
         "difficulty": "Medium",
         "category": "Data Structures",
         "templates": {
-            "java": ""
+            "java": "import java.util.*;\npublic class Solution {\n    public List<Integer> inorderTraversal(TreeNode root) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Binary Tree Inorder\n    pass"
         },
         "test_cases": [
             {
@@ -405,7 +430,8 @@
         "difficulty": "Medium",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "import java.util.*;\npublic class Solution {\n    public List<List<Integer>> generate(int numRows) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Pascal's Triangle\n    pass"
         },
         "test_cases": [
             {
@@ -421,7 +447,8 @@
         "difficulty": "Easy",
         "category": "Arrays",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Two Sum Problem\n    pass"
         },
         "test_cases": [
             {
@@ -437,7 +464,8 @@
         "difficulty": "Medium",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int lengthOfLongestSubstring(String s) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Longest Substring\n    pass"
         },
         "test_cases": [
             {
@@ -453,7 +481,8 @@
         "difficulty": "Medium",
         "category": "Arrays",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int maxArea(int[] height) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Container Max Water\n    pass"
         },
         "test_cases": [
             {
@@ -469,7 +498,8 @@
         "difficulty": "Medium",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public String intToRoman(int num) {\n        // Your code here\n        return \"\";\n    }\n}",
+            "python": "def solve():\n    # Implement Integer to Roman\n    pass"
         },
         "test_cases": [
             {
@@ -485,7 +515,8 @@
         "difficulty": "Easy",
         "category": "Math",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public int romanToInt(String s) {\n        // Your code here\n        return 0;\n    }\n}",
+            "python": "def solve():\n    # Implement Roman to Integer\n    pass"
         },
         "test_cases": [
             {
@@ -501,7 +532,8 @@
         "difficulty": "Easy",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public String longestCommonPrefix(String[] strs) {\n        // Your code here\n        return \"\";\n    }\n}",
+            "python": "def solve():\n    # Implement Longest Common Prefix\n    pass"
         },
         "test_cases": [
             {
@@ -517,7 +549,8 @@
         "difficulty": "Medium",
         "category": "Arrays",
         "templates": {
-            "java": ""
+            "java": "import java.util.*;\npublic class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement 3Sum\n    pass"
         },
         "test_cases": [
             {
@@ -533,7 +566,8 @@
         "difficulty": "Medium",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "import java.util.*;\npublic class Solution {\n    public List<String> letterCombinations(String digits) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Letter Combinations\n    pass"
         },
         "test_cases": [
             {
@@ -549,7 +583,8 @@
         "difficulty": "Medium",
         "category": "Data Structures",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public ListNode removeNthFromEnd(ListNode head, int n) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Remove Nth Node\n    pass"
         },
         "test_cases": [
             {
@@ -565,7 +600,8 @@
         "difficulty": "Medium",
         "category": "Data Structures",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public ListNode swapPairs(ListNode head) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Swap Pairs\n    pass"
         },
         "test_cases": [
             {
@@ -581,7 +617,8 @@
         "difficulty": "Medium",
         "category": "Matrix",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public void rotate(int[][] matrix) {\n        // Your code here\n    }\n}",
+            "python": "def solve():\n    # Implement Rotate Image\n    pass"
         },
         "test_cases": [
             {
@@ -597,7 +634,8 @@
         "difficulty": "Medium",
         "category": "Strings",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean isAnagram(String s1, String s2) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Group Anagrams\n    pass"
         },
         "test_cases": [
             {
@@ -613,7 +651,8 @@
         "difficulty": "Medium",
         "category": "Matrix",
         "templates": {
-            "java": ""
+            "java": "import java.util.*;\npublic class Solution {\n    public List<Integer> spiralOrder(int[][] matrix) {\n        // Your code here\n        return null;\n    }\n}",
+            "python": "def solve():\n    # Implement Spiral Matrix\n    pass"
         },
         "test_cases": [
             {
@@ -629,7 +668,8 @@
         "difficulty": "Medium",
         "category": "Dynamic Programming",
         "templates": {
-            "java": ""
+            "java": "public class Solution {\n    public boolean canJump(int[] nums) {\n        // Your code here\n        return false;\n    }\n}",
+            "python": "def solve():\n    # Implement Jump Game\n    pass"
         },
         "test_cases": [
             {
