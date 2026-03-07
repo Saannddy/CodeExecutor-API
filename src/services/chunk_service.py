@@ -10,14 +10,25 @@ class ChunkService:
         if not chunk:
             return None
 
+        cmt_map = {
+            "python": "# TODO: {} here",
+            "c": "// TODO: {} here",
+            "cpp": "// TODO: {} here",
+            "java": "// TODO: {} here",
+            "default": "// TODO: {} here"
+        }
+
         templates = chunk.get("config", {}).get("templates", {})
         for lang, t_dict in templates.items():
-            # Split template_code into parts by handlebar patterns
-            # When split handlerbar should not appear in array anymore
+            cmt_pat = cmt_map.get(lang.lower(), cmt_map["default"])
             tc = t_dict.get("template_code")
             if tc:
-                t_dict["template_code"] = re.split(r'\{\{\{?|}}}?|\n', tc)
-                t_dict["template_code"] = [x for x in t_dict["template_code"] if x]
+                processed = re.sub(
+                    r'\{{3}\s*(\w+)\s*\}{3}', 
+                    lambda m: f"\n{cmt_pat.format(m.group(1))}\n", 
+                    tc
+                )
+                t_dict["template_code"] = [line for line in processed.split('\n') if line]
 
             # Transform snippets dict into parallel arrays
             snippets_dict = t_dict.get("snippets", {})
