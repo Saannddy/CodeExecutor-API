@@ -290,7 +290,7 @@ def seed_data():
                     {
                         "lang": "javascript",
                         "name": "JavaScript Implementation",
-                        "code": "function solution({{{args}}}) {\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "code": "function solution({{{args}}}) {\n{{{logic}}}\n}\n\n// Test here\n{{{test}}}",
                         "snippets": [("args", "x, y"), ("logic", "return x * y;"), ("test", "console.log(solution(1, 2))")]
                     }
                 ],
@@ -303,13 +303,13 @@ def seed_data():
                     {
                         "lang": "python",
                         "name": "Python Implementation",
-                        "code": "def solution({{{args}}}):\n{{{indent logic}}}\n\n# Test here\n{{{test}}}",
+                        "code": "def solution({{{args}}}):\n{{{logic}}}\n\n# Test here\n{{{test}}}",
                         "snippets": [("args", "x, y"), ("logic", "return x + y"), ("test", "print(solution(2, 4))")]
                     },
                     {
                         "lang": "javascript",
                         "name": "JavaScript Implementation",
-                        "code": "function solution({{{args}}}) {\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "code": "function solution({{{args}}}) {\n{{{logic}}}\n}\n\n// Test here\n{{{test}}}",
                         "snippets": [("args", "x, y"), ("logic", "return x + y;"), ("test", "console.log(solution(2, 4))")]
                     }
                 ],
@@ -322,13 +322,13 @@ def seed_data():
                     {
                         "lang": "python",
                         "name": "Python Implementation",
-                        "code": "def solution({{{args}}}):\n{{{indent logic}}}\n\n# Test here\n{{{test}}}",
+                        "code": "def solution({{{args}}}):\n{{{logic}}}\n\n# Test here\n{{{test}}}",
                         "snippets": [("args", "x, y"), ("logic", "return x * y"), ("test", "print(solution(3, 6))")]
                     },
                     {
                         "lang": "javascript",
                         "name": "JavaScript Implementation",
-                        "code": "function solution({{{args}}}) {\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "code": "function solution({{{args}}}) {\n{{{logic}}}\n}\n\n// Test here\n{{{test}}}",
                         "snippets": [("args", "x, y"), ("logic", "return x * y;"), ("test", "console.log(solution(3, 6))")]
                     }
                 ],

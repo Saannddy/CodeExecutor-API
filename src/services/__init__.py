@@ -3,3 +3,4 @@ from .execution_service import ExecutionService
 from .random_service import RandomService
 from .question_service import QuestionService
 from .riddle_service import RiddleService
+from .chunk_service import ChunkService
