@@ -342,7 +342,7 @@ def seed_data():
                     {
                         "lang": "python",
                         "name": "Complex Python Implementation",
-                        "code": "{{{imports}}}\n\n{{{setup}}}\n\ndef utility(v):\n    return v * 2\n\ndef solution({{{args}}}):\n{{{indent validation}}}\n{{{indent logic}}}\n\n# Test here\n{{{test}}}",
+                        "code": "{{{imports}}}\n\n{{{setup}}}\n\ndef utility(v):\n    return v * 2\n\ndef solution({{{args}}}):\n{{{validation}}}\n{{{logic}}}\n\n# Test here\n{{{test}}}",
                         "snippets": [
                             ("imports", "import math\nimport random"),
                             ("setup", "OFFSET = 100\ndef get_offset(): return OFFSET"),
@@ -355,7 +355,7 @@ def seed_data():
                     {
                         "lang": "javascript",
                         "name": "Complex JavaScript Implementation",
-                        "code": "{{{imports}}}\n\n{{{setup}}}\n\nfunction utility(v) {\n    return v * 2;\n}\n\nfunction solution({{{args}}}) {\n{{{indent validation}}}\n{{{indent logic}}}\n}\n\n// Test here\n{{{test}}}",
+                        "code": "{{{imports}}}\n\n{{{setup}}}\n\nfunction utility(v) {\n    return v * 2;\n}\n\nfunction solution({{{args}}}) {\n{{{validation}}}\n{{{logic}}}\n}\n\n// Test here\n{{{test}}}",
                         "snippets": [
                             ("imports", "// No imports needed"),
                             ("setup", "const OFFSET = 100;\nfunction getOffset() { return OFFSET; }"),
