@@ -1,880 +1,374 @@
 [
     {
-        "title": "Java Memory Management",
-        "text": "Which part of memory is used for objects in Java?",
+        "title": "RST-I",
+        "text": "Which option best describes the OOP principle of Encapsulation in Java?",
         "choices": [
             [
-                "Stack",
+                "Inheritance of properties from a parent class to a child class",
                 false
             ],
             [
-                "Heap",
+                "Hiding internal class details and allowing access only through defined methods",
                 true
             ],
             [
-                "Register",
+                "Ability of a class to take on many forms through method overloading",
                 false
             ],
             [
-                "Cache",
+                "Creating multiple objects from a single class  ",
                 false
             ]
         ]
     },
     {
-        "title": "JVM Components",
-        "text": "Which component is responsible for converting bytecode into machine code?",
+        "title": "RST-II",
+        "text": "Which option best describes the principle of Inheritance in Java?  ",
         "choices": [
             [
-                "Compiler",
+                "Hiding internal class details and allowing access only through defined methods",
                 false
             ],
             [
-                "Interpreter",
+                "Ability of a class to take on many forms through method overloading",
                 false
             ],
             [
-                "JIT Compiler",
-                true
-            ],
-            [
-                "Class Loader",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "String Pool",
-        "text": "Where are string literals stored in Java memory?",
-        "choices": [
-            [
-                "Stack",
-                false
-            ],
-            [
-                "String Constant Pool",
-                true
-            ],
-            [
-                "Heap directly",
-                false
-            ],
-            [
-                "Static area",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Object Equality",
-        "text": "Which method should be overridden when overriding equals() in Java?",
-        "choices": [
-            [
-                "toString()",
-                false
-            ],
-            [
-                "hashCode()",
-                true
-            ],
-            [
-                "clone()",
-                false
-            ],
-            [
-                "finalize()",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Final Variable",
-        "text": "What happens when a variable is declared as final?",
-        "choices": [
-            [
-                "Value cannot be changed",
-                true
-            ],
-            [
-                "Method cannot be overridden",
-                false
-            ],
-            [
-                "Class cannot be inherited",
-                false
-            ],
-            [
-                "Memory is freed",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Abstract Class",
-        "text": "An abstract class can have...",
-        "choices": [
-            [
-                "Only abstract methods",
-                false
-            ],
-            [
-                "Only concrete methods",
-                false
-            ],
-            [
-                "Both abstract and concrete methods",
-                true
-            ],
-            [
-                "Neither",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Interface Methods",
-        "text": "Since Java 8, interfaces can have...",
-        "choices": [
-            [
-                "Abstract methods only",
-                false
-            ],
-            [
-                "Static methods only",
-                false
-            ],
-            [
-                "Default and static methods",
-                true
-            ],
-            [
-                "No methods",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Unchecked Exception",
-        "text": "Which of these is an unchecked exception?",
-        "choices": [
-            [
-                "IOException",
-                false
-            ],
-            [
-                "NullPointerException",
-                true
-            ],
-            [
-                "SQLException",
-                false
-            ],
-            [
-                "ClassNotFoundException",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Static Keyword",
-        "text": "What does the static keyword do to a variable?",
-        "choices": [
-            [
-                "Makes it constant",
-                false
-            ],
-            [
-                "Shares it among all instances",
-                true
-            ],
-            [
-                "Makes it private",
-                false
-            ],
-            [
-                "Makes it thread-safe",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Try-With-Resources",
-        "text": "Try-with-resources was introduced in which Java version?",
-        "choices": [
-            [
-                "Java 6",
-                false
-            ],
-            [
-                "Java 7",
-                true
-            ],
-            [
-                "Java 8",
-                false
-            ],
-            [
-                "Java 9",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Checked Exception",
-        "text": "Which exception must be declared or caught at compile time?",
-        "choices": [
-            [
-                "NullPointerException",
-                false
-            ],
-            [
-                "ArithmeticException",
-                false
-            ],
-            [
-                "Checked Exception",
-                true
-            ],
-            [
-                "RuntimeException",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "List vs Set",
-        "text": "Which collection allows duplicate elements?",
-        "choices": [
-            [
-                "List",
-                true
-            ],
-            [
-                "Set",
-                false
-            ],
-            [
-                "Map",
-                false
-            ],
-            [
-                "SortedSet",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Garbage Collector",
-        "text": "Can we force garbage collection in Java?",
-        "choices": [
-            [
-                "Yes",
-                false
-            ],
-            [
-                "No",
-                true
-            ],
-            [
-                "Only in Java 8",
-                false
-            ],
-            [
-                "Only with System.gc()",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Thread Execution",
-        "text": "Which method starts a thread's execution?",
-        "choices": [
-            [
-                "run()",
-                false
-            ],
-            [
-                "start()",
-                true
-            ],
-            [
-                "execute()",
-                false
-            ],
-            [
-                "begin()",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Volatile Keyword",
-        "text": "The volatile keyword ensures...",
-        "choices": [
-            [
-                "Mutual exclusion",
-                false
-            ],
-            [
-                "Visibility of changes",
-                true
-            ],
-            [
-                "Atomicity",
-                false
-            ],
-            [
-                "Deadlock prevention",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Singleton Pattern",
-        "text": "A singleton class has...",
-        "choices": [
-            [
-                "Public constructor",
-                false
-            ],
-            [
-                "Private constructor",
-                true
-            ],
-            [
-                "No constructor",
-                false
-            ],
-            [
-                "Protected constructor",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Primitive Types",
-        "text": "How many primitive data types are in Java?",
-        "choices": [
-            [
-                "7",
-                false
-            ],
-            [
-                "8",
-                true
-            ],
-            [
-                "9",
-                false
-            ],
-            [
-                "10",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Byte Size",
-        "text": "What is the size of a long in Java?",
-        "choices": [
-            [
-                "32 bits",
-                false
-            ],
-            [
-                "64 bits",
-                true
-            ],
-            [
-                "16 bits",
-                false
-            ],
-            [
-                "128 bits",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Casting",
-        "text": "Converting a smaller type to a larger type size is called...",
-        "choices": [
-            [
-                "Narrowing",
-                false
-            ],
-            [
-                "Widening",
-                true
-            ],
-            [
-                "Parsing",
-                false
-            ],
-            [
-                "Wrapping",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Wrapper Classes",
-        "text": "Which class is the wrapper for the 'int' primitive?",
-        "choices": [
-            [
-                "Int",
-                false
-            ],
-            [
-                "Integer",
-                true
-            ],
-            [
-                "Int32",
-                false
-            ],
-            [
-                "Number",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Marker Interface",
-        "text": "Which of these is a marker interface?",
-        "choices": [
-            [
-                "Runnable",
-                false
-            ],
-            [
-                "Serializable",
-                true
-            ],
-            [
-                "Comparable",
-                false
-            ],
-            [
-                "List",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Inheritance",
-        "text": "Java supports which type of inheritance via classes?",
-        "choices": [
-            [
-                "Single",
-                true
-            ],
-            [
-                "Multiple",
-                false
-            ],
-            [
-                "Hybrid",
-                false
-            ],
-            [
-                "All",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Super Keyword",
-        "text": "The super keyword is used to refer to...",
-        "choices": [
-            [
-                "Current class members",
-                false
-            ],
-            [
-                "Parent class members",
-                true
-            ],
-            [
-                "Grandparent class",
-                false
-            ],
-            [
-                "Subclass",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "This Keyword",
-        "text": "The this keyword refers to...",
-        "choices": [
-            [
-                "Current instance",
-                true
-            ],
-            [
-                "Parent instance",
-                false
-            ],
-            [
-                "Static variable",
-                false
-            ],
-            [
-                "Class name",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Java Compiler",
-        "text": "Java source code is compiled into...",
-        "choices": [
-            [
-                "Machine code",
-                false
-            ],
-            [
-                "Bytecode",
-                true
-            ],
-            [
-                "Assembly",
-                false
-            ],
-            [
-                "Binary",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "File Extension",
-        "text": "Compiled Java files have the extension...",
-        "choices": [
-            [
-                ".java",
-                false
-            ],
-            [
-                ".class",
-                true
-            ],
-            [
-                ".exe",
-                false
-            ],
-            [
-                ".obj",
-                false
-            ]
-        ]
-    },
-    {
-        "title": "Constructor",
-        "text": "A class can have how many constructors?",
-        "choices": [
-            [
-                "One",
-                false
-            ],
-            [
-                "Two",
-                false
-            ],
-            [
-                "Zero",
+                "Creating multiple objects from a single class",
                 false
             ],
             [
-                "Multiple",
+                "A child class inheriting properties from a parent class",
                 true
             ]
         ]
     },
     {
-        "title": "Method Overloading",
-        "text": "Method overloading depends on change in...",
+        "title": "RST-III",
+        "text": "Which option best describes the principle of Polymorphism in Java?  ",
         "choices": [
             [
-                "Return type",
+                "Hiding internal class details and allowing access only through defined methods",
                 false
             ],
             [
-                "Modifiers",
-                false
-            ],
-            [
-                "Method signature/parameters",
+                "Ability of a class to take on many forms through method overloading",
                 true
             ],
             [
-                "Exceptions thrown",
+                "Creating multiple objects from a single class",
+                false
+            ],
+            [
+                "A child class inheriting properties from a parent class",
                 false
             ]
         ]
     },
     {
-        "title": "Method Overriding",
-        "text": "Overriding occurs in...",
+        "title": "RST-IV",
+        "text": "Which option best describes the principle of Abstraction in Java?  ",
         "choices": [
             [
-                "Same class",
-                false
-            ],
-            [
-                "Subclass",
+                "Showing only necessary details and hiding unimportant ones\u00a0",
                 true
             ],
             [
-                "Superclass",
+                "Creating a large number of objects  ",
                 false
             ],
             [
-                "Static block",
+                "Always using public variables",
+                false
+            ],
+            [
+                "Inheriting through multiple layers of classes",
                 false
             ]
         ]
     },
     {
-        "title": "Encapsulation",
-        "text": "Encapsulation is achieved by...",
+        "title": "RST-V",
+        "text": "Which of the following best describes a Class in Java?  ",
         "choices": [
             [
-                "Inheritance",
+                "A real-world object in memory",
                 false
             ],
             [
-                "Interfaces",
-                false
-            ],
-            [
-                "Private fields and public getters/setters",
+                "A blueprint for creating objects",
                 true
             ],
             [
-                "Static methods",
+                "A type of loop structure",
+                false
+            ],
+            [
+                "A method inside an object",
                 false
             ]
         ]
     },
     {
-        "title": "Polymorphism",
-        "text": "Polymorphism which is resolved at runtime is...",
+        "title": "RST-VI",
+        "text": "Which best describes Method Overloading?  ",
         "choices": [
             [
-                "Static Binding",
+                "A subclass replacing a parent method",
                 false
             ],
             [
-                "Dynamic Binding",
+                "Multiple methods with the same name but different parameters",
                 true
             ],
             [
-                "Compile-time",
+                "A method that runs only once",
                 false
             ],
             [
-                "Late binding",
+                "A method that cannot be changed",
                 false
             ]
         ]
     },
     {
-        "title": "Packages",
-        "text": "Which keyword is used to import a package?",
+        "title": "RST-VII",
+        "text": "Which best describes Method Overriding?  ",
         "choices": [
             [
-                "package",
+                "Changing the name of a method",
                 false
             ],
             [
-                "using",
-                false
-            ],
-            [
-                "import",
+                "A child class writing a new method to replace the parent class's method",
                 true
             ],
             [
-                "include",
+                "Combining multiple methods into one",
+                false
+            ],
+            [
+                "Deleting a method from a class",
                 false
             ]
         ]
     },
     {
-        "title": "Main Method",
-        "text": "The main method must be...",
+        "title": "RST-VIII",
+        "text": "Which best describes the static keyword in a java object?  ",
         "choices": [
             [
-                "Static",
+                "Belongs to object",
+                false
+            ],
+            [
+                "Belongs to class",
                 true
             ],
             [
-                "Private",
+                "Used only in constructors",
                 false
             ],
             [
-                "Protected",
-                false
-            ],
-            [
-                "Non-static",
+                "Deleted after compilation",
                 false
             ]
         ]
     },
     {
-        "title": "Lambda Expression",
-        "text": "Lambdas can be used with what type of interfaces?",
+        "title": "RST-IX",
+        "text": "What is the main benefit of using Java Programming for OOP?  ",
         "choices": [
             [
-                "Marker",
+                "Makes programs faster in every case",
                 false
             ],
             [
-                "Functional",
+                "Makes code organized, easy to maintain, and reusable",
                 true
             ],
             [
-                "Abstract",
+                "No need to use variables",
                 false
             ],
             [
-                "Normal",
+                "Replaces everything with loops",
                 false
             ]
         ]
     },
     {
-        "title": "Optional Class",
-        "text": "Optional class helps avoid...",
+        "title": "RST-X",
+        "text": "Which of the following best describes a Constructor in Java?  ",
         "choices": [
             [
-                "OutOfMemoryError",
-                false
-            ],
-            [
-                "NullPointerException",
+                "A special method that is automatically called when an object is created.",
                 true
             ],
             [
-                "StackOverflowError",
+                "A method that must return an integer.",
                 false
             ],
             [
-                "IOException",
+                "A method that can only be called manually.",
+                false
+            ],
+            [
+                "A method that always prints output.",
                 false
             ]
         ]
     },
     {
-        "title": "Stream API",
-        "text": "Which stream operation is a terminal operation?",
+        "title": "RST-XI",
+        "text": "Which best describes the \u201cthis\u201d keyword in Java class?  ",
         "choices": [
             [
-                "map",
-                false
-            ],
-            [
-                "filter",
-                false
-            ],
-            [
-                "collect",
+                "A reference to the current object.",
                 true
             ],
             [
-                "sorted",
+                "A reference to the parent class.",
+                false
+            ],
+            [
+                "A reference to the main method.",
+                false
+            ],
+            [
+                "A reference to all objects.",
                 false
             ]
         ]
     },
     {
-        "title": "HashMap vs ConcurrentHashMap",
-        "text": "Which one is thread-safe?",
+        "title": "RST-XII",
+        "text": "What is a \"Generic\" in Java (e.g., List<T>) used for?  ",
         "choices": [
             [
-                "HashMap",
+                "To speed up compilation.",
                 false
             ],
             [
-                "ConcurrentHashMap",
+                "To allow methods to return multiple values.",
+                false
+            ],
+            [
+                "To enable stronger type checks at compile time and eliminate casting.",
                 true
             ],
             [
-                "TreeMap",
-                false
-            ],
-            [
-                "IdentityHashMap",
+                "To create dynamic arrays.",
                 false
             ]
         ]
     },
     {
-        "title": "Serialization",
-        "text": "To prevent a field from being serialized, use...",
+        "title": "RST-XIII",
+        "text": "Which of the following correctly describes the \"protected\" access modifier in Java?  ",
         "choices": [
             [
-                "static",
+                "Accessible only within the same class.",
                 false
             ],
             [
-                "volatile",
+                "Accessible only within the same package.",
                 false
             ],
             [
-                "transient",
+                "Accessible within the same package and by subclasses in other packages.",
                 true
             ],
             [
-                "final",
+                "Accessible from any class in any package.",
                 false
             ]
         ]
     },
     {
-        "title": "Reflection API",
-        "text": "Reflection allows inspecting...",
+        "title": "RST-XIV",
+        "text": "Which scenario causes a StackOverflowError?  ",
         "choices": [
             [
-                "Only public members",
+                "Creating too many objects until the Heap is full.",
                 false
             ],
             [
-                "Classes and members at runtime",
+                "Deep or infinite recursion where method calls exceed the stack memory limit.",
                 true
             ],
             [
-                "Source code",
+                "Accessing an array index that does not exist.",
                 false
             ],
             [
-                "Comment lines",
+                "Dividing an integer by zero.",
                 false
             ]
         ]
     },
     {
-        "title": "Java Versioning",
-        "text": "LTS stands for...",
+        "title": "RST-XV",
+        "text": "Which of the following is a key difference between an Interface and an Abstract Class?  ",
         "choices": [
             [
-                "Long Term Service",
+                "An interface can have constructors, while an abstract class cannot.",
                 false
             ],
             [
-                "Long Term Support",
+                "A class can extend multiple abstract classes, but only implement one interface.",
+                false
+            ],
+            [
+                "An interface defines what to do, An abstract class can provide a partial implementation.",
                 true
             ],
             [
-                "List of Thread states",
+                "Abstract classes only allow public methods, while interfaces allow private methods.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XVI",
+        "text": "What is the difference between throw and throws?  ",
+        "choices": [
+            [
+                "throw declares an exception; throws creates an exception.",
                 false
             ],
             [
-                "Local Thread Storage",
+                "throw creates an exception; throws declares an exception.",
+                true
+            ],
+            [
+                "throw is for checked errors; throws is for unchecked errors.",
+                false
+            ],
+            [
+                "throw handles the error; throws ignores the error.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XVII",
+        "text": "What happens when you catch an exception but leave the block empty?  ",
+        "choices": [
+            [
+                "The program crashes immediately with an error.",
+                false
+            ],
+            [
+                "The exception is ignored and the program continues.",
+                true
+            ],
+            [
+                "The compiler will refuse to compile the code.",
+                false
+            ],
+            [
+                "The exception is automatically printed to the console.",
                 false
             ]
         ]
