@@ -80,19 +80,25 @@ def _run_c_cpp(code, lang, tests=None, timeout=None):
         with open(src, 'w') as f:
             f.write(code)
             
-        comp = subprocess.run(
-            [cfg['compiler'], src, "-o", exe], 
-            capture_output=True, text=True, timeout=timeout, cwd=d
-        )
-        if comp.returncode:
-            return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+        try:
+            comp = subprocess.run(
+                [cfg['compiler'], src, "-o", exe], 
+                capture_output=True, text=True, timeout=max(timeout, 10), cwd=d
+            )
+            if comp.returncode:
+                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+        except subprocess.TimeoutExpired:
+            return {"status": "error", "message": "Compilation timed out"}
 
         if tests is None:
-            res = subprocess.run(
-                [exe], capture_output=True, text=True, 
-                timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout)
-            )
-            return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+            try:
+                res = subprocess.run(
+                    [exe], capture_output=True, text=True, 
+                    timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout)
+                )
+                return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+            except subprocess.TimeoutExpired:
+                return {"status": "error", "message": "Execution timed out"}
             
         return _run_tests([exe], tests, timeout, cwd=d)
 
@@ -115,17 +121,23 @@ def _run_java(code, tests=None, timeout=None):
         with open(src, 'w') as f:
             f.write(code)
             
-        comp = subprocess.run(["javac", src, "-d", d], capture_output=True, text=True, timeout=timeout, cwd=d)
-        if comp.returncode:
-            return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+        try:
+            comp = subprocess.run(["javac", src, "-d", d], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d)
+            if comp.returncode:
+                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+        except subprocess.TimeoutExpired:
+            return {"status": "error", "message": "Compilation timed out"}
             
         cmd = ["java", "-cp", d, f"-Xmx{MAX_MEMORY_MB}m", class_name]
         if tests is None:
-            res = subprocess.run(
-                cmd, capture_output=True, text=True, 
-                timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout, skip_memory=True)
-            )
-            return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+            try:
+                res = subprocess.run(
+                    cmd, capture_output=True, text=True, 
+                    timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout, skip_memory=True)
+                )
+                return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+            except subprocess.TimeoutExpired:
+                return {"status": "error", "message": "Execution timed out"}
             
         return _run_tests(cmd, tests, timeout, cwd=d, skip_memory=True)
 
@@ -141,11 +153,14 @@ def _run_interpreted(code, lang, tests=None, timeout=None):
             
         cmd = [cfg['interpreter'], src]
         if tests is None:
-            res = subprocess.run(
-                cmd, capture_output=True, text=True, 
-                timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout)
-            )
-            return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+            try:
+                res = subprocess.run(
+                    cmd, capture_output=True, text=True, 
+                    timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout)
+                )
+                return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+            except subprocess.TimeoutExpired:
+                return {"status": "error", "message": "Execution timed out"}
             
         return _run_tests(cmd, tests, timeout, cwd=d)
 
