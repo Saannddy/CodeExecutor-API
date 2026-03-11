@@ -21,7 +21,11 @@ from unittest.mock import MagicMock
 import pytest
 
 
+# If running in Docker, the app root IS /usr/src/app, but tests expect src/
+# If src/ doesn't exist, we add the current directory to path.
 SRC_DIR = os.path.join(os.path.dirname(__file__), '..', 'src')
+if not os.path.exists(SRC_DIR):
+    SRC_DIR = os.path.join(os.path.dirname(__file__), '..')
 sys.path.insert(0, os.path.abspath(SRC_DIR))
 
 
@@ -38,10 +42,11 @@ sys.modules.setdefault('models.base', models_mock)
 repos_mock = MagicMock()
 sys.modules.setdefault('repositories', repos_mock)
 sys.modules.setdefault('repositories.problem_repository', repos_mock)
-sys.modules.setdefault('repositories.testcase_repository', repos_mock)
+sys.modules.setdefault('repositories.test_case_repository', repos_mock)
 sys.modules.setdefault('repositories.question_repository', repos_mock)
 sys.modules.setdefault('repositories.choice_repository', repos_mock)
 sys.modules.setdefault('repositories.riddle_repository', repos_mock)
+sys.modules.setdefault('repositories.chunk_repository', repos_mock)
 
 # Mock scripts (seed, etc.)
 sys.modules.setdefault('scripts', MagicMock())

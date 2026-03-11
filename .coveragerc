@@ -10,6 +10,6 @@ exclude_lines =
     raise NotImplementedError
 
 [html]
-directory = coverage_html
+directory = coverage
 title = CodeExecutor-API Coverage Report
 show_contexts = true
