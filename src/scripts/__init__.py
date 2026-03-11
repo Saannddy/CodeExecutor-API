@@ -1,1 +1,1 @@
-from .seed import seed_data
+# This file makes the folder a Python package.

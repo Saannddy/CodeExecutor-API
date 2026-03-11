@@ -1,0 +1,376 @@
+[
+    {
+        "title": "RST-I",
+        "text": "Which option best describes the OOP principle of Encapsulation in Java?",
+        "choices": [
+            [
+                "Inheritance of properties from a parent class to a child class",
+                false
+            ],
+            [
+                "Hiding internal class details and allowing access only through defined methods",
+                true
+            ],
+            [
+                "Ability of a class to take on many forms through method overloading",
+                false
+            ],
+            [
+                "Creating multiple objects from a single class  ",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-II",
+        "text": "Which option best describes the principle of Inheritance in Java?  ",
+        "choices": [
+            [
+                "Hiding internal class details and allowing access only through defined methods",
+                false
+            ],
+            [
+                "Ability of a class to take on many forms through method overloading",
+                false
+            ],
+            [
+                "Creating multiple objects from a single class",
+                false
+            ],
+            [
+                "A child class inheriting properties from a parent class",
+                true
+            ]
+        ]
+    },
+    {
+        "title": "RST-III",
+        "text": "Which option best describes the principle of Polymorphism in Java?  ",
+        "choices": [
+            [
+                "Hiding internal class details and allowing access only through defined methods",
+                false
+            ],
+            [
+                "Ability of a class to take on many forms through method overloading",
+                true
+            ],
+            [
+                "Creating multiple objects from a single class",
+                false
+            ],
+            [
+                "A child class inheriting properties from a parent class",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-IV",
+        "text": "Which option best describes the principle of Abstraction in Java?  ",
+        "choices": [
+            [
+                "Showing only necessary details and hiding unimportant ones\u00a0",
+                true
+            ],
+            [
+                "Creating a large number of objects  ",
+                false
+            ],
+            [
+                "Always using public variables",
+                false
+            ],
+            [
+                "Inheriting through multiple layers of classes",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-V",
+        "text": "Which of the following best describes a Class in Java?  ",
+        "choices": [
+            [
+                "A real-world object in memory",
+                false
+            ],
+            [
+                "A blueprint for creating objects",
+                true
+            ],
+            [
+                "A type of loop structure",
+                false
+            ],
+            [
+                "A method inside an object",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-VI",
+        "text": "Which best describes Method Overloading?  ",
+        "choices": [
+            [
+                "A subclass replacing a parent method",
+                false
+            ],
+            [
+                "Multiple methods with the same name but different parameters",
+                true
+            ],
+            [
+                "A method that runs only once",
+                false
+            ],
+            [
+                "A method that cannot be changed",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-VII",
+        "text": "Which best describes Method Overriding?  ",
+        "choices": [
+            [
+                "Changing the name of a method",
+                false
+            ],
+            [
+                "A child class writing a new method to replace the parent class's method",
+                true
+            ],
+            [
+                "Combining multiple methods into one",
+                false
+            ],
+            [
+                "Deleting a method from a class",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-VIII",
+        "text": "Which best describes the static keyword in a java object?  ",
+        "choices": [
+            [
+                "Belongs to object",
+                false
+            ],
+            [
+                "Belongs to class",
+                true
+            ],
+            [
+                "Used only in constructors",
+                false
+            ],
+            [
+                "Deleted after compilation",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-IX",
+        "text": "What is the main benefit of using Java Programming for OOP?  ",
+        "choices": [
+            [
+                "Makes programs faster in every case",
+                false
+            ],
+            [
+                "Makes code organized, easy to maintain, and reusable",
+                true
+            ],
+            [
+                "No need to use variables",
+                false
+            ],
+            [
+                "Replaces everything with loops",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-X",
+        "text": "Which of the following best describes a Constructor in Java?  ",
+        "choices": [
+            [
+                "A special method that is automatically called when an object is created.",
+                true
+            ],
+            [
+                "A method that must return an integer.",
+                false
+            ],
+            [
+                "A method that can only be called manually.",
+                false
+            ],
+            [
+                "A method that always prints output.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XI",
+        "text": "Which best describes the \u201cthis\u201d keyword in Java class?  ",
+        "choices": [
+            [
+                "A reference to the current object.",
+                true
+            ],
+            [
+                "A reference to the parent class.",
+                false
+            ],
+            [
+                "A reference to the main method.",
+                false
+            ],
+            [
+                "A reference to all objects.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XII",
+        "text": "What is a \"Generic\" in Java (e.g., List<T>) used for?  ",
+        "choices": [
+            [
+                "To speed up compilation.",
+                false
+            ],
+            [
+                "To allow methods to return multiple values.",
+                false
+            ],
+            [
+                "To enable stronger type checks at compile time and eliminate casting.",
+                true
+            ],
+            [
+                "To create dynamic arrays.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XIII",
+        "text": "Which of the following correctly describes the \"protected\" access modifier in Java?  ",
+        "choices": [
+            [
+                "Accessible only within the same class.",
+                false
+            ],
+            [
+                "Accessible only within the same package.",
+                false
+            ],
+            [
+                "Accessible within the same package and by subclasses in other packages.",
+                true
+            ],
+            [
+                "Accessible from any class in any package.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XIV",
+        "text": "Which scenario causes a StackOverflowError?  ",
+        "choices": [
+            [
+                "Creating too many objects until the Heap is full.",
+                false
+            ],
+            [
+                "Deep or infinite recursion where method calls exceed the stack memory limit.",
+                true
+            ],
+            [
+                "Accessing an array index that does not exist.",
+                false
+            ],
+            [
+                "Dividing an integer by zero.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XV",
+        "text": "Which of the following is a key difference between an Interface and an Abstract Class?  ",
+        "choices": [
+            [
+                "An interface can have constructors, while an abstract class cannot.",
+                false
+            ],
+            [
+                "A class can extend multiple abstract classes, but only implement one interface.",
+                false
+            ],
+            [
+                "An interface defines what to do, An abstract class can provide a partial implementation.",
+                true
+            ],
+            [
+                "Abstract classes only allow public methods, while interfaces allow private methods.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XVI",
+        "text": "What is the difference between throw and throws?  ",
+        "choices": [
+            [
+                "throw declares an exception; throws creates an exception.",
+                false
+            ],
+            [
+                "throw creates an exception; throws declares an exception.",
+                true
+            ],
+            [
+                "throw is for checked errors; throws is for unchecked errors.",
+                false
+            ],
+            [
+                "throw handles the error; throws ignores the error.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "RST-XVII",
+        "text": "What happens when you catch an exception but leave the block empty?  ",
+        "choices": [
+            [
+                "The program crashes immediately with an error.",
+                false
+            ],
+            [
+                "The exception is ignored and the program continues.",
+                true
+            ],
+            [
+                "The compiler will refuse to compile the code.",
+                false
+            ],
+            [
+                "The exception is automatically printed to the console.",
+                false
+            ]
+        ]
+    }
+]

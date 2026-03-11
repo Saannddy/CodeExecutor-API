@@ -1,0 +1,602 @@
+[
+    {
+        "text": "A pointed peak with a belt across, I lead the alphabet without a loss. In this code, I take the lead, the very first step you'll need to read.",
+        "char": "A",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "Two loops stacked upon a line, a buzzing insect shares my sign. I step into the second place, moving forward in this race.",
+        "char": "B",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A crescent moon facing the right, an ocean vast but out of sight. I sit right in the middle space, the third lock in this secret place.",
+        "char": "C",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A straight back with a rounded front, I start the day and lead the hunt. Penultimate is my domain, the fourth link in this sturdy chain.",
+        "char": "D",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "Three teeth upon a vertical comb, I'm found at the end of every 'home'. I close this set, the final key, the fifth and last, unlocking thee.",
+        "char": "E",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A flag waving on a single pole, I am the spark that starts the 'fire'. I claim the very first position, starting off this secret mission.",
+        "char": "F",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "An arrow spinning inward tight, the start of 'good' and end of 'dog'. I follow close behind the start, the second piece of this puzzle's heart.",
+        "char": "G",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "Two tall walls and a bridge between, in 'heaven' and 'hell' I can be seen. I stand at number three, you see, the center of this mystery.",
+        "char": "H",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "I am the ego, standing alone, a single pillar carved in stone. Number four is where I rest, one step away from finishing the test.",
+        "char": "I",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A fishhook waiting for a bite, I bring the 'joy' into the light. The fifth and final slot I claim, the ending of this guessing game.",
+        "char": "J",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A straight line with an open beak, I start the 'kite' that children seek. I am the first one in the queue, the starting point revealed to you.",
+        "char": "K",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A right angle sitting on the floor, the shape of a loser, but 'love's' true door. Second in line is where I fall, answering the puzzle's call.",
+        "char": "L",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "Two mountain peaks that touch the sky, turned upside down, a 'W' am I. The third position is my throne, exactly in the middle zone.",
+        "char": "M",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A jagged peak, an endless 'no', I point the compass where to go. I take the fourth spot on the board, almost completing the final cord.",
+        "char": "N",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A perfect circle, an empty space, surprise is written on my face. The fifth and final number's mine, the last link in the line.",
+        "char": "O",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A head on a stick, looking to the right, a 'pirate's' start, prepared to fight. I am the vanguard, number one, the very place this code begun.",
+        "char": "P",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A circle with a tiny tail, without a 'U', I often fail. I hold the second spot in line, a quirky piece of this design.",
+        "char": "Q",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A pirate's favorite sound to make, a leg kicks out for goodness' sake! Dead center at the number three, the heart of this security.",
+        "char": "R",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A winding river, a snake's swift glide, I am the plural at the end of the ride. Position four is where I stand, the second-to-last in this command.",
+        "char": "S",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A simple cross, a balanced scale, I end the 'cat' and start the 'tale'. Number five is my decree, the final cipher is the key.",
+        "char": "T",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "An open cup to catch the rain, I sound like you but have no brain. I am the first to take the stage, the opening letter on this page.",
+        "char": "U",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A plunging valley, steep and deep, the Roman numeral five I keep. But here I sit at number two, the second step to see you through.",
+        "char": "V",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "Two valleys joined or double 'U', I ask 'what', 'where', and 'who'. Third in the sequence is my place, right in the middle of the race.",
+        "char": "W",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "I mark the spot where treasures hide, a crossing path from side to side. Position four is my domain, near the end of this brain-drain.",
+        "char": "X",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A branching road, a question asked, the end of 'day', a simple task. I finish up at number five, the last to keep this code alive.",
+        "char": "Y",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A zigzag path, a sleepy sound, the final letter to be found. Yet here I break the natural rule, and stand first to test the fool.",
+        "char": "Z",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A triangle with a missing base, the start of the human alphabet race. But here I take the second seat, the next step on this puzzling street.",
+        "char": "A",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The most common letter you will see, a horizontal pitchfork facing free. I sit at three, the middle bound, where balance in the code is found.",
+        "char": "E",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The seeing orb without the eye, a straight line pointing to the sky. I wait at four, almost the end, a subtle clue for you, my friend.",
+        "char": "I",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A ring of gold, a hollow sphere, when you understand, you say 'Oh dear!'. The fifth position is my home, the final stop where you will roam.",
+        "char": "O",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A loop on top of a single pole, I pop and ping to play my role. I follow the leader, taking slot two, revealing the next hidden step to you.",
+        "char": "P",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A straight-backed guard with an arm and a kick, I start the 'knight' though the 'n' does the trick. I stand at the center, the vital third space, the balancing act in this numeric race.",
+        "char": "K",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A sharp right angle, a corner turned square, I am the start of the 'love' in the air. Fourth in the sequence, I patiently wait, just one step away from unlocking the gate.",
+        "char": "L",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A circle left open, a crescent of light, I start off the 'cat' prowling into the night. I am the fifth, the final decree, the last puzzle piece to set the lock free.",
+        "char": "C",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "Like a comb with two teeth or a flag blowing free, I start off the 'future' for you and for me. I am the vanguard, the very first key, unlocking the start of this mystery.",
+        "char": "F",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A horseshoe facing the heavens above, I sound like the person you're speaking of. Second in line, I step up to the plate, forging ahead through the cryptographic gate.",
+        "char": "U",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A straight wooden bow with a string pulled tight, I bring the 'dawn' after the dark of the night. Dead in the center, at index number three, I hold the middle of this secret key.",
+        "char": "D",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "An open loop that curls inward and stops, I start the 'gravity' before the apple drops. Almost the end, I take the fourth slot, tightening the loop on the password's knot.",
+        "char": "G",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Up, then diagonal, and straight up once more, I sit at the center of the word 'ignore'. The fifth and the final, the last of the line, complete the sequence and the prize is thine.",
+        "char": "N",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A loop on a stick with a leg kicking out, I roar and I rumble, I whisper and shout. I stand at the threshold, the very first space, kicking things off in this puzzling chase.",
+        "char": "R",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "Two bubbles attached to a vertical spine, I am the start of the 'borderline'. Seated at three, the heart of the code, exactly halfway down this winding road.",
+        "char": "B",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Twin mountain summits, a valley between, in 'magic' and 'mystery' I'm often seen. I slide into second, continuing the quest, putting your cipher skills to the test.",
+        "char": "M",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A flat wooden roof on a pillar so tall, I start off the 'time' that will govern us all. Fourth in the lineup, I stand straight and true, preparing the final transition for you.",
+        "char": "T",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A downward plunge and a steep upward climb, the shape of a wedge cutting right through the rhyme. The fifth position is where I descend, marking the cipher's definitive end.",
+        "char": "V",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Twin valleys carved out by rivers of old, I spin the 'web' where the secrets unfold. I am the alpha, the number one slot, the starting thread of this intricate plot.",
+        "char": "W",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "An umbrella handle turned upside down, a jester who juggles to entertain town. I swing into second, the follow-up act, keeping the passkey entirely intact.",
+        "char": "J",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A perfect round circle with a tiny kickstand, the 'queen' of the letters ruling the land. I rest in the middle, position number three, the balancing point of the master key.",
+        "char": "Q",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A slippery serpent that slithers around, a hissing 'silence' with barely a sound. Second-to-last is the spot that I claim, slot number four in this guessing game.",
+        "char": "S",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A fork in the road where you must make a choice, the roaring 'yell' of a powerful voice. The final position, the absolute end, slot number five is the message I send.",
+        "char": "Y",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Like goalposts erected upon the green field, I am the 'hero' with sword and with shield. I step up to one, the very first gate, the opening move of this puzzle's fate.",
+        "char": "H",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A mountain peak crossed by a trail, the starting breath of every tale. I sit exactly in the middle space, claiming the third and central place.",
+        "char": "A",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The right wing of a butterfly, a buzzing sound as I fly by. I take the fourth step in the quest, just one more left to beat the test.",
+        "char": "B",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A silver sickle in the sky, a crescent moon that catches the eye. The final piece of the design, the fifth and closing of the line.",
+        "char": "C",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A hunter\u2019s bow with a tautened string, the start of \u2018dawn\u2019 and end of \u2018king\u2019. I am the first, the opening door, with four more secrets to explore.",
+        "char": "D",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A heavy rake with just three tines, the most used letter in these lines. I step into the second slot, continuing the secret plot.",
+        "char": "E",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A weather vane with arrows blown, the start of every \u2018fault\u2019 that's known. I am the third, the middle ground, where perfect symmetry is found.",
+        "char": "F",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "An open circle turning in, where \u2018game\u2019 and \u2018glory\u2019 both begin. Penultimate is my domain, the fourth link in this sturdy chain.",
+        "char": "G",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A ladder missing all but one, the breathless sigh when work is done. The fifth and final lock I keep, the end of the puzzle, dark and deep.",
+        "char": "H",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A single needle standing tall, the Roman one, the start of all. I am the pioneer today, the number one who leads the way.",
+        "char": "I",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A candy cane flipped upside down, the joyful \u2018jester\u2019 of the town. I follow close behind the lead, the second cipher that you need.",
+        "char": "J",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A snapping branch against a tree, the start of every \u2018knight\u2019 you see. Dead center at the number three, the heart of this security.",
+        "char": "K",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A corner square, a perfect right, the heavy \u2018lead\u2019 in darkest night. I take the fourth spot on the board, almost completing the final cord.",
+        "char": "L",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Twin mountain peaks that touch the sun, a \u2018million\u2019 miles until we\u2019re done. I close the book, the fifth decree, the final cipher is the key.",
+        "char": "M",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A lightning bolt that strikes the ground, a stubborn \u2018no\u2019 without a sound. I claim the very first position, starting off this secret mission.",
+        "char": "N",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A golden ring without a stone, an empty void left all alone. Second in line is where I fall, answering the puzzle's call.",
+        "char": "O",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A butterfly with just one wing, a popping \u2018penny\u2019 for the king. I stand at number three, you see, the center of this mystery.",
+        "char": "P",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A magnifying glass held near, to make the \u2018question\u2019 crystal clear. The fourth position I demand, the second-to-last in this command.",
+        "char": "Q",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A standing guard who kicks a knee, the roaring sound of the angry sea. Number five is my decree, the final cipher is the key.",
+        "char": "R",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A swan\u2019s long neck, a winding stream, the start of every \u2018silent\u2019 dream. I lead the alphabet's new race, taking the very first place.",
+        "char": "S",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A hammer poised to strike a nail, the ending of the \u2018cat\u2019 and \u2018tale\u2019. I step into the second place, moving forward in this race.",
+        "char": "T",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "An empty bowl awaiting soup, an open, upward-facing loop. The third position is my throne, exactly in the middle zone.",
+        "char": "U",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A flock of birds in distant flight, a plunging valley out of sight. I take the fourth slot in your quest, just one more left to beat the test.",
+        "char": "V",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A jagged wave upon the sea, a double curve of mystery. The fifth and final slot I claim, the ending of this guessing game.",
+        "char": "W",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "Two clashing swords that meet in strife, the unknown variable in life. I am the vanguard, number one, the very place this code begun.",
+        "char": "X",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A slingshot drawn to fire a stone, the ending of the \u2018day\u2019 alone. I hold the second spot in line, a quirky piece of this design.",
+        "char": "Y",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The zigzag mark a swordsman leaves, the sleepy sound the dreamer weaves. Dead center at the number three, the heart of this security.",
+        "char": "Z",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The pointed nose of a rocket ship, the start of the \u2018apple\u2019 you can grip. Position four is where I stand, the second-to-last in this command.",
+        "char": "A",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A pair of glasses turned on end, a \u2018brave\u2019 and bold, courageous friend. I finish up at number five, the last to keep this code alive.",
+        "char": "B",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A bitten cookie, curved and sweet, a \u2018clever\u2019 cat upon the street. I start the sequence, fresh and new, the first clue given unto you.",
+        "char": "C",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A half-moon resting on a wall, the \u2018dark\u2019 that falls upon us all. But here I sit at number two, the second step to see you through.",
+        "char": "D",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A comb designed for giant's hair, an \u2018echo\u2019 fading in the air. I rest in the middle, position three, the balancing point of the master key.",
+        "char": "E",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A wooden gibbet standing tall, a \u2018feather\u2019 drifting to the fall. Fourth in the sequence, I patiently wait, just one step away from unlocking the gate.",
+        "char": "F",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A curving snake that bites its tail, a \u2018ghost\u2019 that wanders, cold and pale. I am the fifth, the final decree, the last puzzle piece to set the lock free.",
+        "char": "G",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Two columns holding up the sky, the \u2018heavy\u2019 heave, the weary sigh. I am the first to take the stage, the opening letter on this page.",
+        "char": "H",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "An icicle hanging straight and true, an \u2018island\u2019 in the ocean blue. Second in line, I step up to the plate, forging ahead through the cryptographic gate.",
+        "char": "I",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A scythe to reap the golden wheat, a \u2018jungle\u2019 filled with humid heat. Dead in the center, at index number three, I hold the middle of this secret key.",
+        "char": "J",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A bird\u2019s beak opening to sing, a \u2018kite\u2019 that flies upon the string. Almost the end, I take the fourth slot, tightening the loop on the password's knot.",
+        "char": "K",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A heavy boot without a toe, the \u2018light\u2019 that helps the garden grow. The fifth and the final, the last of the line, complete the sequence and the prize is thine.",
+        "char": "L",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The steady hum of a busy hive, a \u2018mountain\u2019 where the eagles thrive. I stand at the threshold, the very first space, kicking things off in this puzzling chase.",
+        "char": "M",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A rigid seesaw locked in place, the \u2018night\u2019 that covers up the space. I follow the leader, taking slot two, revealing the next hidden step to you.",
+        "char": "N",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The quiet eye of a raging storm, an \u2018open\u2019 door to keep you warm. Seated at three, the heart of the code, exactly halfway down this winding road.",
+        "char": "O",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A keyhole's upper, rounded half, a \u2018playful\u2019 joke to make you laugh. Fourth in the lineup, I stand straight and true, preparing the final transition for you.",
+        "char": "P",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A rolling coin that slips away, a \u2018quiet\u2019 moment in the day. The fifth position is where I descend, marking the cipher's definitive end.",
+        "char": "Q",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A sailor's mast with a rolled-up sail, a \u2018roaring\u2019 lion on the trail. I am the alpha, the number one slot, the starting thread of this intricate plot.",
+        "char": "R",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A hook that hangs upon the door, the \u2018sand\u2019 that washes on the shore. I swing into second, the follow-up act, keeping the passkey entirely intact.",
+        "char": "S",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A balanced scale of justice blind, the \u2018truth\u2019 that you must seek and find. I sit at three, the middle bound, where balance in the code is found.",
+        "char": "T",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A gentle smile without a face, an \u2018under\u2019 world beneath this place. Second-to-last is the spot that I claim, slot number four in this guessing game.",
+        "char": "U",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A teardrop falling from the sky, a \u2018valley\u2019 where the shadows lie. The final position, the absolute end, slot number five is the message I send.",
+        "char": "V",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Two deep ravines beside a hill, a \u2018whisper\u2019 when the wind is still. I step up to one, the very first gate, the opening move of this puzzle's fate.",
+        "char": "W",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A windmill's blades that catch the breeze, the \u2018xylophone\u2019 that plays with ease. I slide into second, continuing the quest, putting your cipher skills to the test.",
+        "char": "X",
+        "index": 2,
+        "difficulty": "Medium"
+    }
+]
