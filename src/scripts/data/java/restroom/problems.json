@@ -1,1 +1,110 @@
-[]
+[
+    {
+        "title": "RST-001: System Logger Offline",
+        "description": "Error: System logger is offline. Manual log entry required to proceed.\nYou have two variables: level = \"WARNING\" event_id = \"1542\"\nYou must print() the log entry in the exact system format to be authenticated. Example Format: [WARNING] Status: 3842",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "templates": {
+            "java": "import java.util.Scanner;\npublic class Solution {\n    public static void main(String[] args) {\n        String level;\n        String event_id;\n        Scanner sc = new Scanner(System.in);\n        level = sc.nextLine();\n        event_id = sc.nextLine();\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "WARNING\n1542",
+                "output": "[WARNING] Status: 1542",
+                "is_hidden": false
+            },
+            {
+                "input": "ERROR\n9999",
+                "output": "[ERROR] Status: 9999",
+                "is_hidden": false
+            },
+            {
+                "input": "INFO\n0001",
+                "output": "[INFO] Status: 0001",
+                "is_hidden": false
+            },
+            {
+                "input": "CRITICAL\n7777",
+                "output": "[CRITICAL] Status: 7777",
+                "is_hidden": false
+            },
+            {
+                "input": "DEBUG\n1234",
+                "output": "[DEBUG] Status: 1234",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "RST-002: Database Connection String Update",
+        "description": "// The database moved to a secure port, but our connection string stubbornly refuses to update.\nString dbUrl = \"jdbc:mysql://localhost:80/data\";\ndbUrl.replace(\"80\", \"443\");\nSystem.out.println(dbUrl);",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "templates": {
+            "java": "import java.util.Scanner;\npublic class Solution {\n    public static void main(String[] args) {\n        String dbUrl = \"jdbc:mysql://localhost:80/data\";\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n        System.out.println(dbUrl);\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "5432",
+                "output": "jdbc:mysql://localhost:5432/data",
+                "is_hidden": false
+            },
+            {
+                "input": "3306",
+                "output": "jdbc:mysql://localhost:3306/data",
+                "is_hidden": false
+            },
+            {
+                "input": "1521",
+                "output": "jdbc:mysql://localhost:1521/data",
+                "is_hidden": false
+            },
+            {
+                "input": "27017",
+                "output": "jdbc:mysql://localhost:27017/data",
+                "is_hidden": false
+            },
+            {
+                "input": "6379",
+                "output": "jdbc:mysql://localhost:6379/data",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "RST-003: Oxygen Scrubber Parity Check",
+        "description": "Error: Oxygen scrubber synchronization fault. Cycle parity check required to clear the fault.\nYou have one variable: int cycleCount;\nInstruction: Using the modulus operator (%), print a status message followed by a boolean evaluation of whether the cycle count is an even number.\nExample Format: Even Cycle Active: true",
+        "difficulty": "Easy",
+        "category": "Operators",
+        "templates": {
+            "java": "import java.util.Scanner;\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n       int cycleCount = sc.nextInt();\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "87",
+                "output": "Even Cycle Active: false",
+                "is_hidden": false
+            },
+            {
+                "input": "100",
+                "output": "Even Cycle Active: true",
+                "is_hidden": false
+            },
+            {
+                "input": "42",
+                "output": "Even Cycle Active: true",
+                "is_hidden": false
+            },
+            {
+                "input": "15",
+                "output": "Even Cycle Active: false",
+                "is_hidden": false
+            },
+            {
+                "input": "0",
+                "output": "Even Cycle Active: true",
+                "is_hidden": false
+            }
+        ]
+    }
+]

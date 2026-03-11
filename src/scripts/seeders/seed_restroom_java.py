@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from sqlalchemy import text
 from sqlalchemy.orm.attributes import flag_modified
 from sqlmodel import Session, select
+from tqdm import tqdm
 from infrastructure import engine
 from models import (
     Category, Tag, Riddle, Question, Choice, Chunk, ChunkTemplate, Snippet, Expectation, Problem, TestCase
