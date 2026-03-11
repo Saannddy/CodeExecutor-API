@@ -106,5 +106,77 @@
                 "is_hidden": false
             }
         ]
+    },
+    {
+        "title": "RST-004: Thruster Telemetry Calculation",
+        "description": "Error: Thruster telemetry mismatch. Real-time thrust calculation required.\nYou have two variables: int basePower = 400; double multiplier = 1.5;\nInstruction: You must print the calculated thrust (base power multiplied by the multiplier) with its unit.\nExample Format: Current Thrust: 300.0 kW",
+        "difficulty": "Easy",
+        "category": "Operators",
+        "templates": {
+            "java": "import java.util.Scanner;\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int basePower = sc.nextInt();\n        double multiplier = sc.nextDouble();\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "400 1.5",
+                "output": "Current Thrust: 600.0 kW",
+                "is_hidden": false
+            },
+            {
+                "input": "500 2.0",
+                "output": "Current Thrust: 1000.0 kW",
+                "is_hidden": false
+            },
+            {
+                "input": "300 1.2",
+                "output": "Current Thrust: 360.0 kW",
+                "is_hidden": false
+            },
+            {
+                "input": "450 1.8",
+                "output": "Current Thrust: 810.0 kW",
+                "is_hidden": false
+            },
+            {
+                "input": "600 2.5",
+                "output": "Current Thrust: 1500.0 kW",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "RST-005: String Identity Crisis",
+        "description": "// The words look identical, but Java insists they are completely different.\nString input = new String(\"secret\");\nboolean isMatch = (input == \"secret\");\nSystem.out.println(isMatch);",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "templates": {
+            "java": "import java.util.Scanner;\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String input = sc.nextLine();\n        boolean isMatch = /* Fix this condition */;\n        System.out.println(isMatch);\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "secret",
+                "output": "true",
+                "is_hidden": false
+            },
+            {
+                "input": "Secret",
+                "output": "false",
+                "is_hidden": false
+            },
+            {
+                "input": "secret ",
+                "output": "false",
+                "is_hidden": false
+            },
+            {
+                "input": "sexret",
+                "output": "false",
+                "is_hidden": false
+            },
+            {
+                "input": "secreT",
+                "output": "false",
+                "is_hidden": false
+            }
+        ]
     }
 ]

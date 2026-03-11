@@ -4,19 +4,19 @@
         "text": "Which option best describes the OOP principle of Encapsulation in Java?",
         "choices": [
             [
-                "Inheritance of properties from a parent class to a child class",
+                "Child inherits parent properties",
                 false
             ],
             [
-                "Hiding internal class details and allowing access only through defined methods",
+                "Hide details, access through methods",
                 true
             ],
             [
-                "Ability of a class to take on many forms through method overloading",
+                "Class can behave differently via methods",
                 false
             ],
             [
-                "Creating multiple objects from a single class  ",
+                "Creating multiple objects from a single class",
                 false
             ]
         ]
@@ -26,11 +26,11 @@
         "text": "Which option best describes the principle of Inheritance in Java?  ",
         "choices": [
             [
-                "Hiding internal class details and allowing access only through defined methods",
+                "Hide details, access through methods",
                 false
             ],
             [
-                "Ability of a class to take on many forms through method overloading",
+                "Class can behave differently via methods",
                 false
             ],
             [
@@ -48,11 +48,11 @@
         "text": "Which option best describes the principle of Polymorphism in Java?  ",
         "choices": [
             [
-                "Hiding internal class details and allowing access only through defined methods",
+                "Hide details, access through methods",
                 false
             ],
             [
-                "Ability of a class to take on many forms through method overloading",
+                "Class can behave differently via methods",
                 true
             ],
             [
@@ -70,11 +70,11 @@
         "text": "Which option best describes the principle of Abstraction in Java?  ",
         "choices": [
             [
-                "Showing only necessary details and hiding unimportant ones\u00a0",
+                "Showing only necessary details and hiding unimportant ones",
                 true
             ],
             [
-                "Creating a large number of objects  ",
+                "Creating a large number of objects",
                 false
             ],
             [
@@ -140,7 +140,7 @@
                 false
             ],
             [
-                "A child class writing a new method to replace the parent class's method",
+                "Child overrides parent's method",
                 true
             ],
             [
@@ -202,7 +202,7 @@
         "text": "Which of the following best describes a Constructor in Java?  ",
         "choices": [
             [
-                "A special method that is automatically called when an object is created.",
+                "Constructor runs when an object is created",
                 true
             ],
             [
@@ -254,7 +254,7 @@
                 false
             ],
             [
-                "To enable stronger type checks at compile time and eliminate casting.",
+                "Improve compile-time type safety",
                 true
             ],
             [
@@ -276,7 +276,7 @@
                 false
             ],
             [
-                "Accessible within the same package and by subclasses in other packages.",
+                "Package-wide and subclass access",
                 true
             ],
             [
@@ -294,7 +294,7 @@
                 false
             ],
             [
-                "Deep or infinite recursion where method calls exceed the stack memory limit.",
+                "Recursive calls without base case causing overflow",
                 true
             ],
             [
@@ -312,19 +312,19 @@
         "text": "Which of the following is a key difference between an Interface and an Abstract Class?  ",
         "choices": [
             [
-                "An interface can have constructors, while an abstract class cannot.",
+                "Interfaces cannot have constructors",
                 false
             ],
             [
-                "A class can extend multiple abstract classes, but only implement one interface.",
+                "A class can extend one abstract class only",
                 false
             ],
             [
-                "An interface defines what to do, An abstract class can provide a partial implementation.",
+                "Interface defines behavior; abstract class can implement some",
                 true
             ],
             [
-                "Abstract classes only allow public methods, while interfaces allow private methods.",
+                "Abstract classes can have non-public methods",
                 false
             ]
         ]

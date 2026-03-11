@@ -8,7 +8,7 @@
                 false
             ],
             [
-                "Bundling data and methods together while restricting direct access to some components.",
+                "Bundle data and methods, restrict access",
                 true
             ],
             [
@@ -48,7 +48,7 @@
         "text": "Which scenario best demonstrates Polymorphism?",
         "choices": [
             [
-                "A single Shape variable being used to refer to a Circle, a Square, or a Triangle object.",
+                "One Shape var holds Circle, Square, or Triangle",
                 true
             ],
             [
@@ -74,7 +74,7 @@
                 false
             ],
             [
-                "Using an Interface to define what a class should do without showing how it does it.",
+                "Interface defines behavior without implementation",
                 true
             ],
             [
@@ -100,7 +100,7 @@
                 false
             ],
             [
-                "A class is the blueprint, and an object is the specific instance created from that blueprint.",
+                "Class is blueprint; object is instance",
                 true
             ],
             [
@@ -118,15 +118,15 @@
                 false
             ],
             [
-                "The methods must have the same name but different parameter lists (type or number).",
+                "Same name methods with different params",
                 true
             ],
             [
-                "One method must be in a parent class and the other in a child class.",
+                "Overloaded methods must be in same class",
                 false
             ],
             [
-                "The methods must return different data types but have the same parameters.",
+                "Different return types with same params",
                 false
             ]
         ]
@@ -158,7 +158,7 @@
         "text": "If a variable is declared as static in Java, what does it mean?",
         "choices": [
             [
-                "Every object of that class has its own unique copy of the variable.",
+                "Each object has its own copy of the variable",
                 false
             ],
             [
@@ -184,7 +184,7 @@
                 false
             ],
             [
-                "It promotes code modularity, making it easier to debug and scale.",
+                "It promotes modular code for easier debugging",
                 true
             ],
             [
@@ -202,7 +202,7 @@
         "text": "What is a key characteristic of a Constructor in Java?",
         "choices": [
             [
-                "It must have the exact same name as the class and no return type.",
+                "Constructor name matches class and has no return type",
                 true
             ],
             [
@@ -228,7 +228,7 @@
                 false
             ],
             [
-                "Distinguish between class attributes and parameters with the same name.",
+                "Differentiate attributes from parameters",
                 true
             ],
             [
@@ -246,11 +246,11 @@
         "text": "Why would a developer use Generics, such as ArrayList<String>?",
         "choices": [
             [
-                "To allow the list to store any type of data without restriction.",
+                "Allow list to store any data type",
                 false
             ],
             [
-                "To ensure type safety by restricting the list to a specific type.",
+                "Restrict list to specific type for safety",
                 true
             ],
             [
@@ -272,7 +272,7 @@
                 false
             ],
             [
-                "Any child class (subclass) that inherits from the parent class.",
+                "Any subclass of the parent class",
                 false
             ],
             [
@@ -312,19 +312,19 @@
         "text": "Regarding the \"rules of inheritance,\" how do Interfaces and Abstract Classes differ in how they can be used by a single Java class?",
         "choices": [
             [
-                "A class can inherit from (extend) only one Abstract Class, but it can implement many different Interfaces.",
+                "Extend one abstract class but implement many interfaces",
                 true
             ],
             [
-                "A class can inherit from many Abstract Classes, but only one Interface.",
+                "Can't extend multiple abstract classes",
                 false
             ],
             [
-                "A class must implement every Interface in its package, but Abstract Classes are optional.",
+                "Don't have to implement every package interface",
                 false
             ],
             [
-                "There is no difference; Java treats \"extending\" and \"implementing\" as the exact same rule.",
+                "Extending and implementing follow different rules",
                 false
             ]
         ]
@@ -334,11 +334,11 @@
         "text": "Which statement correctly describes the use of throw?",
         "choices": [
             [
-                "It is used in a method signature to warn about possible errors.",
+                "Declare exceptions in method signature",
                 false
             ],
             [
-                "It is used inside a method body to explicitly trigger a specific exception.",
+                "Use to throw an exception in code",
                 true
             ],
             [
@@ -378,7 +378,7 @@
         "text": "What does the 'super' keyword do in Java?",
         "choices": [
             [
-                "It refers to the parent class and allows access to its methods and variables.",
+                "Refers to parent class for access",
                 true
             ],
             [
@@ -818,7 +818,7 @@
         "text": "What is the difference between a checked and an unchecked exception?",
         "choices": [
             [
-                "Checked exceptions must be caught or declared; unchecked exceptions don't need to be.",
+                "Checked exceptions must be caught or declared; unchecked exceptions don't need to.",
                 true
             ],
             [
