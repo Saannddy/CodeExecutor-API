@@ -1,0 +1,1432 @@
+[
+    {
+        "title": "LCK-I",
+        "text": "Which of the following is a primary goal of Encapsulation?",
+        "choices": [
+            [
+                "Allowing any class to modify internal data directly.",
+                false
+            ],
+            [
+                "Bundling data and methods together while restricting direct access to some components.",
+                true
+            ],
+            [
+                "Making sure a class has only one instance.",
+                false
+            ],
+            [
+                "Speeding up the execution of mathematical loops.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-II",
+        "text": "In Java, which keyword is primarily used to implement the principle of Inheritance?",
+        "choices": [
+            [
+                "implements",
+                false
+            ],
+            [
+                "static",
+                false
+            ],
+            [
+                "extends",
+                true
+            ],
+            [
+                "encapsulate",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-III",
+        "text": "Which scenario best demonstrates Polymorphism?",
+        "choices": [
+            [
+                "A single Shape variable being used to refer to a Circle, a Square, or a Triangle object.",
+                true
+            ],
+            [
+                "Hiding the password variable in a User class.",
+                false
+            ],
+            [
+                "Running a program on multiple operating systems.",
+                false
+            ],
+            [
+                "Using a for loop to iterate through a list.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-IV",
+        "text": "Which of these is an example of Abstraction in a Java program?",
+        "choices": [
+            [
+                "Writing a very long method with 100 lines of code.",
+                false
+            ],
+            [
+                "Using an Interface to define what a class should do without showing how it does it.",
+                true
+            ],
+            [
+                "Using the private keyword on all variables.",
+                false
+            ],
+            [
+                "Declaring an array with a fixed size.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-V",
+        "text": "What is the relationship between a Class and an Object?",
+        "choices": [
+            [
+                "An object is a template used to create a class.",
+                false
+            ],
+            [
+                "A class is an instance of an object in memory.",
+                false
+            ],
+            [
+                "A class is the blueprint, and an object is the specific instance created from that blueprint.",
+                true
+            ],
+            [
+                "There is no difference; they are synonyms in Java.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-VI",
+        "text": "To implement Method Overloading, what must be true?",
+        "choices": [
+            [
+                "The method names must be different.",
+                false
+            ],
+            [
+                "The methods must have the same name but different parameter lists (type or number).",
+                true
+            ],
+            [
+                "One method must be in a parent class and the other in a child class.",
+                false
+            ],
+            [
+                "The methods must return different data types but have the same parameters.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-VII",
+        "text": "When a child class provides a specific implementation for a method that is already defined in its parent class, this is known as:",
+        "choices": [
+            [
+                "Method Overloading",
+                false
+            ],
+            [
+                "Method Overriding",
+                true
+            ],
+            [
+                "Method Redundancy",
+                false
+            ],
+            [
+                "Method Extraction",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-VIII",
+        "text": "If a variable is declared as static in Java, what does it mean?",
+        "choices": [
+            [
+                "Every object of that class has its own unique copy of the variable.",
+                false
+            ],
+            [
+                "The variable's value cannot be changed.",
+                false
+            ],
+            [
+                "The variable is shared across all instances of the class.",
+                true
+            ],
+            [
+                "The variable can only be accessed within the main method.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-IX",
+        "text": "Why is OOP (Object-Oriented Programming) considered beneficial for large software projects?",
+        "choices": [
+            [
+                "It eliminates the need for testing.",
+                false
+            ],
+            [
+                "It promotes code modularity, making it easier to debug and scale.",
+                true
+            ],
+            [
+                "It allows code to run without a Java Virtual Machine (JVM).",
+                false
+            ],
+            [
+                "It converts all text into binary automatically.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-X",
+        "text": "What is a key characteristic of a Constructor in Java?",
+        "choices": [
+            [
+                "It must have the exact same name as the class and no return type.",
+                true
+            ],
+            [
+                "It is used to delete objects from memory.",
+                false
+            ],
+            [
+                "It must be declared as void.",
+                false
+            ],
+            [
+                "It is only called when a method is overloaded.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XI",
+        "text": "The this keyword is most commonly used to:",
+        "choices": [
+            [
+                "Call a method from a different class.",
+                false
+            ],
+            [
+                "Distinguish between class attributes and parameters with the same name.",
+                true
+            ],
+            [
+                "Access the private variables of a parent class.",
+                false
+            ],
+            [
+                "Terminate a loop early.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XII",
+        "text": "Why would a developer use Generics, such as ArrayList<String>?",
+        "choices": [
+            [
+                "To allow the list to store any type of data without restriction.",
+                false
+            ],
+            [
+                "To ensure type safety by restricting the list to a specific type.",
+                true
+            ],
+            [
+                "To make the code run on older versions of Java.",
+                false
+            ],
+            [
+                "To automatically sort the data in the list.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XIII",
+        "text": "If a variable is marked as \"protected,\" which of the following groups is EXCLUDED from accessing it?",
+        "choices": [
+            [
+                "Any class that exists within the same package.",
+                false
+            ],
+            [
+                "Any child class (subclass) that inherits from the parent class.",
+                false
+            ],
+            [
+                "A completely unrelated class located in a different package.",
+                true
+            ],
+            [
+                "The class in which the variable was originally defined.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XIV",
+        "text": "What is the most likely cause of a StackOverflowError in a Java application?",
+        "choices": [
+            [
+                "A recursive method that never reaches a base case.",
+                true
+            ],
+            [
+                "Trying to store a very large string in a variable.",
+                false
+            ],
+            [
+                "Running out of RAM on the computer.",
+                false
+            ],
+            [
+                "A while loop that runs over thousand times.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XV",
+        "text": "Regarding the \"rules of inheritance,\" how do Interfaces and Abstract Classes differ in how they can be used by a single Java class?",
+        "choices": [
+            [
+                "A class can inherit from (extend) only one Abstract Class, but it can implement many different Interfaces.",
+                true
+            ],
+            [
+                "A class can inherit from many Abstract Classes, but only one Interface.",
+                false
+            ],
+            [
+                "A class must implement every Interface in its package, but Abstract Classes are optional.",
+                false
+            ],
+            [
+                "There is no difference; Java treats \"extending\" and \"implementing\" as the exact same rule.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XVI",
+        "text": "Which statement correctly describes the use of throw?",
+        "choices": [
+            [
+                "It is used in a method signature to warn about possible errors.",
+                false
+            ],
+            [
+                "It is used inside a method body to explicitly trigger a specific exception.",
+                true
+            ],
+            [
+                "It is used to catch an exception after it happens.",
+                false
+            ],
+            [
+                "It is used to prevent any exceptions from occurring.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XVII",
+        "text": "What is considered a \"bad practice\" when handling exceptions?",
+        "choices": [
+            [
+                "Using multiple catch blocks for different error types.",
+                false
+            ],
+            [
+                "Using a finally block to close resources.",
+                false
+            ],
+            [
+                "Catching an exception and leaving the catch block empty.",
+                true
+            ],
+            [
+                "Throwing a custom exception.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XVIII",
+        "text": "What does the 'super' keyword do in Java?",
+        "choices": [
+            [
+                "It refers to the parent class and allows access to its methods and variables.",
+                true
+            ],
+            [
+                "It creates a new instance of the current class.",
+                false
+            ],
+            [
+                "It marks a method as final and prevents overriding.",
+                false
+            ],
+            [
+                "It terminates the current method execution.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XIX",
+        "text": "Which access modifier allows access only within the same class?",
+        "choices": [
+            [
+                "public",
+                false
+            ],
+            [
+                "protected",
+                false
+            ],
+            [
+                "private",
+                true
+            ],
+            [
+                "default",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XX",
+        "text": "Which access modifier allows access within the same package and subclasses?",
+        "choices": [
+            [
+                "public",
+                false
+            ],
+            [
+                "protected",
+                true
+            ],
+            [
+                "private",
+                false
+            ],
+            [
+                "default",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXI",
+        "text": "What is the default access level (package-private) in Java?",
+        "choices": [
+            [
+                "Accessible only within the same class",
+                false
+            ],
+            [
+                "Accessible within the same package",
+                true
+            ],
+            [
+                "Accessible from anywhere",
+                false
+            ],
+            [
+                "Never accessible",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXII",
+        "text": "What access modifier allows access from anywhere in the application?",
+        "choices": [
+            [
+                "public",
+                true
+            ],
+            [
+                "protected",
+                false
+            ],
+            [
+                "private",
+                false
+            ],
+            [
+                "default",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXIII",
+        "text": "What is the main purpose of the 'super()' call in a constructor?",
+        "choices": [
+            [
+                "To call the parent class's constructor.",
+                true
+            ],
+            [
+                "To create a new instance of the current class.",
+                false
+            ],
+            [
+                "To call a method from the current class.",
+                false
+            ],
+            [
+                "To initialize static variables.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXIV",
+        "text": "How can you explicitly call a parent class method from a child class?",
+        "choices": [
+            [
+                "Using the 'parent' keyword",
+                false
+            ],
+            [
+                "Using the 'super' keyword",
+                true
+            ],
+            [
+                "Using the 'extends' keyword",
+                false
+            ],
+            [
+                "Using the 'this' keyword",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXV",
+        "text": "What does the 'new' keyword do in Java?",
+        "choices": [
+            [
+                "It declares a new variable.",
+                false
+            ],
+            [
+                "It allocates memory for an object and calls its constructor.",
+                true
+            ],
+            [
+                "It creates a new class.",
+                false
+            ],
+            [
+                "It imports a new package.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXVI",
+        "text": "What happens when you create an object using the 'new' keyword?",
+        "choices": [
+            [
+                "A variable is declared and memory is allocated on the stack",
+                false
+            ],
+            [
+                "Memory is allocated on the heap and the constructor is called",
+                true
+            ],
+            [
+                "A reference is created but no memory is allocated",
+                false
+            ],
+            [
+                "The garbage collector is invoked",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXVII",
+        "text": "What does it mean for a method to be 'abstract'?",
+        "choices": [
+            [
+                "It contains no implementation and must be overridden in subclasses.",
+                true
+            ],
+            [
+                "It cannot be called from other classes.",
+                false
+            ],
+            [
+                "It has multiple implementations in the same class.",
+                false
+            ],
+            [
+                "It is a method that is automatically generated.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXVIII",
+        "text": "What can contain abstract methods in Java?",
+        "choices": [
+            [
+                "Only classes",
+                false
+            ],
+            [
+                "Abstract classes and interfaces",
+                true
+            ],
+            [
+                "Concrete classes and interfaces",
+                false
+            ],
+            [
+                "Only regular methods",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXIX",
+        "text": "Can you instantiate an abstract class directly?",
+        "choices": [
+            [
+                "Yes, always",
+                false
+            ],
+            [
+                "No, you must create a subclass that implements all abstract methods",
+                true
+            ],
+            [
+                "Yes, but only with parameters",
+                false
+            ],
+            [
+                "Only if it has a main method",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXX",
+        "text": "What does the 'interface' keyword define in Java?",
+        "choices": [
+            [
+                "A contract that classes must follow by implementing its methods.",
+                true
+            ],
+            [
+                "A class with only abstract methods.",
+                false
+            ],
+            [
+                "A way to inherit from multiple classes.",
+                false
+            ],
+            [
+                "A package of related classes.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXI",
+        "text": "Can a class implement multiple interfaces in Java?",
+        "choices": [
+            [
+                "No, a class can implement only one interface",
+                false
+            ],
+            [
+                "Yes, a class can implement multiple interfaces",
+                true
+            ],
+            [
+                "Only if the interfaces are related",
+                false
+            ],
+            [
+                "Only in Java 8 and later",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXII",
+        "text": "What is the 'default' method in an interface used for?",
+        "choices": [
+            [
+                "To provide a default constructor.",
+                false
+            ],
+            [
+                "To provide a default implementation of a method that implementing classes can override.",
+                true
+            ],
+            [
+                "To define methods that must be implemented.",
+                false
+            ],
+            [
+                "To create private methods in an interface.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXIII",
+        "text": "Which of the following is NOT a characteristic of an interface in Java?",
+        "choices": [
+            [
+                "It can declare abstract methods.",
+                false
+            ],
+            [
+                "It can contain constructor implementations.",
+                true
+            ],
+            [
+                "A class can implement multiple interfaces.",
+                false
+            ],
+            [
+                "It can declare constants (static final variables).",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXIV",
+        "text": "What is the difference between an abstract class and an interface?",
+        "choices": [
+            [
+                "They are identical in functionality.",
+                false
+            ],
+            [
+                "A class can extend only one abstract class, but implement multiple interfaces.",
+                true
+            ],
+            [
+                "Interfaces can have constructors; abstract classes cannot.",
+                false
+            ],
+            [
+                "Abstract classes allow multiple inheritance; interfaces do not.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXV",
+        "text": "Can an interface extend another interface in Java?",
+        "choices": [
+            [
+                "No, interfaces cannot extend other interfaces",
+                false
+            ],
+            [
+                "Yes, an interface can extend another interface",
+                true
+            ],
+            [
+                "Only if they have the same methods",
+                false
+            ],
+            [
+                "Only in Java 9 and later",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXVI",
+        "text": "Which statement is true about the 'finally' block?",
+        "choices": [
+            [
+                "It is optional and executes only if an exception occurs.",
+                false
+            ],
+            [
+                "It always executes, whether an exception occurs or not.",
+                true
+            ],
+            [
+                "It must contain exception handling code.",
+                false
+            ],
+            [
+                "It is executed before the try block.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXVII",
+        "text": "What is the correct order of exception handling in a try-catch-finally block?",
+        "choices": [
+            [
+                "finally executes first, then catch, then the rest of the code.",
+                false
+            ],
+            [
+                "try executes first, then catch (if needed), then finally always executes.",
+                true
+            ],
+            [
+                "catch executes first, then try, then finally.",
+                false
+            ],
+            [
+                "finally executes first, then the rest depends on exceptions.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXVIII",
+        "text": "What is the difference between a checked and an unchecked exception?",
+        "choices": [
+            [
+                "Checked exceptions must be caught or declared; unchecked exceptions don't need to be.",
+                true
+            ],
+            [
+                "Unchecked exceptions are more severe than checked exceptions.",
+                false
+            ],
+            [
+                "Both require the same handling in code.",
+                false
+            ],
+            [
+                "There is no difference between them.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XXXIX",
+        "text": "Which of the following is a checked exception?",
+        "choices": [
+            [
+                "NullPointerException",
+                false
+            ],
+            [
+                "IOException",
+                true
+            ],
+            [
+                "ArrayIndexOutOfBoundsException",
+                false
+            ],
+            [
+                "ArithmeticException",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XL",
+        "text": "What does the 'throws' keyword specify in a method signature?",
+        "choices": [
+            [
+                "The exceptions that the method may throw and not handle internally.",
+                true
+            ],
+            [
+                "The exceptions that must be caught by the caller.",
+                false
+            ],
+            [
+                "The exceptions that the method will definitely throw.",
+                false
+            ],
+            [
+                "The same thing as the 'throw' keyword.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLI",
+        "text": "What is a 'null pointer exception' in Java?",
+        "choices": [
+            [
+                "An exception thrown when accessing a method of a null object.",
+                true
+            ],
+            [
+                "An exception thrown when declaring a variable.",
+                false
+            ],
+            [
+                "An exception that occurs when a pointer is out of bounds.",
+                false
+            ],
+            [
+                "An exception that prevents null values from being used.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLII",
+        "text": "What is the main purpose of using 'try-with-resources' in Java?",
+        "choices": [
+            [
+                "To automatically allocate memory for objects.",
+                false
+            ],
+            [
+                "To automatically close resources (like file streams) after use.",
+                true
+            ],
+            [
+                "To prevent exceptions from being thrown.",
+                false
+            ],
+            [
+                "To create multiple instances of the same resource.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLIII",
+        "text": "What is the main purpose of the 'finally' block in exception handling?",
+        "choices": [
+            [
+                "To handle all types of exceptions.",
+                false
+            ],
+            [
+                "To execute code that must run regardless of whether an exception occurred.",
+                true
+            ],
+            [
+                "To prevent exceptions from being thrown.",
+                false
+            ],
+            [
+                "To retry the code in the try block.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLIV",
+        "text": "What is the purpose of the 'Collection' framework in Java?",
+        "choices": [
+            [
+                "To provide a unified way to store and manipulate groups of objects.",
+                true
+            ],
+            [
+                "To replace arrays entirely.",
+                false
+            ],
+            [
+                "To handle only primitive data types.",
+                false
+            ],
+            [
+                "To manage file I/O operations.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLV",
+        "text": "What is the difference between a List and a Set in Java?",
+        "choices": [
+            [
+                "A List allows duplicates and maintains order; a Set does not allow duplicates.",
+                true
+            ],
+            [
+                "A Set allows duplicates; a List does not.",
+                false
+            ],
+            [
+                "They are identical.",
+                false
+            ],
+            [
+                "A List is faster than a Set.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLVI",
+        "text": "What is the main difference between ArrayList and LinkedList in Java?",
+        "choices": [
+            [
+                "ArrayList is faster for access; LinkedList is faster for insertions/deletions.",
+                true
+            ],
+            [
+                "LinkedList is faster for access than ArrayList.",
+                false
+            ],
+            [
+                "They have identical performance characteristics.",
+                false
+            ],
+            [
+                "ArrayList uses linked nodes; LinkedList uses arrays.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLVII",
+        "text": "What is the primary difference between HashMap and Hashtable in Java?",
+        "choices": [
+            [
+                "HashMap is synchronized; Hashtable is not.",
+                false
+            ],
+            [
+                "Hashtable is synchronized; HashMap is not.",
+                true
+            ],
+            [
+                "They have the same functionality.",
+                false
+            ],
+            [
+                "HashMap can store null keys; Hashtable cannot.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLVIII",
+        "text": "What data structure does HashMap use internally?",
+        "choices": [
+            [
+                "Linked list",
+                false
+            ],
+            [
+                "Array of buckets with hash function",
+                true
+            ],
+            [
+                "Tree structure",
+                false
+            ],
+            [
+                "Graph structure",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-XLIX",
+        "text": "Can HashMap store null keys and values?",
+        "choices": [
+            [
+                "No, neither keys nor values can be null",
+                false
+            ],
+            [
+                "Yes, one null key and multiple null values are allowed",
+                true
+            ],
+            [
+                "Only null values are allowed, not keys",
+                false
+            ],
+            [
+                "Only null keys are allowed, not values",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-L",
+        "text": "What is the relationship between the 'Comparable' and 'Comparator' interfaces?",
+        "choices": [
+            [
+                "They are identical and can be used interchangeably.",
+                false
+            ],
+            [
+                "'Comparable' defines a single natural ordering; 'Comparator' allows multiple custom orderings.",
+                true
+            ],
+            [
+                "'Comparator' is deprecated in favor of 'Comparable'.",
+                false
+            ],
+            [
+                "'Comparable' is used for primitive types; 'Comparator' is for objects.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LI",
+        "text": "What is the purpose of the 'Comparable' interface?",
+        "choices": [
+            [
+                "To define a way for objects to compare themselves to other objects.",
+                true
+            ],
+            [
+                "To compare primitive data types.",
+                false
+            ],
+            [
+                "To prevent comparison between objects.",
+                false
+            ],
+            [
+                "To define constants in a class.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LII",
+        "text": "What method must be implemented by a class that implements Comparable?",
+        "choices": [
+            [
+                "compare()",
+                false
+            ],
+            [
+                "compareTo()",
+                true
+            ],
+            [
+                "equals()",
+                false
+            ],
+            [
+                "sort()",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LIII",
+        "text": "How many comparators can be used for sorting a collection?",
+        "choices": [
+            [
+                "Only one comparator per collection",
+                false
+            ],
+            [
+                "Multiple custom comparators can be defined and used",
+                true
+            ],
+            [
+                "Comparators cannot be used with collections",
+                false
+            ],
+            [
+                "Only the default comparator can be used",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LIV",
+        "text": "What is an 'enum' in Java?",
+        "choices": [
+            [
+                "A data type that can hold a fixed set of constant values.",
+                true
+            ],
+            [
+                "A class with no methods.",
+                false
+            ],
+            [
+                "A list of variables.",
+                false
+            ],
+            [
+                "A way to create interfaces.",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LV",
+        "text": "Can an enum implement an interface in Java?",
+        "choices": [
+            [
+                "No, enums cannot implement interfaces",
+                false
+            ],
+            [
+                "Yes, an enum can implement one or more interfaces",
+                true
+            ],
+            [
+                "Only if the interface has no methods",
+                false
+            ],
+            [
+                "Only in Java 10 and later",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LVI",
+        "text": "Can an enum have methods and variables?",
+        "choices": [
+            [
+                "No, enums can only contain constants",
+                false
+            ],
+            [
+                "Yes, enums can have methods, variables, and constructors",
+                true
+            ],
+            [
+                "Only methods are allowed, not variables",
+                false
+            ],
+            [
+                "Only in Java 12 and later",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LVII",
+        "text": "What is Generics in Java primarily used for?",
+        "choices": [
+            [
+                "To create classes without specific types",
+                false
+            ],
+            [
+                "To provide compile-time type safety and eliminate casting",
+                true
+            ],
+            [
+                "To allow unlimited type combinations",
+                false
+            ],
+            [
+                "To replace inheritance in Java",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LVIII",
+        "text": "What is the syntax for declaring a generic class in Java?",
+        "choices": [
+            [
+                "class MyClass { }",
+                false
+            ],
+            [
+                "class MyClass<T> { }",
+                true
+            ],
+            [
+                "class MyClass(T) { }",
+                false
+            ],
+            [
+                "class MyClass[T] { }",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LIX",
+        "text": "What does the 'T' represent in a generic class like 'Box<T>'?",
+        "choices": [
+            [
+                "A specific data type like String or Integer",
+                false
+            ],
+            [
+                "A type parameter that can be replaced with any type",
+                true
+            ],
+            [
+                "Always represents the type 'T'",
+                false
+            ],
+            [
+                "A primitive type only",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LX",
+        "text": "Can you use primitive types as type parameters in generics?",
+        "choices": [
+            [
+                "Yes, primitives work directly with generics",
+                false
+            ],
+            [
+                "No, you must use wrapper classes like Integer, Double, etc.",
+                true
+            ],
+            [
+                "Only for the Integer type",
+                false
+            ],
+            [
+                "Only in Java 15 and later",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LXI",
+        "text": "What is a bounded type parameter in Java generics?",
+        "choices": [
+            [
+                "A type parameter with no restrictions",
+                false
+            ],
+            [
+                "A type parameter restricted to a specific type or its subtypes",
+                true
+            ],
+            [
+                "A parameter that can only be String",
+                false
+            ],
+            [
+                "A parameter that has a maximum size",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LXII",
+        "text": "How do you create an instance of a generic class with a specific type?",
+        "choices": [
+            [
+                "Box box = new Box();",
+                false
+            ],
+            [
+                "Box<String> box = new Box<String>();",
+                true
+            ],
+            [
+                "Box<String> box = new Box();",
+                false
+            ],
+            [
+                "Box box = new Box<String>();",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LXIII",
+        "text": "What is the purpose of wildcard '?' in Java generics?",
+        "choices": [
+            [
+                "To represent any specific type",
+                false
+            ],
+            [
+                "To allow flexibility when the specific type is unknown or irrelevant",
+                true
+            ],
+            [
+                "To create a new generic type",
+                false
+            ],
+            [
+                "To represent null types",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LXIV",
+        "text": "What does List<?> represent in Java?",
+        "choices": [
+            [
+                "A list of any type",
+                true
+            ],
+            [
+                "A list of type 'Object' only",
+                false
+            ],
+            [
+                "An empty list",
+                false
+            ],
+            [
+                "A list of null values",
+                false
+            ]
+        ]
+    },
+    {
+        "title": "LCK-LXV",
+        "text": "What is the difference between '? extends T' and '? super T' in generics?",
+        "choices": [
+            [
+                "'extends' restricts to T and its subclasses; 'super' restricts to T and its superclasses",
+                true
+            ],
+            [
+                "They have the same functionality",
+                false
+            ],
+            [
+                "'extends' is only for classes; 'super' is only for interfaces",
+                false
+            ],
+            [
+                "'super' restricts to T only",
+                false
+            ]
+        ]
+    }
+]

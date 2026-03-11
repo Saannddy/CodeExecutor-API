@@ -2,6 +2,7 @@ import logging
 from sqlalchemy import text
 from sqlmodel import Session
 from infrastructure import engine
+from tqdm import tqdm 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
@@ -37,7 +38,7 @@ def delete_all_data():
         ]
         
         try:
-            for table in tables:
+            for table in tqdm(tables, desc="Deleting tables", unit="table"):
                 logging.info(f"Deleting data from {table}...")
                 session.exec(text(f"DELETE FROM {table}"))
             

@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 from sqlalchemy import text
 from sqlalchemy.orm.attributes import flag_modified
 from sqlmodel import Session, select
-from tqdm import tqdm
 from infrastructure import engine
 from models import (
     Category, Tag, Riddle, Question, Choice, Chunk, ChunkTemplate, Snippet, Expectation, Problem, TestCase
@@ -23,7 +22,7 @@ def get_uuid(name: str) -> uuid.UUID:
 
 def load_json(filename):
     # Base directory for seeding data (one level up from seeders/)
-    base_path = os.path.join(os.path.dirname(__file__), "..", "data", "java", "restroom")
+    base_path = os.path.join(os.path.dirname(__file__), "..", "data", "java", "lockerroom")
     filepath = os.path.join(base_path, filename)
     if not os.path.exists(filepath):
         logging.warning(f"File not found: {filepath}")
@@ -31,7 +30,7 @@ def load_json(filename):
     with open(filepath, "r") as f:
         return json.load(f)
 
-def seed_restroom_java():
+def seed_lockerroom_java():
     if not engine:
         logging.error("No database engine found. Skipping seeding.")
         return
@@ -43,7 +42,7 @@ def seed_restroom_java():
     PROBLEMS = load_json("problems.json")
 
     with Session(engine) as session:
-        logging.info("Starting JAV_RESTROOM JSON-based seeding process...")
+        logging.info("Starting JAV_LOCKERROOM JSON-based seeding process...")
 
         def get_or_create_category(name):
             cat_id = get_uuid(f"cat_{name}")
@@ -69,13 +68,13 @@ def seed_restroom_java():
                 session.refresh(tag)
             return tag
 
-        jav_restroom_tag = get_or_create_tag("JAV_RESTROOM")
+        jav_lockerroom_tag = get_or_create_tag("JAV_LOCKERROOM")
         java_cat = get_or_create_category("Java")
 
         # 1. Seed Questions
         logging.info(f"Seeding {len(QUESTIONS)} Java questions...")
         for q_data in QUESTIONS:
-            q_id = get_uuid(f"jav_rst_q_{q_data['title']}")
+            q_id = get_uuid(f"jav_lockerroom_q_{q_data['title']}")
             if session.exec(select(Question).where(Question.id == q_id)).first():
                 continue
             
@@ -85,13 +84,13 @@ def seed_restroom_java():
                 question_text=q_data["text"],
                 created_at=datetime.now(timezone.utc)
             )
-            question.tags = [jav_restroom_tag]
+            question.tags = [jav_lockerroom_tag]
             question.categories = [java_cat]
             session.add(question)
             session.flush()
 
             for i, (choice_text, is_correct) in enumerate(q_data["choices"]):
-                c_id = get_uuid(f"jav_rst_c_{q_data['title']}_{i}")
+                c_id = get_uuid(f"jav_lockerroom_c_{q_data['title']}_{i}")
                 choice = Choice(
                     id=c_id,
                     question_id=question.id,
@@ -103,7 +102,7 @@ def seed_restroom_java():
         # 2. Seed Riddles
         logging.info(f"Seeding {len(RIDDLES)} Java riddles...")
         for i, r_data in enumerate(RIDDLES):
-            r_id = get_uuid(f"jav_rst_r_{i}")
+            r_id = get_uuid(f"jav_lockerroom_r_{i}")
             if session.exec(select(Riddle).where(Riddle.id == r_id)).first():
                 continue
                 
@@ -115,13 +114,13 @@ def seed_restroom_java():
                 difficulty=r_data["difficulty"] or "Medium",
                 created_at=datetime.now(timezone.utc)
             )
-            riddle.tags = [jav_restroom_tag]
+            riddle.tags = [jav_lockerroom_tag]
             session.add(riddle)
 
         # 3. Seed Chunks
         logging.info(f"Seeding {len(CHUNKS)} Java chunks...")
         for c_data in CHUNKS:
-            c_id = get_uuid(f"jav_rst_chunk_{c_data['title']}")
+            c_id = get_uuid(f"jav_lockerroom_chunk_{c_data['title']}")
             chunk = session.exec(select(Chunk).where(Chunk.id == c_id)).first()
             if not chunk:
                 chunk = Chunk(
@@ -131,7 +130,7 @@ def seed_restroom_java():
                     created_at=datetime.now(timezone.utc)
                 )
                 chunk.categories = [get_or_create_category(c_data.get("category", "Java Basics"))]
-                chunk.tags = [jav_restroom_tag]
+                chunk.tags = [jav_lockerroom_tag]
                 session.add(chunk)
                 session.flush()
             else:
@@ -185,7 +184,7 @@ def seed_restroom_java():
                     config={"templates": p_data.get("templates", {})}
                 )
                 problem.categories = [get_or_create_category(p_data.get("category", "Java Algorithms"))]
-                problem.tags = [jav_restroom_tag]
+                problem.tags = [jav_lockerroom_tag]
                 session.add(problem)
             else:
                 # Update existing problem
@@ -207,7 +206,7 @@ def seed_restroom_java():
                 session.flush()
 
                 for i, tc_data in enumerate(p_data["test_cases"]):
-                    tc_id = get_uuid(f"jav_rst_tc_{p_data['title']}_{i}")
+                    tc_id = get_uuid(f"jav_lockerroom_tc_{p_data['title']}_{i}")
                     tc = TestCase(
                         id=tc_id,
                         problem_id=p_id,
@@ -219,7 +218,7 @@ def seed_restroom_java():
                     session.add(tc)
 
         session.commit()
-        logging.info("JAV_RESTROOM JSON-based seeding completed successfully.")
+        logging.info("JAV_LOCKERROOM JSON-based seeding completed successfully.")
 
 if __name__ == "__main__":
-    seed_restroom_java()
+    seed_lockerroom_java()

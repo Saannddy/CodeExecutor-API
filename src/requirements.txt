@@ -10,3 +10,4 @@ javalang==0.13.0
 pytest-cov==6.0.0
 psycopg2-binary==2.9.6
 pybars3==0.9.7
+tqdm==4.66.1
