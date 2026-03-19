@@ -58,6 +58,35 @@ paths:
         '404':
           description: Problem not found
 
+  /problem/{problem_id}/title:
+    patch:
+      summary: Update problem title
+      parameters:
+        - name: problem_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  example: "Two Sum Updated"
+      responses:
+        '200':
+          description: Problem title updated successfully
+        '400':
+          description: Invalid request
+        '404':
+          description: Problem not found
+
   /problem/{problem_id}/testcases:
     post:
       summary: Add test cases to a problem
