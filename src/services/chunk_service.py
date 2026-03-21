@@ -50,6 +50,6 @@ class ChunkService:
             return self._process_chunk(chunk)
         return None
 
-    def get_random_chunks(self, limit=1, lang=None):
-        chunks = self.repo.find_random(limit=limit, lang=lang)
+    def get_random_chunks(self, limit=1, lang=None, tags=None):
+        chunks = self.repo.find_random(limit=limit, lang=lang, tags=tags)
         return [self._process_chunk(c) for c in chunks]

@@ -23,6 +23,9 @@ class ChunkHandler:
     def get_random_chunks(self):
         limit = request.args.get('limit', default=1, type=int)
         lang = request.args.get('lang')
+        tags = request.args.get('tags')
+        if tags:
+            tags = [tag.strip() for tag in tags.split(',')]
         
-        chunks = self.service.get_random_chunks(limit=limit, lang=lang)
+        chunks = self.service.get_random_chunks(limit=limit, lang=lang, tags=tags)
         return jsonify(status="success", data=chunks), 200

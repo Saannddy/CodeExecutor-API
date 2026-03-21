@@ -78,13 +78,28 @@ class ChunkRepository:
             
         return self._serialize_chunk(chunk, lang)
 
-    def find_random(self, limit=1, lang=None):
-        """Fetch random N chunks with their implementation details. Filters by language if provided."""
+    def find_random(self, limit=1, lang=None, tags=None):
+        """Fetch random N chunks with their implementation details. Filters by language and tags if provided."""
         with self._get_session() as session:
-            statement = select(Chunk).order_by(func.random())
-            # For simplicity, if lang is provided, we fetch more and filter in Python
-            # or just fetch all and filter.
-            results = session.exec(statement).all()
+            statement = select(Chunk).options(
+                joinedload(Chunk.templates).joinedload(ChunkTemplate.snippets),
+                joinedload(Chunk.tags)
+            ).order_by(func.random())
+            
+            # If language is specified, filter chunks that HAVE at least one template in that language
+            if lang:
+                statement = statement.join(Chunk.templates).where(ChunkTemplate.language == lang)
+            
+            # If tags are specified, we need chunks that have ALL specified tags
+            if tags:
+                from models import Tag
+                # For simplicity, fetch more and filter in Python
+                fetch_limit = limit * 10  # Fetch more to account for filtering
+                statement = statement.limit(fetch_limit)
+            else:
+                statement = statement.limit(limit * 2)  # Some buffer
+            
+            results = session.exec(statement).unique().all()
             if not results:
                 return []
 
@@ -92,6 +107,10 @@ class ChunkRepository:
             for chunk in results:
                 if lang and lang not in chunk.config.get("templates", {}):
                     continue
+                if tags:
+                    chunk_tag_names = [t.name for t in chunk.tags]
+                    if not all(tag in chunk_tag_names for tag in tags):
+                        continue
                 chunks.append(self._serialize_chunk(chunk, lang))
                 if len(chunks) >= limit:
                     break
