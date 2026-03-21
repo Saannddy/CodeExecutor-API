@@ -1,1 +1,112 @@
-[]
+[
+    {
+        "title": "LCK-CHUNK-001: Internal Subnet Check",
+        "difficulty": "Medium",
+        "category": "Java Basics",
+        "templates": [
+            {
+                "lang": "java",
+                "name": "Java Implementation",
+                "code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        String ipAddress = scanner.nextLine();\n        \n        /* The faculty's strict firewall is blocking all of your external traffic. \n         * To run your escape script, you need to spoof the routing so it looks like \n         * it's coming from the internal student network. The internal subnet ALWAYS \n         * begins with \"192.168.\".\n         */\n         \n        // Return true if the IP address starts with the internal subnet\n        {{{player_code}}}\n        \n        System.out.println(isInternal);\n    }\n}",
+                "snippets": [
+                    [
+                        "player_code",
+                        "boolean isInternal = ipAddress.startsWith(\"192.168.\");"
+                    ]
+                ]
+            }
+        ],
+        "expectation": {
+            "input": "192.168.1.1",
+            "output": "true"
+        }
+    },
+    {
+        "title": "LCK-CHUNK-002: Backdoor Account Detection",
+        "difficulty": "Medium",
+        "category": "Java Basics",
+        "templates": [
+            {
+                "lang": "java",
+                "name": "Java Implementation",
+                "code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        String username = scanner.nextLine();\n        \n        /* The corrupt SysAdmin leaves hidden backdoor accounts on every faculty server. \n         * You intercepted the user logs. You know their naming convention always includes \n         * the word \"admin\", but they try to hide it by mixing uppercase and lowercase \n         * letters (like \"SysAdMin42\" or \"rootADMIN\").\n         */\n         \n        // Return true if the username contains \"admin\" (ignoring case!)\n        {{{find_backdoor}}}\n        \n        System.out.println(isBackdoor);\n    }\n}",
+                "snippets": [
+                    [
+                        "find_backdoor",
+                        "boolean isBackdoor = username.toLowerCase().contains(\"admin\");"
+                    ]
+                ]
+            }
+        ],
+        "expectation": {
+            "input": "admin",
+            "output": "true"
+        }
+    },
+    {
+        "title": "LCK-CHUNK-003: URL Protocol Upgrade",
+        "difficulty": "Medium",
+        "category": "Java Basics",
+        "templates": [
+            {
+                "lang": "java",
+                "name": "Java Implementation",
+                "code": "import java.util.*;\r\n\r\npublic class Solution {\r\n    public static void main(String[] args) {\r\n        Scanner scanner = new Scanner(System.in);\r\n        String legacyUrl = scanner.nextLine();\r\n        \r\n        /* * LORE: The faculty's student database still uses an outdated, \r\n         * unencrypted API for internal requests. Your data extraction script \r\n         * will be immediately blocked by the modern outbound proxy unless \r\n         * the URL strictly uses \"https://\" instead of \"http://\".\r\n         */\r\n         \r\n        // Replace \"http://\" with \"https://\" in the provided URL string\r\n        {{{upgrade_protocol}}}\r\n        \r\n        System.out.println(secureUrl);\r\n    }\r\n}",
+                "snippets": [
+                    [
+                        "upgrade_protocol",
+                        "String secureUrl = legacyUrl.replace(\"http://\", \"https://\");"
+                    ]
+                ]
+            }
+        ],
+        "expectation": {
+            "input": "http://example.com",
+            "output": "https://example.com"
+        }
+    },
+    {
+        "title": "LCK-CHUNK-004: Storage Capacity Check",
+        "difficulty": "Medium",
+        "category": "Java Basics",
+        "templates": [
+            {
+                "lang": "java",
+                "name": "Java Implementation",
+                "code": "import java.util.*;\r\n\r\npublic class Solution {\r\n    public static void main(String[] args) {\r\n        Scanner scanner = new Scanner(System.in);\r\n        int driveCapacityMB = scanner.nextInt();\r\n        int fileSizeKB = scanner.nextInt();\r\n        \r\n        /* * LORE: You've accessed the Dean's terminal and are trying to download the \r\n         * digital blueprints of the faculty building onto a smuggled thumb drive. \r\n         * The system gives you the file size in Kilobytes (KB), but you only know \r\n         * your drive's remaining capacity in Megabytes (MB).\r\n         */\r\n         \r\n        // Check if the file will fit on the drive (Remember: 1024 KB in 1 MB)\r\n        {{{check_storage}}}\r\n        \r\n        System.out.println(hasEnoughSpace);\r\n    }\r\n}",
+                "snippets": [
+                    [
+                        "check_storage",
+                        "boolean hasEnoughSpace = (fileSizeKB / 1024) <= driveCapacityMB;"
+                    ]
+                ]
+            }
+        ],
+        "expectation": {
+            "input": "1024\n2048",
+            "output": "true"
+        }
+    },
+    {
+        "title": "LCK-CHUNK-005: Password Validation",
+        "difficulty": "Medium",
+        "category": "Java Basics",
+        "templates": [
+            {
+                "lang": "java",
+                "name": "Java Implementation",
+                "code": "import java.util.*;\r\n\r\npublic class Solution {\r\n    public static void main(String[] args) {\r\n        Scanner scanner = new Scanner(System.in);\r\n        String username = scanner.nextLine();\r\n        String password = scanner.nextLine();\r\n        \r\n        /* The Teaching Assistant used a notoriously weak password policy \r\n         * for the gradebook server. To crack into the system and find the security \r\n         * bypass key, you need to write a quick validation script. A valid password \r\n         * must be at least 8 characters long and MUST NOT be exactly the same as the username.\r\n         */\r\n         \r\n        // Return true if the password is 8+ characters and doesn't match the username\r\n        {{{validate_password}}}\r\n        \r\n        System.out.println(isValid);\r\n    }\r\n}",
+                "snippets": [
+                    [
+                        "validate_password",
+                        "boolean isValid = password.length() >= 8 && !password.equals(username);"
+                    ]
+                ]
+            }
+        ],
+        "expectation": {
+            "input": "password\nusername",
+            "output": "false"
+        }
+    }
+]
