@@ -141,18 +141,20 @@ def seed_lockerroom_java():
                     session.delete(t)
                 session.flush()
 
-            for lang, t_data in c_data["templates"].items():
+            for t_data in c_data["templates"]:
+                lang = t_data["lang"]
                 template = ChunkTemplate(
                     chunk_id=chunk.id,
                     language=lang,
                     name=t_data["name"],
-                    template_code=t_data["template_code"],
+                    template_code=t_data["code"],
                     description=t_data.get("description", f"Standard {lang} boilerplate")
                 )
                 session.add(template)
                 session.flush()
 
-                for key, content in t_data.get("snippets", {}).items():
+                for snippet in t_data.get("snippets", []):
+                    key, content = snippet
                     s = Snippet(template_id=template.id, placeholder_key=key, code_content=content)
                     session.add(s)
 
