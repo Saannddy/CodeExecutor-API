@@ -1,0 +1,21 @@
+meta {
+  name: PATCH update problem title by ID
+  type: http
+  seq: 7
+}
+
+patch {
+  url: {{base_url}}/problem/2a3380b4-fbc7-517d-9583-01d41d1cbb80/title
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Multiply Two Numbers (2)"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

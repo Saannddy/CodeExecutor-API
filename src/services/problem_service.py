@@ -66,7 +66,9 @@ class ProblemService:
 
         return enriched
     
-
+    def update_problem_title(self, problem_id, new_title):
+        """ Update problem title """
+        return self.problem_repo.update_title_by_id(problem_id, new_title)
     
     def add_test_cases(self, problem_id, testcases):
         """ Add multiple test cases to problem """
