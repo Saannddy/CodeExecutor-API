@@ -1,0 +1,470 @@
+[
+    {
+        "title": "HLW-001: Bad news",
+        "description": "AUTHOR: Anonymous\n\nBad news. The security daemon doesn't just use a static shelf number anymore. It rotates the physical bypass tunnel every 24 hours based on the server's daily diagnostic logs.\n\nI intercepted the interface architecture. You need to write a class named ShelfOverride that implements the ShelfController interface.\n\nThe system will pass an array of integers into your method. The correct shelf number is the total count of diagnostic codes in that array that are BOTH strictly greater than 100 AND a multiple of 3.\n\nYOUR TARGET:\n\nImplement: ShelfController\n\nRequired Method: public int getTargetShelf(int[] diagnostics)\n\nWrite the loop. Filter the array. Return the final count.\n\nWarning: Do not write an infinite loop. The server will time out, flag this terminal, and lock us out forever.",
+        "difficulty": "Hard",
+        "category": "HLW_P004",
+        "templates": {
+            "java": "class ShelfOverride {\n    public int getTargetShelf(int[] diagnostics) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[102, 105, 108]",
+                "output": "3",
+                "is_hidden": false
+            },
+            {
+                "input": "[99, 100, 101]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[300, 200, 102]",
+                "output": "2",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[103, 106, 110, 111]",
+                "output": "2",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-002: The encrypted gatekeeper is monitoring heat sig...",
+        "description": "AUTHOR: Ghost_Protocol\n\nThe encrypted gatekeeper is monitoring heat signatures. To bypass the thermal lock, you need to identify \"critical spikes.\"\n\nWrite a class ThermalBypass that implements SensorArray. Iterate through the input array and count how many values are negative OR above 500.\n\nTARGET:\n\nImplement: SensorArray\n\nMethod: public int countSpikes(int[] heat)",
+        "difficulty": "Hard",
+        "category": "HLW_P004",
+        "templates": {
+            "java": "class ThermalBypass {\n    public int countSpikes(int[] heat) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[-1, 501, 100]",
+                "output": "2",
+                "is_hidden": false
+            },
+            {
+                "input": "[0, 500, 499]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[-10, -20, 600, 700]",
+                "output": "4",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[1, 2, 3]",
+                "output": "0",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-003: We\u2019re intercepting a packet stream",
+        "description": "AUTHOR: NullPointer\n\n\n\nWe\u2019re intercepting a packet stream. The bridge will only open if we provide the sum of all \"parity-aligned\" IDs.\n\n\n\nImplement BridgeProtocol. Your method must sum all even numbers in the array. If the array is empty, return 0.\n\n\n\nTARGET:\n\n\nImplement: BridgeProtocol\n\n\nMethod: public int getParitySum(int[] ids)",
+        "difficulty": "Hard",
+        "category": "HLW_P004",
+        "templates": {
+            "java": "class BridgeProtocol {\n    public int getParitySum(int[] ids) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[2, 4, 6]",
+                "output": "12",
+                "is_hidden": false
+            },
+            {
+                "input": "[1, 3, 5]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[10, 11, 12]",
+                "output": "22",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[-2, 2, 0]",
+                "output": "0",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-004: The vault uses a \"Range-Lock\" mechanism",
+        "description": "AUTHOR: Anonymous\n\n\n\nThe vault uses a \"Range-Lock\" mechanism. We need to verify if the server's sequence contains at least three values within the \"Safe Zone\" (between 10 and 20 inclusive).\n\n\n\nImplement VaultUnlocker. Return true if the count of valid numbers is 3 or more, otherwise return false.\n\n\n\nTARGET:\n\n\nImplement: VaultUnlocker\n\n\nMethod: public boolean isSafe(int[] seq)",
+        "difficulty": "Hard",
+        "category": "HLW_P004",
+        "templates": {
+            "java": "class VaultUnlocker {\n    public boolean isSafe(int[] seq) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[10, 15, 20]",
+                "output": "true",
+                "is_hidden": false
+            },
+            {
+                "input": "[10, 15, 9]",
+                "output": "false",
+                "is_hidden": true
+            },
+            {
+                "input": "[10, 20, 11, 12]",
+                "output": "true",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "false",
+                "is_hidden": true
+            },
+            {
+                "input": "[21, 22, 23, 24, 25]",
+                "output": "false",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-005: The watchdog timer is scanning for anomalies",
+        "description": "AUTHOR: Root_Access\n\n\n\nThe watchdog timer is scanning for anomalies. An anomaly is any value that is exactly double the value of the number immediately preceding it in the array.\n\n\n\nImplement WatchdogBypass. Return the total count of these anomalies. Start your check from the second element.\n\n\n\nTARGET:\n\n\nImplement: WatchdogBypass\n\n\nMethod: public int findAnomalies(int[] stream)",
+        "difficulty": "Hard",
+        "category": "HLW_P004",
+        "templates": {
+            "java": "class WatchdogBypass {\n    public int findAnomalies(int[] stream) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[1, 2, 4]",
+                "output": "2",
+                "is_hidden": false
+            },
+            {
+                "input": "[1, 3, 6]",
+                "output": "1",
+                "is_hidden": true
+            },
+            {
+                "input": "[10, 20, 30, 60]",
+                "output": "2",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "[100]",
+                "output": "0",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-006: Security Protocol is failing to compile",
+        "description": "Security Protocol is failing to compile. The security protocol uses the Decryptor interface, but the Clue class is missing the required method to unlock it.\n\nTARGET: Write the missing method. The interface requires getShiftKey() to return an integer of the bypass shift key. The bypass shift key for this node is the amount of bookshelves added to the amount of student's desk.",
+        "difficulty": "Hard",
+        "category": "HLW_P005",
+        "templates": {
+            "java": "class Clue {\n    public int getShiftKey() {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "dummy_0",
+                "output": "STATUS: PASSED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": false
+            },
+            {
+                "input": "dummy_1",
+                "output": "STATUS: PASSED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_2",
+                "output": "STATUS: PASSED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_3",
+                "output": "STATUS: PASSED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_4",
+                "output": "STATUS: PASSED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-007: The server room is overheating",
+        "description": "The server room is overheating. The CoolantSystem interface requires a getTemperatureThreshold() method to initiate the purge.\n\n\n\nTARGET: Calculate the threshold by adding the roomCount (12) to the serverDensity (14).",
+        "difficulty": "Hard",
+        "category": "HLW_P005",
+        "templates": {
+            "java": "class PurgeUnit {\n    public int getTemperatureThreshold() {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "dummy_0",
+                "output": "STATUS: PURGING\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": false
+            },
+            {
+                "input": "dummy_1",
+                "output": "STATUS: PURGING\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_2",
+                "output": "STATUS: PURGING\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_3",
+                "output": "STATUS: PURGING\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_4",
+                "output": "STATUS: PURGING\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-008: The satellite dish is misaligned",
+        "description": "The satellite dish is misaligned. The Uplink interface requires a getSignalFrequency() method to lock onto the DevScape core.\n\n\n\nTARGET: Calculate the frequency by multiplying the dishRotation (45) by the amplifierGain (2).",
+        "difficulty": "Hard",
+        "category": "HLW_P005",
+        "templates": {
+            "java": "class SatelliteDish {\n    public int getSignalFrequency() {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "dummy_0",
+                "output": "STATUS: CONNECTED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": false
+            },
+            {
+                "input": "dummy_1",
+                "output": "STATUS: CONNECTED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_2",
+                "output": "STATUS: CONNECTED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_3",
+                "output": "STATUS: CONNECTED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_4",
+                "output": "STATUS: CONNECTED\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-009: The archive vault is locked behind a syntax error",
+        "description": "The archive vault is locked behind a syntax error. The Vault interface requires getAccessKey() to verify the user.\n\n\n\nTARGET: The access key is the vaultID (1024) minus the securityDelay (24).",
+        "difficulty": "Hard",
+        "category": "HLW_P005",
+        "templates": {
+            "java": "class ArchiveVault {\n    public int getAccessKey() {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "dummy_0",
+                "output": "STATUS: UNLOCKED\n\n\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": false
+            },
+            {
+                "input": "dummy_1",
+                "output": "STATUS: UNLOCKED\n\n\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_2",
+                "output": "STATUS: UNLOCKED\n\n\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_3",
+                "output": "STATUS: UNLOCKED\n\n\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            },
+            {
+                "input": "dummy_4",
+                "output": "STATUS: UNLOCKED\n\n\nRIDDLE ACQUIRED: \"RIDDLE\"",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-010: Don't bother running straight to the lobby",
+        "description": "AUTHOR: Anonymous\n\nDon't bother running straight to the lobby. The final exit keypad is completely powered down. The system won't supply power to the keypad until all five auxiliary security nodes in this hallway are decrypted.\n\nThe lockdown AI completely wiped the Firewall class from the server memory to stop us from getting the last clue. It only left the Mainframe interface intact.\n\nTARGET: \nRebuild the missing class from scratch.\n\nCreate a class named Firewall that implements Mainframe.\n\nImplement the missing decrypt() method.\n\nThe method must scan the data array. If it finds the exact integer 404, it must return: getPasskeyRiddle()\n\nIf it doesn't find it, return \"LOCKED\".",
+        "difficulty": "Hard",
+        "category": "HLW_P006",
+        "templates": {
+            "java": "class Firewall {\n    public String decrypt(int[] data) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[101, 404, 202]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": false
+            },
+            {
+                "input": "[1, 2, 3]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[404]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[405, 403]",
+                "output": "LOCKED",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-011: The biometric scanner for the armory is offline",
+        "description": "AUTHOR: Cipher\n\nThe biometric scanner for the armory is offline. The auxiliary power routing needs a massive surge to bypass the mechanical breaker. We need to channel all available data packets and check if the total voltage is high enough.\n\nTARGET:\nRebuild the missing routing class.\n\nCreate a class named PowerRouter that implements Mainframe.\n\nImplement the missing decrypt() method.\n\nThe method must calculate the total sum of all integers in the data array. If the total is greater than 9000, it must return: getPasskeyRiddle()\n\nIf it isn't, return \"LOCKED\".",
+        "difficulty": "Hard",
+        "category": "HLW_P006",
+        "templates": {
+            "java": "class PowerRouter {\n    public String decrypt(int[] data) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[5000, 4001]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": false
+            },
+            {
+                "input": "[9000]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[4500, 4500]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[10000]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-012: A logic bomb has been planted in the ventilatio...",
+        "description": "AUTHOR: Ghost\n\n\n\nA logic bomb has been planted in the ventilation control subnet. We don't have time to sanitize the whole thing. We just need to find the trigger sequence before it executes. The bomb's signature is two consecutive negative integers.\n\n\n\nTARGET:\n\n\nConstruct the scanner class.\n\n\n\nCreate a class named LogicScanner that implements Mainframe.\n\n\n\nImplement the missing decrypt() method.\n\n\n\nThe method must scan the data array for two negative numbers in a row (e.g., -5 immediately followed by -1). If it finds this signature, return: getPasskeyRiddle()\n\n\n\nIf it reaches the end without finding the signature, return \"LOCKED\".",
+        "difficulty": "Hard",
+        "category": "HLW_P006",
+        "templates": {
+            "java": "class LogicScanner {\n    public String decrypt(int[] data) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[-1, -2]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": false
+            },
+            {
+                "input": "[-1, 0, -2]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[1, 2, -3, -4, 5]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[-1]",
+                "output": "LOCKED",
+                "is_hidden": true
+            }
+        ]
+    },
+    {
+        "title": "HLW-013: The main elevator requires a secure handshake t...",
+        "description": "AUTHOR: Overwatch\n\nThe main elevator requires a secure handshake to descend to the lab level. The encryption parity is strict: every single packet in the handshake sequence must be an even number. One odd packet means the connection is compromised.\n\nTARGET:\n\nBuild the verification class.\n\nCreate a class named ParityCheck that implements Mainframe.\n\nImplement the missing decrypt() method.\n\nThe method must evaluate the data array. If it detects ANY odd integer, immediately return: \"LOCKED\"\n\nIf it successfully scans the entire array and all numbers are even, return: getPasskeyRiddle()",
+        "difficulty": "Hard",
+        "category": "HLW_P006",
+        "templates": {
+            "java": "class ParityCheck {\n    public String decrypt(int[] data) {\n        // Your code here\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "[2, 4, 6]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": false
+            },
+            {
+                "input": "[2, 4, 5]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[1, 3, 5]",
+                "output": "LOCKED",
+                "is_hidden": true
+            },
+            {
+                "input": "[]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": true
+            },
+            {
+                "input": "[0, 2, 4]",
+                "output": "RIDDLE_CONTENT",
+                "is_hidden": true
+            }
+        ]
+    }
+]
