@@ -1,0 +1,102 @@
+[
+    {
+        "title": "HLW-CHUNK-001",
+        "difficulty": "Hard",
+        "category": "HLW_P001",
+        "templates": {
+            "java": {
+                "name": "Java Implementation",
+                "template_code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int core_temp = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        int access_code = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        String main_grid = scanner.hasNext() ? scanner.next() : \"\";\n        int battery_level = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        \n        boolean coolant = false;\n        String vault_door = \"LOCKED\";\n        String backup_power = \"OFF\";\n\n        //TASK 1: COOLING LOGIC\n{{{snippet_1}}}\n     coolant = true;\n}\n//TASK 2: VAULT ACCESS\n{{{snippet_2}}}\n     vault_door = \"OPEN\";\n}\n//TASK 3: POWER FAILSAFE (ADVANCED)\n{{{snippet_3}}}\n     backup_power = \"ON\";\n}\n        \n        System.out.print(coolant + \"|\" + vault_door + \"|\" + backup_power);\n    }\n}",
+                "snippets": {
+                    "snippet_1": "if (core_temp >= 90) {",
+                    "snippet_2": "if (access_code == 7734) {",
+                    "snippet_3": "if (main_grid == \"OFF\" && battery_level < 20) {"
+                }
+            }
+        },
+        "expectation": {
+            "input": "95\n7734\nOFF\n15",
+            "output": "true|OPEN|ON"
+        }
+    },
+    {
+        "title": "HLW-CHUNK-002",
+        "difficulty": "Hard",
+        "category": "HLW_P001",
+        "templates": {
+            "java": {
+                "name": "Java Implementation",
+                "template_code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int core_temp = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        int access_code = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        String main_grid = scanner.hasNext() ? scanner.next() : \"\";\n        int battery_level = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        \n        boolean coolant = false;\n        String vault_door = \"LOCKED\";\n        String backup_power = \"OFF\";\n\n        //TASK 1: GATEWAY OVERRIDE\n     {{{snippet_1}}}\ngateway = \"OPEN\";\n}\n//TASK 2: PACKET FILTER\n     {{{snippet_2}}}\ndrop_packet = true;\n}\n//TASK 3: SSL HANDSHAKE\n     {{{snippet_3}}}\nsecure_connection = true;\n}\n        \n        System.out.print(coolant + \"|\" + vault_door + \"|\" + backup_power);\n    }\n}",
+                "snippets": {
+                    "snippet_1": "if (ip_address == \"192.168.1.1\") {",
+                    "snippet_2": "if (protocol == \"UDP\" && port == 80) {",
+                    "snippet_3": "if (cert_expiry > 2026) {"
+                }
+            }
+        },
+        "expectation": {
+            "input": "95\n7734\nOFF\n15",
+            "output": "true|OPEN|ON"
+        }
+    },
+    {
+        "title": "HLW-CHUNK-003",
+        "difficulty": "Hard",
+        "category": "HLW_P001",
+        "templates": {
+            "java": {
+                "name": "Java Implementation",
+                "template_code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int core_temp = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        int access_code = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        String main_grid = scanner.hasNext() ? scanner.next() : \"\";\n        int battery_level = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        \n        boolean coolant = false;\n        String vault_door = \"LOCKED\";\n        String backup_power = \"OFF\";\n\n        // TASK 1: AI OUTPUT SANITIZATION\n{{{snippet_1}}}\n  ai_output = \"CONTAINED\";\n}\n// TASK 2: CONTAINMENT FIELD LOGIC\n{{{snippet_2}}}\n  containment_field = \"ACTIVE\";\n}\n// TASK 3: ENCRYPTION CHECK (ADVANCED)\n{{{snippet_3}}}\n  access_granted = true;\n}\n        \n        System.out.print(coolant + \"|\" + vault_door + \"|\" + backup_power);\n    }\n}",
+                "snippets": {
+                    "snippet_1": "if (ai_response_string == \"CRITICAL ERROR\") {",
+                    "snippet_2": "if (core_stability < 0.2 && core_temperature > 500) {",
+                    "snippet_3": "if (encryption_type == \"RSA\" || encryption_type == \"AES\") {"
+                }
+            }
+        },
+        "expectation": {
+            "input": "95\n7734\nOFF\n15",
+            "output": "true|OPEN|ON"
+        }
+    },
+    {
+        "title": "HLW-CHUNK-004",
+        "difficulty": "Hard",
+        "category": "HLW_P001",
+        "templates": {
+            "java": {
+                "name": "Java Implementation",
+                "template_code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int core_temp = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        int access_code = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        String main_grid = scanner.hasNext() ? scanner.next() : \"\";\n        int battery_level = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        \n        boolean coolant = false;\n        String vault_door = \"LOCKED\";\n        String backup_power = \"OFF\";\n\n        //TASK 1: OXYGEN RECLAMATION\n{{{snippet_1}}}\nscrubber_status = \"MAX\";\n}\n//TASK 2: THERMAL REGULATION\n{{{snippet_2}}}\nheater = \"ON\";\n}\n//TASK 3: WATER FILTRATION (ADVANCED)\n{{{snippet_3}}}\nflush_filter = true;\n}\n        \n        System.out.print(coolant + \"|\" + vault_door + \"|\" + backup_power);\n    }\n}",
+                "snippets": {
+                    "snippet_1": "if (co2_level > 0.05) {",
+                    "snippet_2": "if (ambient_temp < 18) {",
+                    "snippet_3": "if (psi >= 60 && turbidity > 5) {"
+                }
+            }
+        },
+        "expectation": {
+            "input": "95\n7734\nOFF\n15",
+            "output": "true|OPEN|ON"
+        }
+    },
+    {
+        "title": "HLW-CHUNK-005",
+        "difficulty": "Hard",
+        "category": "HLW_P001",
+        "templates": {
+            "java": {
+                "name": "Java Implementation",
+                "template_code": "import java.util.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int core_temp = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        int access_code = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        String main_grid = scanner.hasNext() ? scanner.next() : \"\";\n        int battery_level = scanner.hasNextInt() ? scanner.nextInt() : 0;\n        \n        boolean coolant = false;\n        String vault_door = \"LOCKED\";\n        String backup_power = \"OFF\";\n\n        //TASK 1: PERIMETER SCAN\n{{{snippet_1}}}\nalarm_siren = true;\n}\n//TASK 2: TURRET CALIBRATION\n{{{snippet_2}}}\ntarget_lock = \"LOCKED\";\n}\n//TASK 3: BIOMETRIC OVERRIDE\n{{{snippet_3}}}\ngate_bypass = true;\n}\n        \n        System.out.print(coolant + \"|\" + vault_door + \"|\" + backup_power);\n    }\n}",
+                "snippets": {
+                    "snippet_1": "if (motion_detected == true && authorized == false) {",
+                    "snippet_2": "if (distance <= 500 && visibility == \"CLEAR\") {",
+                    "snippet_3": "if (admin_key == 99) {"
+                }
+            }
+        },
+        "expectation": {
+            "input": "95\n7734\nOFF\n15",
+            "output": "true|OPEN|ON"
+        }
+    }
+]
