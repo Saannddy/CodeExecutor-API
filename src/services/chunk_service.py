@@ -40,11 +40,14 @@ class ChunkService:
                 processed_list.append(current_buffer if current_buffer else "\n")
                 t_dict["template_code"] = processed_list
 
-            snippets_dict = t_dict.get("snippets", {})
-            if isinstance(snippets_dict, dict):
-                keys = list(snippets_dict.keys())
-                t_dict["snippets"] = keys
-                t_dict["code_content"] = [snippets_dict[k] for k in keys]
+                snippets_dict = t_dict.get("snippets", {})
+                if isinstance(snippets_dict, dict):
+                # We sort the keys to ensure the order is deterministic.
+                # If your keys are 'step_1', 'step_2', etc., sorted() will keep them in order.
+                    sorted_keys = sorted(snippets_dict.keys())
+                
+                    t_dict["snippets"] = sorted_keys
+                    t_dict["code_content"] = [snippets_dict[k] for k in sorted_keys]
 
         return chunk
 
