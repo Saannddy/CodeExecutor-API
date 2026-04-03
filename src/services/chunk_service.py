@@ -42,8 +42,6 @@ class ChunkService:
 
                 snippets_dict = t_dict.get("snippets", {})
                 if isinstance(snippets_dict, dict):
-                # We sort the keys to ensure the order is deterministic.
-                # If your keys are 'step_1', 'step_2', etc., sorted() will keep them in order.
                     sorted_keys = sorted(snippets_dict.keys())
                 
                     t_dict["snippets"] = sorted_keys
