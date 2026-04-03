@@ -11,12 +11,10 @@ from models import (
     RiddleTagLink, QuestionTagLink, QuestionCategoryLink,
     ChunkTemplate, Chunk, Snippet, ChunkCategoryLink, ChunkTagLink, Expectation
 )
-from scripts.seeders import (
-    seed_hallway_java,
-    seed_lockerroom_java,
-    seed_restroom_java,
-    seed_elevatorhall_java
-)
+from scripts.seeders.seed_hallway_java import seed_hallway_java
+from scripts.seeders.seed_lockerroom_java import seed_lockerroom_java
+from scripts.seeders.seed_restroom_java import seed_restroom_java
+from scripts.seeders.seed_elevatorhall_java import seed_elevatorhall_java
 
 
 
