@@ -78,20 +78,48 @@ class ChunkRepository:
             
         return self._serialize_chunk(chunk, lang)
 
-    def find_random(self, limit=1, lang=None):
-        """Fetch random N chunks with their implementation details. Filters by language if provided."""
+    def find_random(self, limit=1, lang=None, tags=None, category=None):
+        """Fetch random N chunks with their implementation details. Filters by language, tags, and category if provided."""
         with self._get_session() as session:
-            statement = select(Chunk).order_by(func.random())
-            # For simplicity, if lang is provided, we fetch more and filter in Python
-            # or just fetch all and filter.
-            results = session.exec(statement).all()
+            statement = select(Chunk).options(
+                joinedload(Chunk.templates).joinedload(ChunkTemplate.snippets),
+                joinedload(Chunk.tags),
+                joinedload(Chunk.categories)
+            ).order_by(func.random())
+            
+            # If language is specified, filter chunks that HAVE at least one template in that language
+            if lang:
+                statement = statement.join(Chunk.templates).where(ChunkTemplate.language == lang)
+            
+            # If tags or category are specified, we might need more to filter in Python
+            if tags or category:
+                fetch_limit = limit * 20  # Fetch more to account for filtering
+                statement = statement.limit(fetch_limit)
+            else:
+                statement = statement.limit(limit * 2)  # Some buffer
+            
+            results = session.exec(statement).unique().all()
             if not results:
                 return []
 
             chunks = []
             for chunk in results:
-                if lang and lang not in chunk.config.get("templates", {}):
+                # Basic language check (redundant but safe)
+                if lang and lang not in [t.language for t in chunk.templates]:
                     continue
+                
+                # Tag check
+                if tags:
+                    chunk_tag_names = [t.name for t in chunk.tags]
+                    if not all(tag in chunk_tag_names for tag in tags):
+                        continue
+                
+                # Category check
+                if category:
+                    chunk_category_names = [c.name for c in chunk.categories]
+                    if category not in chunk_category_names:
+                        continue
+
                 chunks.append(self._serialize_chunk(chunk, lang))
                 if len(chunks) >= limit:
                     break

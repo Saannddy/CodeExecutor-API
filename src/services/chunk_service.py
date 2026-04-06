@@ -6,7 +6,6 @@ class ChunkService:
         self.repo = ChunkRepository()
 
     def _process_chunk(self, chunk):
-
         if not chunk:
             return None
 
@@ -22,21 +21,31 @@ class ChunkService:
         for lang, t_dict in templates.items():
             cmt_pat = cmt_map.get(lang.lower(), cmt_map["default"])
             tc = t_dict.get("template_code")
+            
             if tc:
-                processed = re.sub(
-                    r'\{{3}\s*(\w+)\s*\}{3}', 
-                    lambda m: f"\n{cmt_pat.format(m.group(1))}\n", 
-                    tc
-                )
-                t_dict["template_code"] = [line for line in processed.split('\n') if line]
+                parts = re.split(r'(\{{3}\s*\w+\s*\}{3})', tc)
+                processed_list = []
+                current_buffer = ""
 
-            # Transform snippets dict into parallel arrays
-            snippets_dict = t_dict.get("snippets", {})
-            if isinstance(snippets_dict, dict):
-                keys = list(snippets_dict.keys())
-                values = [snippets_dict[k] for k in keys]
-                t_dict["snippets"] = keys
-                t_dict["code_content"] = values
+                for part in parts:
+                    match = re.match(r'\{{3}\s*(\w+)\s*\}{3}', part)
+                    if match:
+                        key_name = match.group(1)
+                        comment_str = f"\n{cmt_pat.format(key_name)}"
+                        processed_list.append(current_buffer + comment_str)
+                        current_buffer = ""
+                    else:
+                        current_buffer = part
+
+                processed_list.append(current_buffer if current_buffer else "\n")
+                t_dict["template_code"] = processed_list
+
+                snippets_dict = t_dict.get("snippets", {})
+                if isinstance(snippets_dict, dict):
+                    sorted_keys = sorted(snippets_dict.keys())
+                
+                    t_dict["snippets"] = sorted_keys
+                    t_dict["code_content"] = [snippets_dict[k] for k in sorted_keys]
 
         return chunk
 
@@ -50,6 +59,6 @@ class ChunkService:
             return self._process_chunk(chunk)
         return None
 
-    def get_random_chunks(self, limit=1, lang=None):
-        chunks = self.repo.find_random(limit=limit, lang=lang)
+    def get_random_chunks(self, limit=1, lang=None, tags=None, category=None):
+        chunks = self.repo.find_random(limit=limit, lang=lang, tags=tags, category=category)
         return [self._process_chunk(c) for c in chunks]
