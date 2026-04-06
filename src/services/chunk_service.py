@@ -40,11 +40,12 @@ class ChunkService:
                 processed_list.append(current_buffer if current_buffer else "\n")
                 t_dict["template_code"] = processed_list
 
-            snippets_dict = t_dict.get("snippets", {})
-            if isinstance(snippets_dict, dict):
-                keys = list(snippets_dict.keys())
-                t_dict["snippets"] = keys
-                t_dict["code_content"] = [snippets_dict[k] for k in keys]
+                snippets_dict = t_dict.get("snippets", {})
+                if isinstance(snippets_dict, dict):
+                    sorted_keys = sorted(snippets_dict.keys())
+                
+                    t_dict["snippets"] = sorted_keys
+                    t_dict["code_content"] = [snippets_dict[k] for k in sorted_keys]
 
         return chunk
 
@@ -58,6 +59,6 @@ class ChunkService:
             return self._process_chunk(chunk)
         return None
 
-    def get_random_chunks(self, limit=1, lang=None, tags=None):
-        chunks = self.repo.find_random(limit=limit, lang=lang, tags=tags)
+    def get_random_chunks(self, limit=1, lang=None, tags=None, category=None):
+        chunks = self.repo.find_random(limit=limit, lang=lang, tags=tags, category=category)
         return [self._process_chunk(c) for c in chunks]
