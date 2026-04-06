@@ -1,0 +1,23 @@
+meta {
+  name: Execute Java Chunk
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:3000/chunk/execute/22e04d50-3aea-43ac-9a89-32daea0cc9f8?lang=java
+  body: json
+  auth: none
+}
+
+params:query {
+  lang: java
+}
+
+body:json {
+  {
+    "snippets": {
+      "logic": "return x * y"
+    }
+  }
+}
