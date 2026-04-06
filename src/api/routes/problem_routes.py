@@ -28,3 +28,8 @@ def add_test_cases(problem_id):
 def import_test_cases(problem_id):
     """ Import test cases from a ZIP file (Base: /problem/<id>/testcases/import)"""
     return problem_handler.import_test_cases(problem_id)
+
+@problem_bp.patch('/<problem_id>/title')
+def update_problem_title(problem_id):
+    """Update problem title (Base: /problem/<id>/title)"""
+    return problem_handler.update_problem_title(problem_id)

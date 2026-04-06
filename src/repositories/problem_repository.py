@@ -76,3 +76,16 @@ class ProblemRepository:
                 problems.append(p_dict)
 
             return problems
+        
+    def update_title_by_id(self, problem_id, new_title):
+        """ Update problem title """
+        with self._get_session() as session:
+            problem = session.get(Problem, problem_id)
+            if not problem:
+                return {"status": "error", "message": "Problem not found"}
+
+            problem.title = new_title
+            session.commit()
+            session.refresh(problem)
+
+            return {"status": "success", "data": problem.model_dump(exclude={"config", "description"})}

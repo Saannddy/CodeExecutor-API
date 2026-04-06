@@ -43,6 +43,24 @@ class ProblemHandler:
         if not problem:
             return jsonify(status="error", message="No problems found"), 404
         return jsonify(status="success", data=problem), 200
+    
+    def update_problem_title(self, problem_id):
+        """ Update problem title """
+        if not request.is_json:
+            return jsonify(status='error', message='Request must be JSON'), 400
+        
+        data = request.get_json()
+        new_title = data.get('title')
+
+        if not new_title:
+            return jsonify(status='error', message='Title is required'), 400
+        
+        new_title = new_title.strip()
+        result = self.problem_service.update_problem_title(problem_id, new_title)
+
+        if result['status'] == 'error':
+            return jsonify(status='error', message=result.get('message')), 400
+        return jsonify(status='success', data=result.get('data')), 200
 
     def add_test_cases(self, problem_id):
         """ Add multiple test case  """
