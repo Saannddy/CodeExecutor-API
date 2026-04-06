@@ -22,6 +22,28 @@
         }
     },
     {
+        "title": "LCK-CHUNK-003: URL Protocol Upgrade -- removed due to blacklist detected",
+        "difficulty": "Medium",
+        "category": "Java Basics",
+        "templates": [
+            {
+                "lang": "java",
+                "name": "Java Implementation",
+                "code": "import java.util.*;\n\n\n\npublic class Solution {\n\n    public static void main(String[] args) {\n\n        Scanner scanner = new Scanner(System.in);\n\n        String legacyUrl = scanner.nextLine();\n\n        \n\n        /* * LORE: The faculty's student database still uses an outdated, \n\n         * unencrypted API for internal requests. Your data extraction script \n\n         * will be immediately blocked by the modern outbound proxy unless \n\n         * the URL strictly uses \"https://\" instead of \"http://\".\n\n         */\n\n         \n\n        // Replace \"http://\" with \"https://\" in the provided URL string\n\n        {{{upgrade_protocol}}}\n\n        \n\n        System.out.println(secureUrl);\n\n    }\n\n}",
+                "snippets": [
+                    [
+                        "upgrade_protocol",
+                        "String secureUrl = legacyUrl.replace(\"http://\", \"https://\");"
+                    ]
+                ]
+            }
+        ],
+        "expectation": {
+            "input": "http://example.com",
+            "output": "https://example.com"
+        }
+    },
+    {
         "title": "Java Lambda Comparator",
         "difficulty": "Medium",
         "category": "Functional",

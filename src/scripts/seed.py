@@ -11,6 +11,11 @@ from models import (
     RiddleTagLink, QuestionTagLink, QuestionCategoryLink,
     ChunkTemplate, Chunk, Snippet, ChunkCategoryLink, ChunkTagLink, Expectation
 )
+from scripts.seeders.seed_hallway_java import seed_hallway_java
+from scripts.seeders.seed_lockerroom_java import seed_lockerroom_java
+from scripts.seeders.seed_restroom_java import seed_restroom_java
+from scripts.seeders.seed_elevatorhall_java import seed_elevatorhall_java
+
 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -410,6 +415,15 @@ def seed_data():
         
         session.commit()
         logging.info("Chunk seeding process completed.")
+
+        # Seed local regional data
+        logging.info("Seeding regional data...")
+        seed_hallway_java()
+        seed_lockerroom_java()
+        seed_restroom_java()
+        seed_elevatorhall_java()
+        logging.info("Regional seeding process completed.")
+
 
 if __name__ == "__main__":
     seed_data()
