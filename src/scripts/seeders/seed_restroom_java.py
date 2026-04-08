@@ -72,9 +72,8 @@ def seed_restroom_java():
         jav_restroom_tag = get_or_create_tag("JAV_RESTROOM")
         java_cat = get_or_create_category("Java")
 
-        # 1. Seed Questions
         logging.info(f"Seeding {len(QUESTIONS)} Java questions...")
-        for q_data in QUESTIONS:
+        for q_data in tqdm(QUESTIONS, desc="Seeding Questions"):
             q_id = get_uuid(f"jav_rst_q_{q_data['title']}")
             if session.exec(select(Question).where(Question.id == q_id)).first():
                 continue
@@ -100,9 +99,8 @@ def seed_restroom_java():
                 )
                 session.add(choice)
 
-        # 2. Seed Riddles
         logging.info(f"Seeding {len(RIDDLES)} Java riddles...")
-        for i, r_data in enumerate(RIDDLES):
+        for i, r_data in enumerate(tqdm(RIDDLES, desc="Seeding Riddles")):
             r_id = get_uuid(f"jav_rst_r_{i}")
             if session.exec(select(Riddle).where(Riddle.id == r_id)).first():
                 continue
@@ -118,9 +116,8 @@ def seed_restroom_java():
             riddle.tags = [jav_restroom_tag]
             session.add(riddle)
 
-        # 3. Seed Chunks
         logging.info(f"Seeding {len(CHUNKS)} Java chunks...")
-        for c_data in CHUNKS:
+        for c_data in tqdm(CHUNKS, desc="Seeding Chunks"):
             c_id = get_uuid(f"jav_rst_chunk_{c_data['title']}")
             chunk = session.exec(select(Chunk).where(Chunk.id == c_id)).first()
             if not chunk:
@@ -170,9 +167,8 @@ def seed_restroom_java():
                 )
                 session.add(ex)
 
-        # 4. Seed Problems
         logging.info(f"Seeding {len(PROBLEMS)} Java problems...")
-        for p_data in PROBLEMS:
+        for p_data in tqdm(PROBLEMS, desc="Seeding Problems"):
             p_id = get_uuid(f"jav_rst_prob_{p_data['title']}")
             problem = session.exec(select(Problem).where(Problem.id == p_id)).first()
             
