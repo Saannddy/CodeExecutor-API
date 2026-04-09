@@ -1,4 +1,5 @@
 import logging
+from tqdm import tqdm
 import uuid
 import random
 import string
@@ -230,7 +231,7 @@ def seed_data():
             session.commit()
             
             logging.info("Seeding 30 riddles...")
-            for i in range(1, 31):
+            for i in tqdm(range(1, 31), desc="Seeding Riddles"):
                 riddle = Riddle(
                     riddle_text=f"This is riddle number {i}. What is it?",
                     refer_char=random.choice(string.ascii_uppercase),
@@ -254,7 +255,7 @@ def seed_data():
             session.commit()
 
             logging.info("Seeding 10 questions with 4 choices each...")
-            for i in range(1, 11):
+            for i in tqdm(range(1, 11), desc="Seeding Questions"):
                 question = Question(
                     title=f"Sample Question {i}",
                     question_text=f"This is the content for question {i}. Which choice is correct?",
@@ -375,7 +376,7 @@ def seed_data():
             }
         ]
 
-        for c_data in chunks_to_seed:
+        for c_data in tqdm(chunks_to_seed, desc="Seeding Chunks"):
             existing = session.exec(select(Chunk).where(Chunk.title == c_data["title"])).first()
             if existing:
                 continue

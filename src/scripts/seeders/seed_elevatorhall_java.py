@@ -1,4 +1,5 @@
 import logging
+from tqdm import tqdm
 import uuid
 import json
 import os
@@ -61,9 +62,8 @@ def seed_elevatorhall_java():
         elv_hall_tag = get_or_create_tag("JAV_ELVHALL")
         java_cat = get_or_create_category("Java")
 
-        # 1. Seed Chunks
         logging.info(f"Seeding {len(CHUNKS)} Java chunks...")
-        for c_data in CHUNKS:
+        for c_data in tqdm(CHUNKS, desc="Seeding Chunks"):
             c_id = get_uuid(f"jav_elvhall_chunk_{c_data['title']}")
             chunk = session.exec(select(Chunk).where(Chunk.id == c_id)).first()
             if not chunk:
@@ -109,9 +109,8 @@ def seed_elevatorhall_java():
                 )
                 session.add(ex)
 
-        # 2. Seed Problems
         logging.info(f"Seeding {len(PROBLEMS)} Java problems...")
-        for p_data in PROBLEMS:
+        for p_data in tqdm(PROBLEMS, desc="Seeding Problems"):
             p_id = get_uuid(f"jav_elvhall_prob_{p_data['title']}")
             problem = session.exec(select(Problem).where(Problem.id == p_id)).first()
             if not problem:
