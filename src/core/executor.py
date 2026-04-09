@@ -11,6 +11,21 @@ MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", 1))
 MAX_OPEN_FILES = int(os.getenv("MAX_OPEN_FILES", 64))
 MAX_RUN_TIME = int(os.getenv("MAX_RUN_TIME", 5))
 
+def _java_env():
+    """Build a clean environment for Java subprocesses, removing JAVA_TOOL_OPTIONS to prevent noise."""
+    env = os.environ.copy()
+    env.pop("JAVA_TOOL_OPTIONS", None)
+    env.pop("_JAVA_OPTIONS", None)
+    return env
+
+def _clean_java_stderr(stderr):
+    """Strip JVM noise lines (Picked up JAVA_TOOL_OPTIONS, etc.) from stderr."""
+    if not stderr:
+        return stderr
+    lines = stderr.splitlines(True)
+    cleaned = [l for l in lines if not l.startswith("Picked up ")]
+    return "".join(cleaned)
+
 def _sandbox_preexec(timeout, skip_memory=False):
     """Set resource limits for child processes."""
     def _set_limits():
@@ -121,6 +136,7 @@ def _run_java(code, tests=None, timeout=None):
         with open(src, 'w') as f:
             f.write(code)
             
+        java_env = _java_env()
         try:
             # Compile with --release 11 for broad compatibility and fast startup
             comp = subprocess.run([
@@ -130,9 +146,9 @@ def _run_java(code, tests=None, timeout=None):
                 "--release", "11",
                 src, "-d", d
             ], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d,
-               env={**os.environ, "JAVA_TOOL_OPTIONS": ""})
+               env=java_env)
             if comp.returncode:
-                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": _clean_java_stderr(comp.stderr)}
         except subprocess.TimeoutExpired:
             return {"status": "error", "message": "Compilation timed out"}
 
@@ -150,13 +166,14 @@ def _run_java(code, tests=None, timeout=None):
             try:
                 res = subprocess.run(
                     cmd, capture_output=True, text=True, 
-                    timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout, skip_memory=True)
+                    timeout=timeout, cwd=d, env=java_env,
+                    preexec_fn=_sandbox_preexec(timeout, skip_memory=True)
                 )
-                return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+                return {"status": "success", "stdout": res.stdout, "stderr": _clean_java_stderr(res.stderr)}
             except subprocess.TimeoutExpired:
                 return {"status": "error", "message": "Execution timed out"}
             
-        return _run_tests(cmd, tests, timeout, cwd=d, skip_memory=True)
+        return _run_tests(cmd, tests, timeout, cwd=d, skip_memory=True, env=java_env)
 
 def _run_interpreted(code, lang, tests=None, timeout=None):
     """Run interpreted languages like Python/JS."""
@@ -181,16 +198,19 @@ def _run_interpreted(code, lang, tests=None, timeout=None):
             
         return _run_tests(cmd, tests, timeout, cwd=d)
 
-def _run_tests(cmd_base, tests, timeout, cwd=None, skip_memory=False):
+def _run_tests(cmd_base, tests, timeout, cwd=None, skip_memory=False, env=None):
     """Run code against multiple test cases."""
     results, status, msg = [], "correct", "All tests passed!"
     for t in tests:
         try:
-            r = subprocess.run(
-                cmd_base, input=t['input'], capture_output=True, 
-                text=True, timeout=timeout, cwd=cwd, 
+            run_kwargs = dict(
+                input=t['input'], capture_output=True,
+                text=True, timeout=timeout, cwd=cwd,
                 preexec_fn=_sandbox_preexec(timeout, skip_memory)
             )
+            if env:
+                run_kwargs['env'] = env
+            r = subprocess.run(cmd_base, **run_kwargs)
             out, err = r.stdout.strip(), r.stderr.strip()
             
             # Simple correctness check
