@@ -6,7 +6,7 @@ import resource
 from .config import COMPILERS, validate_code
 from .security.sanitizer import sanitize_code
 
-MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 512))
+MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 128))
 MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", 1))
 MAX_OPEN_FILES = int(os.getenv("MAX_OPEN_FILES", 64))
 MAX_RUN_TIME = int(os.getenv("MAX_RUN_TIME", 5))
@@ -62,14 +62,14 @@ def execute_code(code: str, lang: str, tests: list, timeout: int = None, templat
     if timeout is None:
         timeout = MAX_RUN_TIME
     if lang not in COMPILERS:
-        return {"status": "error", "message": f"Unsupported language: {lang}"}
+        return {"status": "error", "msg": f"Unsupported language: {lang}"}
 
     scan = sanitize_code(lang, code)
     if not scan["safe"]:
-        return {"status": "error", "message": f"Code reject for execute due to {' and '.join(scan['violations'])}"}
+        return {"status": "error", "msg": f"Code reject for execute due to {' and '.join(scan['violations'])}"}
 
     if not validate_code(lang, code, rules or {}):
-        return {"status": "error", "message": "Code failed additional rules."}
+        return {"status": "error", "msg": "Code failed additional rules."}
     
     code_final = code
     template = (templates or {}).get(lang)
@@ -101,9 +101,9 @@ def _run_c_cpp(code, lang, tests=None, timeout=None):
                 capture_output=True, text=True, timeout=max(timeout, 10), cwd=d
             )
             if comp.returncode:
-                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+                return {"status": "incorrect", "msg": comp.stderr}
         except subprocess.TimeoutExpired:
-            return {"status": "error", "message": "Compilation timed out"}
+            return {"status": "error", "msg": "Compilation timed out"}
 
         if tests is None:
             try:
@@ -113,7 +113,7 @@ def _run_c_cpp(code, lang, tests=None, timeout=None):
                 )
                 return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
             except subprocess.TimeoutExpired:
-                return {"status": "error", "message": "Execution timed out"}
+                return {"status": "error", "msg": "Execution timed out"}
             
         return _run_tests([exe], tests, timeout, cwd=d)
 
@@ -127,7 +127,7 @@ def _run_java(code, tests=None, timeout=None):
     
     match = re.search(r'(?:public\s+)?(?:(?:abstract|final|static|strictfp)\s+)*class\s+(\w+)', code_clean)
     if not match:
-        return {"status": "error", "message": "Java class not found."}
+        return {"status": "error", "msg": "Java class not found."}
         
     class_name = match.group(1)
     
@@ -148,9 +148,9 @@ def _run_java(code, tests=None, timeout=None):
             ], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d,
                env=java_env)
             if comp.returncode:
-                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": _clean_java_stderr(comp.stderr)}
+                return {"status": "incorrect", "msg": _clean_java_stderr(comp.stderr)}
         except subprocess.TimeoutExpired:
-            return {"status": "error", "message": "Compilation timed out"}
+            return {"status": "error", "msg": "Compilation timed out"}
 
         # Optimized JVM startup arguments (removed deprecated -noverify)
         cmd = [
@@ -171,7 +171,7 @@ def _run_java(code, tests=None, timeout=None):
                 )
                 return {"status": "success", "stdout": res.stdout, "stderr": _clean_java_stderr(res.stderr)}
             except subprocess.TimeoutExpired:
-                return {"status": "error", "message": "Execution timed out"}
+                return {"status": "error", "msg": "Execution timed out"}
             
         return _run_tests(cmd, tests, timeout, cwd=d, skip_memory=True, env=java_env)
 
@@ -194,7 +194,7 @@ def _run_interpreted(code, lang, tests=None, timeout=None):
                 )
                 return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
             except subprocess.TimeoutExpired:
-                return {"status": "error", "message": "Execution timed out"}
+                return {"status": "error", "msg": "Execution timed out"}
             
         return _run_tests(cmd, tests, timeout, cwd=d)
 
