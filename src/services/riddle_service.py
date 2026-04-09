@@ -87,10 +87,10 @@ class RiddleService:
             
         return self.riddle_repo.update(riddle).model_dump()
 
-    def get_random_riddles_group(self, amount: int):
+    def get_random_riddles_group(self, amount: int, tag: str = None):
         """Pick N random riddles (1 per refer_index) and build solution string."""
         try:
-            riddles = self.riddle_repo.find_random_per_index(amount)
+            riddles = self.riddle_repo.find_random_per_index(amount, tag_name=tag)
             
             # Build solution string by joining refer_char in order of refer_index
             solution = "".join([r.refer_char for r in riddles])
