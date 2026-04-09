@@ -5,7 +5,12 @@ from sqlalchemy.orm import sessionmaker
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-engine = create_engine(DATABASE_URL, echo=False) if DATABASE_URL else None
+engine = create_engine(
+    DATABASE_URL,
+    echo=False,
+    pool_pre_ping=True,
+    pool_recycle=300,
+) if DATABASE_URL else None
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, class_=Session) if engine else None
 
 if engine:
