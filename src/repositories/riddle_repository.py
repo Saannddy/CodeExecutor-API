@@ -47,15 +47,20 @@ class RiddleRepository:
             
             return riddles, total_count
 
-    def find_random_per_index(self, amount: int):
+    def find_random_per_index(self, amount: int, tag_name: str = None):
         """Pick one random riddle for each refer_index from 1 to amount."""
         riddles_group = []
         with self._get_session() as session:
             for i in range(1, amount + 1):
                 statement = select(Riddle).where(Riddle.refer_index == i)
+                if tag_name:
+                    statement = statement.join(Riddle.tags).where(Tag.name.ilike(tag_name))
                 results = session.exec(statement).all()
                 if results:
                     riddles_group.append(random.choice(results))
                 else:
-                    raise ValueError(f"No riddles found for specific index {i}")
+                    error_msg = f"No riddles found for specific index {i}"
+                    if tag_name:
+                        error_msg += f" with tag '{tag_name}'"
+                    raise ValueError(error_msg)
         return riddles_group
