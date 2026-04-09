@@ -16,7 +16,8 @@ class RiddleHandler:
     def get_riddles_group(self):
         """Get a random group of riddles (1 per index) and their solution."""
         amount = request.args.get('amount', 5, type=int)
-        res = self.riddle_service.get_random_riddles_group(amount)
+        tag = request.args.get('tag')
+        res = self.riddle_service.get_random_riddles_group(amount, tag=tag)
         if res['status'] == "error":
             return jsonify(res), 400
         return jsonify(res), 200
