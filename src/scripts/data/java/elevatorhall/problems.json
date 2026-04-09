@@ -1,25 +1,25 @@
 [
     {
         "title": "ELV-P1-PROB-001",
-        "description": "// [NULL] destroyed the auth daemon's recursive checksum.\n// Without a base case, every badge scan crashes the stack.\n// Restore it. The first fragment unlocks when it runs clean.\n\npublic class AuthDaemon {\n\n    public static int hashPassword(String s) {\n        // Recursively sum the ASCII value of each character.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(hashPassword(\"DOOR\"));\n        System.out.println(hashPassword(\"KEY\"));\n        System.out.println(hashPassword(\"\"));\n    }\n}",
+        "description": "// [NULL] destroyed the auth daemon's recursive checksum.\n// Without a base case, every badge scan crashes the stack.\n// Restore it. The first fragment unlocks when it runs clean.\n",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// [NULL] destroyed the auth daemon's recursive checksum.\n// Without a base case, every badge scan crashes the stack.\n// Restore it. The first fragment unlocks when it runs clean.\n\npublic class AuthDaemon {\n\n    public static int hashPassword(String s) {\n        // Recursively sum the ASCII value of each character.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(hashPassword(\"DOOR\"));\n        System.out.println(hashPassword(\"KEY\"));\n        System.out.println(hashPassword(\"\"));\n    }\n}"
+            "java": "public class AuthDaemon {\npublic static int hashPassword(String s) {\n// Recursively sum the ASCII value of each character.\n//Player code goes here\n}\n\n    public static void main(String[] args) {\n\t    Scanner sc = new Scanner(System.in);\n\t    String str = sc.nextLine();\n        System.out.println(hashPassword(str));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "\"DOOR\"",
-                "output": "289",
+                "input": "DOOR",
+                "output": "308",
                 "is_hidden": false
             },
             {
-                "input": "\"KEY\"",
-                "output": "236",
+                "input": "KEY",
+                "output": "233",
                 "is_hidden": true
             },
             {
-                "input": "\"\"",
+                "input": "",
                 "output": "0",
                 "is_hidden": true
             }
@@ -27,63 +27,68 @@
     },
     {
         "title": "ELV-P1-PROB-002",
-        "description": "// The badge scanner counts security characters in access codes recursively.\n// [NULL] gutted the logic. Restore it before the auth layer rejects every card.\n\npublic class AuthDaemon {\n\n    public static int countChar(String s, char target) {\n        // Recursively count how many times target appears in s.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(countChar(\"ESCALATE\", 'E'));\n        System.out.println(countChar(\"ACCESS\", 'S'));\n        System.out.println(countChar(\"DOOR\", 'Z'));\n    }\n}",
+        "description": "// The badge scanner counts security characters in access codes recursively.\n// [NULL] gutted the logic. Restore it before the auth layer rejects every card.\n\n",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// The badge scanner counts security characters in access codes recursively.\n// [NULL] gutted the logic. Restore it before the auth layer rejects every card.\n\npublic class AuthDaemon {\n\n    public static int countChar(String s, char target) {\n        // Recursively count how many times target appears in s.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(countChar(\"ESCALATE\", 'E'));\n        System.out.println(countChar(\"ACCESS\", 'S'));\n        System.out.println(countChar(\"DOOR\", 'Z'));\n    }\n}"
+            "java": "import java.util.Scanner;\npublic class AuthDaemon {\n    public static int countChar(String s, char target) {\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String str = sc.nextLine();\n        char c = sc.next().charAt(0);\n        System.out.println(countChar(str,c));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "\"ESCALATE\", 'E'",
+                "input": "ESCALATE\nE",
                 "output": "2",
                 "is_hidden": false
             },
             {
-                "input": "\"ACCESS\", 'S'",
+                "input": "ACCESS\nS",
                 "output": "2",
                 "is_hidden": true
             },
             {
-                "input": "\"DOOR\", 'Z'",
+                "input": "DOOR\nZ",
                 "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "AAAA\nA",
+                "output": "4",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P1-PROB-003",
-        "description": "// [NULL] reversed every exit label in the CCTV registry to cover their tracks.\n// This recursive function reverses them back. It is broken. Fix it.\n\npublic class AuthDaemon {\n\n    public static String reverseCode(String s) {\n        // Recursively reverse the string.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(reverseCode(\"TIXE\"));\n        System.out.println(reverseCode(\"EDOC\"));\n        System.out.println(reverseCode(\"\"));\n    }\n}",
+        "description": "[NULL] reversed every exit label in the CCTV registry to cover their tracks.\n// This recursive function reverses them back. It is broken. Fix it.\n",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// [NULL] reversed every exit label in the CCTV registry to cover their tracks.\n// This recursive function reverses them back. It is broken. Fix it.\n\npublic class AuthDaemon {\n\n    public static String reverseCode(String s) {\n        // Recursively reverse the string.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(reverseCode(\"TIXE\"));\n        System.out.println(reverseCode(\"EDOC\"));\n        System.out.println(reverseCode(\"\"));\n    }\n}"
+            "java": "import java.util.Scanner;\npublic class AuthDaemon {\n    public static String reverseCode(String s) {\n        // Recursively reverse the string.\n        // player code goes here\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String str = sc.nextLine();\n        System.out.println(reverseCode(str));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "\"TIXE\"",
+                "input": "TIXE",
                 "output": "EXIT",
                 "is_hidden": false
             },
             {
-                "input": "\"EDOC\"",
+                "input": "EDOC",
                 "output": "CODE",
                 "is_hidden": true
             },
             {
-                "input": "\"\"",
-                "output": "",
+                "input": "SANDY",
+                "output": "YDNAS",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P1-PROB-004",
-        "description": "// Floor access codes are validated by a recursive digit checksum.\n// The module is down. Restore it before the elevator rejects every request.\n\npublic class AuthDaemon {\n\n    public static int sumDigits(int n) {\n        // Recursively sum each digit of n.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(sumDigits(4821));\n        System.out.println(sumDigits(9));\n        System.out.println(sumDigits(0));\n    }\n}",
+        "description": "// Floor access codes are validated by a recursive digit checksum.\n// The module is down. Restore it before the elevator rejects every request.",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// Floor access codes are validated by a recursive digit checksum.\n// The module is down. Restore it before the elevator rejects every request.\n\npublic class AuthDaemon {\n\n    public static int sumDigits(int n) {\n        // Recursively sum each digit of n.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(sumDigits(4821));\n        System.out.println(sumDigits(9));\n        System.out.println(sumDigits(0));\n    }\n}"
+            "java": "import java.util.Scanner;\npublic class AuthDaemon {\n    public static int sumDigits(int n) {\n        // Recursively sum each digit of n.\n        // player code goes here \n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int num = sc.nextInt();\n        System.out.println(sumDigits(num));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
@@ -126,11 +131,11 @@
     },
     {
         "title": "ELV-P2-PROB-002",
-        "description": "// [NULL] is hiding in wireless dead zones to avoid detection.\n// The signal map is a grid, find every cell below strength 10.\n// Expose the dead zones and the relay comes back online.\n\nimport java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findDeadZones(int[][] signal) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Flag every cell where signal strength is below 10 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if coverage is full.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] signal = {\n            {55,  3, 80,  7},\n            {90, 42,  8, 60},\n            { 5, 70, 33,  2}\n        };\n        System.out.println(findDeadZones(signal));\n\n        int[][] signal2 = {{50, 60}, {70, 80}};\n        System.out.println(findDeadZones(signal2));\n    }\n}",
+        "description": "[NULL] is hiding in wireless dead zones to avoid detection.\nThe signal map is a grid, find every cell below strength 10.\nExpose the dead zones and the relay comes back online.\n",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// [NULL] is hiding in wireless dead zones to avoid detection.\n// The signal map is a grid, find every cell below strength 10.\n// Expose the dead zones and the relay comes back online.\n\nimport java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findDeadZones(int[][] signal) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Flag every cell where signal strength is below 10 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if coverage is full.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] signal = {\n            {55,  3, 80,  7},\n            {90, 42,  8, 60},\n            { 5, 70, 33,  2}\n        };\n        System.out.println(findDeadZones(signal));\n\n        int[][] signal2 = {{50, 60}, {70, 80}};\n        System.out.println(findDeadZones(signal2));\n    }\n}"
+            "java": "import java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findDeadZones(int[][] signal) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Flag every cell where signal strength is below 10 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if coverage is full.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] signal = {\n            {55,  3, 80,  7},\n            {90, 42,  8, 60},\n            { 5, 70, 33,  2}\n        };\n        System.out.println(findDeadZones(signal));\n\n        int[][] signal2 = {{50, 60}, {70, 80}};\n        System.out.println(findDeadZones(signal2));\n    }\n}"
         },
         "test_cases": [
             {
@@ -147,11 +152,11 @@
     },
     {
         "title": "ELV-P2-PROB-003",
-        "description": "// Security needs a headcount to confirm the building is clear.\n// The attendance grid uses 1 for present, 0 for absent.\n// Count the occupied cells and report the total.\n\npublic class GridScanner {\n\n    public static int countPresent(int[][] attendance) {\n        // Count every cell equal to 1 and return the total.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] a = {\n            {1, 0, 1, 1},\n            {0, 0, 1, 0},\n            {1, 1, 0, 1}\n        };\n        System.out.println(countPresent(a));\n\n        int[][] b = {{0, 0}, {0, 0}};\n        System.out.println(countPresent(b));\n    }\n}",
+        "description": "Security needs a headcount to confirm the building is clear.\nThe attendance grid uses 1 for present, 0 for absent.\nCount the occupied cells and report the total.\n",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// Security needs a headcount to confirm the building is clear.\n// The attendance grid uses 1 for present, 0 for absent.\n// Count the occupied cells and report the total.\n\npublic class GridScanner {\n\n    public static int countPresent(int[][] attendance) {\n        // Count every cell equal to 1 and return the total.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] a = {\n            {1, 0, 1, 1},\n            {0, 0, 1, 0},\n            {1, 1, 0, 1}\n        };\n        System.out.println(countPresent(a));\n\n        int[][] b = {{0, 0}, {0, 0}};\n        System.out.println(countPresent(b));\n    }\n}"
+            "java": "import java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static int countPresent(int[][] attendance) {\n        // Count every cell equal to 1 and return the total.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] a = {\n            {1, 0, 1, 1},\n            {0, 0, 1, 0},\n            {1, 1, 0, 1}\n        };\n        System.out.println(countPresent(a));\n\n        int[][] b = {{0, 0}, {0, 0}};\n        System.out.println(countPresent(b));\n    }\n}"
         },
         "test_cases": [
             {
@@ -168,11 +173,11 @@
     },
     {
         "title": "ELV-P2-PROB-004",
-        "description": "// One server rack is running [NULL]'s process and overheating the room.\n// Find the single hottest cell in the thermal grid.\n// Return its location and temperature, then we know where to cut power.\n\npublic class GridScanner {\n\n    public static String findHotspot(int[][] temps) {\n        // Find the cell with the maximum value. Return \"[row,col]=value\".\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] t = {\n            {40, 72, 55},\n            {88, 61, 47},\n            {33, 95, 70}\n        };\n        System.out.println(findHotspot(t));\n\n        int[][] t2 = {{10, 20}, {30, 25}};\n        System.out.println(findHotspot(t2));\n    }\n}",
+        "description": "One server rack is running [NULL]'s process and overheating the room.\nFind the single hottest cell in the thermal grid.\nReturn its location and temperature, then we know where to cut power.\n",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// One server rack is running [NULL]'s process and overheating the room.\n// Find the single hottest cell in the thermal grid.\n// Return its location and temperature, then we know where to cut power.\n\npublic class GridScanner {\n\n    public static String findHotspot(int[][] temps) {\n        // Find the cell with the maximum value. Return \"[row,col]=value\".\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] t = {\n            {40, 72, 55},\n            {88, 61, 47},\n            {33, 95, 70}\n        };\n        System.out.println(findHotspot(t));\n\n        int[][] t2 = {{10, 20}, {30, 25}};\n        System.out.println(findHotspot(t2));\n    }\n}"
+            "java": "import java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findHotspot(int[][] temps) {\n        // Find the cell with the maximum value. Return \"[row,col]=value\".\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] t = {\n            {40, 72, 55},\n            {88, 61, 47},\n            {33, 95, 70}\n        };\n        System.out.println(findHotspot(t));\n\n        int[][] t2 = {{10, 20}, {30, 25}};\n        System.out.println(findHotspot(t2));\n    }\n}"
         },
         "test_cases": [
             {
@@ -189,11 +194,11 @@
     },
     {
         "title": "ELV-P3-PROB-001",
-        "description": "// [NULL] wiped both card subclasses from the clearance system.\n// Every card now returns UNKNOWN and every door stays locked.\n// The base class survived. Restore both card types from scratch.\n\npublic class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}",
+        "description": "[NULL] wiped both card subclasses from the clearance system.\nEvery card now returns UNKNOWN and every door stays locked.\nThe base class survived. Restore both card types from scratch.\n\npublic class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}",
         "difficulty": "Hard",
         "category": "ELV-P3",
         "templates": {
-            "java": "// [NULL] wiped both card subclasses from the clearance system.\n// Every card now returns UNKNOWN and every door stays locked.\n// The base class survived. Restore both card types from scratch.\n\npublic class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}"
+            "java": "import java.util.ArrayList;\n\npublic class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}"
         },
         "test_cases": [
             {
