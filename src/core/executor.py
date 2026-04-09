@@ -122,26 +122,28 @@ def _run_java(code, tests=None, timeout=None):
             f.write(code)
             
         try:
-            # Added JVM args to javac to speed up its own startup time
+            # Compile with --release 11 for broad compatibility and fast startup
             comp = subprocess.run([
-                "javac", 
-                "-J-XX:+TieredCompilation", 
-                "-J-XX:TieredStopAtLevel=1", 
+                "javac",
+                "-J-XX:+TieredCompilation",
+                "-J-XX:TieredStopAtLevel=1",
+                "--release", "11",
                 src, "-d", d
-            ], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d)
+            ], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d,
+               env={**os.environ, "JAVA_TOOL_OPTIONS": ""})
             if comp.returncode:
                 return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
         except subprocess.TimeoutExpired:
             return {"status": "error", "message": "Compilation timed out"}
-            
-        # Optimized JVM startup arguments
+
+        # Optimized JVM startup arguments (removed deprecated -noverify)
         cmd = [
-            "java", 
-            "-cp", d, 
-            f"-Xmx{MAX_MEMORY_MB}m", 
-            "-XX:+TieredCompilation", 
-            "-XX:TieredStopAtLevel=1", 
-            "-noverify",
+            "java",
+            "-cp", d,
+            f"-Xmx{MAX_MEMORY_MB}m",
+            f"-Xms32m",
+            "-XX:+TieredCompilation",
+            "-XX:TieredStopAtLevel=1",
             class_name
         ]
         if tests is None:
