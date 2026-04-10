@@ -98,7 +98,7 @@ def _run_c_cpp(code, lang, tests=None, timeout=None):
         try:
             comp = subprocess.run(
                 [cfg['compiler'], src, "-o", exe], 
-                capture_output=True, text=True, timeout=max(timeout, 10), cwd=d
+                capture_output=True, text=True, timeout=max(timeout, 20), cwd=d
             )
             if comp.returncode:
                 return {"status": "incorrect", "msg": comp.stderr}
@@ -145,7 +145,7 @@ def _run_java(code, tests=None, timeout=None):
                 "-J-XX:TieredStopAtLevel=1",
                 "--release", "11",
                 src, "-d", d
-            ], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d,
+            ], capture_output=True, text=True, timeout=max(timeout, 20), cwd=d,
                env=java_env)
             if comp.returncode:
                 return {"status": "incorrect", "msg": _clean_java_stderr(comp.stderr)}
