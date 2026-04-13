@@ -125,7 +125,9 @@ def _run_java(code, tests=None, timeout=None):
     code_clean = re.sub(r'//.*?$', '', code, flags=re.MULTILINE)
     code_clean = re.sub(r'/\*.*?\*/', '', code_clean, flags=re.DOTALL)
     
-    match = re.search(r'(?:public\s+)?(?:(?:abstract|final|static|strictfp)\s+)*class\s+(\w+)', code_clean)
+    match = re.search(r'public\s+(?:abstract|final|static|strictfp\s+)*class\s+(\w+)', code_clean)
+    if not match:
+        match = re.search(r'(?:public\s+)?(?:(?:abstract|final|static|strictfp)\s+)*class\s+(\w+)', code_clean)
     if not match:
         return {"status": "error", "msg": "Java class not found."}
         
