@@ -112,6 +112,10 @@ Seed the database with Java MCQs, riddles, and problems tagged as `JAV_RESTROOM`
 # Running via Docker (Must rebuild if scripts are modified)
 docker compose --profile local up -d --build
 docker compose --profile local exec local-code-api python3 -m scripts.seeders.seed_restroom_java
+docker compose --profile remote exec code-api python3 -m scripts.seeders.seed_restroom_java
+docker compose --profile remote exec code-api python3 -m scripts.seeders.seed_lockerroom_java
+docker compose --profile remote exec code-api python3 -m scripts.seeders.seed_hallway_java
+docker compose --profile remote exec code-api python3 -m scripts.seeders.seed_elevatorhall_java
 
 # Running Locally (Ensure .env is configured or set DATABASE_URL)
 export DATABASE_URL=postgresql://postgres:postgres@localhost:5432/code_executor
