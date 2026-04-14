@@ -37,7 +37,7 @@
     },
     {
         "title": "RST-002: Database Connection String Update",
-        "description": "// The database moved to a secure port, but our connection string stubbornly refuses to update.\nString dbUrl = \"jdbc:mysql://localhost:80/data\";\ndbUrl.replace(\"80\", \"443\");\nSystem.out.println(dbUrl);",
+        "description": "The database moved to a secure port, but our connection string stubbornly refuses to update.\nThe secure port will be receive as input string\nString dbUrl = \"jdbc:mysql://localhost:80/data\";\ndbUrl.replace(\"80\", \"443\");\nSystem.out.println(dbUrl);\nThis code should not work",
         "difficulty": "Easy",
         "category": "Strings",
         "templates": {
