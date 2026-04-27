@@ -1,7 +1,7 @@
 [
     {
         "title": "FIREWALL RULE ENGINE v3.1",
-        "description": " == FIREWALL RULE ENGINE v3.1 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the firewall's rule engine.\nPackets flow unchecked. Every rule was a single encoded string.\nParse the format, enforce the logic. One misread and the breach widens.\n\nRULE FORMAT:\n    \"ACTION|port_min-port_max|protocol\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    port_min and port_max define an inclusive range\n    protocol is a string like \"TCP\" or \"UDP\"\n\nPACKET FORMAT:\n    \"port|protocol\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's port as an integer and its protocol as a string.\n    2. Parse the rule's action, port range, and protocol.\n    3. If the packet's port falls within the range (inclusive)\n       AND the protocol matches (case-insensitive), return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "description": "== FIREWALL RULE ENGINE v3.1 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the firewall's rule engine. Packets flow unchecked. Restore it.\n\nRULE FORMAT:  \"ACTION|port_min-port_max|protocol\"\n  - ACTION is \"ALLOW\" or \"DENY\"\n  - port_min and port_max define an inclusive range\n  - protocol is a string like \"TCP\" or \"UDP\"\n\nPACKET FORMAT:  \"port|protocol\"\n\nLOGIC: If the packet's port is within [port_min, port_max] AND the protocol matches (case-insensitive), return the ACTION. Otherwise return \"NO_MATCH\".\n\nInput: line 1 is the rule string, line 2 is Q (number of packets), next Q lines are packet strings\nOutput: Q lines, each with the result for that packet",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -12,12 +12,27 @@
                 "input": "ALLOW|80-443|TCP\n4\n80|TCP\n443|tcp\n8080|TCP\n80|UDP",
                 "output": "ALLOW\nALLOW\nNO_MATCH\nNO_MATCH",
                 "is_hidden": false
+            },
+            {
+                "input": "DENY|22-22|SSH\n2\n22|SSH\n23|SSH",
+                "output": "DENY\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "ALLOW|1000-2000|UDP\n3\n1000|UDP\n2000|udp\n999|UDP",
+                "output": "ALLOW\nALLOW\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "DENY|0-65535|TCP\n2\n8080|TCP\n8080|UDP",
+                "output": "DENY\nNO_MATCH",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "FIREWALL RULE ENGINE v3.2",
-        "description": " == FIREWALL RULE ENGINE v3.2 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the firewall's IP-based rule engine.\nTraffic flows unfiltered. Every rule was a single encoded string.\nParse the format, enforce the logic. One wrong IP and the whole floor is exposed.\n\nRULE FORMAT:\n    \"ACTION|ip_prefix|port\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    ip_prefix is a partial IP like \"192.168\" (match if packet IP starts with this)\n    port is an exact port number\n\nPACKET FORMAT:\n    \"ip_address|port\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's IP address (string) and port (integer).\n    2. Parse the rule's action, IP prefix, and port.\n    3. If the packet's IP starts with the rule's ip_prefix\n       AND the port matches exactly, return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "description": "== FIREWALL RULE ENGINE v3.2 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the IP-based rule engine. Traffic flows unfiltered. Restore it.\n\nRULE FORMAT:  \"ACTION|ip_prefix|port\"\n  - ACTION is \"ALLOW\" or \"DENY\"\n  - ip_prefix is a partial IP like \"192.168\" — a packet IP matches if it STARTS WITH this string\n  - port is an exact port number\n\nPACKET FORMAT:  \"ip_address|port\"\n\nLOGIC: If the packet's IP starts with ip_prefix AND the port matches exactly, return the ACTION. Otherwise return \"NO_MATCH\".\n\nNote: prefix matching is a plain string prefix check — \"192.168.10\" also matches \"192.168.100.x\".\n\nInput: line 1 is the rule string, line 2 is Q (number of packets), next Q lines are packet strings\nOutput: Q lines, each with the result for that packet",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -28,12 +43,27 @@
                 "input": "ALLOW|192.168|8080\n3\n192.168.1.5|8080\n192.168.0.1|3000\n10.0.0.1|8080",
                 "output": "ALLOW\nNO_MATCH\nNO_MATCH",
                 "is_hidden": false
+            },
+            {
+                "input": "DENY|10.0.0|443\n2\n10.0.0.5|443\n10.0.1.5|443",
+                "output": "DENY\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "ALLOW|192.168.10|80\n2\n192.168.100.1|80\n192.168.10.1|80",
+                "output": "ALLOW\nALLOW",
+                "is_hidden": true
+            },
+            {
+                "input": "DENY|172.16|22\n2\n172.16.5.10|22\n172.16.5.10|23",
+                "output": "DENY\nNO_MATCH",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "FIREWALL RULE ENGINE v3.3",
-        "description": " == FIREWALL RULE ENGINE v3.3 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the outbound traffic filter.\nEvery packet escapes unchecked. Rules encoded as single strings are all that remain.\nParse the format, enforce the logic. The building leaks data with every second.\n\nRULE FORMAT:\n    \"ACTION|protocol|min_port\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    protocol is a string like \"TCP\", \"UDP\", \"ICMP\"\n    min_port is a threshold: rule applies to packets with port >= min_port\n\nPACKET FORMAT:\n    \"protocol|port\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's protocol (string) and port (integer).\n    2. Parse the rule's action, protocol, and minimum port.\n    3. If the protocol matches (case-insensitive)\n       AND the packet's port >= min_port, return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "description": "== FIREWALL RULE ENGINE v3.3 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the outbound traffic filter. Every packet escapes unchecked. Restore it.\n\nRULE FORMAT:  \"ACTION|protocol|min_port\"\n  - ACTION is \"ALLOW\" or \"DENY\"\n  - protocol is a string like \"TCP\", \"UDP\", \"ICMP\"\n  - min_port is a threshold — the rule applies to packets with port >= min_port\n\nPACKET FORMAT:  \"protocol|port\"\n\nLOGIC: If the protocol matches (case-insensitive) AND the packet's port >= min_port, return the ACTION. Otherwise return \"NO_MATCH\".\n\nInput: line 1 is the rule string, line 2 is Q (number of packets), next Q lines are packet strings\nOutput: Q lines, each with the result for that packet",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -44,12 +74,27 @@
                 "input": "DENY|TCP|1024\n3\nTCP|2000\nTCP|80\nUDP|2000",
                 "output": "DENY\nNO_MATCH\nNO_MATCH",
                 "is_hidden": false
+            },
+            {
+                "input": "DENY|UDP|1024\n3\nUDP|1024\nUDP|1023\nTCP|2000",
+                "output": "DENY\nNO_MATCH\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "ALLOW|ICMP|0\n2\nicmp|1\nTCP|0",
+                "output": "ALLOW\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "ALLOW|TCP|443\n3\ntcp|443\ntcp|442\nUDP|500",
+                "output": "ALLOW\nNO_MATCH\nNO_MATCH",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "FIREWALL RULE ENGINE v3.4",
-        "description": " == FIREWALL RULE ENGINE v3.4 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the zone-based packet filter.\nInternal zones bleed into external. Every rule was a single encoded string.\nParse the format, enforce the logic. One wrong zone and the core is exposed.\n\nRULE FORMAT:\n    \"ACTION|zone|port_min-port_max\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    zone is a string like \"INTERNAL\", \"EXTERNAL\", \"DMZ\"\n    port_min and port_max define an inclusive range\n\nPACKET FORMAT:\n    \"zone|port\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's zone (string) and port (integer).\n    2. Parse the rule's action, zone, and port range.\n    3. If the zone matches (case-insensitive)\n       AND the port falls within the range (inclusive), return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "description": "== FIREWALL RULE ENGINE v3.4 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the zone-based packet filter. Internal zones bleed into external. Restore it.\n\nRULE FORMAT:  \"ACTION|zone|port_min-port_max\"\n  - ACTION is \"ALLOW\" or \"DENY\"\n  - zone is a string like \"INTERNAL\", \"EXTERNAL\", \"DMZ\"\n  - port_min and port_max define an inclusive port range\n\nPACKET FORMAT:  \"zone|port\"\n\nLOGIC: If the zone matches (case-insensitive) AND the port is within [port_min, port_max], return the ACTION. Otherwise return \"NO_MATCH\".\n\nInput: line 1 is the rule string, line 2 is Q (number of packets), next Q lines are packet strings\nOutput: Q lines, each with the result for that packet",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -57,15 +102,30 @@
         },
         "test_cases": [
             {
-                "input": "ALLOW|INTERNAL|80-443\n4\nINTERNAL|80\ninternal|443\nEXTERNAL|80\nINTERNAL|8080\n",
+                "input": "ALLOW|INTERNAL|80-443\n4\nINTERNAL|80\ninternal|443\nEXTERNAL|80\nINTERNAL|8080",
                 "output": "ALLOW\nALLOW\nNO_MATCH\nNO_MATCH",
                 "is_hidden": false
+            },
+            {
+                "input": "DENY|DMZ|8000-9000\n3\ndmz|8000\nDMZ|9001\nINTERNAL|8500",
+                "output": "DENY\nNO_MATCH\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "ALLOW|EXTERNAL|443-443\n2\nexternal|443\nexternal|442",
+                "output": "ALLOW\nNO_MATCH",
+                "is_hidden": true
+            },
+            {
+                "input": "DENY|INTERNAL|0-65535\n3\nINTERNAL|1\nEXTERNAL|1\ninternal|65535",
+                "output": "DENY\nNO_MATCH\nDENY",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "DYNAMIC MEMORY ALLOCATOR v2.0",
-        "description": " == DYNAMIC MEMORY ALLOCATOR v2.0 ==\nSTATUS: CHAIN SEVERED BY [NULL]\n\n[NULL] corrupted the dynamic memory allocator's linked structure.\nNodes point nowhere. The chain is severed at every link.\nRebuild the node definition and the reversal engine.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndReverse(int[] values)\n\n    This method must:\n        1. Build a singly linked list from the array (first element = head).\n        2. Reverse the entire linked list in-place using pointer manipulation.\n        3. Return the reversed list as a string: \"data1 -> data2 -> data3\"\n        4. Return \"EMPTY\" if the input array has no elements.",
+        "description": "== DYNAMIC MEMORY ALLOCATOR v2.0 ==\nSTATUS: CHAIN SEVERED BY [NULL]\n\n[NULL] corrupted the dynamic memory allocator's linked structure. Rebuild the node definition and the reversal engine.\n\nRequirements:\n1. Define a static inner class \"Node\" inside MemoryAllocator with: an int field \"data\", a Node field \"next\", and a constructor that takes an int and sets next to null.\n2. Implement: public static String buildAndReverse(int[] values)\n   - Build a singly linked list from the array (first element = head).\n   - Reverse the entire list in-place using pointer manipulation (no extra collections).\n   - Return the reversed list as \"data1 -> data2 -> data3\".\n   - Return \"EMPTY\" if the input array has no elements.\n\nInput: a single line of space-separated integers, or the word \"EMPTY\" for an empty list\nOutput: the reversed linked list as a string, or \"EMPTY\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -76,12 +136,32 @@
                 "input": "10 20 30 40",
                 "output": "40 -> 30 -> 20 -> 10",
                 "is_hidden": false
+            },
+            {
+                "input": "EMPTY",
+                "output": "EMPTY",
+                "is_hidden": true
+            },
+            {
+                "input": "7",
+                "output": "7",
+                "is_hidden": true
+            },
+            {
+                "input": "1 2",
+                "output": "2 -> 1",
+                "is_hidden": true
+            },
+            {
+                "input": "5 4 3 2 1",
+                "output": "1 -> 2 -> 3 -> 4 -> 5",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "DYNAMIC MEMORY ALLOCATOR v2.1",
-        "description": " == DYNAMIC MEMORY ALLOCATOR v2.1 ==\nSTATUS: CORRUPTED BY [NULL]\n\n[NULL] destroyed the memory chain analyzer.\nLength is unknown. The midpoint is lost.\nRebuild the node structure, count the chain, and locate the center.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndFindMiddle(int[] values)\n\n    This method must:\n        1. Build a singly linked list from the array (first element = head).\n        2. Find the middle node using slow/fast pointer technique.\n           For even-length lists, return the second of the two middle nodes.\n        3. Return \"LENGTH:n|MIDDLE:data\" where n is total nodes.\n        4. Return \"EMPTY\" if the input array has no elements.",
+        "description": "== DYNAMIC MEMORY ALLOCATOR v2.1 ==\nSTATUS: CORRUPTED BY [NULL]\n\n[NULL] destroyed the memory chain analyzer. Length is unknown and the midpoint is lost. Rebuild the chain, count it, and locate the center.\n\nRequirements:\n1. Define a static inner class \"Node\" inside MemoryAllocator with: an int field \"data\", a Node field \"next\", and a constructor that takes an int and sets next to null.\n2. Implement: public static String buildAndFindMiddle(int[] values)\n   - Build a singly linked list from the array.\n   - Find the middle node using the slow/fast pointer technique.\n     For even-length lists, return the SECOND of the two middle nodes.\n   - Return \"LENGTH:n|MIDDLE:data\" where n is the total number of nodes.\n   - Return \"EMPTY\" if the input array has no elements.\n\nInput: a single line of space-separated integers, or the word \"EMPTY\" for an empty list\nOutput: \"LENGTH:n|MIDDLE:data\" or \"EMPTY\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -92,12 +172,32 @@
                 "input": "1 2 3 4 5",
                 "output": "LENGTH:5|MIDDLE:3",
                 "is_hidden": false
+            },
+            {
+                "input": "EMPTY",
+                "output": "EMPTY",
+                "is_hidden": true
+            },
+            {
+                "input": "42",
+                "output": "LENGTH:1|MIDDLE:42",
+                "is_hidden": true
+            },
+            {
+                "input": "1 2 3 4",
+                "output": "LENGTH:4|MIDDLE:3",
+                "is_hidden": true
+            },
+            {
+                "input": "10 20 30 40 50 60",
+                "output": "LENGTH:6|MIDDLE:40",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "DYNAMIC MEMORY ALLOCATOR v2.2",
-        "description": " == DYNAMIC MEMORY ALLOCATOR v2.2 ==\nSTATUS: POLLUTED BY [NULL]\n\n[NULL] injected duplicate entries into the memory chain.\nRepeated allocations corrupt the heap. Duplicates must be purged.\nRebuild the chain and strip all duplicate values, keeping only first occurrences.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndDeduplicate(int[] values)\n\n    This method must:\n        1. Build a singly linked list from the array.\n        2. Remove all duplicate values, keeping only the FIRST occurrence.\n        3. Return the deduplicated list as \"data1 -> data2 -> data3\".\n        4. Return \"EMPTY\" if the input array has no elements.",
+        "description": "== DYNAMIC MEMORY ALLOCATOR v2.2 ==\nSTATUS: POLLUTED BY [NULL]\n\n[NULL] injected duplicate entries into the memory chain. Repeated allocations corrupt the heap. Rebuild the chain and strip all duplicates, keeping only the first occurrence of each value.\n\nRequirements:\n1. Define a static inner class \"Node\" inside MemoryAllocator with: an int field \"data\", a Node field \"next\", and a constructor that takes an int and sets next to null.\n2. Implement: public static String buildAndDeduplicate(int[] values)\n   - Build a singly linked list from the array.\n   - Remove all duplicate values, keeping only the FIRST occurrence of each.\n   - Return the deduplicated list as \"data1 -> data2 -> data3\".\n   - Return \"EMPTY\" if the input array has no elements.\n\nInput: a single line of space-separated integers, or the word \"EMPTY\" for an empty list\nOutput: deduplicated linked list as a string, or \"EMPTY\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -108,12 +208,32 @@
                 "input": "3 1 3 2 1",
                 "output": "3 -> 1 -> 2",
                 "is_hidden": false
+            },
+            {
+                "input": "EMPTY",
+                "output": "EMPTY",
+                "is_hidden": true
+            },
+            {
+                "input": "1 1 1",
+                "output": "1",
+                "is_hidden": true
+            },
+            {
+                "input": "1 2 3",
+                "output": "1 -> 2 -> 3",
+                "is_hidden": true
+            },
+            {
+                "input": "5 3 5 3 5",
+                "output": "5 -> 3",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "DYNAMIC MEMORY ALLOCATOR v2.3",
-        "description": " == DYNAMIC MEMORY ALLOCATOR v2.3 ==\nSTATUS: INFECTED BY [NULL]\n\n[NULL] planted rogue entries in the memory chain.\nA known malicious value is embedded at random positions.\nRebuild the chain and surgically remove every occurrence of the target.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndPurge(int[] values, int target)\n\n    This method must:\n        1. Build a singly linked list from the array.\n        2. Remove ALL nodes whose data equals target.\n        3. Return the cleaned list as \"data1 -> data2 -> data3\".\n        4. Return \"EMPTY\" if the list is empty after purging\n           (or if the input array was empty).\n",
+        "description": "== DYNAMIC MEMORY ALLOCATOR v2.3 ==\nSTATUS: INFECTED BY [NULL]\n\n[NULL] planted rogue entries in the memory chain. A known malicious value is embedded at random positions. Rebuild the chain and surgically remove every occurrence of the target.\n\nRequirements:\n1. Define a static inner class \"Node\" inside MemoryAllocator with: an int field \"data\", a Node field \"next\", and a constructor that takes an int and sets next to null.\n2. Implement: public static String buildAndPurge(int[] values, int target)\n   - Build a singly linked list from the array.\n   - Remove ALL nodes whose data equals target.\n   - Return the cleaned list as \"data1 -> data2 -> data3\".\n   - Return \"EMPTY\" if the list is empty after purging (or if the input was empty).\n\nInput: line 1 is a space-separated list of integers, or \"EMPTY\" for an empty list; line 2 is the target integer to remove\nOutput: purged linked list as a string, or \"EMPTY\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -121,15 +241,35 @@
         },
         "test_cases": [
             {
-                "input": "values=[1, 9, 2, 9, 3], target=9",
+                "input": "1 9 2 9 3\n9",
                 "output": "1 -> 2 -> 3",
                 "is_hidden": false
+            },
+            {
+                "input": "5 5 5\n5",
+                "output": "EMPTY",
+                "is_hidden": true
+            },
+            {
+                "input": "1 2 3 4 5\n6",
+                "output": "1 -> 2 -> 3 -> 4 -> 5",
+                "is_hidden": true
+            },
+            {
+                "input": "7\n7",
+                "output": "EMPTY",
+                "is_hidden": true
+            },
+            {
+                "input": "3 1 4 1 5\n1",
+                "output": "3 -> 4 -> 5",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "SYSTEM BOOT SEQUENCER v1.0",
-        "description": " == SYSTEM BOOT SEQUENCER v1.0 ==\nSTATUS: SCRAMBLED BY [NULL]\n\n[NULL] scrambled the boot sequence.\nServices start before their dependencies, causing cascade failures.\nReconstruct the topological order. Every dependency must load first.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n                  (b must boot before a)\n\nOUTPUT:\n    A single line of space-separated service numbers in valid boot order.\n    When multiple services have no pending dependencies,\n    boot the lowest-numbered service first.\n    If a cycle makes ordering impossible, output \"CYCLE_DETECTED\".\n\nALGORITHM HINT:\n    Track how many dependencies each service has (in-degree).\n    Repeatedly pick the service with zero remaining dependencies,\n    boot it, then reduce the count for everything that depends on it.\n    If you finish and not all services were booted, there is a cycle.",
+        "description": "== SYSTEM BOOT SEQUENCER v1.0 ==\nSTATUS: SCRAMBLED BY [NULL]\n\n[NULL] scrambled the boot sequence. Services start before their dependencies, causing cascade failures. Reconstruct the topological order — every dependency must load first.\n\nImplement bootOrder(int numServices, int[][] deps) using Kahn's algorithm (BFS-based topological sort):\n- Track how many unresolved dependencies each service has (in-degree).\n- Use a min-priority queue so that when multiple services are ready, the LOWEST-numbered boots first.\n- Remove each booted service from others' dependency counts.\n- If not all services were booted, there is a cycle — return \"CYCLE_DETECTED\".\n- Otherwise return a space-separated boot order.\n\nInput: line 1 = N (number of services, labeled 0 to N-1), line 2 = M (number of dependency pairs), next M lines = \"a b\" meaning service a depends on service b (b boots before a)\nOutput: space-separated boot order, or \"CYCLE_DETECTED\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -137,15 +277,30 @@
         },
         "test_cases": [
             {
-                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "input": "4\n3\n1 0\n2 0\n3 2",
                 "output": "0 1 2 3",
                 "is_hidden": false
+            },
+            {
+                "input": "3\n3\n0 1\n1 2\n2 0",
+                "output": "CYCLE_DETECTED",
+                "is_hidden": true
+            },
+            {
+                "input": "3\n0",
+                "output": "0 1 2",
+                "is_hidden": true
+            },
+            {
+                "input": "5\n4\n1 0\n2 0\n3 1\n4 2",
+                "output": "0 1 2 3 4",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "SYSTEM BOOT SEQUENCER v1.1",
-        "description": " == SYSTEM BOOT SEQUENCER v1.1 ==\nSTATUS: INVERTED BY [NULL]\n\n[NULL] reversed the boot priority.\nThe system now demands highest-numbered services boot first when tied.\nReconstruct the topological order with inverted priority.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n                  (b must boot before a)\n\nOUTPUT:\n    A single line of space-separated service numbers in valid boot order.\n    When multiple services have no pending dependencies,\n    boot the HIGHEST-numbered service first.\n    If a cycle makes ordering impossible, output \"CYCLE_DETECTED\".\n\nEXAMPLES:\n    4 services, deps: 1->0, 2->0, 3->2\n    Valid: 0 is required first (only zero-indeg node initially).\n    Then 1 and 2 are free: pick 2 first (higher). Then 1, then 3.\n    Boot order: 0 2 3 1\n\n    3 services, deps: 0->1, 1->2, 2->0\n    Output: CYCLE_DETECTED",
+        "description": "== SYSTEM BOOT SEQUENCER v1.1 ==\nSTATUS: INVERTED BY [NULL]\n\n[NULL] reversed the boot priority. The system now demands the highest-numbered service boots first when multiple are ready. Reconstruct the topological order with inverted priority.\n\nImplement bootOrder(int numServices, int[][] deps) — same logic as v1.0 but use a MAX-priority queue so that when multiple services are ready at the same time, the HIGHEST-numbered boots first.\n\nExample: 4 services, deps: 1→0, 2→0, 3→2\n- Only 0 is ready first. Boot 0.\n- Both 1 and 2 become ready. Pick 2 (highest). Boot 2.\n- Both 1 and 3 become ready. Pick 3 (highest). Boot 3.\n- Only 1 remains. Boot 1.\n- Result: 0 2 3 1\n\nInput: line 1 = N (number of services), line 2 = M (dependency pairs), next M lines = \"a b\" (a depends on b)\nOutput: space-separated boot order (highest-first tiebreak), or \"CYCLE_DETECTED\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -153,15 +308,30 @@
         },
         "test_cases": [
             {
-                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "input": "4\n3\n1 0\n2 0\n3 2",
                 "output": "0 2 3 1",
                 "is_hidden": false
+            },
+            {
+                "input": "3\n3\n0 1\n1 2\n2 0",
+                "output": "CYCLE_DETECTED",
+                "is_hidden": true
+            },
+            {
+                "input": "3\n0",
+                "output": "2 1 0",
+                "is_hidden": true
+            },
+            {
+                "input": "5\n4\n1 0\n2 0\n3 1\n4 2",
+                "output": "0 2 1 4 3",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "SYSTEM BOOT SEQUENCER v1.2",
-        "description": " == SYSTEM BOOT SEQUENCER v1.2 ==\nSTATUS: DEPTH UNKNOWN BY [NULL]\n\n[NULL] scrambled the boot sequence and erased the layer count.\nWithout knowing how deep the dependency chain goes, staged rollout is impossible.\nReconstruct the boot order AND report the number of boot layers.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n\nOUTPUT:\n    Line 1: Boot order (space-separated, lowest-first tiebreak).\n    Line 2: \"LAYERS:X\" where X is the number of rounds needed.\n            (A round processes all currently available zero-indeg services.)\n    If a cycle, output only \"CYCLE_DETECTED\".\n\nEXAMPLES:\n    4 services, deps: 1->0, 2->0, 3->2\n    Round 1: boot 0. Round 2: boot 1, 2. Round 3: boot 3.\n    Output:\n        0 1 2 3\n        LAYERS:3\n\n    3 services, deps: 0->1, 1->2, 2->0\n    Output: CYCLE_DETECTED",
+        "description": "== SYSTEM BOOT SEQUENCER v1.2 ==\nSTATUS: DEPTH UNKNOWN BY [NULL]\n\n[NULL] scrambled the boot sequence and erased the layer count. Without knowing how deep the dependency chain goes, staged rollout is impossible. Reconstruct the boot order AND report the number of boot layers.\n\nImplement bootOrder(int numServices, int[][] deps) — same as v1.0 (lowest-first tiebreak) but process all currently-ready services in one round (one layer) before starting the next:\n- Round 1: boot all services with no dependencies, smallest first.\n- Round 2: boot all newly-unblocked services, smallest first. Etc.\n- Return two lines: boot order (all services space-separated) then \"LAYERS:X\".\n- If a cycle exists, return only \"CYCLE_DETECTED\".\n\nExample: 4 services, deps: 1→0, 2→0, 3→2\n- Round 1: [0]. Round 2: [1, 2]. Round 3: [3]. → \"0 1 2 3\\nLAYERS:3\"\n\nInput: line 1 = N, line 2 = M, next M lines = \"a b\" (a depends on b)\nOutput: space-separated boot order on line 1, \"LAYERS:X\" on line 2, or just \"CYCLE_DETECTED\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -169,15 +339,30 @@
         },
         "test_cases": [
             {
-                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "input": "4\n3\n1 0\n2 0\n3 2",
                 "output": "0 1 2 3\nLAYERS:3",
                 "is_hidden": false
+            },
+            {
+                "input": "3\n3\n0 1\n1 2\n2 0",
+                "output": "CYCLE_DETECTED",
+                "is_hidden": true
+            },
+            {
+                "input": "3\n0",
+                "output": "0 1 2\nLAYERS:1",
+                "is_hidden": true
+            },
+            {
+                "input": "4\n3\n1 0\n2 1\n3 2",
+                "output": "0 1 2 3\nLAYERS:4",
+                "is_hidden": true
             }
         ]
     },
     {
         "title": "SYSTEM SHUTDOWN SEQUENCER v1.0",
-        "description": " == SYSTEM SHUTDOWN SEQUENCER v1.0 ==\nSTATUS: CORRUPTED BY [NULL]\n\n[NULL] scrambled the shutdown sequence.\nServices that others depend on are killed first, crashing everything downstream.\nReconstruct the REVERSE topological order: shut down dependents first,\nthen their dependencies.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n                  (b must boot before a, meaning a must SHUT DOWN before b)\n\nOUTPUT:\n    A single line of space-separated service numbers in valid SHUTDOWN order\n    (reverse of boot order).\n    When multiple services can shut down, pick the LOWEST-numbered first.\n    If a cycle, output \"CYCLE_DETECTED\".\n\nEXAMPLES:\n    4 services, deps: 1->0, 2->0, 3->2\n    Boot order would be: 0 1 2 3\n    Shutdown order (reverse): 3 1 2 0\n    (3 and 1 have no dependents; pick 1 first? No: 3 depends on 2 depends on 0,\n     1 depends on 0. Shutdown: nodes with no dependents first.\n     Out-degree 0: 1, 3. Pick 1 first (lowest). Then 3. Then 2. Then 0.)\n    Output: 1 3 2 0\n\n    3 services, deps: 0->1, 1->2, 2->0\n    Output: CYCLE_DETECTED",
+        "description": "== SYSTEM SHUTDOWN SEQUENCER v1.0 ==\nSTATUS: CORRUPTED BY [NULL]\n\n[NULL] scrambled the shutdown sequence. Services that others depend on are killed first, crashing everything downstream. Reconstruct the REVERSE topological order: dependents shut down before their dependencies.\n\nImplement shutdownOrder(int numServices, int[][] deps) — this is topological sort on the reverse graph:\n- A service can only shut down when nothing else depends on it (out-degree = 0 in the original graph).\n- Use a min-priority queue so the LOWEST-numbered eligible service shuts down first.\n- Return the space-separated shutdown order, or \"CYCLE_DETECTED\" if a cycle exists.\n\nExample: 4 services, deps: 1→0, 2→0, 3→2\n- Services with no dependents initially: {1, 3}. Pick 1 (lowest). Shut down 1.\n- After 1: {3}. Shut down 3. After 3: {2}. Shut down 2. After 2: {0}. Shut down 0.\n- Result: 1 3 2 0\n\nInput: line 1 = N (number of services), line 2 = M (dependency pairs), next M lines = \"a b\" (a depends on b)\nOutput: space-separated shutdown order, or \"CYCLE_DETECTED\"",
         "difficulty": "Hard",
         "category": "Java Systems",
         "templates": {
@@ -185,9 +370,24 @@
         },
         "test_cases": [
             {
-                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "input": "4\n3\n1 0\n2 0\n3 2",
                 "output": "1 3 2 0",
                 "is_hidden": false
+            },
+            {
+                "input": "3\n3\n0 1\n1 2\n2 0",
+                "output": "CYCLE_DETECTED",
+                "is_hidden": true
+            },
+            {
+                "input": "3\n0",
+                "output": "0 1 2",
+                "is_hidden": true
+            },
+            {
+                "input": "5\n4\n1 0\n2 0\n3 1\n4 2",
+                "output": "3 4 1 2 0",
+                "is_hidden": true
             }
         ]
     }
