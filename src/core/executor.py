@@ -6,10 +6,25 @@ import resource
 from .config import COMPILERS, validate_code
 from .security.sanitizer import sanitize_code
 
-MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 512))
+MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 128))
 MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", 1))
 MAX_OPEN_FILES = int(os.getenv("MAX_OPEN_FILES", 64))
 MAX_RUN_TIME = int(os.getenv("MAX_RUN_TIME", 5))
+
+def _java_env():
+    """Build a clean environment for Java subprocesses, removing JAVA_TOOL_OPTIONS to prevent noise."""
+    env = os.environ.copy()
+    env.pop("JAVA_TOOL_OPTIONS", None)
+    env.pop("_JAVA_OPTIONS", None)
+    return env
+
+def _clean_java_stderr(stderr):
+    """Strip JVM noise lines (Picked up JAVA_TOOL_OPTIONS, etc.) from stderr."""
+    if not stderr:
+        return stderr
+    lines = stderr.splitlines(True)
+    cleaned = [l for l in lines if not l.startswith("Picked up ")]
+    return "".join(cleaned)
 
 def _sandbox_preexec(timeout, skip_memory=False):
     """Set resource limits for child processes."""
@@ -47,14 +62,14 @@ def execute_code(code: str, lang: str, tests: list, timeout: int = None, templat
     if timeout is None:
         timeout = MAX_RUN_TIME
     if lang not in COMPILERS:
-        return {"status": "error", "message": f"Unsupported language: {lang}"}
+        return {"status": "error", "msg": f"Unsupported language: {lang}"}
 
     scan = sanitize_code(lang, code)
     if not scan["safe"]:
-        return {"status": "error", "message": f"Code reject for execute due to {' and '.join(scan['violations'])}"}
+        return {"status": "error", "msg": f"Code reject for execute due to {' and '.join(scan['violations'])}"}
 
     if not validate_code(lang, code, rules or {}):
-        return {"status": "error", "message": "Code failed additional rules."}
+        return {"status": "error", "msg": "Code failed additional rules."}
     
     code_final = code
     template = (templates or {}).get(lang)
@@ -83,12 +98,12 @@ def _run_c_cpp(code, lang, tests=None, timeout=None):
         try:
             comp = subprocess.run(
                 [cfg['compiler'], src, "-o", exe], 
-                capture_output=True, text=True, timeout=max(timeout, 10), cwd=d
+                capture_output=True, text=True, timeout=max(timeout, 20), cwd=d
             )
             if comp.returncode:
-                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+                return {"status": "incorrect", "msg": comp.stderr}
         except subprocess.TimeoutExpired:
-            return {"status": "error", "message": "Compilation timed out"}
+            return {"status": "error", "msg": "Compilation timed out"}
 
         if tests is None:
             try:
@@ -98,7 +113,7 @@ def _run_c_cpp(code, lang, tests=None, timeout=None):
                 )
                 return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
             except subprocess.TimeoutExpired:
-                return {"status": "error", "message": "Execution timed out"}
+                return {"status": "error", "msg": "Execution timed out"}
             
         return _run_tests([exe], tests, timeout, cwd=d)
 
@@ -110,9 +125,11 @@ def _run_java(code, tests=None, timeout=None):
     code_clean = re.sub(r'//.*?$', '', code, flags=re.MULTILINE)
     code_clean = re.sub(r'/\*.*?\*/', '', code_clean, flags=re.DOTALL)
     
-    match = re.search(r'(?:public\s+)?(?:(?:abstract|final|static|strictfp)\s+)*class\s+(\w+)', code_clean)
+    match = re.search(r'public\s+(?:abstract|final|static|strictfp\s+)*class\s+(\w+)', code_clean)
     if not match:
-        return {"status": "error", "message": "Java class not found."}
+        match = re.search(r'(?:public\s+)?(?:(?:abstract|final|static|strictfp)\s+)*class\s+(\w+)', code_clean)
+    if not match:
+        return {"status": "error", "msg": "Java class not found."}
         
     class_name = match.group(1)
     
@@ -121,40 +138,44 @@ def _run_java(code, tests=None, timeout=None):
         with open(src, 'w') as f:
             f.write(code)
             
+        java_env = _java_env()
         try:
-            # Added JVM args to javac to speed up its own startup time
+            # Compile with --release 11 for broad compatibility and fast startup
             comp = subprocess.run([
-                "javac", 
-                "-J-XX:+TieredCompilation", 
-                "-J-XX:TieredStopAtLevel=1", 
+                "javac",
+                "-J-XX:+TieredCompilation",
+                "-J-XX:TieredStopAtLevel=1",
+                "--release", "11",
                 src, "-d", d
-            ], capture_output=True, text=True, timeout=max(timeout, 10), cwd=d)
+            ], capture_output=True, text=True, timeout=max(timeout, 20), cwd=d,
+               env=java_env)
             if comp.returncode:
-                return {"status": "incorrect", "message": "Compilation failed", "compiler_output": comp.stderr}
+                return {"status": "incorrect", "msg": _clean_java_stderr(comp.stderr)}
         except subprocess.TimeoutExpired:
-            return {"status": "error", "message": "Compilation timed out"}
-            
-        # Optimized JVM startup arguments
+            return {"status": "error", "msg": "Compilation timed out"}
+
+        # Optimized JVM startup arguments (removed deprecated -noverify)
         cmd = [
-            "java", 
-            "-cp", d, 
-            f"-Xmx{MAX_MEMORY_MB}m", 
-            "-XX:+TieredCompilation", 
-            "-XX:TieredStopAtLevel=1", 
-            "-noverify",
+            "java",
+            "-cp", d,
+            f"-Xmx{MAX_MEMORY_MB}m",
+            f"-Xms32m",
+            "-XX:+TieredCompilation",
+            "-XX:TieredStopAtLevel=1",
             class_name
         ]
         if tests is None:
             try:
                 res = subprocess.run(
                     cmd, capture_output=True, text=True, 
-                    timeout=timeout, cwd=d, preexec_fn=_sandbox_preexec(timeout, skip_memory=True)
+                    timeout=timeout, cwd=d, env=java_env,
+                    preexec_fn=_sandbox_preexec(timeout, skip_memory=True)
                 )
-                return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
+                return {"status": "success", "stdout": res.stdout, "stderr": _clean_java_stderr(res.stderr)}
             except subprocess.TimeoutExpired:
-                return {"status": "error", "message": "Execution timed out"}
+                return {"status": "error", "msg": "Execution timed out"}
             
-        return _run_tests(cmd, tests, timeout, cwd=d, skip_memory=True)
+        return _run_tests(cmd, tests, timeout, cwd=d, skip_memory=True, env=java_env)
 
 def _run_interpreted(code, lang, tests=None, timeout=None):
     """Run interpreted languages like Python/JS."""
@@ -175,20 +196,23 @@ def _run_interpreted(code, lang, tests=None, timeout=None):
                 )
                 return {"status": "success", "stdout": res.stdout, "stderr": res.stderr}
             except subprocess.TimeoutExpired:
-                return {"status": "error", "message": "Execution timed out"}
+                return {"status": "error", "msg": "Execution timed out"}
             
         return _run_tests(cmd, tests, timeout, cwd=d)
 
-def _run_tests(cmd_base, tests, timeout, cwd=None, skip_memory=False):
+def _run_tests(cmd_base, tests, timeout, cwd=None, skip_memory=False, env=None):
     """Run code against multiple test cases."""
     results, status, msg = [], "correct", "All tests passed!"
     for t in tests:
         try:
-            r = subprocess.run(
-                cmd_base, input=t['input'], capture_output=True, 
-                text=True, timeout=timeout, cwd=cwd, 
+            run_kwargs = dict(
+                input=t['input'], capture_output=True,
+                text=True, timeout=timeout, cwd=cwd,
                 preexec_fn=_sandbox_preexec(timeout, skip_memory)
             )
+            if env:
+                run_kwargs['env'] = env
+            r = subprocess.run(cmd_base, **run_kwargs)
             out, err = r.stdout.strip(), r.stderr.strip()
             
             # Simple correctness check

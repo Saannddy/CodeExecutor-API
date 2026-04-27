@@ -4,7 +4,7 @@ FROM debian:bookworm-slim
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     build-essential \
-    default-jdk \
+    default-jdk-headless \
     python3 \
     python3-pip \
     nodejs \
@@ -33,6 +33,9 @@ COPY --chown=coder:coder alembic.ini .
 
 USER coder
 
+# Constrain JVM heap for child processes to save memory
+ENV JAVA_TOOL_OPTIONS="-Xmx64m -Xms32m"
+
 EXPOSE 3000
 
-CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:3000", "--timeout", "60", "--access-logfile", "-", "app:app"]
+CMD ["gunicorn", "--workers", "2", "--preload", "--bind", "0.0.0.0:3000", "--timeout", "60", "--access-logfile", "-", "app:app"]
