@@ -1,0 +1,194 @@
+[
+    {
+        "title": "FIREWALL RULE ENGINE v3.1",
+        "description": " == FIREWALL RULE ENGINE v3.1 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the firewall's rule engine.\nPackets flow unchecked. Every rule was a single encoded string.\nParse the format, enforce the logic. One misread and the breach widens.\n\nRULE FORMAT:\n    \"ACTION|port_min-port_max|protocol\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    port_min and port_max define an inclusive range\n    protocol is a string like \"TCP\" or \"UDP\"\n\nPACKET FORMAT:\n    \"port|protocol\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's port as an integer and its protocol as a string.\n    2. Parse the rule's action, port range, and protocol.\n    3. If the packet's port falls within the range (inclusive)\n       AND the protocol matches (case-insensitive), return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class FirewallRules {\n\n    public static String evaluate(String rule, String packet) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String rule = sc.nextLine().trim();\n        int q = Integer.parseInt(sc.nextLine().trim());\n        for (int i = 0; i < q; i++) {\n            String packet = sc.nextLine().trim();\n            System.out.println(evaluate(rule, packet));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "ALLOW|80-443|TCP\n4\n80|TCP\n443|tcp\n8080|TCP\n80|UDP",
+                "output": "ALLOW\nALLOW\nNO_MATCH\nNO_MATCH",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "FIREWALL RULE ENGINE v3.2",
+        "description": " == FIREWALL RULE ENGINE v3.2 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the firewall's IP-based rule engine.\nTraffic flows unfiltered. Every rule was a single encoded string.\nParse the format, enforce the logic. One wrong IP and the whole floor is exposed.\n\nRULE FORMAT:\n    \"ACTION|ip_prefix|port\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    ip_prefix is a partial IP like \"192.168\" (match if packet IP starts with this)\n    port is an exact port number\n\nPACKET FORMAT:\n    \"ip_address|port\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's IP address (string) and port (integer).\n    2. Parse the rule's action, IP prefix, and port.\n    3. If the packet's IP starts with the rule's ip_prefix\n       AND the port matches exactly, return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class FirewallRules {\n\n    public static String evaluate(String rule, String packet) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String rule = sc.nextLine().trim();\n        int q = Integer.parseInt(sc.nextLine().trim());\n        for (int i = 0; i < q; i++) {\n            String packet = sc.nextLine().trim();\n            System.out.println(evaluate(rule, packet));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "ALLOW|192.168|8080\n3\n192.168.1.5|8080\n192.168.0.1|3000\n10.0.0.1|8080",
+                "output": "ALLOW\nNO_MATCH\nNO_MATCH",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "FIREWALL RULE ENGINE v3.3",
+        "description": " == FIREWALL RULE ENGINE v3.3 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the outbound traffic filter.\nEvery packet escapes unchecked. Rules encoded as single strings are all that remain.\nParse the format, enforce the logic. The building leaks data with every second.\n\nRULE FORMAT:\n    \"ACTION|protocol|min_port\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    protocol is a string like \"TCP\", \"UDP\", \"ICMP\"\n    min_port is a threshold: rule applies to packets with port >= min_port\n\nPACKET FORMAT:\n    \"protocol|port\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's protocol (string) and port (integer).\n    2. Parse the rule's action, protocol, and minimum port.\n    3. If the protocol matches (case-insensitive)\n       AND the packet's port >= min_port, return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class FirewallRules {\n\n    public static String evaluate(String rule, String packet) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String rule = sc.nextLine().trim();\n        int q = Integer.parseInt(sc.nextLine().trim());\n        for (int i = 0; i < q; i++) {\n            String packet = sc.nextLine().trim();\n            System.out.println(evaluate(rule, packet));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "DENY|TCP|1024\n3\nTCP|2000\nTCP|80\nUDP|2000",
+                "output": "DENY\nNO_MATCH\nNO_MATCH",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "FIREWALL RULE ENGINE v3.4",
+        "description": " == FIREWALL RULE ENGINE v3.4 ==\nSTATUS: WIPED BY [NULL]\n\n[NULL] erased the zone-based packet filter.\nInternal zones bleed into external. Every rule was a single encoded string.\nParse the format, enforce the logic. One wrong zone and the core is exposed.\n\nRULE FORMAT:\n    \"ACTION|zone|port_min-port_max\"\n    ACTION is either \"ALLOW\" or \"DENY\"\n    zone is a string like \"INTERNAL\", \"EXTERNAL\", \"DMZ\"\n    port_min and port_max define an inclusive range\n\nPACKET FORMAT:\n    \"zone|port\"\n\nEVALUATION LOGIC:\n    1. Parse the packet's zone (string) and port (integer).\n    2. Parse the rule's action, zone, and port range.\n    3. If the zone matches (case-insensitive)\n       AND the port falls within the range (inclusive), return the action.\n    4. Otherwise, return \"NO_MATCH\".",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class FirewallRules {\n\n    public static String evaluate(String rule, String packet) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String rule = sc.nextLine().trim();\n        int q = Integer.parseInt(sc.nextLine().trim());\n        for (int i = 0; i < q; i++) {\n            String packet = sc.nextLine().trim();\n            System.out.println(evaluate(rule, packet));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "ALLOW|INTERNAL|80-443\n4\nINTERNAL|80\ninternal|443\nEXTERNAL|80\nINTERNAL|8080\n",
+                "output": "ALLOW\nALLOW\nNO_MATCH\nNO_MATCH",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "DYNAMIC MEMORY ALLOCATOR v2.0",
+        "description": " == DYNAMIC MEMORY ALLOCATOR v2.0 ==\nSTATUS: CHAIN SEVERED BY [NULL]\n\n[NULL] corrupted the dynamic memory allocator's linked structure.\nNodes point nowhere. The chain is severed at every link.\nRebuild the node definition and the reversal engine.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndReverse(int[] values)\n\n    This method must:\n        1. Build a singly linked list from the array (first element = head).\n        2. Reverse the entire linked list in-place using pointer manipulation.\n        3. Return the reversed list as a string: \"data1 -> data2 -> data3\"\n        4. Return \"EMPTY\" if the input array has no elements.",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class MemoryAllocator {\n\n    // Player code goes here\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String line = sc.nextLine().trim();\n        if (line.equals(\"EMPTY\")) {\n            System.out.println(buildAndReverse(new int[0]));\n        } else {\n            String[] parts = line.split(\" \");\n            int[] vals = new int[parts.length];\n            for (int i = 0; i < parts.length; i++) {\n                vals[i] = Integer.parseInt(parts[i]);\n            }\n            System.out.println(buildAndReverse(vals));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "10 20 30 40",
+                "output": "40 -> 30 -> 20 -> 10",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "DYNAMIC MEMORY ALLOCATOR v2.1",
+        "description": " == DYNAMIC MEMORY ALLOCATOR v2.1 ==\nSTATUS: CORRUPTED BY [NULL]\n\n[NULL] destroyed the memory chain analyzer.\nLength is unknown. The midpoint is lost.\nRebuild the node structure, count the chain, and locate the center.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndFindMiddle(int[] values)\n\n    This method must:\n        1. Build a singly linked list from the array (first element = head).\n        2. Find the middle node using slow/fast pointer technique.\n           For even-length lists, return the second of the two middle nodes.\n        3. Return \"LENGTH:n|MIDDLE:data\" where n is total nodes.\n        4. Return \"EMPTY\" if the input array has no elements.",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class MemoryAllocator {\n\n    // Player code goes here\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String line = sc.nextLine().trim();\n        if (line.equals(\"EMPTY\")) {\n            System.out.println(buildAndFindMiddle(new int[0]));\n        } else {\n            String[] parts = line.split(\" \");\n            int[] vals = new int[parts.length];\n            for (int i = 0; i < parts.length; i++) {\n                vals[i] = Integer.parseInt(parts[i]);\n            }\n            System.out.println(buildAndFindMiddle(vals));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "1 2 3 4 5",
+                "output": "LENGTH:5|MIDDLE:3",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "DYNAMIC MEMORY ALLOCATOR v2.2",
+        "description": " == DYNAMIC MEMORY ALLOCATOR v2.2 ==\nSTATUS: POLLUTED BY [NULL]\n\n[NULL] injected duplicate entries into the memory chain.\nRepeated allocations corrupt the heap. Duplicates must be purged.\nRebuild the chain and strip all duplicate values, keeping only first occurrences.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndDeduplicate(int[] values)\n\n    This method must:\n        1. Build a singly linked list from the array.\n        2. Remove all duplicate values, keeping only the FIRST occurrence.\n        3. Return the deduplicated list as \"data1 -> data2 -> data3\".\n        4. Return \"EMPTY\" if the input array has no elements.",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class MemoryAllocator {\n\n    // Player code goes here\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String line = sc.nextLine().trim();\n        if (line.equals(\"EMPTY\")) {\n            System.out.println(buildAndDeduplicate(new int[0]));\n        } else {\n            String[] parts = line.split(\" \");\n            int[] vals = new int[parts.length];\n            for (int i = 0; i < parts.length; i++) {\n                vals[i] = Integer.parseInt(parts[i]);\n            }\n            System.out.println(buildAndDeduplicate(vals));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "3 1 3 2 1",
+                "output": "3 -> 1 -> 2",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "DYNAMIC MEMORY ALLOCATOR v2.3",
+        "description": " == DYNAMIC MEMORY ALLOCATOR v2.3 ==\nSTATUS: INFECTED BY [NULL]\n\n[NULL] planted rogue entries in the memory chain.\nA known malicious value is embedded at random positions.\nRebuild the chain and surgically remove every occurrence of the target.\n\nREQUIREMENTS:\n    Define a static inner class \"Node\" inside MemoryAllocator with:\n        - an int field \"data\"\n        - a Node field \"next\"\n        - a constructor that takes an int and sets next to null\n\n    Then write a static method:\n        public static String buildAndPurge(int[] values, int target)\n\n    This method must:\n        1. Build a singly linked list from the array.\n        2. Remove ALL nodes whose data equals target.\n        3. Return the cleaned list as \"data1 -> data2 -> data3\".\n        4. Return \"EMPTY\" if the list is empty after purging\n           (or if the input array was empty).\n",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.Scanner;\n\npublic class MemoryAllocator {\n\n    // Player code goes here\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String line = sc.nextLine().trim();\n        int target = Integer.parseInt(sc.nextLine().trim());\n        if (line.equals(\"EMPTY\")) {\n            System.out.println(buildAndPurge(new int[0], target));\n        } else {\n            String[] parts = line.split(\" \");\n            int[] vals = new int[parts.length];\n            for (int i = 0; i < parts.length; i++) {\n                vals[i] = Integer.parseInt(parts[i]);\n            }\n            System.out.println(buildAndPurge(vals, target));\n        }\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "values=[1, 9, 2, 9, 3], target=9",
+                "output": "1 -> 2 -> 3",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "SYSTEM BOOT SEQUENCER v1.0",
+        "description": " == SYSTEM BOOT SEQUENCER v1.0 ==\nSTATUS: SCRAMBLED BY [NULL]\n\n[NULL] scrambled the boot sequence.\nServices start before their dependencies, causing cascade failures.\nReconstruct the topological order. Every dependency must load first.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n                  (b must boot before a)\n\nOUTPUT:\n    A single line of space-separated service numbers in valid boot order.\n    When multiple services have no pending dependencies,\n    boot the lowest-numbered service first.\n    If a cycle makes ordering impossible, output \"CYCLE_DETECTED\".\n\nALGORITHM HINT:\n    Track how many dependencies each service has (in-degree).\n    Repeatedly pick the service with zero remaining dependencies,\n    boot it, then reduce the count for everything that depends on it.\n    If you finish and not all services were booted, there is a cycle.",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.*;\n\npublic class SystemRestore {\n\n    public static String bootOrder(int numServices, int[][] deps) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int numServices = Integer.parseInt(sc.nextLine().trim());\n        int numDeps = Integer.parseInt(sc.nextLine().trim());\n        int[][] deps = new int[numDeps][2];\n        for (int i = 0; i < numDeps; i++) {\n            String[] parts = sc.nextLine().trim().split(\" \");\n            deps[i][0] = Integer.parseInt(parts[0]);\n            deps[i][1] = Integer.parseInt(parts[1]);\n        }\n        System.out.println(bootOrder(numServices, deps));\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "output": "0 1 2 3",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "SYSTEM BOOT SEQUENCER v1.1",
+        "description": " == SYSTEM BOOT SEQUENCER v1.1 ==\nSTATUS: INVERTED BY [NULL]\n\n[NULL] reversed the boot priority.\nThe system now demands highest-numbered services boot first when tied.\nReconstruct the topological order with inverted priority.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n                  (b must boot before a)\n\nOUTPUT:\n    A single line of space-separated service numbers in valid boot order.\n    When multiple services have no pending dependencies,\n    boot the HIGHEST-numbered service first.\n    If a cycle makes ordering impossible, output \"CYCLE_DETECTED\".\n\nEXAMPLES:\n    4 services, deps: 1->0, 2->0, 3->2\n    Valid: 0 is required first (only zero-indeg node initially).\n    Then 1 and 2 are free: pick 2 first (higher). Then 1, then 3.\n    Boot order: 0 2 3 1\n\n    3 services, deps: 0->1, 1->2, 2->0\n    Output: CYCLE_DETECTED",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.*;\n\npublic class SystemRestore {\n\n    public static String bootOrder(int numServices, int[][] deps) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int numServices = Integer.parseInt(sc.nextLine().trim());\n        int numDeps = Integer.parseInt(sc.nextLine().trim());\n        int[][] deps = new int[numDeps][2];\n        for (int i = 0; i < numDeps; i++) {\n            String[] parts = sc.nextLine().trim().split(\" \");\n            deps[i][0] = Integer.parseInt(parts[0]);\n            deps[i][1] = Integer.parseInt(parts[1]);\n        }\n        System.out.println(bootOrder(numServices, deps));\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "output": "0 2 3 1",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "SYSTEM BOOT SEQUENCER v1.2",
+        "description": " == SYSTEM BOOT SEQUENCER v1.2 ==\nSTATUS: DEPTH UNKNOWN BY [NULL]\n\n[NULL] scrambled the boot sequence and erased the layer count.\nWithout knowing how deep the dependency chain goes, staged rollout is impossible.\nReconstruct the boot order AND report the number of boot layers.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n\nOUTPUT:\n    Line 1: Boot order (space-separated, lowest-first tiebreak).\n    Line 2: \"LAYERS:X\" where X is the number of rounds needed.\n            (A round processes all currently available zero-indeg services.)\n    If a cycle, output only \"CYCLE_DETECTED\".\n\nEXAMPLES:\n    4 services, deps: 1->0, 2->0, 3->2\n    Round 1: boot 0. Round 2: boot 1, 2. Round 3: boot 3.\n    Output:\n        0 1 2 3\n        LAYERS:3\n\n    3 services, deps: 0->1, 1->2, 2->0\n    Output: CYCLE_DETECTED",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.*;\n\npublic class SystemRestore {\n\n    public static String bootOrder(int numServices, int[][] deps) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int numServices = Integer.parseInt(sc.nextLine().trim());\n        int numDeps = Integer.parseInt(sc.nextLine().trim());\n        int[][] deps = new int[numDeps][2];\n        for (int i = 0; i < numDeps; i++) {\n            String[] parts = sc.nextLine().trim().split(\" \");\n            deps[i][0] = Integer.parseInt(parts[0]);\n            deps[i][1] = Integer.parseInt(parts[1]);\n        }\n        System.out.println(bootOrder(numServices, deps));\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "output": "0 1 2 3\nLAYERS:3",
+                "is_hidden": false
+            }
+        ]
+    },
+    {
+        "title": "SYSTEM SHUTDOWN SEQUENCER v1.0",
+        "description": " == SYSTEM SHUTDOWN SEQUENCER v1.0 ==\nSTATUS: CORRUPTED BY [NULL]\n\n[NULL] scrambled the shutdown sequence.\nServices that others depend on are killed first, crashing everything downstream.\nReconstruct the REVERSE topological order: shut down dependents first,\nthen their dependencies.\nIf a cycle exists, the system is unrecoverable.\n\nINPUT FORMAT:\n    Line 1: N (number of services, labeled 0 to N-1)\n    Line 2: M (number of dependency pairs)\n    Next M lines: \"a b\" meaning service a depends on service b\n                  (b must boot before a, meaning a must SHUT DOWN before b)\n\nOUTPUT:\n    A single line of space-separated service numbers in valid SHUTDOWN order\n    (reverse of boot order).\n    When multiple services can shut down, pick the LOWEST-numbered first.\n    If a cycle, output \"CYCLE_DETECTED\".\n\nEXAMPLES:\n    4 services, deps: 1->0, 2->0, 3->2\n    Boot order would be: 0 1 2 3\n    Shutdown order (reverse): 3 1 2 0\n    (3 and 1 have no dependents; pick 1 first? No: 3 depends on 2 depends on 0,\n     1 depends on 0. Shutdown: nodes with no dependents first.\n     Out-degree 0: 1, 3. Pick 1 first (lowest). Then 3. Then 2. Then 0.)\n    Output: 1 3 2 0\n\n    3 services, deps: 0->1, 1->2, 2->0\n    Output: CYCLE_DETECTED",
+        "difficulty": "Hard",
+        "category": "Java Systems",
+        "templates": {
+            "java": "import java.util.*;\n\npublic class SystemRestore {\n\n    public static String shutdownOrder(int numServices, int[][] deps) {\n        // Player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int numServices = Integer.parseInt(sc.nextLine().trim());\n        int numDeps = Integer.parseInt(sc.nextLine().trim());\n        int[][] deps = new int[numDeps][2];\n        for (int i = 0; i < numDeps; i++) {\n            String[] parts = sc.nextLine().trim().split(\" \");\n            deps[i][0] = Integer.parseInt(parts[0]);\n            deps[i][1] = Integer.parseInt(parts[1]);\n        }\n        System.out.println(shutdownOrder(numServices, deps));\n        sc.close();\n    }\n}"
+        },
+        "test_cases": [
+            {
+                "input": "4 services, deps 1 0 / 2 0 / 3 2",
+                "output": "1 3 2 0",
+                "is_hidden": false
+            }
+        ]
+    }
+]
