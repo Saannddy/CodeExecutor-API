@@ -1,1 +1,152 @@
-[]
+[
+    {
+        "text": "A priority-one rule at the top of the firewall table — its rank forms a sharp peak above every other entry, the first pattern matched against every packet that crosses the boundary. First in the passkey, I rank and lead, the opening cipher you will need.",
+        "char": "A",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Two packets queued back to back in the input buffer — each one a rounded header waiting for the rule engine to read its destination field and decide whether it passes or is dropped. Second in the chain, I queue and wait, the follow-up cipher at the gate.",
+        "char": "B",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A half-ring network topology with both endpoints still unconnected — the arc of a segment that was meant to close into a full loop before [NULL] severed the last link. Third in the sequence, I arc and wait, the middle cipher in the chain.",
+        "char": "C",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A framed data packet — a flat header field on the left edge and a rounded payload body on the right, the standard envelope the protocol uses to carry every message across the wire. Fourth in the chain, I frame and send, one step before the final bend.",
+        "char": "D",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Three firewall rules stacked in the policy table — each one a horizontal row tested in order from the top, the engine reading down until the first match tells it whether to allow or deny. Fifth and final, I rule and end, the last cipher round the bend.",
+        "char": "E",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A routing fork where an outbound packet reaches a split interface — one path continues straight toward the primary gateway and the other branches to the backup route assigned when the main link is saturated. First in the passkey, I fork and route, the opening cipher of this bout.",
+        "char": "F",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A gateway latch holding a socket half-open — a partial arc with a retaining bar, the shape of a TCP connection that has sent its SYN but is still waiting for the handshake to be acknowledged. Second in the sequence, I latch and hold, the follow-up cipher to be told.",
+        "char": "G",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Two linked-list nodes joined by a pointer bridge — two data fields standing side by side with a reference arrow between them, the fundamental unit repeated along the entire memory chain. Third in the line, I link and bridge, the center cipher on the ridge.",
+        "char": "H",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A single server node standing alone in the rack — the last process still responding after every dependent service in the boot chain has been taken offline by [NULL]'s shutdown sequence. Fourth in the slot, I stand and wait, one step before the final state.",
+        "char": "I",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The head pointer of a linked list — a hook that curves down to latch onto the first node, the only anchor for the entire chain that extends behind it through every allocated block of memory. Fifth and last, I hook and link, the closing cipher of this sync.",
+        "char": "J",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A network switch port housing — a vertical barrel with two angled prongs that engage the cable clip when the connector is fully seated, locking the link in place until it is deliberately released. First in the passkey, I lock and hold, the opening letter of the fold.",
+        "char": "K",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A patch cable run that travels the full length of a server row and bends ninety degrees into the floor tray at the end — the shape every wire makes when it turns a corner and disappears under the raised floor. Second in line, I run and turn, the follow-up cipher you will earn.",
+        "char": "L",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A dual-node cluster where two servers share the workload — each one a peak on the monitoring dashboard, their load curves rising and falling in rough parallel until one node fails and the other absorbs everything. Third in the sequence, I mirror load, the center cipher of the code.",
+        "char": "M",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The hop diagram in a traceroute result — each bounce angled away from the last, a jagged line plotting the path a packet took across four intermediate routers before it reached its destination. Fourth in the chain, I hop and trace, one step before the final place.",
+        "char": "N",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A closed routing loop — a circular path that a misdirected packet circles through indefinitely, the TTL counter decrementing with each pass until the value reaches zero and the packet is finally discarded. Fifth and last, I loop and drain, the closing cipher of the chain.",
+        "char": "O",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A port number in the packet header — a vertical identifier field topped with a rounded destination label that tells the router which service on the receiving host should handle this segment before anything else is read. First in the passkey, I port and lead, the opening cipher you will need.",
+        "char": "P",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A database cursor looping through a result set — a circular query handle with a trailing reference that marks the most recently examined row, moving forward until the last record has been returned. Second in the sequence, I query on, the follow-up cipher to carry on.",
+        "char": "Q",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A router's classification arm — an input barrel at the top that reads the destination, a matching hump where the rule fires, and a leg that kicks the packet toward the correct outbound interface without stopping to explain itself. Third in the line, I route and kick, the middle cipher of this trick.",
+        "char": "R",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The serpentine path a packet traces through three consecutive NAT stages — curving back on itself twice before emerging with a translated source address at the far side of the perimeter gateway. Fourth in the chain, I curve and shift, one step before the final lift.",
+        "char": "S",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The SYN-ACK crossover at the centre of a TCP handshake — two acknowledgement signals meeting at a midpoint, forming the balanced exchange that confirms a connection is established before any payload is transferred. Fifth and last, I cross and end, the closing cipher round the bend.",
+        "char": "T",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A buffer underrun event — the moment an output queue empties faster than it is refilled, leaving a concave gap in the data stream that the scheduler must close before the next transmission window opens. First in the passkey, I drain and dip, the opening cipher of this trip.",
+        "char": "U",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The descending arrow in a priority queue drain log — pointing downward as each high-severity entry exits first and lower-priority packets wait longer with every pass, sinking further from the front. Second in line, I drain below, the follow-up cipher in the flow.",
+        "char": "V",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A W-shaped dip in a ping latency graph — two valleys marking the moments where routing delays spiked and the path briefly rerouted before settling back near the baseline that the SLA requires. Third in the sequence, I dip and ping, the center cipher of the ring.",
+        "char": "W",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "Two packets crossing in opposite directions at the moment both endpoints send a TCP RST simultaneously — the connection terminating cleanly from both sides, neither waiting for the other to close first. Fourth in the chain, I cross and close, one step before the curtain goes.",
+        "char": "X",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The branch point inside a load balancer where an incoming request forks — one copy heading to the primary node and the other continuing to the failover, a wishbone etched into every traffic diagram that maps this infrastructure. Fifth and last, I split and end, the closing cipher round the bend.",
+        "char": "Y",
+        "index": 5,
+        "difficulty": "Hard"
+    }
+]
