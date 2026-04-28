@@ -3,160 +3,168 @@
         "title": "ELV-P4-CHUNK-001",
         "difficulty": "Medium",
         "category": "ELV-P4",
+        "description": "[NULL] stripped the exception handling from the ID scanner. It now crashes on any non-integer input and floods the audit log with errors. Restore the three blocks — every scan must be logged, pass or fail.\n\nFill in the three snippets inside parseStudentID(String input):\n- snippet_1: Parse input as an integer. Return \"VALID:\" + the value if it is between 10000 and 99999 (inclusive), otherwise return \"INVALID:OUT_OF_RANGE\".\n- snippet_2: Return \"INVALID:NOT_A_NUMBER\" when the input cannot be parsed as an integer.\n- snippet_3: Always print \"scan attempt logged\" — this runs whether parsing succeeded or failed.\n\nInput: a string representing a student ID\nOutput: \"scan attempt logged\" on its own line, then the validation result on the next line",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// [NULL] stripped the exception handling from the ID scanner.\n// It now crashes on any non-integer input and floods the audit log with errors.\n// Restore the three blocks. Every scan must be logged, pass or fail.\n\npublic class CheckpointScanner {\n\n    public static String parseStudentID(String input) {\n        try {\n            // TASK 1: Parse input. Return \"VALID:\" + id if 10000\u201399999, else \"INVALID:OUT_OF_RANGE\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:NOT_A_NUMBER\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"scan attempt logged\".\n            {{{snippet_3}}}\n        }\n    }\n}",
+                "template_code": "import java.util.Scanner;\n\npublic class CheckpointScanner {\n\n    public static String parseStudentID(String input) {\n        try {\n            // TASK 1: Parse input. Return \"VALID:\" + id if 10000–99999, else \"INVALID:OUT_OF_RANGE\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:NOT_A_NUMBER\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"scan attempt logged\".\n            {{{snippet_3}}}\n        }\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String input = sc.nextLine();\n        System.out.println(parseStudentID(input));\n        sc.close();\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Parse the input String as an integer. If the value is in range [10000, 99999], return \"VALID:\" + that integer. Otherwise return \"INVALID:OUT_OF_RANGE\".",
+                    "snippet_2": "Return \"INVALID:NOT_A_NUMBER\".",
+                    "snippet_3": "Print \"scan attempt logged\" to standard output."
                 }
             }
         },
         "expectation": {
             "input": "12345",
-            "output": "VALID:12345"
+            "output": "scan attempt logged\nVALID:12345"
         }
     },
     {
         "title": "ELV-P4-CHUNK-002",
         "difficulty": "Medium",
         "category": "ELV-P4",
+        "description": "The room code scanner is throwing unhandled exceptions on every bad input. [NULL] knew exactly which lines to delete to break the audit trail. Restore all three exception blocks.\n\nFill in the three snippets inside parseRoomCode(String input):\n- snippet_1: Parse input as an integer. Return \"ROOM:\" + the value if it is between 100 and 999 (inclusive), otherwise return \"INVALID:NOT_A_ROOM\".\n- snippet_2: Return \"INVALID:FORMAT_ERROR\" when the input cannot be parsed as an integer.\n- snippet_3: Always print \"door scan logged\" — this runs whether parsing succeeded or failed.\n\nInput: a string representing a room code\nOutput: \"door scan logged\" on its own line, then the validation result on the next line",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// The room code scanner is throwing unhandled exceptions on every bad input.\n// [NULL] knew exactly which lines to delete to break the audit trail.\n// Restore all three exception blocks.\n\npublic class CheckpointScanner {\n\n    public static String parseRoomCode(String input) {\n        try {\n            // TASK 1: Parse input. Return \"ROOM:\" + code if 100\u2013999, else \"INVALID:NOT_A_ROOM\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:FORMAT_ERROR\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"door scan logged\".\n            {{{snippet_3}}}\n        }\n    }\n}",
+                "template_code": "import java.util.Scanner;\n\npublic class CheckpointScanner {\n\n    public static String parseRoomCode(String input) {\n        try {\n            // TASK 1: Parse input. Return \"ROOM:\" + code if 100–999, else \"INVALID:NOT_A_ROOM\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:FORMAT_ERROR\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"door scan logged\".\n            {{{snippet_3}}}\n        }\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String input = sc.nextLine();\n        System.out.println(parseRoomCode(input));\n        sc.close();\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Parse the input String as an integer. If the value is in range [100, 999], return \"ROOM:\" + that integer. Otherwise return \"INVALID:NOT_A_ROOM\".",
+                    "snippet_2": "Return \"INVALID:FORMAT_ERROR\".",
+                    "snippet_3": "Print \"door scan logged\" to standard output."
                 }
             }
         },
         "expectation": {
             "input": "123",
-            "output": "ROOM:123"
+            "output": "door scan logged\nROOM:123"
         }
     },
     {
         "title": "ELV-P4-CHUNK-003",
         "difficulty": "Medium",
         "category": "ELV-P4",
+        "description": "The port scanner crashes on anything that is not a clean integer. Without proper exception handling the network audit trail is blind. Restore it.\n\nFill in the three snippets inside parsePort(String input):\n- snippet_1: Parse input as an integer. Return \"PORT:\" + the value if it is between 1 and 65535 (inclusive), otherwise return \"INVALID:PORT_OUT_OF_RANGE\".\n- snippet_2: Return \"INVALID:NOT_A_PORT\" when the input cannot be parsed as an integer.\n- snippet_3: Always print \"connection attempt logged\" — this runs whether parsing succeeded or failed.\n\nInput: a string representing a port number\nOutput: \"connection attempt logged\" on its own line, then the validation result on the next line",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// The port scanner crashes on anything that is not a clean integer.\n// Without proper exception handling the network audit trail is blind.\n// Restore it.\n\npublic class CheckpointScanner {\n\n    public static String parsePort(String input) {\n        try {\n            // TASK 1: Parse input. Return \"PORT:\" + number if 1\u201365535, else \"INVALID:PORT_OUT_OF_RANGE\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:NOT_A_PORT\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"connection attempt logged\".\n            {{{snippet_3}}}\n        }\n    }\n}",
+                "template_code": "import java.util.Scanner;\n\npublic class CheckpointScanner {\n\n    public static String parsePort(String input) {\n        try {\n            // TASK 1: Parse input. Return \"PORT:\" + number if 1–65535, else \"INVALID:PORT_OUT_OF_RANGE\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:NOT_A_PORT\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"connection attempt logged\".\n            {{{snippet_3}}}\n        }\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String input = sc.nextLine();\n        System.out.println(parsePort(input));\n        sc.close();\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Parse the input String as an integer. If the value is in range [1, 65535], return \"PORT:\" + that integer. Otherwise return \"INVALID:PORT_OUT_OF_RANGE\".",
+                    "snippet_2": "Return \"INVALID:NOT_A_PORT\".",
+                    "snippet_3": "Print \"connection attempt logged\" to standard output."
                 }
             }
         },
         "expectation": {
             "input": "80",
-            "output": "PORT:80"
+            "output": "connection attempt logged\nPORT:80"
         }
     },
     {
         "title": "ELV-P4-CHUNK-004",
         "difficulty": "Medium",
         "category": "ELV-P4",
+        "description": "The elevator rejects every floor request because the parser throws on bad input. [NULL] removed the safety net. Restore the exception blocks — the finally block is not optional, the lift log must always write.\n\nFill in the three snippets inside parseFloor(String input):\n- snippet_1: Parse input as an integer. Return \"FLOOR:\" + the value if it is between 1 and 10 (inclusive), otherwise return \"INVALID:NO_SUCH_FLOOR\".\n- snippet_2: Return \"INVALID:NOT_A_NUMBER\" when the input cannot be parsed as an integer.\n- snippet_3: Always print \"elevator request logged\" — this runs whether parsing succeeded or failed.\n\nInput: a string representing a floor number\nOutput: \"elevator request logged\" on its own line, then the validation result on the next line",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// The elevator rejects every floor request because the parser throws on bad input.\n// [NULL] removed the safety net. Restore the exception blocks.\n// The finally block is not optional \u2014 the lift log must always write.\n\npublic class CheckpointScanner {\n\n    public static String parseFloor(String input) {\n        try {\n            // TASK 1: Parse input. Return \"FLOOR:\" + number if 1\u201310, else \"INVALID:NO_SUCH_FLOOR\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:NOT_A_NUMBER\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"elevator request logged\".\n            {{{snippet_3}}}\n        }\n    }\n}",
+                "template_code": "import java.util.Scanner;\n\npublic class CheckpointScanner {\n\n    public static String parseFloor(String input) {\n        try {\n            // TASK 1: Parse input. Return \"FLOOR:\" + number if 1–10, else \"INVALID:NO_SUCH_FLOOR\".\n            {{{snippet_1}}}\n        } catch (NumberFormatException e) {\n            // TASK 2: Return \"INVALID:NOT_A_NUMBER\".\n            {{{snippet_2}}}\n        } finally {\n            // TASK 3: Always print \"elevator request logged\".\n            {{{snippet_3}}}\n        }\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String input = sc.nextLine();\n        System.out.println(parseFloor(input));\n        sc.close();\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Parse the input String as an integer. If the value is in range [1, 10], return \"FLOOR:\" + that integer. Otherwise return \"INVALID:NO_SUCH_FLOOR\".",
+                    "snippet_2": "Return \"INVALID:NOT_A_NUMBER\".",
+                    "snippet_3": "Print \"elevator request logged\" to standard output."
                 }
             }
         },
         "expectation": {
             "input": "5",
-            "output": "FLOOR:5"
+            "output": "elevator request logged\nFLOOR:5"
         }
     },
     {
         "title": "ELV-P5-CHUNK-001",
         "difficulty": "Medium",
         "category": "ELV-P5",
+        "description": "4,847 log entries and the threat filter is gone — [NULL] deleted it first. Without it the emergency system cannot assess severity. Find the threats — the building needs this report before it can act.\n\nFill in the three snippets inside analyzeLogs(ArrayList<String> logs):\n- snippet_1: Declare an int counter starting at 0 and an ArrayList<String> to collect threat descriptions.\n- snippet_2: If the current entry starts with \"THREAT:\", increment the counter and add the substring after the first 8 characters to the description list.\n- snippet_3: Return \"THREATS:0|none\" if the counter is 0, otherwise return \"THREATS:\" + count + \"|\" + descriptions joined by \",\".",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// 4,847 log entries. The threat filter is gone \u2014 [NULL] deleted it first.\n// Without it the emergency system cannot assess severity.\n// Find the threats. The building needs this report before it can act.\n\nimport java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String analyzeLogs(ArrayList<String> logs) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for threat descriptions.\n        {{{snippet_1}}}\n\n        for (String entry : logs) {\n            // TASK 2: If entry starts with \"THREAT:\", increment and collect the description (after 8 chars).\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"THREATS:0|none\" if clean, else \"THREATS:\" + count + \"|\" + descriptions joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> logs1 = new ArrayList<>();\n        logs1.add(\"INFO: door opened\");\n        logs1.add(\"THREAT: brute force\");\n        logs1.add(\"INFO: scan ok\");\n        logs1.add(\"THREAT: port scan\");\n        logs1.add(\"THREAT: login fail\");\n        System.out.println(analyzeLogs(logs1));\n\n        ArrayList<String> logs2 = new ArrayList<>();\n        logs2.add(\"INFO: all clear\");\n        System.out.println(analyzeLogs(logs2));\n    }\n}",
+                "template_code": "import java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String analyzeLogs(ArrayList<String> logs) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for threat descriptions.\n        {{{snippet_1}}}\n\n        for (String entry : logs) {\n            // TASK 2: If entry starts with \"THREAT:\", increment and collect the description (after 8 chars).\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"THREATS:0|none\" if clean, else \"THREATS:\" + count + \"|\" + descriptions joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> logs1 = new ArrayList<>();\n        logs1.add(\"INFO: door opened\");\n        logs1.add(\"THREAT: brute force\");\n        logs1.add(\"INFO: scan ok\");\n        logs1.add(\"THREAT: port scan\");\n        logs1.add(\"THREAT: login fail\");\n        System.out.println(analyzeLogs(logs1));\n\n        ArrayList<String> logs2 = new ArrayList<>();\n        logs2.add(\"INFO: all clear\");\n        System.out.println(analyzeLogs(logs2));\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Declare: int count = 0; and ArrayList<String> threats = new ArrayList<>();",
+                    "snippet_2": "Check if entry starts with \"THREAT:\". If so, increment count and add entry.substring(8) to threats.",
+                    "snippet_3": "If count == 0 return \"THREATS:0|none\", else return \"THREATS:\" + count + \"|\" + String.join(\",\", threats)."
                 }
             }
         },
         "expectation": {
             "input": "",
-            "output": ""
+            "output": "THREATS:3|brute force,port scan,login fail\nTHREATS:0|none"
         }
     },
     {
         "title": "ELV-P5-CHUNK-002",
         "difficulty": "Medium",
         "category": "ELV-P5",
+        "description": "The server error filter was wiped along with the intrusion logs. Critical errors are invisible to the monitoring system. Restore the filter — find every ERROR entry and report the count.\n\nFill in the three snippets inside filterErrors(ArrayList<String> logs):\n- snippet_1: Declare an int counter starting at 0 and an ArrayList<String> to collect error messages.\n- snippet_2: If the current entry starts with \"ERROR:\", increment the counter and add the substring after the first 7 characters to the message list.\n- snippet_3: Return \"ERRORS:0|none\" if the counter is 0, otherwise return \"ERRORS:\" + count + \"|\" + messages joined by \",\".",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// The server error filter was wiped along with the intrusion logs.\n// Critical errors are invisible to the monitoring system.\n// Restore the filter \u2014 find every ERROR entry and report the count.\n\nimport java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String filterErrors(ArrayList<String> logs) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for error messages.\n        {{{snippet_1}}}\n\n        for (String entry : logs) {\n            // TASK 2: If entry starts with \"ERROR:\", increment and collect the message (after 7 chars).\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"ERRORS:0|none\" if clean, else \"ERRORS:\" + count + \"|\" + messages joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> logs1 = new ArrayList<>();\n        logs1.add(\"INFO: server started\");\n        logs1.add(\"ERROR: disk full\");\n        logs1.add(\"ERROR: null pointer\");\n        logs1.add(\"INFO: backup ok\");\n        System.out.println(filterErrors(logs1));\n\n        ArrayList<String> logs2 = new ArrayList<>();\n        logs2.add(\"INFO: running\");\n        System.out.println(filterErrors(logs2));\n    }\n}",
+                "template_code": "import java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String filterErrors(ArrayList<String> logs) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for error messages.\n        {{{snippet_1}}}\n\n        for (String entry : logs) {\n            // TASK 2: If entry starts with \"ERROR:\", increment and collect the message (after 7 chars).\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"ERRORS:0|none\" if clean, else \"ERRORS:\" + count + \"|\" + messages joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> logs1 = new ArrayList<>();\n        logs1.add(\"INFO: server started\");\n        logs1.add(\"ERROR: disk full\");\n        logs1.add(\"ERROR: null pointer\");\n        logs1.add(\"INFO: backup ok\");\n        System.out.println(filterErrors(logs1));\n\n        ArrayList<String> logs2 = new ArrayList<>();\n        logs2.add(\"INFO: running\");\n        System.out.println(filterErrors(logs2));\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Declare: int count = 0; and ArrayList<String> errors = new ArrayList<>();",
+                    "snippet_2": "Check if entry starts with \"ERROR:\". If so, increment count and add entry.substring(7) to errors.",
+                    "snippet_3": "If count == 0 return \"ERRORS:0|none\", else return \"ERRORS:\" + count + \"|\" + String.join(\",\", errors)."
                 }
             }
         },
         "expectation": {
             "input": "",
-            "output": ""
+            "output": "ERRORS:2|disk full,null pointer\nERRORS:0|none"
         }
     },
     {
         "title": "ELV-P5-CHUNK-003",
         "difficulty": "Medium",
         "category": "ELV-P5",
+        "description": "The badge access log is full of denied entries — someone was probing every door. The scanner that should have flagged them is offline. Find every DENIED entry before [NULL] makes another move.\n\nFill in the three snippets inside findDenied(ArrayList<String> entries):\n- snippet_1: Declare an int counter starting at 0 and an ArrayList<String> to collect denied entries.\n- snippet_2: If the current entry contains the word \"DENIED\" anywhere, increment the counter and add the full entry to the list.\n- snippet_3: Return \"DENIED:0|none\" if the counter is 0, otherwise return \"DENIED:\" + count + \"|\" + entries joined by \",\".",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// The badge access log is full of denied entries \u2014 someone was probing every door.\n// The scanner that should have flagged them is offline.\n// Find every DENIED entry before [NULL] makes another move.\n\nimport java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String findDenied(ArrayList<String> entries) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for denied entries.\n        {{{snippet_1}}}\n\n        for (String entry : entries) {\n            // TASK 2: If entry contains \"DENIED\" anywhere, increment and collect the full entry.\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"DENIED:0|none\" if none, else \"DENIED:\" + count + \"|\" + entries joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> e1 = new ArrayList<>();\n        e1.add(\"Student 001: GRANTED\");\n        e1.add(\"Student 002: DENIED low clearance\");\n        e1.add(\"Student 003: GRANTED\");\n        e1.add(\"Visitor 01: DENIED no badge\");\n        System.out.println(findDenied(e1));\n\n        ArrayList<String> e2 = new ArrayList<>();\n        e2.add(\"Staff 001: GRANTED\");\n        System.out.println(findDenied(e2));\n    }\n}",
+                "template_code": "import java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String findDenied(ArrayList<String> entries) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for denied entries.\n        {{{snippet_1}}}\n\n        for (String entry : entries) {\n            // TASK 2: If entry contains \"DENIED\" anywhere, increment and collect the full entry.\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"DENIED:0|none\" if none, else \"DENIED:\" + count + \"|\" + entries joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> e1 = new ArrayList<>();\n        e1.add(\"Student 001: GRANTED\");\n        e1.add(\"Student 002: DENIED low clearance\");\n        e1.add(\"Student 003: GRANTED\");\n        e1.add(\"Visitor 01: DENIED no badge\");\n        System.out.println(findDenied(e1));\n\n        ArrayList<String> e2 = new ArrayList<>();\n        e2.add(\"Staff 001: GRANTED\");\n        System.out.println(findDenied(e2));\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Declare: int count = 0; and ArrayList<String> denied = new ArrayList<>();",
+                    "snippet_2": "Check if entry contains \"DENIED\". If so, increment count and add the full entry to denied.",
+                    "snippet_3": "If count == 0 return \"DENIED:0|none\", else return \"DENIED:\" + count + \"|\" + String.join(\",\", denied)."
                 }
             }
         },
         "expectation": {
             "input": "",
-            "output": ""
+            "output": "DENIED:2|Student 002: DENIED low clearance,Visitor 01: DENIED no badge\nDENIED:0|none"
         }
     },
     {
         "title": "ELV-P5-CHUNK-004",
         "difficulty": "Medium",
         "category": "ELV-P5",
+        "description": "Elevator requests are piling up but the floor filter is down. Security needs to know exactly how many calls are going to each floor. Restore the filter — match by floor number and report the count.\n\nFill in the three snippets inside findFloorRequests(ArrayList<String> logs, int floor):\n- snippet_1: Declare an int counter starting at 0 and an ArrayList<String> to collect matching requests.\n- snippet_2: If the current entry ends with \":\" + floor, increment the counter and add the full entry to the list.\n- snippet_3: Return \"FLOOR\" + floor + \":0|none\" if the counter is 0, otherwise return \"FLOOR\" + floor + \":\" + count + \"|\" + entries joined by \",\".",
         "templates": {
             "java": {
                 "name": "Java Implementation",
-                "template_code": "// Elevator requests are piling up but the floor filter is down.\n// Security needs to know exactly how many calls are going to each floor.\n// Restore the filter \u2014 match by floor number, report the count.\n\nimport java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String findFloorRequests(ArrayList<String> logs, int floor) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for matching requests.\n        {{{snippet_1}}}\n\n        for (String entry : logs) {\n            // TASK 2: If entry ends with \":\" + floor, increment and collect the full entry.\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"FLOOR\" + floor + \":0|none\" if none,\n        // else \"FLOOR\" + floor + \":\" + count + \"|\" + entries joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> logs = new ArrayList<>();\n        logs.add(\"User A requested floor:2\");\n        logs.add(\"User B requested floor:3\");\n        logs.add(\"User C requested floor:2\");\n        logs.add(\"User D requested floor:1\");\n        System.out.println(findFloorRequests(logs, 2));\n        System.out.println(findFloorRequests(logs, 5));\n    }\n}",
+                "template_code": "import java.util.ArrayList;\n\npublic class ThreatAnalyser {\n\n    public static String findFloorRequests(ArrayList<String> logs, int floor) {\n\n        // TASK 1: Declare a counter and an ArrayList<String> for matching requests.\n        {{{snippet_1}}}\n\n        for (String entry : logs) {\n            // TASK 2: If entry ends with \":\" + floor, increment and collect the full entry.\n            {{{snippet_2}}}\n        }\n\n        // TASK 3: Return \"FLOOR\" + floor + \":0|none\" if none,\n        // else \"FLOOR\" + floor + \":\" + count + \"|\" + entries joined by \",\".\n        {{{snippet_3}}}\n    }\n\n    public static void main(String[] args) {\n        ArrayList<String> logs = new ArrayList<>();\n        logs.add(\"User A requested floor:2\");\n        logs.add(\"User B requested floor:3\");\n        logs.add(\"User C requested floor:2\");\n        logs.add(\"User D requested floor:1\");\n        System.out.println(findFloorRequests(logs, 2));\n        System.out.println(findFloorRequests(logs, 5));\n    }\n}",
                 "snippets": {
-                    "snippet_1": "None to be shown here",
-                    "snippet_2": "None to be shown here",
-                    "snippet_3": "None to be shown here"
+                    "snippet_1": "Declare: int count = 0; and ArrayList<String> matches = new ArrayList<>();",
+                    "snippet_2": "Check if entry ends with \":\" + floor. If so, increment count and add the full entry to matches.",
+                    "snippet_3": "If count == 0 return \"FLOOR\" + floor + \":0|none\", else return \"FLOOR\" + floor + \":\" + count + \"|\" + String.join(\",\", matches)."
                 }
             }
         },
         "expectation": {
             "input": "",
-            "output": ""
+            "output": "FLOOR2:2|User A requested floor:2,User C requested floor:2\nFLOOR5:0|none"
         }
     }
 ]

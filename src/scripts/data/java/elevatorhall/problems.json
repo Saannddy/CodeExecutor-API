@@ -1,25 +1,25 @@
 [
     {
         "title": "ELV-P1-PROB-001",
-        "description": "// [NULL] destroyed the auth daemon's recursive checksum.\n// Without a base case, every badge scan crashes the stack.\n// Restore it. The first fragment unlocks when it runs clean.\n\npublic class AuthDaemon {\n\n    public static int hashPassword(String s) {\n        // Recursively sum the ASCII value of each character.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(hashPassword(\"DOOR\"));\n        System.out.println(hashPassword(\"KEY\"));\n        System.out.println(hashPassword(\"\"));\n    }\n}",
+        "description": "[NULL] destroyed the auth daemon's recursive checksum. Without a base case, every badge scan crashes the stack. Restore it before the first fragment is lost.\n\nImplement hashPassword(String s) that recursively sums the ASCII value of every character in s. An empty string must return 0.\n\nInput: a single string\nOutput: the sum of ASCII values of all characters",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// [NULL] destroyed the auth daemon's recursive checksum.\n// Without a base case, every badge scan crashes the stack.\n// Restore it. The first fragment unlocks when it runs clean.\n\npublic class AuthDaemon {\n\n    public static int hashPassword(String s) {\n        // Recursively sum the ASCII value of each character.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(hashPassword(\"DOOR\"));\n        System.out.println(hashPassword(\"KEY\"));\n        System.out.println(hashPassword(\"\"));\n    }\n}"
+            "java": "import java.util.Scanner;\n\npublic class AuthDaemon {\n    public static int hashPassword(String s) {\n        // Recursively sum the ASCII value of each character.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String str = sc.nextLine();\n        System.out.println(hashPassword(str));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "\"DOOR\"",
-                "output": "289",
+                "input": "DOOR",
+                "output": "308",
                 "is_hidden": false
             },
             {
-                "input": "\"KEY\"",
-                "output": "236",
+                "input": "KEY",
+                "output": "233",
                 "is_hidden": true
             },
             {
-                "input": "\"\"",
+                "input": "",
                 "output": "0",
                 "is_hidden": true
             }
@@ -27,63 +27,68 @@
     },
     {
         "title": "ELV-P1-PROB-002",
-        "description": "// The badge scanner counts security characters in access codes recursively.\n// [NULL] gutted the logic. Restore it before the auth layer rejects every card.\n\npublic class AuthDaemon {\n\n    public static int countChar(String s, char target) {\n        // Recursively count how many times target appears in s.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(countChar(\"ESCALATE\", 'E'));\n        System.out.println(countChar(\"ACCESS\", 'S'));\n        System.out.println(countChar(\"DOOR\", 'Z'));\n    }\n}",
+        "description": "The badge scanner counts security characters in access codes recursively. [NULL] gutted the logic. Restore it before the auth layer rejects every card.\n\nImplement countChar(String s, char target) that recursively counts how many times target appears in s. Return 0 if s is empty or target is not found.\n\nInput: first line is a string, second line is a single character\nOutput: the number of times the character appears in the string",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// The badge scanner counts security characters in access codes recursively.\n// [NULL] gutted the logic. Restore it before the auth layer rejects every card.\n\npublic class AuthDaemon {\n\n    public static int countChar(String s, char target) {\n        // Recursively count how many times target appears in s.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(countChar(\"ESCALATE\", 'E'));\n        System.out.println(countChar(\"ACCESS\", 'S'));\n        System.out.println(countChar(\"DOOR\", 'Z'));\n    }\n}"
+            "java": "import java.util.Scanner;\n\npublic class AuthDaemon {\n    public static int countChar(String s, char target) {\n        // Recursively count how many times target appears in s.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String str = sc.nextLine();\n        char c = sc.next().charAt(0);\n        System.out.println(countChar(str, c));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "\"ESCALATE\", 'E'",
+                "input": "ESCALATE\nE",
                 "output": "2",
                 "is_hidden": false
             },
             {
-                "input": "\"ACCESS\", 'S'",
+                "input": "ACCESS\nS",
                 "output": "2",
                 "is_hidden": true
             },
             {
-                "input": "\"DOOR\", 'Z'",
+                "input": "DOOR\nZ",
                 "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "AAAA\nA",
+                "output": "4",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P1-PROB-003",
-        "description": "// [NULL] reversed every exit label in the CCTV registry to cover their tracks.\n// This recursive function reverses them back. It is broken. Fix it.\n\npublic class AuthDaemon {\n\n    public static String reverseCode(String s) {\n        // Recursively reverse the string.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(reverseCode(\"TIXE\"));\n        System.out.println(reverseCode(\"EDOC\"));\n        System.out.println(reverseCode(\"\"));\n    }\n}",
+        "description": "[NULL] reversed every exit label in the CCTV registry to cover their tracks. This recursive function reverses them back. It is broken. Fix it.\n\nImplement reverseCode(String s) that recursively reverses the given string. An empty string should return an empty string.\n\nInput: a single string\nOutput: the string with all characters in reverse order",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// [NULL] reversed every exit label in the CCTV registry to cover their tracks.\n// This recursive function reverses them back. It is broken. Fix it.\n\npublic class AuthDaemon {\n\n    public static String reverseCode(String s) {\n        // Recursively reverse the string.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(reverseCode(\"TIXE\"));\n        System.out.println(reverseCode(\"EDOC\"));\n        System.out.println(reverseCode(\"\"));\n    }\n}"
+            "java": "import java.util.Scanner;\n\npublic class AuthDaemon {\n    public static String reverseCode(String s) {\n        // Recursively reverse the string.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String str = sc.nextLine();\n        System.out.println(reverseCode(str));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "\"TIXE\"",
+                "input": "TIXE",
                 "output": "EXIT",
                 "is_hidden": false
             },
             {
-                "input": "\"EDOC\"",
+                "input": "EDOC",
                 "output": "CODE",
                 "is_hidden": true
             },
             {
-                "input": "\"\"",
-                "output": "",
+                "input": "SANDY",
+                "output": "YDNAS",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P1-PROB-004",
-        "description": "// Floor access codes are validated by a recursive digit checksum.\n// The module is down. Restore it before the elevator rejects every request.\n\npublic class AuthDaemon {\n\n    public static int sumDigits(int n) {\n        // Recursively sum each digit of n.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(sumDigits(4821));\n        System.out.println(sumDigits(9));\n        System.out.println(sumDigits(0));\n    }\n}",
+        "description": "Floor access codes are validated by a recursive digit checksum. The module is down. Restore it before the elevator rejects every request.\n\nImplement sumDigits(int n) that recursively sums each digit of n. For example, sumDigits(4821) returns 4+8+2+1 = 15. Handle n = 0 by returning 0.\n\nInput: a non-negative integer\nOutput: the sum of its digits",
         "difficulty": "Hard",
         "category": "ELV-P1",
         "templates": {
-            "java": "// Floor access codes are validated by a recursive digit checksum.\n// The module is down. Restore it before the elevator rejects every request.\n\npublic class AuthDaemon {\n\n    public static int sumDigits(int n) {\n        // Recursively sum each digit of n.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(sumDigits(4821));\n        System.out.println(sumDigits(9));\n        System.out.println(sumDigits(0));\n    }\n}"
+            "java": "import java.util.Scanner;\n\npublic class AuthDaemon {\n    public static int sumDigits(int n) {\n        // Recursively sum each digit of n.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int num = sc.nextInt();\n        System.out.println(sumDigits(num));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
@@ -105,95 +110,130 @@
     },
     {
         "title": "ELV-P2-PROB-001",
-        "description": "// The corridor heat sensor grid feeds into this machine.\n// [NULL] broke the scan function so it never flags anomalies.\n// Restore it, the security relay needs a clean threat report.\n\nimport java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findHotCells(int[][] grid) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Scan every cell. Flag readings above 80 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if the grid is clean.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] grid = {\n            {12, 45, 88, 23},\n            {91, 34, 56, 77},\n            {10, 82, 19, 95},\n            {60, 55, 33, 84}\n        };\n        System.out.println(findHotCells(grid));\n\n        int[][] grid2 = {{10, 20}, {30, 40}};\n        System.out.println(findHotCells(grid2));\n    }\n}",
+        "description": "The corridor heat sensor grid feeds into this machine. [NULL] broke the scan function so it never flags anomalies. Restore it — the security relay needs a clean threat report.\n\nImplement findHotCells(int[][] grid) that scans every cell and returns a comma-separated list of \"[row,col]=value\" for every cell with a value strictly greater than 80. Return \"none\" if no cell exceeds the threshold.\n\nInput: first line contains rows and cols, followed by grid values row by row\nOutput: flagged cells as \"[row,col]=value\" joined by \", \", or \"none\"",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// The corridor heat sensor grid feeds into this machine.\n// [NULL] broke the scan function so it never flags anomalies.\n// Restore it, the security relay needs a clean threat report.\n\nimport java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findHotCells(int[][] grid) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Scan every cell. Flag readings above 80 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if the grid is clean.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] grid = {\n            {12, 45, 88, 23},\n            {91, 34, 56, 77},\n            {10, 82, 19, 95},\n            {60, 55, 33, 84}\n        };\n        System.out.println(findHotCells(grid));\n\n        int[][] grid2 = {{10, 20}, {30, 40}};\n        System.out.println(findHotCells(grid2));\n    }\n}"
+            "java": "import java.util.ArrayList;\nimport java.util.Scanner;\n\npublic class GridScanner {\n    public static String findHotCells(int[][] grid) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Scan every cell. Flag readings above 80 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if the grid is clean.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int rows = sc.nextInt();\n        int cols = sc.nextInt();\n        int[][] grid = new int[rows][cols];\n        for (int i = 0; i < rows; i++)\n            for (int j = 0; j < cols; j++)\n                grid[i][j] = sc.nextInt();\n        System.out.println(findHotCells(grid));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "4 4\n12 45 88 23\n91 34 56 77\n10 82 19 95\n60 55 33 84",
                 "output": "[0,2]=88, [1,0]=91, [2,1]=82, [2,3]=95, [3,3]=84",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "3 3\n10 20 30\n40 50 60\n70 80 90",
+                "output": "[2,2]=90",
+                "is_hidden": true
+            },
+            {
+                "input": "2 2\n10 20\n30 40",
                 "output": "none",
+                "is_hidden": true
+            },
+            {
+                "input": "1 1\n81",
+                "output": "[0,0]=81",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P2-PROB-002",
-        "description": "// [NULL] is hiding in wireless dead zones to avoid detection.\n// The signal map is a grid, find every cell below strength 10.\n// Expose the dead zones and the relay comes back online.\n\nimport java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findDeadZones(int[][] signal) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Flag every cell where signal strength is below 10 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if coverage is full.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] signal = {\n            {55,  3, 80,  7},\n            {90, 42,  8, 60},\n            { 5, 70, 33,  2}\n        };\n        System.out.println(findDeadZones(signal));\n\n        int[][] signal2 = {{50, 60}, {70, 80}};\n        System.out.println(findDeadZones(signal2));\n    }\n}",
+        "description": "[NULL] is hiding in wireless dead zones to avoid detection. The signal map is a grid — find every cell with signal strength strictly below 10. Expose the dead zones and the relay comes back online.\n\nImplement findDeadZones(int[][] signal) that returns a comma-separated list of \"[row,col]=value\" for every cell with signal strength strictly less than 10. Return \"none\" if coverage is full.\n\nInput: first line contains rows and cols, followed by signal strength values row by row\nOutput: dead zone cells as \"[row,col]=value\" joined by \", \", or \"none\"",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// [NULL] is hiding in wireless dead zones to avoid detection.\n// The signal map is a grid, find every cell below strength 10.\n// Expose the dead zones and the relay comes back online.\n\nimport java.util.ArrayList;\n\npublic class GridScanner {\n\n    public static String findDeadZones(int[][] signal) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Flag every cell where signal strength is below 10 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if coverage is full.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] signal = {\n            {55,  3, 80,  7},\n            {90, 42,  8, 60},\n            { 5, 70, 33,  2}\n        };\n        System.out.println(findDeadZones(signal));\n\n        int[][] signal2 = {{50, 60}, {70, 80}};\n        System.out.println(findDeadZones(signal2));\n    }\n}"
+            "java": "import java.util.ArrayList;\nimport java.util.Scanner;\n\npublic class GridScanner {\n    public static String findDeadZones(int[][] signal) {\n        ArrayList<String> hits = new ArrayList<>();\n        // Flag every cell where signal strength is strictly below 10 as \"[row,col]=value\".\n        // Return hits joined by \", \" or \"none\" if coverage is full.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int rows = sc.nextInt();\n        int cols = sc.nextInt();\n        int[][] signal = new int[rows][cols];\n        for (int i = 0; i < rows; i++)\n            for (int j = 0; j < cols; j++)\n                signal[i][j] = sc.nextInt();\n        System.out.println(findDeadZones(signal));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "3 4\n55 3 80 7\n90 42 8 60\n5 70 33 2",
                 "output": "[0,1]=3, [0,3]=7, [1,2]=8, [2,0]=5, [2,3]=2",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "2 2\n30 40\n50 60",
                 "output": "none",
+                "is_hidden": true
+            },
+            {
+                "input": "1 1\n10",
+                "output": "none",
+                "is_hidden": true
+            },
+            {
+                "input": "1 1\n5",
+                "output": "[0,0]=5",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P2-PROB-003",
-        "description": "// Security needs a headcount to confirm the building is clear.\n// The attendance grid uses 1 for present, 0 for absent.\n// Count the occupied cells and report the total.\n\npublic class GridScanner {\n\n    public static int countPresent(int[][] attendance) {\n        // Count every cell equal to 1 and return the total.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] a = {\n            {1, 0, 1, 1},\n            {0, 0, 1, 0},\n            {1, 1, 0, 1}\n        };\n        System.out.println(countPresent(a));\n\n        int[][] b = {{0, 0}, {0, 0}};\n        System.out.println(countPresent(b));\n    }\n}",
+        "description": "Security needs a headcount to confirm the building is clear. The attendance grid uses 1 for present and 0 for absent. Count the occupied cells and report the total.\n\nImplement countPresent(int[][] attendance) that counts every cell equal to 1 and returns the total count.\n\nInput: first line contains rows and cols, followed by attendance values (0 or 1) row by row\nOutput: total number of cells with value 1",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// Security needs a headcount to confirm the building is clear.\n// The attendance grid uses 1 for present, 0 for absent.\n// Count the occupied cells and report the total.\n\npublic class GridScanner {\n\n    public static int countPresent(int[][] attendance) {\n        // Count every cell equal to 1 and return the total.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] a = {\n            {1, 0, 1, 1},\n            {0, 0, 1, 0},\n            {1, 1, 0, 1}\n        };\n        System.out.println(countPresent(a));\n\n        int[][] b = {{0, 0}, {0, 0}};\n        System.out.println(countPresent(b));\n    }\n}"
+            "java": "import java.util.Scanner;\n\npublic class GridScanner {\n    public static int countPresent(int[][] attendance) {\n        // Count every cell equal to 1 and return the total.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int rows = sc.nextInt();\n        int cols = sc.nextInt();\n        int[][] attendance = new int[rows][cols];\n        for (int i = 0; i < rows; i++)\n            for (int j = 0; j < cols; j++)\n                attendance[i][j] = sc.nextInt();\n        System.out.println(countPresent(attendance));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "3 4\n1 0 1 1\n0 0 1 0\n1 1 0 1",
                 "output": "6",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "2 2\n0 0\n0 0",
                 "output": "0",
+                "is_hidden": true
+            },
+            {
+                "input": "1 1\n1",
+                "output": "1",
+                "is_hidden": true
+            },
+            {
+                "input": "2 3\n1 1 1\n1 1 1",
+                "output": "6",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P2-PROB-004",
-        "description": "// One server rack is running [NULL]'s process and overheating the room.\n// Find the single hottest cell in the thermal grid.\n// Return its location and temperature, then we know where to cut power.\n\npublic class GridScanner {\n\n    public static String findHotspot(int[][] temps) {\n        // Find the cell with the maximum value. Return \"[row,col]=value\".\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] t = {\n            {40, 72, 55},\n            {88, 61, 47},\n            {33, 95, 70}\n        };\n        System.out.println(findHotspot(t));\n\n        int[][] t2 = {{10, 20}, {30, 25}};\n        System.out.println(findHotspot(t2));\n    }\n}",
+        "description": "One server rack is running [NULL]'s process and overheating the room. Find the single hottest cell in the thermal grid. Return its location and temperature so we know where to cut power.\n\nImplement findHotspot(int[][] temps) that finds the cell with the maximum value and returns it as \"[row,col]=value\". If multiple cells share the maximum, return the first one found (scanning top to bottom, left to right).\n\nInput: first line contains rows and cols, followed by temperature values row by row\nOutput: hottest cell in format \"[row,col]=value\"",
         "difficulty": "Hard",
         "category": "ELV-P2",
         "templates": {
-            "java": "// One server rack is running [NULL]'s process and overheating the room.\n// Find the single hottest cell in the thermal grid.\n// Return its location and temperature, then we know where to cut power.\n\npublic class GridScanner {\n\n    public static String findHotspot(int[][] temps) {\n        // Find the cell with the maximum value. Return \"[row,col]=value\".\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[][] t = {\n            {40, 72, 55},\n            {88, 61, 47},\n            {33, 95, 70}\n        };\n        System.out.println(findHotspot(t));\n\n        int[][] t2 = {{10, 20}, {30, 25}};\n        System.out.println(findHotspot(t2));\n    }\n}"
+            "java": "import java.util.Scanner;\n\npublic class GridScanner {\n    public static String findHotspot(int[][] temps) {\n        // Find the cell with the maximum value. Return \"[row,col]=value\".\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int rows = sc.nextInt();\n        int cols = sc.nextInt();\n        int[][] temps = new int[rows][cols];\n        for (int i = 0; i < rows; i++)\n            for (int j = 0; j < cols; j++)\n                temps[i][j] = sc.nextInt();\n        System.out.println(findHotspot(temps));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "3 3\n40 72 55\n88 61 47\n33 95 70",
                 "output": "[2,1]=95",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "2 2\n10 20\n30 25",
                 "output": "[1,0]=30",
+                "is_hidden": true
+            },
+            {
+                "input": "1 1\n42",
+                "output": "[0,0]=42",
                 "is_hidden": true
             }
         ]
     },
     {
         "title": "ELV-P3-PROB-001",
-        "description": "// [NULL] wiped both card subclasses from the clearance system.\n// Every card now returns UNKNOWN and every door stays locked.\n// The base class survived. Restore both card types from scratch.\n\npublic class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}",
+        "description": "[NULL] wiped both card subclasses from the clearance system. Every card now returns UNKNOWN and every door stays locked. The base class AccessCard survived — restore both card types from scratch.\n\nWrite two inner static classes inside ClearanceManager:\n- StudentCard extends AccessCard. Its constructor takes only a name. Access level is always 1. Its identify() returns the parent result with \" [STUDENT]\" appended.\n- StaffCard extends AccessCard. Its constructor takes only a name. Access level is always 5. Its identify() returns the parent result with \" [STAFF]\" appended.",
         "difficulty": "Hard",
         "category": "ELV-P3",
         "templates": {
-            "java": "// [NULL] wiped both card subclasses from the clearance system.\n// Every card now returns UNKNOWN and every door stays locked.\n// The base class survived. Restore both card types from scratch.\n\npublic class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}"
+            "java": "public class ClearanceManager {\n\n    static class AccessCard {\n        protected String ownerName;\n        protected int accessLevel;\n        public AccessCard(String name, int level) {\n            this.ownerName = name;\n            this.accessLevel = level;\n        }\n        public String identify() {\n            return \"CARD[\" + ownerName + \"] Level:\" + accessLevel;\n        }\n    }\n\n    // TASK 1: StudentCard extends AccessCard. Level always 1. Appends \" [STUDENT]\".\n    {TASK 1: STUDENT CARD}\n\n    // TASK 2: StaffCard extends AccessCard. Level always 5. Appends \" [STAFF]\".\n    {TASK 2: STAFF CARD}\n\n    public static void main(String[] args) {\n        AccessCard s = new StudentCard(\"Azri\");\n        AccessCard t = new StaffCard(\"Dr.Lim\");\n        System.out.println(s.identify());\n        System.out.println(t.identify());\n        System.out.println(s.accessLevel);\n        System.out.println(t.accessLevel);\n    }\n}"
         },
         "test_cases": [
             {
@@ -220,11 +260,11 @@
     },
     {
         "title": "ELV-P3-PROB-002",
-        "description": "// The alert system cannot classify severity anymore \u2014 [NULL] deleted the subclasses.\n// Minor and critical alerts both come back blank. Restore both types.\n\npublic class ClearanceManager {\n\n    static class SystemAlert {\n        protected String message;\n        protected int severity;\n        public SystemAlert(String message, int severity) {\n            this.message = message;\n            this.severity = severity;\n        }\n        public String describe() {\n            return \"ALERT[\" + message + \"] Sev:\" + severity;\n        }\n    }\n\n    // TASK 1: MinorAlert extends SystemAlert. Severity always 1. Appends \" [MINOR]\".\n    {TASK 1: MINOR ALERT}\n\n    // TASK 2: CriticalAlert extends SystemAlert. Severity always 9. Appends \" [CRITICAL]\".\n    {TASK 2: CRITICAL ALERT}\n\n    public static void main(String[] args) {\n        SystemAlert a = new MinorAlert(\"door left open\");\n        SystemAlert b = new CriticalAlert(\"server breach\");\n        System.out.println(a.describe());\n        System.out.println(b.describe());\n        System.out.println(a.severity);\n        System.out.println(b.severity);\n    }\n}",
+        "description": "The alert system cannot classify severity anymore — [NULL] deleted the subclasses. Minor and critical alerts both come back blank. Restore both types.\n\nWrite two inner static classes inside ClearanceManager:\n- MinorAlert extends SystemAlert. Its constructor takes only a message. Severity is always 1. Its describe() returns the parent result with \" [MINOR]\" appended.\n- CriticalAlert extends SystemAlert. Its constructor takes only a message. Severity is always 9. Its describe() returns the parent result with \" [CRITICAL]\" appended.",
         "difficulty": "Hard",
         "category": "ELV-P3",
         "templates": {
-            "java": "// The alert system cannot classify severity anymore \u2014 [NULL] deleted the subclasses.\n// Minor and critical alerts both come back blank. Restore both types.\n\npublic class ClearanceManager {\n\n    static class SystemAlert {\n        protected String message;\n        protected int severity;\n        public SystemAlert(String message, int severity) {\n            this.message = message;\n            this.severity = severity;\n        }\n        public String describe() {\n            return \"ALERT[\" + message + \"] Sev:\" + severity;\n        }\n    }\n\n    // TASK 1: MinorAlert extends SystemAlert. Severity always 1. Appends \" [MINOR]\".\n    {TASK 1: MINOR ALERT}\n\n    // TASK 2: CriticalAlert extends SystemAlert. Severity always 9. Appends \" [CRITICAL]\".\n    {TASK 2: CRITICAL ALERT}\n\n    public static void main(String[] args) {\n        SystemAlert a = new MinorAlert(\"door left open\");\n        SystemAlert b = new CriticalAlert(\"server breach\");\n        System.out.println(a.describe());\n        System.out.println(b.describe());\n        System.out.println(a.severity);\n        System.out.println(b.severity);\n    }\n}"
+            "java": "public class ClearanceManager {\n\n    static class SystemAlert {\n        protected String message;\n        protected int severity;\n        public SystemAlert(String message, int severity) {\n            this.message = message;\n            this.severity = severity;\n        }\n        public String describe() {\n            return \"ALERT[\" + message + \"] Sev:\" + severity;\n        }\n    }\n\n    // TASK 1: MinorAlert extends SystemAlert. Severity always 1. Appends \" [MINOR]\".\n    {TASK 1: MINOR ALERT}\n\n    // TASK 2: CriticalAlert extends SystemAlert. Severity always 9. Appends \" [CRITICAL]\".\n    {TASK 2: CRITICAL ALERT}\n\n    public static void main(String[] args) {\n        SystemAlert a = new MinorAlert(\"door left open\");\n        SystemAlert b = new CriticalAlert(\"server breach\");\n        System.out.println(a.describe());\n        System.out.println(b.describe());\n        System.out.println(a.severity);\n        System.out.println(b.severity);\n    }\n}"
         },
         "test_cases": [
             {
@@ -251,11 +291,11 @@
     },
     {
         "title": "ELV-P3-PROB-003",
-        "description": "// The network device registry lost both its concrete types.\n// Wired and wireless devices both report as unknown hardware.\n// Restore them so the building network can come back online.\n\npublic class ClearanceManager {\n\n    static class NetworkDevice {\n        protected String id;\n        protected int bandwidth;\n        public NetworkDevice(String id, int bandwidth) {\n            this.id = id;\n            this.bandwidth = bandwidth;\n        }\n        public String report() {\n            return \"DEV[\" + id + \"] BW:\" + bandwidth;\n        }\n    }\n\n    // TASK 1: WiredDevice extends NetworkDevice. Bandwidth always 1000. Appends \" [WIRED]\".\n    {TASK 1: WIRED DEVICE}\n\n    // TASK 2: WirelessDevice extends NetworkDevice. Bandwidth always 300. Appends \" [WIRELESS]\".\n    {TASK 2: WIRELESS DEVICE}\n\n    public static void main(String[] args) {\n        NetworkDevice w = new WiredDevice(\"ETH-01\");\n        NetworkDevice x = new WirelessDevice(\"WIFI-02\");\n        System.out.println(w.report());\n        System.out.println(x.report());\n        System.out.println(w.bandwidth);\n        System.out.println(x.bandwidth);\n    }\n}",
+        "description": "The network device registry lost both its concrete types. Wired and wireless devices both report as unknown hardware. Restore them so the building network can come back online.\n\nWrite two inner static classes inside ClearanceManager:\n- WiredDevice extends NetworkDevice. Its constructor takes only an id. Bandwidth is always 1000. Its report() returns the parent result with \" [WIRED]\" appended.\n- WirelessDevice extends NetworkDevice. Its constructor takes only an id. Bandwidth is always 300. Its report() returns the parent result with \" [WIRELESS]\" appended.",
         "difficulty": "Hard",
         "category": "ELV-P3",
         "templates": {
-            "java": "// The network device registry lost both its concrete types.\n// Wired and wireless devices both report as unknown hardware.\n// Restore them so the building network can come back online.\n\npublic class ClearanceManager {\n\n    static class NetworkDevice {\n        protected String id;\n        protected int bandwidth;\n        public NetworkDevice(String id, int bandwidth) {\n            this.id = id;\n            this.bandwidth = bandwidth;\n        }\n        public String report() {\n            return \"DEV[\" + id + \"] BW:\" + bandwidth;\n        }\n    }\n\n    // TASK 1: WiredDevice extends NetworkDevice. Bandwidth always 1000. Appends \" [WIRED]\".\n    {TASK 1: WIRED DEVICE}\n\n    // TASK 2: WirelessDevice extends NetworkDevice. Bandwidth always 300. Appends \" [WIRELESS]\".\n    {TASK 2: WIRELESS DEVICE}\n\n    public static void main(String[] args) {\n        NetworkDevice w = new WiredDevice(\"ETH-01\");\n        NetworkDevice x = new WirelessDevice(\"WIFI-02\");\n        System.out.println(w.report());\n        System.out.println(x.report());\n        System.out.println(w.bandwidth);\n        System.out.println(x.bandwidth);\n    }\n}"
+            "java": "public class ClearanceManager {\n\n    static class NetworkDevice {\n        protected String id;\n        protected int bandwidth;\n        public NetworkDevice(String id, int bandwidth) {\n            this.id = id;\n            this.bandwidth = bandwidth;\n        }\n        public String report() {\n            return \"DEV[\" + id + \"] BW:\" + bandwidth;\n        }\n    }\n\n    // TASK 1: WiredDevice extends NetworkDevice. Bandwidth always 1000. Appends \" [WIRED]\".\n    {TASK 1: WIRED DEVICE}\n\n    // TASK 2: WirelessDevice extends NetworkDevice. Bandwidth always 300. Appends \" [WIRELESS]\".\n    {TASK 2: WIRELESS DEVICE}\n\n    public static void main(String[] args) {\n        NetworkDevice w = new WiredDevice(\"ETH-01\");\n        NetworkDevice x = new WirelessDevice(\"WIFI-02\");\n        System.out.println(w.report());\n        System.out.println(x.report());\n        System.out.println(w.bandwidth);\n        System.out.println(x.bandwidth);\n    }\n}"
         },
         "test_cases": [
             {
@@ -282,11 +322,11 @@
     },
     {
         "title": "ELV-P3-PROB-004",
-        "description": "// Lab equipment tagging is broken \u2014 safe and hazardous items look identical.\n// [NULL] deleted both subclasses. One wrong label and the evacuation fails.\n// Restore them.\n\npublic class ClearanceManager {\n\n    static class LabItem {\n        protected String code;\n        protected int riskLevel;\n        public LabItem(String code, int riskLevel) {\n            this.code = code;\n            this.riskLevel = riskLevel;\n        }\n        public String label() {\n            return \"ITEM[\" + code + \"] Risk:\" + riskLevel;\n        }\n    }\n\n    // TASK 1: SafeEquipment extends LabItem. RiskLevel always 1. Appends \" [SAFE]\".\n    {TASK 1: SAFE EQUIPMENT}\n\n    // TASK 2: HazardEquipment extends LabItem. RiskLevel always 5. Appends \" [HAZARD]\".\n    {TASK 2: HAZARD EQUIPMENT}\n\n    public static void main(String[] args) {\n        LabItem s = new SafeEquipment(\"CHAIR-04\");\n        LabItem h = new HazardEquipment(\"LASER-09\");\n        System.out.println(s.label());\n        System.out.println(h.label());\n        System.out.println(s.riskLevel);\n        System.out.println(h.riskLevel);\n    }\n}",
+        "description": "Lab equipment tagging is broken — safe and hazardous items look identical. [NULL] deleted both subclasses. One wrong label and the evacuation fails. Restore them.\n\nWrite two inner static classes inside ClearanceManager:\n- SafeEquipment extends LabItem. Its constructor takes only a code. Risk level is always 1. Its label() returns the parent result with \" [SAFE]\" appended.\n- HazardEquipment extends LabItem. Its constructor takes only a code. Risk level is always 5. Its label() returns the parent result with \" [HAZARD]\" appended.",
         "difficulty": "Hard",
         "category": "ELV-P3",
         "templates": {
-            "java": "// Lab equipment tagging is broken \u2014 safe and hazardous items look identical.\n// [NULL] deleted both subclasses. One wrong label and the evacuation fails.\n// Restore them.\n\npublic class ClearanceManager {\n\n    static class LabItem {\n        protected String code;\n        protected int riskLevel;\n        public LabItem(String code, int riskLevel) {\n            this.code = code;\n            this.riskLevel = riskLevel;\n        }\n        public String label() {\n            return \"ITEM[\" + code + \"] Risk:\" + riskLevel;\n        }\n    }\n\n    // TASK 1: SafeEquipment extends LabItem. RiskLevel always 1. Appends \" [SAFE]\".\n    {TASK 1: SAFE EQUIPMENT}\n\n    // TASK 2: HazardEquipment extends LabItem. RiskLevel always 5. Appends \" [HAZARD]\".\n    {TASK 2: HAZARD EQUIPMENT}\n\n    public static void main(String[] args) {\n        LabItem s = new SafeEquipment(\"CHAIR-04\");\n        LabItem h = new HazardEquipment(\"LASER-09\");\n        System.out.println(s.label());\n        System.out.println(h.label());\n        System.out.println(s.riskLevel);\n        System.out.println(h.riskLevel);\n    }\n}"
+            "java": "public class ClearanceManager {\n\n    static class LabItem {\n        protected String code;\n        protected int riskLevel;\n        public LabItem(String code, int riskLevel) {\n            this.code = code;\n            this.riskLevel = riskLevel;\n        }\n        public String label() {\n            return \"ITEM[\" + code + \"] Risk:\" + riskLevel;\n        }\n    }\n\n    // TASK 1: SafeEquipment extends LabItem. RiskLevel always 1. Appends \" [SAFE]\".\n    {TASK 1: SAFE EQUIPMENT}\n\n    // TASK 2: HazardEquipment extends LabItem. RiskLevel always 5. Appends \" [HAZARD]\".\n    {TASK 2: HAZARD EQUIPMENT}\n\n    public static void main(String[] args) {\n        LabItem s = new SafeEquipment(\"CHAIR-04\");\n        LabItem h = new HazardEquipment(\"LASER-09\");\n        System.out.println(s.label());\n        System.out.println(h.label());\n        System.out.println(s.riskLevel);\n        System.out.println(h.riskLevel);\n    }\n}"
         },
         "test_cases": [
             {
@@ -313,25 +353,25 @@
     },
     {
         "title": "ELV-P6-PROB-001",
-        "description": "// The elevator queue manager is down \u2014 [NULL] wiped the sort logic.\n// The lift now skips floors at random. You are one floor from the exit.\n// Sort the queue manually. Get it moving in the right order.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static void sortFloors(int[] floors) {\n        int n = floors.length;\n        // Sort floors ascending in place. No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[] a = {4, 1, 3, 2, 5};\n        sortFloors(a);\n        System.out.println(Arrays.toString(a));\n\n        int[] b = {9, 2, 7, 1};\n        sortFloors(b);\n        System.out.println(Arrays.toString(b));\n\n        int[] c = {3, 3, 1};\n        sortFloors(c);\n        System.out.println(Arrays.toString(c));\n    }\n}",
+        "description": "The elevator queue manager is down — [NULL] wiped the sort logic. The lift now skips floors at random. You are one floor from the exit. Sort the queue manually and get it moving in the right order.\n\nImplement sortFloors(int[] floors) that sorts the array in ascending order in place. You may NOT use Arrays.sort() or any library sort method — write the sorting algorithm yourself.\n\nInput: first line is n (number of floors), second line is n space-separated floor numbers\nOutput: sorted array in Arrays.toString() format, e.g. [1, 2, 3, 4, 5]",
         "difficulty": "Hard",
         "category": "ELV-P6",
         "templates": {
-            "java": "// The elevator queue manager is down \u2014 [NULL] wiped the sort logic.\n// The lift now skips floors at random. You are one floor from the exit.\n// Sort the queue manually. Get it moving in the right order.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static void sortFloors(int[] floors) {\n        int n = floors.length;\n        // Sort floors ascending in place. No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[] a = {4, 1, 3, 2, 5};\n        sortFloors(a);\n        System.out.println(Arrays.toString(a));\n\n        int[] b = {9, 2, 7, 1};\n        sortFloors(b);\n        System.out.println(Arrays.toString(b));\n\n        int[] c = {3, 3, 1};\n        sortFloors(c);\n        System.out.println(Arrays.toString(c));\n    }\n}"
+            "java": "import java.util.Arrays;\nimport java.util.Scanner;\n\npublic class ElevatorQueue {\n\n    public static void sortFloors(int[] floors) {\n        int n = floors.length;\n        // Sort floors ascending in place. No Arrays.sort() or library sort allowed.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] floors = new int[n];\n        for (int i = 0; i < n; i++) floors[i] = sc.nextInt();\n        sortFloors(floors);\n        System.out.println(Arrays.toString(floors));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "5\n4 1 3 2 5",
                 "output": "[1, 2, 3, 4, 5]",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "4\n9 2 7 1",
                 "output": "[1, 2, 7, 9]",
                 "is_hidden": true
             },
             {
-                "input": "",
+                "input": "3\n3 3 1",
                 "output": "[1, 3, 3]",
                 "is_hidden": true
             }
@@ -339,20 +379,20 @@
     },
     {
         "title": "ELV-P6-PROB-002",
-        "description": "// Critical floors need service first \u2014 highest priority number wins.\n// The priority sorter is gone. The lift is serving the wrong floors first.\n// Restore the sort. Descending order. No library methods.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static void sortByPriority(int[] priorities) {\n        int n = priorities.length;\n        // Sort priorities descending in place. No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[] a = {3, 1, 4, 2};\n        sortByPriority(a);\n        System.out.println(Arrays.toString(a));\n\n        int[] b = {5, 5, 2, 8};\n        sortByPriority(b);\n        System.out.println(Arrays.toString(b));\n    }\n}",
+        "description": "Critical floors need service first — the highest priority number wins. The priority sorter is gone and the lift is serving the wrong floors first. Restore the sort in descending order.\n\nImplement sortByPriority(int[] priorities) that sorts the array in descending order in place. You may NOT use Arrays.sort() or any library sort method — write the sorting algorithm yourself.\n\nInput: first line is n (number of priorities), second line is n space-separated priority values\nOutput: sorted array in descending order in Arrays.toString() format",
         "difficulty": "Hard",
         "category": "ELV-P6",
         "templates": {
-            "java": "// Critical floors need service first \u2014 highest priority number wins.\n// The priority sorter is gone. The lift is serving the wrong floors first.\n// Restore the sort. Descending order. No library methods.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static void sortByPriority(int[] priorities) {\n        int n = priorities.length;\n        // Sort priorities descending in place. No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[] a = {3, 1, 4, 2};\n        sortByPriority(a);\n        System.out.println(Arrays.toString(a));\n\n        int[] b = {5, 5, 2, 8};\n        sortByPriority(b);\n        System.out.println(Arrays.toString(b));\n    }\n}"
+            "java": "import java.util.Arrays;\nimport java.util.Scanner;\n\npublic class ElevatorQueue {\n\n    public static void sortByPriority(int[] priorities) {\n        int n = priorities.length;\n        // Sort priorities descending in place. No Arrays.sort() or library sort allowed.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] priorities = new int[n];\n        for (int i = 0; i < n; i++) priorities[i] = sc.nextInt();\n        sortByPriority(priorities);\n        System.out.println(Arrays.toString(priorities));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "4\n3 1 4 2",
                 "output": "[4, 3, 2, 1]",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "4\n5 5 2 8",
                 "output": "[8, 5, 5, 2]",
                 "is_hidden": true
             }
@@ -360,20 +400,20 @@
     },
     {
         "title": "ELV-P6-PROB-003",
-        "description": "// Lab booking slots include duplicates \u2014 multiple people queued for the same floor.\n// The sorter has to handle that cleanly. [NULL] knew it wouldn't.\n// Fix it. Handle the duplicates. Get the queue sorted.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static void sortSlots(int[] slots) {\n        int n = slots.length;\n        // Sort slots ascending in place. Duplicates must be handled correctly.\n        // No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[] a = {3, 1, 3, 2, 1};\n        sortSlots(a);\n        System.out.println(Arrays.toString(a));\n\n        int[] b = {7, 7, 7};\n        sortSlots(b);\n        System.out.println(Arrays.toString(b));\n    }\n}",
+        "description": "Lab booking slots include duplicates — multiple people queued for the same floor. The sorter has to handle that cleanly. [NULL] knew it wouldn't. Fix it and get the queue sorted correctly.\n\nImplement sortSlots(int[] slots) that sorts the array in ascending order in place, correctly preserving duplicate values. You may NOT use Arrays.sort() or any library sort method.\n\nInput: first line is n (number of slots), second line is n space-separated slot numbers\nOutput: sorted array in Arrays.toString() format with duplicates preserved",
         "difficulty": "Hard",
         "category": "ELV-P6",
         "templates": {
-            "java": "// Lab booking slots include duplicates \u2014 multiple people queued for the same floor.\n// The sorter has to handle that cleanly. [NULL] knew it wouldn't.\n// Fix it. Handle the duplicates. Get the queue sorted.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static void sortSlots(int[] slots) {\n        int n = slots.length;\n        // Sort slots ascending in place. Duplicates must be handled correctly.\n        // No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        int[] a = {3, 1, 3, 2, 1};\n        sortSlots(a);\n        System.out.println(Arrays.toString(a));\n\n        int[] b = {7, 7, 7};\n        sortSlots(b);\n        System.out.println(Arrays.toString(b));\n    }\n}"
+            "java": "import java.util.Arrays;\nimport java.util.Scanner;\n\npublic class ElevatorQueue {\n\n    public static void sortSlots(int[] slots) {\n        int n = slots.length;\n        // Sort slots ascending in place. Duplicates must be handled correctly.\n        // No Arrays.sort() or library sort allowed.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] slots = new int[n];\n        for (int i = 0; i < n; i++) slots[i] = sc.nextInt();\n        sortSlots(slots);\n        System.out.println(Arrays.toString(slots));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "5\n3 1 3 2 1",
                 "output": "[1, 1, 2, 3, 3]",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "3\n7 7 7",
                 "output": "[7, 7, 7]",
                 "is_hidden": true
             }
@@ -381,20 +421,20 @@
     },
     {
         "title": "ELV-P6-PROB-004",
-        "description": "// The emergency system needs the three highest-risk floor scores to prioritise response.\n// Sort the scores yourself, then return the top three in a new array.\n// No shortcuts. Write the algorithm from scratch.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static int[] topThreeScores(int[] scores) {\n        int n = scores.length;\n        // Sort scores, then return a new int[] containing only the top 3 values.\n        // No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(topThreeScores(new int[]{88, 55, 72, 91, 60})));\n        System.out.println(Arrays.toString(topThreeScores(new int[]{100, 50, 75})));\n    }\n}",
+        "description": "The emergency system needs the three highest-risk floor scores to prioritise response. Sort the scores yourself, then return only the top three — no shortcuts, write the algorithm from scratch.\n\nImplement topThreeScores(int[] scores) that sorts all scores in descending order and returns a new int[] containing only the top 3 values. You may NOT use Arrays.sort() or any library sort method. Input will always have at least 3 elements.\n\nInput: first line is n (number of scores), second line is n space-separated scores\nOutput: top 3 scores in descending order in Arrays.toString() format, e.g. [91, 88, 72]",
         "difficulty": "Hard",
         "category": "ELV-P6",
         "templates": {
-            "java": "// The emergency system needs the three highest-risk floor scores to prioritise response.\n// Sort the scores yourself, then return the top three in a new array.\n// No shortcuts. Write the algorithm from scratch.\n\nimport java.util.Arrays;\n\npublic class ElevatorQueue {\n\n    public static int[] topThreeScores(int[] scores) {\n        int n = scores.length;\n        // Sort scores, then return a new int[] containing only the top 3 values.\n        // No Arrays.sort() or library sort allowed.\n        {PLAYER CODE}\n    }\n\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(topThreeScores(new int[]{88, 55, 72, 91, 60})));\n        System.out.println(Arrays.toString(topThreeScores(new int[]{100, 50, 75})));\n    }\n}"
+            "java": "import java.util.Arrays;\nimport java.util.Scanner;\n\npublic class ElevatorQueue {\n\n    public static int[] topThreeScores(int[] scores) {\n        int n = scores.length;\n        // Sort scores descending, then return a new int[] containing only the top 3 values.\n        // No Arrays.sort() or library sort allowed.\n        // player code goes here\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] scores = new int[n];\n        for (int i = 0; i < n; i++) scores[i] = sc.nextInt();\n        System.out.println(Arrays.toString(topThreeScores(scores)));\n        sc.close();\n    }\n}"
         },
         "test_cases": [
             {
-                "input": "",
+                "input": "5\n88 55 72 91 60",
                 "output": "[91, 88, 72]",
                 "is_hidden": false
             },
             {
-                "input": "",
+                "input": "3\n100 50 75",
                 "output": "[100, 75, 50]",
                 "is_hidden": true
             }
