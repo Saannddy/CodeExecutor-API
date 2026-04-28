@@ -1,0 +1,152 @@
+[
+    {
+        "text": "A peaked steel anchor at the crown of the shaft, crossed by the horizontal safety bar that locks the cab in place when the motor stops. First in the passkey, I rise and hold, the opening cipher yet to be told.",
+        "char": "A",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "Two call buttons stacked on the same panel beside a landing door, both lit in amber when riders are waiting on two floors at once. Second in the chain, I stack and glow, the follow-up cipher below.",
+        "char": "B",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The curved glass face of the badge reader mounted beside every controlled door — open and waiting, but refusing to grant access until the right credential sweeps across it. Third in the sequence, I curve and wait, the middle cipher at the gate.",
+        "char": "C",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "A flat rear wall and a rounded cab door that slides out to meet it — the cross-section of every elevator entrance just before the panel seals shut and the cab begins to move. Fourth in the chain, I slide and seal, one step before the final reveal.",
+        "char": "D",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "Three illuminated floor markers on the indicator strip above the doors, each lighting in turn as the cab climbs through the shaft toward the requested level. Fifth and final, I count the floors, the last cipher unlocking these doors.",
+        "char": "E",
+        "index": 5,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The emergency stop lever mounted on the shaft wall — one arm jutting straight out and another anchoring it to the bracket, ready to halt everything if the safety relay fires. First in the passkey, I halt and hold, the opening cipher of this code.",
+        "char": "F",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The latch mechanism on the maintenance hatch cut into the shaft wall — a partial arc with a retaining bar that must be cleared before the panel will swing open for the service crew. Second in the sequence, I latch and turn, the follow-up cipher you must earn.",
+        "char": "G",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "Two steel guide rails running the full height of the shaft, braced by a crossbeam that prevents the cab from swaying when it accelerates away from a floor. Third in the line, I rail and brace, the center cipher of this space.",
+        "char": "H",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "A single illuminated call button standing alone on the panel — the only one still responding after [NULL] disabled every other control in the cab. Fourth in the slot, I stand alone, one step before the final tone.",
+        "char": "I",
+        "index": 4,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The hook at the end of the emergency cable, curving inward to engage the safety ratchet and hold the cab suspended if the main drive wire ever fails. Fifth and last, I hook and catch, the closing cipher of this batch.",
+        "char": "J",
+        "index": 5,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The key-switch slot on the service panel — a vertical housing with two angled teeth that engage the barrel and release the override mode when the correct maintenance key is turned. First in the passkey, I cut and catch, the opening letter of the batch.",
+        "char": "K",
+        "index": 1,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The floor track that the cab door slides along — a vertical channel bending into a horizontal base that anchors the rail to the cab floor and keeps the panel true during every transit. Second in line, I track and hold, the follow-up cipher to be told.",
+        "char": "L",
+        "index": 2,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "A twin-shaft installation where two cabs rise and fall in parallel, their silhouettes mirroring each other against the glass wall of the atrium at every floor they pass together. Third in the sequence, I twin and climb, the center cipher marking time.",
+        "char": "M",
+        "index": 3,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The stairwell railing that zigzags beside the shaft — angled balusters bracing each run before the next flight begins, a route for those who did not wait for the cab. Fourth in the chain, I angle and brace, one step before the final place.",
+        "char": "N",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The circular inspection porthole cut into the shaft access door, sealed flush when the cab is in motion and opened only by a technician who has already swiped their badge twice. Fifth and last, I seal and stare, the closing cipher of this stair.",
+        "char": "O",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The call panel housing on the wall — a vertical column topped with a rounded indicator that glows amber while the cab is still approaching and goes dark the moment the doors part. First in the passkey, I light and call, the opening cipher of the hall.",
+        "char": "P",
+        "index": 1,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The surveillance camera mounted in the corner of the cab — a round lens with a trailing cable that loops down toward the recorder hidden in the ceiling panel above. Second in the sequence, I watch and trail, the follow-up cipher of this tale.",
+        "char": "Q",
+        "index": 2,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The ratchet arm on the safety brake — a curved catch at the top that releases under rated load and a leg that kicks outward to engage the shaft teeth the instant the cab exceeds safe descent speed. Third in the line, I catch and kick, the middle cipher of this trick.",
+        "char": "R",
+        "index": 3,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The hydraulic supply hose coiled in the service bay, curving back on itself twice before connecting to the pressure valve that raises the cab when the pump runs. Fourth in the chain, I coil and press, one step before the final rest.",
+        "char": "S",
+        "index": 4,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The overhead I-beam carrying the pulley block at the crown of the shaft — a horizontal span resting on a single vertical anchor welded to the building frame high above every floor. Fifth and last, I span and rest, the closing cipher of the test.",
+        "char": "T",
+        "index": 5,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The elevator pit at the base of the shaft — a concrete recess that catches the buffer springs and absorbs the last energy of the cab if every other safety system has already been exhausted. First in the passkey, I catch and hold, the opening cipher to be told.",
+        "char": "U",
+        "index": 1,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The descending arrow on the floor indicator panel — pointing down to signal that the cab has accepted a call below and is now moving away from the floor where you are standing. Second in line, I point below, the follow-up letter in the flow.",
+        "char": "V",
+        "index": 2,
+        "difficulty": "Hard"
+    },
+    {
+        "text": "The up and down call buttons mounted beside every landing door — two indented panels side by side, both depressed by a rider who is not sure which direction the cab will arrive from first. Third in the sequence, I press and wait, the center cipher at the gate.",
+        "char": "W",
+        "index": 3,
+        "difficulty": "Easy"
+    },
+    {
+        "text": "The emergency cross painted on the shaft access panel — a clear warning mark that this door remains sealed unless all other options have already been tried and failed. Fourth in the chain, I mark and warn, one step before the last is born.",
+        "char": "X",
+        "index": 4,
+        "difficulty": "Medium"
+    },
+    {
+        "text": "The branch point in the basement floor plate where the goods lift shaft splits away from the passenger shaft — a fork cast into the concrete that separates the two paths before either rises to the first floor. Fifth and last, I fork and end, the closing cipher round the bend.",
+        "char": "Y",
+        "index": 5,
+        "difficulty": "Easy"
+    }
+]

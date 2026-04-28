@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from sqlmodel import Session, select
 from infrastructure import engine
 from models import (
-    Category, Tag, Question, Choice, Chunk, ChunkTemplate, Snippet, Expectation, Problem, TestCase
+    Category, Tag, Riddle, Question, Choice, Chunk, ChunkTemplate, Snippet, Expectation, Problem, TestCase
 )
 from sqlalchemy.orm.attributes import flag_modified
 
@@ -33,6 +33,7 @@ def seed_elevatorhall_java():
         logging.error("No database engine found. Skipping seeding.")
         return
 
+    RIDDLES = load_json("riddles.json")
     CHUNKS = load_json("chunks.json")
     PROBLEMS = load_json("problems.json")
 
@@ -61,6 +62,23 @@ def seed_elevatorhall_java():
 
         elv_hall_tag = get_or_create_tag("JAV_ELVHALL")
         java_cat = get_or_create_category("Java")
+
+        logging.info(f"Seeding {len(RIDDLES)} Java riddles...")
+        for i, r_data in enumerate(tqdm(RIDDLES, desc="Seeding Riddles")):
+            r_id = get_uuid(f"jav_elvhall_r_{i}")
+            if session.exec(select(Riddle).where(Riddle.id == r_id)).first():
+                continue
+
+            riddle = Riddle(
+                id=r_id,
+                riddle_text=r_data["text"],
+                refer_char=r_data["char"],
+                refer_index=r_data["index"],
+                difficulty=r_data.get("difficulty", "Medium"),
+                created_at=datetime.now(timezone.utc)
+            )
+            riddle.tags = [elv_hall_tag]
+            session.add(riddle)
 
         logging.info(f"Seeding {len(CHUNKS)} Java chunks...")
         for c_data in tqdm(CHUNKS, desc="Seeding Chunks"):
