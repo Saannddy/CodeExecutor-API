@@ -1,0 +1,170 @@
+[
+    {
+        "title": "L5_P4 (Chunk) Chunk 1",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] jumbled the intrusion log timestamps. Events are scattered across time. Without ordering, the forensic trail is useless. Implement the comparator, parse the entries, and format the sorted report.\n\nFill in the three tasks inside IntrusionLogger:\n- TASK 1 (compareTo): Sort LogEntry by timestamp ascending. If timestamps are equal, sort by event name alphabetically.\n- TASK 2 (buildLog): Parse each line as \"timestamp:event\" (split on \":\"). Create a LogEntry for each and return the ArrayList.\n- TASK 3 (formatReport): Sort the list with Collections.sort, then build a string where each entry is on its own line as \"[timestamp] event\". No trailing newline.\n\nInput: first line is n (number of log entries), next n lines are \"timestamp:event\" strings\nOutput: all entries sorted by timestamp (then event name for ties), one per line as \"[timestamp] event\"",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.*;\n\npublic class IntrusionLogger {\n\n    static class LogEntry implements Comparable<LogEntry> {\n        int timestamp;\n        String event;\n\n        LogEntry(int timestamp, String event) {\n            this.timestamp = timestamp;\n            this.event = event;\n        }\n\n        // TASK 1: Implement compareTo.\n        // Sort by timestamp ascending.\n        // If timestamps are equal, sort by event alphabetically.\n        {TASK 1: COMPARE TO}\n    }\n\n    public static ArrayList<LogEntry> buildLog(String[] lines) {\n        // TASK 2: Parse each line formatted as \"timestamp:event\".\n        // Create a LogEntry for each and return the list.\n        {TASK 2: PARSE ENTRIES}\n    }\n\n    public static String formatReport(ArrayList<LogEntry> log) {\n        // TASK 3: Sort the log using Collections.sort, then build a string.\n        // Each entry on its own line as \"[timestamp] event\".\n        // Return the full string (no trailing newline).\n        {TASK 3: SORT AND FORMAT}\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = Integer.parseInt(sc.nextLine().trim());\n        String[] lines = new String[n];\n        for (int i = 0; i < n; i++) lines[i] = sc.nextLine().trim();\n        ArrayList<LogEntry> log = buildLog(lines);\n        System.out.println(formatReport(log));\n        sc.close();\n    }\n}",
+                "snippets": {
+                    "TASK 1: COMPARE TO": "public int compareTo(LogEntry other) {\n    if (this.timestamp != other.timestamp) {\n        return this.timestamp - other.timestamp;\n    }\n    return this.event.compareTo(other.event);\n}",
+                    "TASK 2: PARSE ENTRIES": "ArrayList<LogEntry> list = new ArrayList<>();\nfor (String line : lines) {\n    String[] parts = line.split(\":\");\n    int ts = Integer.parseInt(parts[0]);\n    String ev = parts[1];\n    list.add(new LogEntry(ts, ev));\n}\nreturn list;",
+                    "TASK 3: SORT AND FORMAT": "Collections.sort(log);\nStringBuilder sb = new StringBuilder();\nfor (int i = 0; i < log.size(); i++) {\n    LogEntry e = log.get(i);\n    sb.append(\"[\").append(e.timestamp).append(\"] \").append(e.event);\n    if (i < log.size() - 1) sb.append(\"\\n\");\n}\nreturn sb.toString();"
+                }
+            }
+        },
+        "expectation": {
+            "input": "4\n300:login\n100:scan\n200:breach\n100:alert",
+            "output": "[100] alert\n[100] scan\n[200] breach\n[300] login"
+        }
+    },
+    {
+        "title": "L5_P4 (Chunk) Chunk 2",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] scrambled the alert priority queue. Critical events are buried under noise. Severity must come first. Rebuild the comparator and sorter — severity descending, then timestamp ascending for ties.\n\nFill in the three tasks inside IntrusionLogger:\n- TASK 1 (compareTo): Sort by severity DESCENDING (highest first). If severity is equal, sort by timestamp ASCENDING.\n- TASK 2 (buildLog): Parse each line as \"severity:timestamp:event\" (split on \":\"). Create a LogEntry for each.\n- TASK 3 (formatReport): Sort with Collections.sort, then format each entry as \"[severity|timestamp] event\", one per line. No trailing newline.\n\nInput: first line is n, next n lines are \"severity:timestamp:event\" strings\nOutput: entries sorted by severity descending (then timestamp ascending for ties), each as \"[severity|timestamp] event\"",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.*;\n\npublic class IntrusionLogger {\n\n    static class LogEntry implements Comparable<LogEntry> {\n        int severity;\n        int timestamp;\n        String event;\n\n        LogEntry(int severity, int timestamp, String event) {\n            this.severity = severity;\n            this.timestamp = timestamp;\n            this.event = event;\n        }\n\n        // TASK 1: Implement compareTo.\n        // Sort by severity DESCENDING (highest first).\n        // If severity is equal, sort by timestamp ASCENDING.\n        {TASK 1: COMPARE TO}\n    }\n\n    public static ArrayList<LogEntry> buildLog(String[] lines) {\n        // TASK 2: Parse each line formatted as \"severity:timestamp:event\".\n        // Create a LogEntry for each and return the list.\n        {TASK 2: PARSE ENTRIES}\n    }\n\n    public static String formatReport(ArrayList<LogEntry> log) {\n        // TASK 3: Sort the log using Collections.sort, then build a string.\n        // Each entry on its own line as \"[severity|timestamp] event\".\n        // Return the full string (no trailing newline).\n        {TASK 3: SORT AND FORMAT}\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = Integer.parseInt(sc.nextLine().trim());\n        String[] lines = new String[n];\n        for (int i = 0; i < n; i++) lines[i] = sc.nextLine().trim();\n        ArrayList<LogEntry> log = buildLog(lines);\n        System.out.println(formatReport(log));\n        sc.close();\n    }\n}",
+                "snippets": {
+                    "TASK 1: COMPARE TO": "public int compareTo(LogEntry other) {\n    if (this.severity != other.severity) {\n        return other.severity - this.severity;\n    }\n    return this.timestamp - other.timestamp;\n}",
+                    "TASK 2: PARSE ENTRIES": "ArrayList<LogEntry> list = new ArrayList<>();\nfor (String line : lines) {\n    String[] parts = line.split(\":\");\n    int sev = Integer.parseInt(parts[0]);\n    int ts = Integer.parseInt(parts[1]);\n    String ev = parts[2];\n    list.add(new LogEntry(sev, ts, ev));\n}\nreturn list;",
+                    "TASK 3: SORT AND FORMAT": "Collections.sort(log);\nStringBuilder sb = new StringBuilder();\nfor (int i = 0; i < log.size(); i++) {\n    LogEntry e = log.get(i);\n    sb.append(\"[\").append(e.severity).append(\"|\").append(e.timestamp).append(\"] \").append(e.event);\n    if (i < log.size() - 1) sb.append(\"\\n\");\n}\nreturn sb.toString();"
+                }
+            }
+        },
+        "expectation": {
+            "input": "4\n1:300:login\n3:100:scan\n2:200:breach\n3:150:alert",
+            "output": "[3|100] scan\n[3|150] alert\n[2|200] breach\n[1|300] login"
+        }
+    },
+    {
+        "title": "L5_P4 (Chunk) Chunk 3",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] shuffled the incident categories. Events with the same name are split across the timeline. Grouping is destroyed. Rebuild the sorter — group by event name alphabetically, then show the latest events first within each group.\n\nFill in the three tasks inside IntrusionLogger:\n- TASK 1 (compareTo): Sort by event name alphabetically. If event names are equal, sort by timestamp DESCENDING (latest first).\n- TASK 2 (buildLog): Parse each line as \"timestamp:event\" (split on \":\"). Create a LogEntry for each.\n- TASK 3 (formatReport): Sort with Collections.sort, then format each entry as \"[timestamp] event\", one per line. No trailing newline.\n\nInput: first line is n, next n lines are \"timestamp:event\" strings\nOutput: entries sorted by event name alphabetically (then timestamp descending for ties), each as \"[timestamp] event\"",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.*;\n\npublic class IntrusionLogger {\n\n    static class LogEntry implements Comparable<LogEntry> {\n        int timestamp;\n        String event;\n\n        LogEntry(int timestamp, String event) {\n            this.timestamp = timestamp;\n            this.event = event;\n        }\n\n        // TASK 1: Implement compareTo.\n        // Sort by event name alphabetically.\n        // If event names are equal, sort by timestamp DESCENDING (latest first).\n        {TASK 1: COMPARE TO}\n    }\n\n    public static ArrayList<LogEntry> buildLog(String[] lines) {\n        // TASK 2: Parse each line formatted as \"timestamp:event\".\n        // Create a LogEntry for each and return the list.\n        {TASK 2: PARSE ENTRIES}\n    }\n\n    public static String formatReport(ArrayList<LogEntry> log) {\n        // TASK 3: Sort the log using Collections.sort, then build a string.\n        // Each entry on its own line as \"[timestamp] event\".\n        // Return the full string (no trailing newline).\n        {TASK 3: SORT AND FORMAT}\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = Integer.parseInt(sc.nextLine().trim());\n        String[] lines = new String[n];\n        for (int i = 0; i < n; i++) lines[i] = sc.nextLine().trim();\n        ArrayList<LogEntry> log = buildLog(lines);\n        System.out.println(formatReport(log));\n        sc.close();\n    }\n}",
+                "snippets": {
+                    "TASK 1: COMPARE TO": "public int compareTo(LogEntry other) {\n    int cmp = this.event.compareTo(other.event);\n    if (cmp != 0) return cmp;\n    return other.timestamp - this.timestamp;\n}",
+                    "TASK 2: PARSE ENTRIES": "ArrayList<LogEntry> list = new ArrayList<>();\nfor (String line : lines) {\n    String[] parts = line.split(\":\");\n    int ts = Integer.parseInt(parts[0]);\n    String ev = parts[1];\n    list.add(new LogEntry(ts, ev));\n}\nreturn list;",
+                    "TASK 3: SORT AND FORMAT": "Collections.sort(log);\nStringBuilder sb = new StringBuilder();\nfor (int i = 0; i < log.size(); i++) {\n    LogEntry e = log.get(i);\n    sb.append(\"[\").append(e.timestamp).append(\"] \").append(e.event);\n    if (i < log.size() - 1) sb.append(\"\\n\");\n}\nreturn sb.toString();"
+                }
+            }
+        },
+        "expectation": {
+            "input": "4\n300:breach\n100:scan\n200:breach\n150:scan",
+            "output": "[300] breach\n[200] breach\n[150] scan\n[100] scan"
+        }
+    },
+    {
+        "title": "L5_P4 (Chunk) Chunk 4",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] erased the log sequence numbers. Events exist but have no position. Without indexing, replay is impossible. Rebuild the sorter and assign sequential indexes after sorting.\n\nFill in the three tasks inside IntrusionLogger:\n- TASK 1 (compareTo): Sort by timestamp ascending. If timestamps are equal, sort by event name alphabetically.\n- TASK 2 (buildLog): Parse each line as \"timestamp:event\" (split on \":\"). Create a LogEntry for each.\n- TASK 3 (formatReport): Sort with Collections.sort, then format each entry as \"#index [timestamp] event\" where index starts at 1. One entry per line. No trailing newline.\n\nInput: first line is n, next n lines are \"timestamp:event\" strings\nOutput: entries sorted by timestamp (then event alphabetically), each prefixed with a 1-based index as \"#1 [timestamp] event\"",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.*;\n\npublic class IntrusionLogger {\n\n    static class LogEntry implements Comparable<LogEntry> {\n        int timestamp;\n        String event;\n\n        LogEntry(int timestamp, String event) {\n            this.timestamp = timestamp;\n            this.event = event;\n        }\n\n        // TASK 1: Implement compareTo.\n        // Sort by timestamp ascending.\n        // If timestamps are equal, sort by event alphabetically.\n        {TASK 1: COMPARE TO}\n    }\n\n    public static ArrayList<LogEntry> buildLog(String[] lines) {\n        // TASK 2: Parse each line formatted as \"timestamp:event\".\n        // Create a LogEntry for each and return the list.\n        {TASK 2: PARSE ENTRIES}\n    }\n\n    public static String formatReport(ArrayList<LogEntry> log) {\n        // TASK 3: Sort the log using Collections.sort, then build a string.\n        // Each entry on its own line as \"#index [timestamp] event\"\n        // where index starts at 1.\n        // Return the full string (no trailing newline).\n        {TASK 3: SORT AND FORMAT}\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = Integer.parseInt(sc.nextLine().trim());\n        String[] lines = new String[n];\n        for (int i = 0; i < n; i++) lines[i] = sc.nextLine().trim();\n        ArrayList<LogEntry> log = buildLog(lines);\n        System.out.println(formatReport(log));\n        sc.close();\n    }\n}",
+                "snippets": {
+                    "TASK 1: COMPARE TO": "public int compareTo(LogEntry other) {\n    if (this.timestamp != other.timestamp) {\n        return this.timestamp - other.timestamp;\n    }\n    return this.event.compareTo(other.event);\n}",
+                    "TASK 2: PARSE ENTRIES": "ArrayList<LogEntry> list = new ArrayList<>();\nfor (String line : lines) {\n    String[] parts = line.split(\":\");\n    int ts = Integer.parseInt(parts[0]);\n    String ev = parts[1];\n    list.add(new LogEntry(ts, ev));\n}\nreturn list;",
+                    "TASK 3: SORT AND FORMAT": "Collections.sort(log);\nStringBuilder sb = new StringBuilder();\nfor (int i = 0; i < log.size(); i++) {\n    LogEntry e = log.get(i);\n    sb.append(\"#\").append(i + 1).append(\" [\").append(e.timestamp).append(\"] \").append(e.event);\n    if (i < log.size() - 1) sb.append(\"\\n\");\n}\nreturn sb.toString();"
+                }
+            }
+        },
+        "expectation": {
+            "input": "4\n300:login\n100:scan\n200:breach\n100:alert",
+            "output": "#1 [100] alert\n#2 [100] scan\n#3 [200] breach\n#4 [300] login"
+        }
+    },
+    {
+        "title": "L5_P6 (Chunk) Chunk 1",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] overloaded the traffic shaper's queue. Packets flood in with no limit, no order, no rejection. Restore the bounded queue — capacity is law, overflow means dropped.\n\nFill in the three tasks inside TrafficShaper:\n- TASK 1 (enqueue): If queue size < capacity, add the packet to the END of the queue and return \"QUEUED\". Otherwise, increment the dropped counter and return \"DROPPED\".\n- TASK 2 (dequeue): Remove and return the packet at the FRONT of the queue. If the queue is empty, return \"IDLE\".\n- TASK 3 (status): Return the string \"SIZE:current/capacity|DROPPED:count\".",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.LinkedList;\n\npublic class TrafficShaper {\n\n    static LinkedList<String> queue = new LinkedList<>();\n    static int capacity;\n    static int dropped = 0;\n\n    public static void init(int cap) { capacity = cap; }\n\n    public static String enqueue(String packet) {\n        // TASK 1: If queue size < capacity, add packet to the end and return \"QUEUED\".\n        // Otherwise, increment dropped counter and return \"DROPPED\".\n        {TASK 1: ENQUEUE}\n    }\n\n    public static String dequeue() {\n        // TASK 2: Remove and return the front packet.\n        // If queue is empty, return \"IDLE\".\n        {TASK 2: DEQUEUE}\n    }\n\n    public static String status() {\n        // TASK 3: Return \"SIZE:current/capacity|DROPPED:count\"\n        {TASK 3: STATUS}\n    }\n\n    public static void main(String[] args) {\n        init(3);\n        System.out.println(enqueue(\"PKT-A\"));\n        System.out.println(enqueue(\"PKT-B\"));\n        System.out.println(enqueue(\"PKT-C\"));\n        System.out.println(enqueue(\"PKT-D\"));\n        System.out.println(status());\n        System.out.println(dequeue());\n        System.out.println(status());\n    }\n}",
+                "snippets": {
+                    "TASK 1: ENQUEUE": "if (queue.size() < capacity) {\n    queue.addLast(packet);\n    return \"QUEUED\";\n} else {\n    dropped++;\n    return \"DROPPED\";\n}",
+                    "TASK 2: DEQUEUE": "if (queue.isEmpty()) return \"IDLE\";\nreturn queue.removeFirst();",
+                    "TASK 3: STATUS": "return \"SIZE:\" + queue.size() + \"/\" + capacity + \"|DROPPED:\" + dropped;"
+                }
+            }
+        },
+        "expectation": {
+            "input": "",
+            "output": "QUEUED\nQUEUED\nQUEUED\nDROPPED\nSIZE:3/3|DROPPED:1\nPKT-A\nSIZE:2/3|DROPPED:1"
+        }
+    },
+    {
+        "title": "L5_P6 (Chunk) Chunk 2",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] disabled the traffic meter. Packets flow but nothing tracks throughput. The processed count is always zero. Restore the queue and track every successful dequeue.\n\nFill in the three tasks inside TrafficShaper:\n- TASK 1 (enqueue): If queue size < capacity, add packet to the END and return \"QUEUED\". Otherwise return \"DROPPED\" (do NOT increment anything).\n- TASK 2 (dequeue): Remove and return the front packet, and increment the processed counter. If queue is empty, return \"IDLE\" (do NOT increment processed).\n- TASK 3 (status): Return the string \"SIZE:current/capacity|PROCESSED:count\".",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.LinkedList;\n\npublic class TrafficShaper {\n\n    static LinkedList<String> queue = new LinkedList<>();\n    static int capacity;\n    static int processed = 0;\n\n    public static void init(int cap) { capacity = cap; }\n\n    public static String enqueue(String packet) {\n        // TASK 1: If queue size < capacity, add packet to the end and return \"QUEUED\".\n        // Otherwise, return \"DROPPED\".\n        {TASK 1: ENQUEUE}\n    }\n\n    public static String dequeue() {\n        // TASK 2: Remove and return the front packet, and increment processed counter.\n        // If queue is empty, return \"IDLE\" (do NOT increment processed).\n        {TASK 2: DEQUEUE}\n    }\n\n    public static String status() {\n        // TASK 3: Return \"SIZE:current/capacity|PROCESSED:count\"\n        {TASK 3: STATUS}\n    }\n\n    public static void main(String[] args) {\n        init(3);\n        System.out.println(enqueue(\"PKT-A\"));\n        System.out.println(enqueue(\"PKT-B\"));\n        System.out.println(enqueue(\"PKT-C\"));\n        System.out.println(dequeue());\n        System.out.println(dequeue());\n        System.out.println(status());\n    }\n}",
+                "snippets": {
+                    "TASK 1: ENQUEUE": "if (queue.size() < capacity) {\n    queue.addLast(packet);\n    return \"QUEUED\";\n} else {\n    return \"DROPPED\";\n}",
+                    "TASK 2: DEQUEUE": "if (queue.isEmpty()) return \"IDLE\";\nprocessed++;\nreturn queue.removeFirst();",
+                    "TASK 3: STATUS": "return \"SIZE:\" + queue.size() + \"/\" + capacity + \"|PROCESSED:\" + processed;"
+                }
+            }
+        },
+        "expectation": {
+            "input": "",
+            "output": "QUEUED\nQUEUED\nQUEUED\nPKT-A\nPKT-B\nSIZE:1/3|PROCESSED:2"
+        }
+    },
+    {
+        "title": "L5_P6 (Chunk) Chunk 3",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] broke the priority lane in the traffic shaper. VIP packets wait in line like everyone else. The fast lane is dead. Restore priority enqueue — VIP goes to the front, normal to the back.\n\nFill in the three tasks inside TrafficShaper:\n- TASK 1 (enqueue with priority flag): If queue size < capacity, add the packet to the FRONT if priority is true (return \"PRIORITY_QUEUED\") or to the END if priority is false (return \"QUEUED\"). If full, increment dropped and return \"DROPPED\".\n- TASK 2 (dequeue): Remove and return the front packet. Return \"IDLE\" if empty.\n- TASK 3 (status): Return \"SIZE:current/capacity|DROPPED:count\".",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.LinkedList;\n\npublic class TrafficShaper {\n\n    static LinkedList<String> queue = new LinkedList<>();\n    static int capacity;\n    static int dropped = 0;\n\n    public static void init(int cap) { capacity = cap; }\n\n    public static String enqueue(String packet, boolean priority) {\n        // TASK 1: If queue size < capacity:\n        //   - If priority is true, add packet to the FRONT and return \"PRIORITY_QUEUED\".\n        //   - If priority is false, add packet to the END and return \"QUEUED\".\n        // If queue is full, increment dropped and return \"DROPPED\".\n        {TASK 1: ENQUEUE}\n    }\n\n    public static String dequeue() {\n        // TASK 2: Remove and return the front packet.\n        // If queue is empty, return \"IDLE\".\n        {TASK 2: DEQUEUE}\n    }\n\n    public static String status() {\n        // TASK 3: Return \"SIZE:current/capacity|DROPPED:count\"\n        {TASK 3: STATUS}\n    }\n\n    public static void main(String[] args) {\n        init(4);\n        System.out.println(enqueue(\"PKT-A\", false));\n        System.out.println(enqueue(\"PKT-B\", false));\n        System.out.println(enqueue(\"VIP-1\", true));\n        System.out.println(dequeue());\n        System.out.println(status());\n    }\n}",
+                "snippets": {
+                    "TASK 1: ENQUEUE": "if (queue.size() < capacity) {\n    if (priority) {\n        queue.addFirst(packet);\n        return \"PRIORITY_QUEUED\";\n    } else {\n        queue.addLast(packet);\n        return \"QUEUED\";\n    }\n} else {\n    dropped++;\n    return \"DROPPED\";\n}",
+                    "TASK 2: DEQUEUE": "if (queue.isEmpty()) return \"IDLE\";\nreturn queue.removeFirst();",
+                    "TASK 3: STATUS": "return \"SIZE:\" + queue.size() + \"/\" + capacity + \"|DROPPED:\" + dropped;"
+                }
+            }
+        },
+        "expectation": {
+            "input": "",
+            "output": "QUEUED\nQUEUED\nPRIORITY_QUEUED\nVIP-1\nSIZE:2/4|DROPPED:0"
+        }
+    },
+    {
+        "title": "L5_P6 (Chunk) Chunk 4",
+        "difficulty": "Hard",
+        "category": "Java Architecture",
+        "description": "[NULL] wiped the traffic shaper's inspection tools. Packets enter the queue but there is no way to inspect them without consuming. Restore the queue with non-destructive peek and lifetime tracking.\n\nFill in the three tasks inside TrafficShaper:\n- TASK 1 (enqueue): If queue size < capacity, add packet to the END, increment totalEnqueued, and return \"QUEUED\". If full, return \"DROPPED\" (do NOT increment totalEnqueued).\n- TASK 2 (peek): Return the packet at the FRONT without removing it. Return \"IDLE\" if empty.\n- TASK 3 (status): Return \"SIZE:current/capacity|TOTAL:totalEnqueued\".",
+        "templates": {
+            "java": {
+                "name": "Java Template",
+                "template_code": "import java.util.LinkedList;\n\npublic class TrafficShaper {\n\n    static LinkedList<String> queue = new LinkedList<>();\n    static int capacity;\n    static int totalEnqueued = 0;\n\n    public static void init(int cap) { capacity = cap; }\n\n    public static String enqueue(String packet) {\n        // TASK 1: If queue size < capacity, add packet to the end,\n        // increment totalEnqueued, and return \"QUEUED\".\n        // Otherwise, return \"DROPPED\" (do NOT increment totalEnqueued).\n        {TASK 1: ENQUEUE}\n    }\n\n    public static String peek() {\n        // TASK 2: Return the front packet WITHOUT removing it.\n        // If queue is empty, return \"IDLE\".\n        {TASK 2: PEEK}\n    }\n\n    public static String status() {\n        // TASK 3: Return \"SIZE:current/capacity|TOTAL:totalEnqueued\"\n        {TASK 3: STATUS}\n    }\n\n    public static void main(String[] args) {\n        init(2);\n        System.out.println(enqueue(\"PKT-A\"));\n        System.out.println(enqueue(\"PKT-B\"));\n        System.out.println(enqueue(\"PKT-C\"));\n        System.out.println(peek());\n        System.out.println(status());\n    }\n}",
+                "snippets": {
+                    "TASK 1: ENQUEUE": "if (queue.size() < capacity) {\n    queue.addLast(packet);\n    totalEnqueued++;\n    return \"QUEUED\";\n} else {\n    return \"DROPPED\";\n}",
+                    "TASK 2: PEEK": "if (queue.isEmpty()) return \"IDLE\";\nreturn queue.getFirst();",
+                    "TASK 3: STATUS": "return \"SIZE:\" + queue.size() + \"/\" + capacity + \"|TOTAL:\" + totalEnqueued;"
+                }
+            }
+        },
+        "expectation": {
+            "input": "",
+            "output": "QUEUED\nQUEUED\nDROPPED\nPKT-A\nSIZE:2/2|TOTAL:2"
+        }
+    }
+]
