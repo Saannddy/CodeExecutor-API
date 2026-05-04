@@ -44,6 +44,10 @@ def _sandbox_preexec(timeout, skip_memory=False):
 
 def execute_custom_code(code: str, lang: str) -> dict:
     """Execute raw code without test cases."""
+    # --- Cheat mode: skip all execution and return success ---
+    if is_cheat_mode():
+        return {"status": "success", "stdout": "Cheat mode enabled - code execution skipped", "stderr": ""}
+
     if lang not in COMPILERS:
         return {"status": "error", "stdout": "", "stderr": f"Unsupported language: {lang}"}
 
