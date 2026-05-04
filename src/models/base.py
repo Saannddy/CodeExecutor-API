@@ -61,6 +61,11 @@ class TestCase(SQLModel, table=True):
     
     problem: "Problem" = Relationship(back_populates="test_cases")
 
+class CheatMode(SQLModel, table=True):
+    __tablename__ = "cheat_mode"
+    id: Optional[int] = Field(default=1, primary_key=True)
+    enabled: bool = Field(default=False)
+
 class Expectation(SQLModel, table=True):
     __tablename__ = "expectations"
     id: UUID = Field(default_factory=uuid4, primary_key=True)

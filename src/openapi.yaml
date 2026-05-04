@@ -629,3 +629,35 @@ paths:
           description: Execution results with test case statuses
         '404':
           description: Chunk or template not found
+
+  /cheat-flip:
+    post:
+      summary: Toggle cheat mode
+      description: Toggles cheat mode on/off. When enabled, all code execution test cases will pass.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [cheat-code]
+              properties:
+                cheat-code:
+                  type: string
+                  description: The raw secret passphrase
+                  example: "fly-moon-to-the-me"
+      responses:
+        '200':
+          description: Success response with new cheat mode status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: "success" }
+                  message: { type: string, example: "Cheat mode enabled." }
+                  cheat_mode: { type: boolean, example: true }
+        '401':
+          description: Invalid cheat code
+        '500':
+          description: Cheat mode not configured

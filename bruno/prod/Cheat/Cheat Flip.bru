@@ -1,0 +1,26 @@
+meta {
+  name: Cheat Flip
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{code-exec-url}}/cheat-flip
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cheat-code": "{{cheater-code}}"
+  }
+}
+
+vars:pre-request {
+  cheater-code: cheater
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

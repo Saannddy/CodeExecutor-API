@@ -1,12 +1,8 @@
 """
-Cheat mode utilities — in-memory state, security-hardened.
+Cheat mode utilities — database-backed persistence.
 
-CHEAT_MODE is held purely in memory (module-level flag) and resets on every
-server restart. This is intentional: cheat mode should not silently persist
-across deployments or container restarts.
-
-CHEAT_CODE env var holds a SHA-256 hex digest of the secret passphrase.
-The raw secret is NEVER stored anywhere — only its hash is in .env.
+CHEAT_MODE is persisted in the database as a single `cheat_mode` row.
+The raw secret passphrase is still protected by CHEAT_CODE in .env.
 
 Setup:
     python3 -c "import hashlib; print(hashlib.sha256(b'YOUR_SECRET').hexdigest())"
@@ -20,19 +16,23 @@ import hmac
 import hashlib
 import threading
 
-# ---------------------------------------------------------------------------
-# In-memory state — process-local, resets on restart
-# ---------------------------------------------------------------------------
+from sqlmodel import select
+from infrastructure import SessionLocal
+from models import CheatMode
 
-# Initialize from CHEAT_MODE env var so you can pre-enable it if needed,
-# but this is purely optional. Default is always False (safe).
-_cheat_mode: bool = os.getenv("CHEAT_MODE", "false").lower() == "true"
 _lock = threading.Lock()
 
 
-# ---------------------------------------------------------------------------
-# Security helpers
-# ---------------------------------------------------------------------------
+def _get_cheat_row(session):
+    statement = select(CheatMode).where(CheatMode.id == 1)
+    cheat = session.exec(statement).first()
+    if cheat is None:
+        cheat = CheatMode(id=1, enabled=False)
+        session.add(cheat)
+        session.commit()
+        session.refresh(cheat)
+    return cheat
+
 
 def _hash_secret(raw: str) -> str:
     """Return the SHA-256 hex digest of a raw passphrase."""
@@ -48,25 +48,23 @@ def _constant_time_verify(raw_input: str, stored_hash: str) -> bool:
     return hmac.compare_digest(input_hash, stored_hash)
 
 
-# ---------------------------------------------------------------------------
-# Public API
-# ---------------------------------------------------------------------------
-
 def is_cheat_mode() -> bool:
     """Return current cheat mode state (thread-safe read)."""
     with _lock:
-        return _cheat_mode
+        if not SessionLocal:
+            return False
+
+        with SessionLocal() as session:
+            return _get_cheat_row(session).enabled
 
 
 def toggle_cheat_mode(raw_cheat_code: str) -> dict:
     """
     Validate raw_cheat_code against the stored SHA-256 hash, then flip the
-    in-memory cheat mode flag. No disk writes — fast and race-condition-safe.
+    cheat mode state in the database.
 
     Returns: { success: bool, message: str, cheat_mode: bool | None }
     """
-    global _cheat_mode
-
     stored_hash = os.getenv("CHEAT_CODE")
     if not stored_hash:
         return {
@@ -82,9 +80,21 @@ def toggle_cheat_mode(raw_cheat_code: str) -> dict:
             "cheat_mode": None,
         }
 
+    if not SessionLocal:
+        return {
+            "success": False,
+            "message": "Database is not configured for cheat mode storage.",
+            "cheat_mode": None,
+        }
+
     with _lock:
-        _cheat_mode = not _cheat_mode
-        new_mode = _cheat_mode
+        with SessionLocal() as session:
+            cheat = _get_cheat_row(session)
+            cheat.enabled = not cheat.enabled
+            session.add(cheat)
+            session.commit()
+            session.refresh(cheat)
+            new_mode = cheat.enabled
 
     return {
         "success": True,
