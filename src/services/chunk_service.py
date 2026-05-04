@@ -23,12 +23,12 @@ class ChunkService:
             tc = t_dict.get("template_code")
             
             if tc:
-                parts = re.split(r'(\{{3}\s*\w+\s*\}{3})', tc)
+                parts = re.split(r'(\{{3}\s*[\w-]+\s*\}{3})', tc)
                 processed_list = []
                 current_buffer = ""
 
                 for part in parts:
-                    match = re.match(r'\{{3}\s*(\w+)\s*\}{3}', part)
+                    match = re.match(r'\{{3}\s*([\w-]+)\s*\}{3}', part)
                     if match:
                         key_name = match.group(1)
                         comment_str = f"\n{cmt_pat.format(key_name)}"
