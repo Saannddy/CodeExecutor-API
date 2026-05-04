@@ -17,7 +17,7 @@ import hashlib
 import threading
 
 from sqlmodel import select
-from infrastructure import SessionLocal
+from infrastructure import SessionLocal as SessionFactory
 from models import CheatMode
 
 _lock = threading.Lock()
@@ -51,10 +51,10 @@ def _constant_time_verify(raw_input: str, stored_hash: str) -> bool:
 def is_cheat_mode() -> bool:
     """Return current cheat mode state (thread-safe read)."""
     with _lock:
-        if not SessionLocal:
+        if not SessionFactory:
             return False
 
-        with SessionLocal() as session:
+        with SessionFactory() as session:
             return _get_cheat_row(session).enabled
 
 
@@ -80,7 +80,7 @@ def toggle_cheat_mode(raw_cheat_code: str) -> dict:
             "cheat_mode": None,
         }
 
-    if not SessionLocal:
+    if not SessionFactory:
         return {
             "success": False,
             "message": "Database is not configured for cheat mode storage.",
@@ -88,7 +88,7 @@ def toggle_cheat_mode(raw_cheat_code: str) -> dict:
         }
 
     with _lock:
-        with SessionLocal() as session:
+        with SessionFactory() as session:
             cheat = _get_cheat_row(session)
             cheat.enabled = not cheat.enabled
             session.add(cheat)
