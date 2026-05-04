@@ -71,6 +71,24 @@ Run arbitrary code without a pre-defined problem.
 }
 ```
 
+### 5. Cheat Flip
+
+Toggle cheat mode on/off. When enabled, all code execution will return "passed" for all test cases.
+
+- **URL**: `/cheat-flip`
+- **Method**: `POST`
+- **Body**:
+
+```json
+{
+  "cheat-code": "your-raw-secret-passphrase"
+}
+```
+
+- **Notes**:
+  - The secret is validated using a constant-time SHA-256 comparison.
+  - The state is held in-memory and resets on server restart.
+
 ---
 
 ## Supported Languages
