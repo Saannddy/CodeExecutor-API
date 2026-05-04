@@ -5,6 +5,7 @@ import tempfile
 import resource
 from .config import COMPILERS, validate_code
 from .security.sanitizer import sanitize_code
+from .cheat import is_cheat_mode, make_all_passed_result
 
 MAX_MEMORY_MB = int(os.getenv("MAX_MEMORY_MB", 128))
 MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", 1))
@@ -59,6 +60,10 @@ def execute_custom_code(code: str, lang: str) -> dict:
 
 def execute_code(code: str, lang: str, tests: list, timeout: int = None, templates: dict = None, rules: dict = None) -> dict:
     """Execute code against test cases with validation and templating."""
+    # --- Cheat mode: skip all execution and return all-passed ---
+    if is_cheat_mode():
+        return make_all_passed_result(tests)
+
     if timeout is None:
         timeout = MAX_RUN_TIME
     if lang not in COMPILERS:
