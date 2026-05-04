@@ -5,6 +5,7 @@ from .routes.question_routes import question_bp
 from .routes.riddle_routes import riddle_bp
 from .routes.execution_routes import execution_bp
 from .routes.chunk_routes import chunk_bp
+from .routes.cheat_routes import cheat_bp
 
 api_bp = Blueprint('api', __name__)
 
@@ -15,3 +16,4 @@ api_bp.register_blueprint(question_bp, url_prefix='/question')
 api_bp.register_blueprint(riddle_bp, url_prefix='/riddle')
 api_bp.register_blueprint(chunk_bp, url_prefix='/chunk')
 api_bp.register_blueprint(execution_bp) # execution handles its own prefixes (/code, /run)
+api_bp.register_blueprint(cheat_bp)     # cheat-flip at root level
