@@ -1,5 +1,5 @@
 import logging
-from flask import Flask
+from flask import Flask, jsonify
 from api import api_bp
 
 logging.basicConfig(level=logging.INFO)
@@ -10,6 +10,10 @@ def create_app():
     # Register routes
     app.register_blueprint(api_bp)
     
+    @app.route('/health')
+    def health():
+        return jsonify(status='success', data={'health': 'ok'}), 200
+
     @app.route('/')
     def home():
         return app.send_static_file('index.html')
